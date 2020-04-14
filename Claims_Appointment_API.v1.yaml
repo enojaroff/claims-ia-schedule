@@ -1,0 +1,1503 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: Claims IA Scheduling API
+  description: |+
+    L'API RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, elle doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.
+
+    L'API respecte le standard REST et utilise le protocole HTTP. Les messages échangés sont au format JSON.
+
+
+    Une clé est nécessaire pour utiliser l'API. Cette clé doit être fournie par la société qui implémente l'API.
+
+
+
+  contact:
+    name: Edouard Nojaroff
+    email: e.nojaroff@claims-ia.fr
+servers:
+  - url: 'https://base_url/claims/v1'
+    description: ''
+tags:
+  - name: Account
+    description: ''
+  - name: Appointment
+    description: Rendez-vous
+  - name: Availability
+    description: Créneau horaire disponible
+  - name: Client
+    description: ''
+  - name: Custom Field
+    description: ''
+  - name: Location
+    description: "Emplacement/adresse d'un site"
+  - name: Time Zone
+    description: ''
+paths:
+  /account/authenticate:
+    post:
+      tags:
+        - Account
+      summary: Authenticate
+      operationId: AccountAuthenticate
+      description: |+
+        La première étape dans l'utilisation de l'API Claims est l'authentification via un compte.
+        Les informations envoyées sont l'email, le mot de passe du compte, et la clé de l'API.
+
+        La réponse contient un jeton de session (session_token) qui sera utilisé à chaque appel de l'API.
+        Pour des raisons de sécurité, le jeton de session doit expirer au bout de 24 heures; une nouvelle authentification est alors nécessaire.
+
+
+      parameters:
+        - in: query
+          name: email
+          description: Account owner email address
+          required: true
+          schema:
+            type: string
+            format: email
+        - in: query
+          name: password
+          description: Account owner password
+          schema:
+            type: string
+            format: password
+        - in: query
+          name: token
+          description: API key
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  responseStatus:
+                    type: string
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  '':
+                    type: string
+        '401':
+          description: "Compte inactif ou clé d'API incorrecte"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 3
+                  statusDescriptions:
+                    type: string
+                    example: Account is not active
+                  data:
+                    type: object
+                    nullable: true
+  /account/logout:
+    get:
+      tags:
+        - Account
+      summary: Logout
+      security:
+        - session_token: []
+      responses:
+        '200':
+          description: Logout successful
+      operationId: AccountLogout
+      description: Logout
+  /account/reset_password:
+    post:
+      tags:
+        - Account
+      summary: Change account credentials
+      description: Modifies the account password using the valid hash_code that was used when initiating the password reset process.
+      parameters:
+        - name: email
+          schema:
+            type: string
+            format: email
+          required: true
+          in: query
+          example: email@company.com
+        - name: hash_code
+          schema:
+            type: string
+          required: true
+          in: query
+          example: test_hash_code
+        - name: new_password
+          schema:
+            type: string
+            format: password
+          required: true
+          in: query
+          example: test_new_password
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    format: int32
+                    description: Status of the operation
+                    example: 0
+                  statusDescriptions:
+                    type: string
+                    example: Password changed
+                    description: Description of the status
+                  data:
+                    type: object
+                    nullable: true
+      operationId: AccountResetPassword
+  /location:
+    get:
+      tags:
+        - Location
+      summary: List locations
+      description: Using this endpoint you can retrieve the attributes of all your locations
+      security:
+        - session_token: []
+      parameters:
+        - name: id
+          in: query
+          description: Location ID
+          schema:
+            type: integer
+        - name: company_id
+          in: query
+          description: Company id
+          schema:
+            type: integer
+        - name: name
+          in: query
+          schema:
+            type: string
+        - name: description
+          in: query
+          schema:
+            type: string
+        - name: street1
+          in: query
+          schema:
+            type: string
+        - name: street2
+          in: query
+          schema:
+            type: string
+        - name: city
+          in: query
+          schema:
+            type: string
+        - name: state
+          in: query
+          schema:
+            type: string
+        - name: zip
+          in: query
+          schema:
+            type: string
+        - name: phone
+          in: query
+          schema:
+            type: string
+        - name: email
+          in: query
+          schema:
+            type: string
+        - name: website
+          in: query
+          schema:
+            type: string
+        - name: lat
+          in: query
+          schema:
+            type: number
+        - name: lng
+          in: query
+          schema:
+            type: number
+        - name: country
+          in: query
+          schema:
+            type: string
+        - name: tags
+          in: query
+          schema:
+            type: string
+        - name: photo
+          in: query
+          schema:
+            type: string
+        - name: paypal_email
+          in: query
+          schema:
+            type: string
+        - name: timezone_id
+          in: query
+          description: The timezone id
+          schema:
+            type: integer
+        - name: virtual
+          in: query
+          schema:
+            type: boolean
+        - name: tmp_default
+          in: query
+          schema:
+            type: boolean
+        - name: has_links
+          in: query
+          schema:
+            type: boolean
+        - name: include_links
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Location'
+      operationId: LocationList
+    post:
+      tags:
+        - Location
+      summary: Create location
+      description: Using this endpoint you can create a new location within the account
+      security:
+        - session_token: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Location'
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Location'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Location'
+      operationId: LocationCreate
+  '/location/{locationId}':
+    get:
+      tags:
+        - Location
+      summary: Get a location
+      security:
+        - session_token: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Location'
+                    required:
+                      - data
+      operationId: LocationGetInfo
+      description: Get a Location
+    put:
+      tags:
+        - Location
+      summary: Modify location
+      description: Using this endpoint you can change the attributes of a location within the account
+      security:
+        - session_token: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Location'
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Location'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Location'
+      operationId: LocationModify
+    delete:
+      tags:
+        - Location
+      summary: Delete a location
+      description: Using this endpoint you can delete a location within the account
+      security:
+        - session_token: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        nullable: true
+      operationId: LocationDelete
+    parameters:
+      - schema:
+          type: string
+        name: locationId
+        in: path
+        required: true
+  /availability:
+    get:
+      tags:
+        - Availability
+      summary: Get Availability Info
+      description: 'Retrieve available time intervals '
+      security:
+        - session_token: []
+      parameters:
+        - name: service_id
+          in: query
+          required: true
+          example: 2116
+          description: The ID of the selected service
+          schema:
+            type: integer
+            format: int64
+        - name: location_id
+          in: query
+          example: 2116
+          description: The ID of the selected location
+          schema:
+            type: integer
+            format: int64
+        - name: provider_id
+          in: query
+          example: 2116
+          description: The ID of the provider (employee)
+          schema:
+            type: integer
+            format: int64
+        - name: start_date
+          in: query
+          required: true
+          example: '2014-05-15'
+          description: (YYYY-mm-dd) The day for which the availability is requested
+          schema:
+            type: string
+            format: date
+        - name: t
+          in: query
+          required: true
+          description: " - If 'weekly', then the availability for the whole week of 'start_date' will be returned.\n- If 'daily', only the availability for 'start_date' will be returned"
+          example: daily
+          schema:
+            type: string
+            enum:
+              - daily
+              - weekly
+        - name: return
+          in: query
+          required: true
+          description: " - If 'boxes', the availability will be returned as a set of boxes representing fractions of an hour.\n- If 'times', the availability will be returned as times when the availability slots begin. "
+          example: boxes
+          schema:
+            type: string
+            enum:
+              - boxes
+              - times
+        - name: timezone_id
+          in: query
+          description: The ID of the timezone relative to which the availability is calculated. Defaults to the location timezone.
+          schema:
+            type: integer
+            format: int32
+          example: 553
+        - name: first_available
+          in: query
+          description: 'When there is no availability from start_date to the end of the interval(t - daily/weekly), whole agenda is scanned until a first available time slot is returned.'
+          schema:
+            type: boolean
+        - name: available_seats
+          in: query
+          description: 'Retrieve available seats for an appointment start time. This will return the number of seats for an employee. If none is provided, a random employee will be selected and the number of seats for that employee will be returned.'
+          schema:
+            type: boolean
+        - name: total_seats
+          in: query
+          description: Use this parameter to get the total number of seats for all employees
+          schema:
+            type: boolean
+        - name: no_of_weeks
+          in: query
+          description: Used to retreive the availability for one month. Accepted values are between 1 and 5
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 5
+          example: 4
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/AvailabilityDetails'
+      operationId: AvailibilityGetInfo
+  /appointment:
+    get:
+      tags:
+        - Appointment
+      summary: Lister les rendez-vous
+      description: "Using this endpoint you can retrieve the attributes of all your existing Setster appointments. We advise using filters to fetch appointments on specific date ranges or attributes. See Filtering appointments in the Introduction section. \n\n---\n\n\n> dsfdfds  \n>\n> dsfdsfdsfsdf\n\n\n"
+      security:
+        - session_token: []
+      parameters:
+        - name: id
+          in: query
+          description: The appointment id
+          schema:
+            type: integer
+        - name: company_id
+          in: query
+          schema:
+            type: integer
+          description: "Code de la compagnie d'assurance"
+        - name: employee_id
+          in: query
+          schema:
+            type: integer
+        - name: location_id
+          in: query
+          schema:
+            type: integer
+        - name: client_id
+          in: query
+          schema:
+            type: integer
+        - name: timezone_id
+          in: query
+          description: Returns appointments date fields with specified time offset
+          schema:
+            type: integer
+            example: 553
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: search_text
+          in: query
+          schema:
+            type: string
+        - name: client_name
+          in: query
+          schema:
+            type: string
+        - name: client_email
+          in: query
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          schema:
+            type: string
+        - name: paid
+          in: query
+          schema:
+            type: integer
+            enum:
+              - 0
+              - 1
+        - name: start
+          in: query
+          description: List pager
+          schema:
+            type: integer
+            default: 0
+        - name: end
+          in: query
+          description: "List pager / 'all' - no limit"
+          schema:
+            oneOf:
+              - type: integer
+              - type: string
+                enum:
+                  - all
+            default: 100
+        - name: updated_after
+          in: query
+          description: Lower date limit for which the appointment was updated
+          schema:
+            type: string
+            format: date-time
+        - name: updated_before
+          in: query
+          description: Upper date limit for which the appointment was updated
+          schema:
+            type: string
+            format: date-time
+        - name: created_after
+          in: query
+          description: Lower date limit for which the appointment was created
+          schema:
+            type: string
+            format: date-time
+        - name: created_before
+          in: query
+          description: Upper date limit for which the appointment was created
+          schema:
+            type: string
+            format: date-time
+        - name: num_results
+          in: query
+          description: 'If 1, the call returns only the number of appointments found'
+          schema:
+            type: integer
+            default: 0
+            enum:
+              - 0
+              - 1
+        - name: sort_by
+          in: query
+          schema:
+            type: string
+            default: start_date
+            enum:
+              - start_date
+              - created
+        - name: sort_order
+          in: query
+          schema:
+            type: string
+            default: asc
+            enum:
+              - asc
+              - desc
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Appointment'
+      operationId: AppointmentGetList
+    post:
+      tags:
+        - Appointment
+      summary: Create appointment
+      description: "Using this endpoint you can create a new appointment within the account. You will have to specify the service and the service provider you are creating the appointment for, along with all the other appointment attributes. This will initiate the scheduling process within Setster. \n\n### Documentation\n\n- [Codes des compagnies](docs/companies.md)\n"
+      security:
+        - session_token: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Appointment'
+      responses:
+        '200':
+          description: The appointment has been created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Appointment'
+        '403':
+          description: The appointment can not be created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        nullable: true
+      operationId: AppointmentCreate
+  '/appointment/{id}':
+    get:
+      tags:
+        - Appointment
+      summary: "LIRE les détails d'un rendez-vous"
+      security:
+        - session_token: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Appointment'
+      operationId: AppointmentGetInfo
+      description: "LIRE les détails d'un rendez-vous"
+    put:
+      tags:
+        - Appointment
+      summary: Modify appointment
+      description: Using this endpoint you can modify the attributes for an appointment
+      security:
+        - session_token: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Appointment id
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Appointment'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Appointment'
+      operationId: AppointmentModify
+    delete:
+      tags:
+        - Appointment
+      summary: Delete appointment
+      description: Using this endpoint you can delete an appointment within the account.
+      security:
+        - session_token: []
+      parameters:
+        - name: id
+          in: path
+          description: Appointment id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        nullable: true
+      operationId: AppointmentDelete
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+  /appointment/listView:
+    get:
+      tags:
+        - Appointment
+      summary: List appointments
+      security:
+        - session_token: []
+      parameters:
+        - name: location_id
+          in: query
+          description: Location ID
+          schema:
+            type: integer
+            default: 0
+        - name: employee_id
+          in: query
+          description: Employee ID
+          schema:
+            type: integer
+            default: 0
+        - name: skip
+          in: query
+          description: The number of results to skip
+          schema:
+            type: integer
+            default: 0
+        - name: count
+          in: query
+          description: The number of results to return
+          schema:
+            type: integer
+            default: 10
+        - name: q
+          in: query
+          description: Search query
+          schema:
+            type: string
+            default: ''
+        - name: start_date
+          in: query
+          description: Start date
+          schema:
+            type: string
+            default: ''
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          results:
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/Appointment'
+                          last_rows:
+                            type: integer
+                            example: 100
+      operationId: AppointmentsListView
+      description: List appointments
+  '/appointment/{id}/confirm':
+    post:
+      tags:
+        - Appointment
+      summary: CONFIRMER un rendez-vous
+      description: Using this endpoint you can confirm an appointment
+      security:
+        - session_token: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                appointment_id:
+                  type: integer
+                  example: 123
+          application/json:
+            schema:
+              type: object
+              properties:
+                appointment_id:
+                  type: integer
+                  example: 123
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Appointment'
+      operationId: AppointmentConfirm
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Identifiant unique du rendez-vous
+  '/appointment/{id}/reschedule':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Appointment ID
+    get:
+      summary: "Demande de replanification d'un rendez-vous"
+      tags:
+        - Appointment
+      responses:
+        '200':
+          description: OK
+      operationId: AppointmentReschedule
+      security:
+        - session_token: []
+      description: "Demande de replanification d'un rendez-vous"
+  /account:
+    get:
+      tags:
+        - Account
+      summary: Lire les informations sur le compte
+      description: Récupère les informations détaillées sur le compte
+      security:
+        - session_token: []
+      parameters:
+        - name: company_id
+          schema:
+            type: integer
+          in: query
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Account'
+      operationId: AccountGetInfo
+components:
+  securitySchemes:
+    session_token:
+      type: apiKey
+      name: session_token
+      in: query
+      description: |
+        To get the session_token, first you need to make a POST
+        request to "account/authenticate" using your API key or
+        username and password. The session token is the element
+        "data.session_token" from the response.
+  schemas:
+    Account:
+      allOf:
+        - properties:
+            id:
+              type: integer
+              readOnly: true
+            company_id:
+              type: integer
+              format: int64
+              example: 2345
+              description: Unique ID of the account
+              readOnly: true
+            created_by:
+              type: integer
+              format: int64
+              example: 1242
+              description: ID of the company owner
+              readOnly: true
+            address_city:
+              type: string
+              description: Account/Default location personal info.
+              example: Los Angeles
+            address_country:
+              type: string
+              description: Account/Default location personal info.
+              example: USA
+            address_state:
+              type: string
+              description: Account/Default location personal info.
+              example: Nevada
+            address_street1:
+              type: string
+              description: Account/Default location personal info.
+              example: 123 Street
+            address_street2:
+              type: string
+              description: Account/Default location personal info.
+              example: ''
+            addresszip:
+              type: string
+              description: Account/Default location personal info.
+              example: '245235'
+            send_to_contact:
+              type: integer
+              default: 0
+            show_map_profile:
+              type: boolean
+              default: false
+            splash:
+              type: string
+            map_url:
+              type: string
+              format: uri
+              description: An http address used for locations display
+              example: ''
+            return_url:
+              type: string
+            policies:
+              type: string
+            account_type:
+              type: integer
+              description: 'Account bussiness profile: 0 - Free User, 1 - Personal, 2 - Small Business, 4 - Medium Business, 5 - Large Business, 6 - Team'
+              enum:
+                - 0
+                - 1
+                - 2
+                - 4
+                - 5
+                - 6
+              format: int32
+              example: 0
+            date_created:
+              type: string
+              format: date-time
+              readOnly: true
+            no_views:
+              type: string
+              readOnly: true
+            notify_app_unconfirmed:
+              type: boolean
+              default: true
+            notify_app_unpaid:
+              type: boolean
+              default: true
+            lang:
+              type: string
+              enum:
+                - en
+                - fr
+                - es
+              description: Language
+              default: en
+            enable_locations:
+              type: boolean
+              description: Allow other location than the implicit one
+              default: false
+            capture_leads:
+              type: string
+            settings:
+              type: string
+              format: json
+              readOnly: true
+            status:
+              type: integer
+              default: 0
+              readOnly: true
+            directory:
+              type: integer
+              default: 0
+            max_providers:
+              type: integer
+              format: int32
+              description: The maximum number of locations and providers that the company is allowed to add
+              default: 0
+            business_hours_label:
+              type: string
+            policies_label:
+              type: string
+            paragraph_label:
+              type: string
+            timezone:
+              type: integer
+              format: int32
+              description: Gmt offset in minutes
+              example: -480
+              default: 0
+            exchange_sync_settings:
+              type: object
+              readOnly: true
+              properties:
+                host:
+                  type: string
+                account:
+                  type: string
+                password:
+                  type: string
+                  format: password
+                sync_period:
+                  type: integer
+      type: object
+    Location:
+      type: object
+      x-examples: {}
+      description: "Représentation d'un lieu"
+      title: Location
+      properties:
+        name:
+          type: string
+          description: Name of the location
+          example: Spa center
+        description:
+          type: string
+          description: Description of the location
+          default: ''
+        is_main:
+          type: boolean
+          readOnly: true
+          default: false
+          description: "Détermine s'il s'agit du lieu du sinistre"
+        address:
+          $ref: '#/components/schemas/PostalAddress'
+        photo:
+          type: string
+          format: uri
+          description: Photo URL
+          example: ''
+        phone:
+          type: string
+          description: Phone number
+          default: ''
+        tags:
+          type: string
+          default: ''
+        timezone_id:
+          type: string
+          description: The ID of the time zone
+          example: '553'
+        lat:
+          type: number
+          format: float
+          description: The latitude of the location automatically calculated based on its address
+        lng:
+          type: number
+          format: float
+          description: The longitude of the location automatically calculated based on its address
+        update_lat_lng:
+          type: boolean
+          description: Available only on update. If true (1) then the lat and lng values will be automatically calculated
+          default: false
+          writeOnly: true
+        ord:
+          type: integer
+          default: 0
+          readOnly: true
+        UID:
+          type: string
+          description: Identifiant unique du lieu
+      required:
+        - name
+        - UID
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: Unique ID of the appointment
+          example: 2342
+        client_id:
+          type: integer
+          format: int64
+          readOnly: true
+          description: The ID of the client that made the appointment
+          example: 23113
+        company_id:
+          type: integer
+          format: int64
+          description: The ID of the company that the appointment belongs to. Field is writable when entity is owned by child account
+          example: 3123
+        client_email:
+          type: string
+          format: email
+          description: The email of the client that made the appointment
+        client_name:
+          type: string
+          description: The client name
+        client_phone:
+          type: string
+          description: The client phone number
+          example: +33 6 12345678
+        client_address:
+          type: string
+          description: The client address
+        employee_id:
+          type: integer
+          format: int64
+          description: The ID of the employee (provider) that the appointment is made for
+          example: 12412
+        location_id:
+          type: integer
+          format: int64
+          description: The ID of the location where the appointment will take place at
+          example: 54232
+        service_id:
+          type: integer
+          format: int64
+          description: The ID of the service that the appointment is made for
+          example: 453
+        start_date:
+          type: string
+          description: |
+            The date and time when the appointment is scheduled to start.
+            The time is local to the company timezone or the location timezone (if the location is in a different timezone).
+            The format of the date is `yyyy-mm-dd hh:mm:ss`
+          example: '2019-09-01T12:00'
+        end_date:
+          type: string
+          description: |
+            The date and time when the appointment is scheduled to end.
+            The time is local to the company timezone or the location timezone (if the location is in a different timezone).
+            The format of the date is `yyyy-mm-dd hh:mm:ss`
+          readOnly: true
+          example: '2019-09-01T13:00'
+        length:
+          type: integer
+          readOnly: true
+          description: 'The duration of the appointment (in milliseconds). Example: 30 minutes = 1800000 milliseconds.'
+          example: 1800000
+        duration:
+          type: integer
+          format: int32
+          writeOnly: true
+          multipleOf: 15
+          description: The duration of the appointment in minutes
+          default: 15
+        duration_padding:
+          type: integer
+          description: 'The appointment time padding (in seconds) - the number of seconds, before and after an appointment, that cannon be used for another appointment'
+          readOnly: true
+          default: 0
+        note:
+          type: string
+          description: Custom client message
+          nullable: true
+        status:
+          type: integer
+          description: |
+            Appointment status. Possible values:
+
+              - 0 - waiting email confirmation from the client
+              - 1 - email confirmed but not validated by the admin/provider
+              - 2 - email confirmed and validated or paid
+              - 3 - declined or canceled
+              - 4 - busy time imported from external sources (e.g. google)
+              - 6 - busy time imported from Zapier
+              - 8 - completed
+              - 9 - no show (the scheduled event did not take place)
+              - 10 - in progress
+              - 11 - checked in
+              - 12 - just arrived
+              - 13 - delayed
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+            - 4
+            - 6
+            - 8
+            - 9
+            - 10
+            - 11
+            - 12
+            - 13
+        type:
+          type: string
+          description: The name of the service with ID service_id
+          readOnly: true
+        last_updated:
+          type: string
+          description: The date and time when the latest change was made to the appointment
+          readOnly: true
+          format: date-time
+          example: '2019-09-01T12:00:00Z'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        subservices:
+          type: string
+          description: IDs of sub services that were selected for the appointment separated by comma
+        paid:
+          type: boolean
+          description: 'Whether the appointment has been paid or not, if the service requires a payment.'
+          default: false
+        price:
+          type: integer
+          default: 0
+        ews_id:
+          type: string
+          default: ''
+        timezone_short:
+          type: string
+          description: The time zone short name (e.g. PST or GMT+4)
+          readOnly: true
+          example: 'GMT -05:00'
+        timezone_offset_seconds:
+          type: integer
+          description: The time zone offset in seconds
+          example: -18000
+          readOnly: true
+        timezone_id:
+          type: integer
+          format: int32
+          description: The ID of the time zone in our database
+          example: 553
+      required:
+        - client_email
+        - client_name
+        - service_id
+        - start_date
+    AvailabilityDetails:
+      type: object
+      properties:
+        interval:
+          type: integer
+          format: int32
+          description: The length (in minutes) of the appointment
+          example: 60
+        boxInterval:
+          type: integer
+          format: int32
+          description: Relevant only if return=boxes and represents the number of minutes in one box
+          example: 5
+        padding:
+          type: integer
+          format: int32
+          description: Relevant only if return=boxes and represents the number of minutes between two adjacent appointments
+          example: 0
+        day:
+          type: integer
+          format: int32
+          description: Selected day
+          example: 15
+        month:
+          type: integer
+          format: int32
+          description: Selected month
+          example: 8
+        year:
+          type: integer
+          format: int32
+          description: Selected year
+          example: 2012
+        times:
+          type: array
+          description: 'Hash table of the start times of the available appointment slots, grouped by date'
+          items:
+            type: string
+            example: '09:00:00'
+    ResponseStatus:
+      type: object
+      description: ResponseStatus donne une information sur la réponse. Il contient un code numérique et une description.
+      x-examples:
+        example:
+          value: 0
+          statusCode: 0
+          statusDescription: 'Cool Baby!'
+      properties:
+        value:
+          type: integer
+          format: int32
+          description: "Statut de l'opération."
+          example: 0
+          enum:
+            OK: 0
+            INVALID_PARAMETERS: 1
+            INVALID_CREDENTIALS: 2
+            ACCOUNT_NOT_ACTIVE: 3
+            INTERNAL_ERROR: 4
+            ERROR_SAVING_ENTITY: 5
+            ERROR_DELETING: 6
+            NOT_FOUND: 7
+            NOT_ALLOWED: 8
+            SLOT_NOT_AVAILABLE: 9
+            SLOT_OCCUPIED: 10
+            ACCOUNTS_LIMIT_REACHED: 11
+        descriptions:
+          type: string
+          example: OK
+          description: Description of the status
+      required:
+        - value
+    Amount:
+      title: Amount
+      type: object
+      description: Représente une valeur monétaire
+      properties:
+        value:
+          type: integer
+          description: "Montant en cientièmes d'unité. Par exemple, la valeur de 123,45€ est 12345"
+        currency:
+          type: string
+          description: Code de la devise au format ISO 4217
+      required:
+        - value
+        - currency
+      x-examples:
+        example:
+          value: -12345
+          currency: EUR
+    PostalAddress:
+      title: PostalAddress
+      type: object
+      description: "Structure générique pour représenter une dresse postale d'un lieu. Les propriétés street1 à street4 contiennent sur 4 lignes max les informations, telles que le numéro, le nom de la voie, et toute information qui n'est pas définie par les autres propriétés."
+      x-examples:
+        exemple:
+          street1: '49-51, rue de Paris'
+          zipcode: '92110'
+          city: Clichy
+          state: IDF
+          country: FR
+      properties:
+        street1:
+          type: string
+          description: 'adresse postale, ligne 1'
+        street2:
+          type: string
+        street3:
+          type: string
+        street4:
+          type: string
+        zipcode:
+          type: string
+          description: Code postal
+        city:
+          type: string
+          description: Ville
+        state:
+          type: string
+          description: 'Région, département'
+        country:
+          type: string
+          default: FR
+          description: Code du pays au format ISO 3166-1 (2 caractères).
+      required:
+        - street1
+        - zipcode
+        - city
+    Claim:
+      title: Claim
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+        sinisterDate:
+          type: string
+          format: date
+        type:
+          type: string
+          enum:
+            - DDE
+            - DE
+            - VOL
+            - INC
+            - CATNAT
+            - BDG
+            - CVT
+        location:
+          $ref: '#/components/schemas/PostalAddress'
+        ThirdPartyInvolved:
+          type: boolean
+        CostEstimate:
+          $ref: '#/components/schemas/Amount'
+        damagesCount:
+          type: object
+          additionalProperties: false
+          minProperties: 1
+          maxProperties: 2
+          properties:
+            movables:
+              type: integer
+            rooms:
+              type: integer
+      required:
+        - date
+        - sinisterDate
+        - type
+        - location
+        - ThirdPartyInvolved
+        - damagesCount
+security:
+  - session_token: []
