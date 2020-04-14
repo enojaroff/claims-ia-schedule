@@ -3,7 +3,7 @@
     "info": {
         "title": "Claims IA Scheduling API",
         "version": "1.0",
-        "description": "L'API RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, elle doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.\n\nL'API respecte le standard REST et utilise le protocole HTTP. Les messages échangés sont au format JSON.\n\n\nUne clé est nécessaire pour utiliser l'API. Cette clé doit être fournie par la société qui implémente l'API.\n\n\n\n\n",
+        "description": "L'API RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, elle doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.<br><br>L'API respecte le standard REST et utilise le protocole HTTP. Les messages échangés sont au format JSON.<br><br><br>Une clé est nécessaire pour utiliser l'API. Cette clé doit être fournie par la société qui implémente l'API.<br><br><br><br><br>",
         "contact": {
             "name": "Edouard Nojaroff",
             "email": "e.nojaroff@claims-ia.fr"
@@ -99,12 +99,12 @@
                                 }
                             }
                         },
-                        "description": "Compte inactif ou clÃ© d'API incorrecte"
+                        "description": "Compte inactif ou clé d'API incorrecte"
                     }
                 },
                 "operationId": "AccountAuthenticate",
                 "summary": "Authenticate",
-                "description": "La premiÃ¨re Ã©tape dans l'utilisation de l'API Claims est l'authentification via un compte.\nLes informations envoyÃ©es sont l'email, le mot de passe du compte, et la clÃ© de l'API.\n\nLa rÃ©ponse contient un jeton de session (session_token) qui sera utilisÃ© Ã  chaque appel de l'API.\nPour des raisons de sÃ©curitÃ©, le jeton de session doit expirer au bout de 24 heures; une nouvelle authentification est alors nÃ©cessaire.\n\n\n\n"
+                "description": "La première étape dans l'utilisation de l'API Claims est l'authentification via un compte.<br>Les informations envoyées sont l'email, le mot de passe du compte, et la clé de l'API.<br><br>La réponse contient un jeton de session (session_token) qui sera utilisé à  chaque appel de l'API.<br>Pour des raisons de sécurité, le jeton de session doit expirer au bout de 24 heures; une nouvelle authentification est alors nécessaire.<br><br><br><br>"
             }
         },
         "/account/logout": {
@@ -677,7 +677,7 @@
                     {
                         "example": "daily",
                         "name": "t",
-                        "description": " - If 'weekly', then the availability for the whole week of 'start_date' will be returned.\n- If 'daily', only the availability for 'start_date' will be returned",
+                        "description": " - If 'weekly', then the availability for the whole week of 'start_date' will be returned.<br>- If 'daily', only the availability for 'start_date' will be returned",
                         "schema": {
                             "enum": [
                                 "daily",
@@ -691,7 +691,7 @@
                     {
                         "example": "boxes",
                         "name": "return",
-                        "description": " - If 'boxes', the availability will be returned as a set of boxes representing fractions of an hour.\n- If 'times', the availability will be returned as times when the availability slots begin. ",
+                        "description": " - If 'boxes', the availability will be returned as a set of boxes representing fractions of an hour.<br>- If 'times', the availability will be returned as times when the availability slots begin. ",
                         "schema": {
                             "enum": [
                                 "boxes",
@@ -1023,7 +1023,7 @@
                 ],
                 "operationId": "AppointmentGetList",
                 "summary": "Lister les rendez-vous",
-                "description": "Using this endpoint you can retrieve the attributes of all your existing Setster appointments. We advise using filters to fetch appointments on specific date ranges or attributes. See Filtering appointments in the Introduction section. \n\n---\n\n\n> dsfdfds  \n>\n> dsfdsfdsfsdf\n\n\n"
+                "description": "Using this endpoint you can retrieve the attributes of all your existing Setster appointments. We advise using filters to fetch appointments on specific date ranges or attributes. See Filtering appointments in the Introduction section. <br><br>---<br><br><br>> dsfdfds  <br>><br>> dsfdsfdsfsdf<br><br><br>"
             },
             "post": {
                 "requestBody": {
@@ -1107,7 +1107,7 @@
                 ],
                 "operationId": "AppointmentCreate",
                 "summary": "Create appointment",
-                "description": "Using this endpoint you can create a new appointment within the account. You will have to specify the service and the service provider you are creating the appointment for, along with all the other appointment attributes. This will initiate the scheduling process within Setster. \n\n### Documentation\n\n- [Codes des compagnies](docs/companies.md)\n"
+                "description": "Using this endpoint you can create a new appointment within the account. You will have to specify the service and the service provider you are creating the appointment for, along with all the other appointment attributes. This will initiate the scheduling process within Setster. <br><br>### Documentation<br><br>- [Codes des compagnies](docs/companies.md)<br>"
             }
         },
         "/appointment/{id}": {
@@ -1148,8 +1148,8 @@
                     }
                 ],
                 "operationId": "AppointmentGetInfo",
-                "summary": "LIRE les dÃ©tails d'un rendez-vous",
-                "description": "LIRE les dÃ©tails d'un rendez-vous"
+                "summary": "LIRE les détails d'un rendez-vous",
+                "description": "LIRE les détails d'un rendez-vous"
             },
             "put": {
                 "requestBody": {
@@ -1544,7 +1544,7 @@
                 ],
                 "operationId": "AccountGetInfo",
                 "summary": "Lire les informations sur le compte",
-                "description": "RÃ©cupÃ¨re les informations dÃ©taillÃ©es sur le compte"
+                "description": "Récupère les informations détaillées sur le compte"
             }
         }
     },
@@ -1736,7 +1736,7 @@
             },
             "Location": {
                 "title": "Location",
-                "description": "ReprÃ©sentation d'un lieu",
+                "description": "Représentation d'un lieu",
                 "required": [
                     "name",
                     "UID"
@@ -1754,7 +1754,7 @@
                         "type": "string"
                     },
                     "is_main": {
-                        "description": "DÃ©termine s'il s'agit du lieu du sinistre",
+                        "description": "Détermine s'il s'agit du lieu du sinistre",
                         "default": false,
                         "type": "boolean",
                         "readOnly": true
@@ -1876,12 +1876,12 @@
                         "example": 453
                     },
                     "start_date": {
-                        "description": "The date and time when the appointment is scheduled to start.\nThe time is local to the company timezone or the location timezone (if the location is in a different timezone).\nThe format of the date is `yyyy-mm-dd hh:mm:ss`\n",
+                        "description": "The date and time when the appointment is scheduled to start.<br>The time is local to the company timezone or the location timezone (if the location is in a different timezone).<br>The format of the date is `yyyy-mm-dd hh:mm:ss`<br>",
                         "type": "string",
                         "example": "2019-09-01T12:00"
                     },
                     "end_date": {
-                        "description": "The date and time when the appointment is scheduled to end.\nThe time is local to the company timezone or the location timezone (if the location is in a different timezone).\nThe format of the date is `yyyy-mm-dd hh:mm:ss`\n",
+                        "description": "The date and time when the appointment is scheduled to end.<br>The time is local to the company timezone or the location timezone (if the location is in a different timezone).<br>The format of the date is `yyyy-mm-dd hh:mm:ss`<br>",
                         "type": "string",
                         "readOnly": true,
                         "example": "2019-09-01T13:00"
@@ -1912,7 +1912,7 @@
                         "type": "string"
                     },
                     "status": {
-                        "description": "Appointment status. Possible values:\n\n  - 0 - waiting email confirmation from the client\n  - 1 - email confirmed but not validated by the admin/provider\n  - 2 - email confirmed and validated or paid\n  - 3 - declined or canceled\n  - 4 - busy time imported from external sources (e.g. google)\n  - 6 - busy time imported from Zapier\n  - 8 - completed\n  - 9 - no show (the scheduled event did not take place)\n  - 10 - in progress\n  - 11 - checked in\n  - 12 - just arrived\n  - 13 - delayed\n",
+                        "description": "Appointment status. Possible values:<br><br>  - 0 - waiting email confirmation from the client<br>  - 1 - email confirmed but not validated by the admin/provider<br>  - 2 - email confirmed and validated or paid<br>  - 3 - declined or canceled<br>  - 4 - busy time imported from external sources (e.g. google)<br>  - 6 - busy time imported from Zapier<br>  - 8 - completed<br>  - 9 - no show (the scheduled event did not take place)<br>  - 10 - in progress<br>  - 11 - checked in<br>  - 12 - just arrived<br>  - 13 - delayed<br>",
                         "enum": [
                             0,
                             1,
@@ -2041,7 +2041,7 @@
                 "properties": {
                     "value": {
                         "format": "int32",
-                        "description": "Statut de l'opÃ©ration.",
+                        "description": "Statut de l'opération.",
                         "enum": {
                             "OK": 0,
                             "INVALID_PARAMETERS": 1,
@@ -2075,7 +2075,7 @@
             },
             "Amount": {
                 "title": "Amount",
-                "description": "ReprÃ©sente une valeur monÃ©taire",
+                "description": "Représente une valeur monétaire",
                 "required": [
                     "value",
                     "currency"
@@ -2083,7 +2083,7 @@
                 "type": "object",
                 "properties": {
                     "value": {
-                        "description": "Montant en cientiÃ¨mes d'unitÃ©. Par exemple, la valeur de 123,45â¬ est 12345",
+                        "description": "Montant en cientièmes d'unité. Par exemple, la valeur de 123,45€¬ est 12345",
                         "type": "integer"
                     },
                     "currency": {
@@ -2100,7 +2100,7 @@
             },
             "PostalAddress": {
                 "title": "PostalAddress",
-                "description": "Structure générique pour représenter une dresse postale d'un lieu. Les propriétés street1 à  street4 contiennent sur 4 lignes max les informations, telles que le numéro, le nom de la voie, et toute information qui n'est pas définie par les autres propriétés.",
+                "description": "Structure générique pour représenter une adresse postale d'un lieu. Les propriétés street1 à  street4 contiennent sur 4 lignes max les informations, telles que le numéro, le nom de la voie, et toute information qui n'est pas définie par les autres propriétés.",
                 "required": [
                     "street1",
                     "zipcode",
@@ -2130,11 +2130,11 @@
                         "type": "string"
                     },
                     "state": {
-                        "description": "RÃ©gion, dÃ©partement",
+                        "description": "Région, département",
                         "type": "string"
                     },
                     "country": {
-                        "description": "Code du pays au format ISO 3166-1 (2 caractÃ¨res).",
+                        "description": "Code du pays au format ISO 3166-1 (2 caractères).",
                         "default": "FR",
                         "type": "string"
                     }
@@ -2210,7 +2210,7 @@
         "securitySchemes": {
             "session_token": {
                 "type": "apiKey",
-                "description": "To get the session_token, first you need to make a POST\nrequest to \"account/authenticate\" using your API key or\nusername and password. The session token is the element\n\"data.session_token\" from the response.\n",
+                "description": "To get the session_token, first you need to make a POST<br>request to account/authenticate using your API key or<br>username and password. The session token is the element<br>data.session_token from the response.<br>",
                 "name": "session_token",
                 "in": "query"
             }
