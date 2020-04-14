@@ -1,0 +1,2250 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Claims IA Scheduling API",
+        "version": "1.0",
+        "description": "L'API RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, elle doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.\n\nL'API respecte le standard REST et utilise le protocole HTTP. Les messages échangés sont au format JSON.\n\n\nUne clé est nécessaire pour utiliser l'API. Cette clé doit être fournie par la société qui implémente l'API.\n\n\n\n\n",
+        "contact": {
+            "name": "Edouard Nojaroff",
+            "email": "e.nojaroff@claims-ia.fr"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://base_url/claims/v1",
+            "description": "Sample Server URL. Doesn't work."
+        }
+    ],
+    "paths": {
+        "/account/authenticate": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "description": "Account owner email address",
+                        "schema": {
+                            "format": "email",
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "description": "Account owner password",
+                        "schema": {
+                            "format": "password",
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "token",
+                        "description": "API key",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "responseStatus": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 3
+                                        },
+                                        "statusDescriptions": {
+                                            "type": "string",
+                                            "example": "Account is not active"
+                                        },
+                                        "data": {
+                                            "nullable": true,
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Compte inactif ou clÃ© d'API incorrecte"
+                    }
+                },
+                "operationId": "AccountAuthenticate",
+                "summary": "Authenticate",
+                "description": "La premiÃ¨re Ã©tape dans l'utilisation de l'API Claims est l'authentification via un compte.\nLes informations envoyÃ©es sont l'email, le mot de passe du compte, et la clÃ© de l'API.\n\nLa rÃ©ponse contient un jeton de session (session_token) qui sera utilisÃ© Ã  chaque appel de l'API.\nPour des raisons de sÃ©curitÃ©, le jeton de session doit expirer au bout de 24 heures; une nouvelle authentification est alors nÃ©cessaire.\n\n\n\n"
+            }
+        },
+        "/account/logout": {
+            "get": {
+                "tags": [
+                    "Account"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logout successful"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "AccountLogout",
+                "summary": "Logout",
+                "description": "Logout"
+            }
+        },
+        "/account/reset_password": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "parameters": [
+                    {
+                        "example": "email@company.com",
+                        "name": "email",
+                        "schema": {
+                            "format": "email",
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "example": "test_hash_code",
+                        "name": "hash_code",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "example": "test_new_password",
+                        "name": "new_password",
+                        "schema": {
+                            "format": "password",
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "statusCode": {
+                                            "format": "int32",
+                                            "description": "Status of the operation",
+                                            "type": "integer",
+                                            "example": 0
+                                        },
+                                        "statusDescriptions": {
+                                            "description": "Description of the status",
+                                            "type": "string",
+                                            "example": "Password changed"
+                                        },
+                                        "data": {
+                                            "nullable": true,
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "operationId": "AccountResetPassword",
+                "summary": "Change account credentials",
+                "description": "Modifies the account password using the valid hash_code that was used when initiating the password reset process."
+            }
+        },
+        "/location": {
+            "get": {
+                "tags": [
+                    "Location"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Location ID",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "company_id",
+                        "description": "Company id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "description",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "street1",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "street2",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "city",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "state",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "zip",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "phone",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "email",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "website",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "lat",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "lng",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "country",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "tags",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "photo",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "paypal_email",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "timezone_id",
+                        "description": "The timezone id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "virtual",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "tmp_default",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "has_links",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "include_links",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Location"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "LocationList",
+                "summary": "List locations",
+                "description": "Using this endpoint you can retrieve the attributes of all your locations"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Location"
+                                    }
+                                }
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Location"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Location"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Location"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "LocationCreate",
+                "summary": "Create location",
+                "description": "Using this endpoint you can create a new location within the account"
+            }
+        },
+        "/location/{locationId}": {
+            "get": {
+                "tags": [
+                    "Location"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "required": [
+                                                "data"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Location"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "LocationGetInfo",
+                "summary": "Get a location",
+                "description": "Get a Location"
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Location"
+                                    }
+                                }
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Location"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Location"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Location"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "LocationModify",
+                "summary": "Modify location",
+                "description": "Using this endpoint you can change the attributes of a location within the account"
+            },
+            "delete": {
+                "tags": [
+                    "Location"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "nullable": true,
+                                                    "type": "object"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "LocationDelete",
+                "summary": "Delete a location",
+                "description": "Using this endpoint you can delete a location within the account"
+            },
+            "parameters": [
+                {
+                    "name": "locationId",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/availability": {
+            "get": {
+                "tags": [
+                    "Availability"
+                ],
+                "parameters": [
+                    {
+                        "example": 2116,
+                        "name": "service_id",
+                        "description": "The ID of the selected service",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "example": 2116,
+                        "name": "location_id",
+                        "description": "The ID of the selected location",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "example": 2116,
+                        "name": "provider_id",
+                        "description": "The ID of the provider (employee)",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "example": "2014-05-15",
+                        "name": "start_date",
+                        "description": "(YYYY-mm-dd) The day for which the availability is requested",
+                        "schema": {
+                            "format": "date",
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "example": "daily",
+                        "name": "t",
+                        "description": " - If 'weekly', then the availability for the whole week of 'start_date' will be returned.\n- If 'daily', only the availability for 'start_date' will be returned",
+                        "schema": {
+                            "enum": [
+                                "daily",
+                                "weekly"
+                            ],
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "example": "boxes",
+                        "name": "return",
+                        "description": " - If 'boxes', the availability will be returned as a set of boxes representing fractions of an hour.\n- If 'times', the availability will be returned as times when the availability slots begin. ",
+                        "schema": {
+                            "enum": [
+                                "boxes",
+                                "times"
+                            ],
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "example": 553,
+                        "name": "timezone_id",
+                        "description": "The ID of the timezone relative to which the availability is calculated. Defaults to the location timezone.",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "first_available",
+                        "description": "When there is no availability from start_date to the end of the interval(t - daily/weekly), whole agenda is scanned until a first available time slot is returned.",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "available_seats",
+                        "description": "Retrieve available seats for an appointment start time. This will return the number of seats for an employee. If none is provided, a random employee will be selected and the number of seats for that employee will be returned.",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "total_seats",
+                        "description": "Use this parameter to get the total number of seats for all employees",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "example": 4,
+                        "name": "no_of_weeks",
+                        "description": "Used to retreive the availability for one month. Accepted values are between 1 and 5",
+                        "schema": {
+                            "maximum": 5,
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/AvailabilityDetails"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "AvailibilityGetInfo",
+                "summary": "Get Availability Info",
+                "description": "Retrieve available time intervals "
+            }
+        },
+        "/appointment": {
+            "get": {
+                "tags": [
+                    "Appointment"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "The appointment id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "company_id",
+                        "description": "Code de la compagnie d'assurance",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "employee_id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "location_id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "client_id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "timezone_id",
+                        "description": "Returns appointments date fields with specified time offset",
+                        "schema": {
+                            "type": "integer",
+                            "example": 553
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "status",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "search_text",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "client_name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "client_email",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "start_date",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "end_date",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "paid",
+                        "schema": {
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "start",
+                        "description": "List pager",
+                        "schema": {
+                            "default": 0,
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "end",
+                        "description": "List pager / 'all' - no limit",
+                        "schema": {
+                            "oneOf": [
+                                {
+                                    "type": "integer"
+                                },
+                                {
+                                    "enum": [
+                                        "all"
+                                    ],
+                                    "type": "string"
+                                }
+                            ],
+                            "default": 100
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "updated_after",
+                        "description": "Lower date limit for which the appointment was updated",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "updated_before",
+                        "description": "Upper date limit for which the appointment was updated",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "created_after",
+                        "description": "Lower date limit for which the appointment was created",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "created_before",
+                        "description": "Upper date limit for which the appointment was created",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "num_results",
+                        "description": "If 1, the call returns only the number of appointments found",
+                        "schema": {
+                            "default": 0,
+                            "enum": [
+                                0,
+                                1
+                            ],
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "sort_by",
+                        "schema": {
+                            "default": "start_date",
+                            "enum": [
+                                "start_date",
+                                "created"
+                            ],
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "sort_order",
+                        "schema": {
+                            "default": "asc",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ],
+                            "type": "string"
+                        },
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Appointment"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "AppointmentGetList",
+                "summary": "Lister les rendez-vous",
+                "description": "Using this endpoint you can retrieve the attributes of all your existing Setster appointments. We advise using filters to fetch appointments on specific date ranges or attributes. See Filtering appointments in the Introduction section. \n\n---\n\n\n> dsfdfds  \n>\n> dsfdsfdsfsdf\n\n\n"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Appointment"
+                                    }
+                                }
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Appointment"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Appointment"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Appointment"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "The appointment has been created"
+                    },
+                    "403": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "nullable": true,
+                                                    "type": "object"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "The appointment can not be created"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "AppointmentCreate",
+                "summary": "Create appointment",
+                "description": "Using this endpoint you can create a new appointment within the account. You will have to specify the service and the service provider you are creating the appointment for, along with all the other appointment attributes. This will initiate the scheduling process within Setster. \n\n### Documentation\n\n- [Codes des compagnies](docs/companies.md)\n"
+            }
+        },
+        "/appointment/{id}": {
+            "get": {
+                "tags": [
+                    "Appointment"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Appointment"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "AppointmentGetInfo",
+                "summary": "LIRE les dÃ©tails d'un rendez-vous",
+                "description": "LIRE les dÃ©tails d'un rendez-vous"
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Appointment"
+                                    }
+                                }
+                            }
+                        },
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/Appointment"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Appointment"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Appointment id",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Appointment"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "AppointmentModify",
+                "summary": "Modify appointment",
+                "description": "Using this endpoint you can modify the attributes for an appointment"
+            },
+            "delete": {
+                "tags": [
+                    "Appointment"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Appointment id",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "nullable": true,
+                                                    "type": "object"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "AppointmentDelete",
+                "summary": "Delete appointment",
+                "description": "Using this endpoint you can delete an appointment within the account."
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/appointment/listView": {
+            "get": {
+                "tags": [
+                    "Appointment"
+                ],
+                "parameters": [
+                    {
+                        "name": "location_id",
+                        "description": "Location ID",
+                        "schema": {
+                            "default": 0,
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "employee_id",
+                        "description": "Employee ID",
+                        "schema": {
+                            "default": 0,
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "skip",
+                        "description": "The number of results to skip",
+                        "schema": {
+                            "default": 0,
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "count",
+                        "description": "The number of results to return",
+                        "schema": {
+                            "default": 10,
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "q",
+                        "description": "Search query",
+                        "schema": {
+                            "default": "",
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "start_date",
+                        "description": "Start date",
+                        "schema": {
+                            "default": "",
+                            "type": "string"
+                        },
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "results": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "$ref": "#/components/schemas/Appointment"
+                                                            }
+                                                        },
+                                                        "last_rows": {
+                                                            "type": "integer",
+                                                            "example": 100
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "AppointmentsListView",
+                "summary": "List appointments",
+                "description": "List appointments"
+            }
+        },
+        "/appointment/{id}/confirm": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "appointment_id": {
+                                        "type": "integer",
+                                        "example": 123
+                                    }
+                                }
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "appointment_id": {
+                                        "type": "integer",
+                                        "example": 123
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Appointment"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Appointment"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "AppointmentConfirm",
+                "summary": "CONFIRMER un rendez-vous",
+                "description": "Using this endpoint you can confirm an appointment"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "description": "Identifiant unique du rendez-vous",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/appointment/{id}/reschedule": {
+            "get": {
+                "tags": [
+                    "Appointment"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "AppointmentReschedule",
+                "summary": "Demande de replanification d'un rendez-vous",
+                "description": "Demande de replanification d'un rendez-vous"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "description": "Appointment ID",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/account": {
+            "get": {
+                "tags": [
+                    "Account"
+                ],
+                "parameters": [
+                    {
+                        "name": "company_id",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseStatus"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "data": {
+                                                    "$ref": "#/components/schemas/Account"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "session_token": []
+                    }
+                ],
+                "operationId": "AccountGetInfo",
+                "summary": "Lire les informations sur le compte",
+                "description": "RÃ©cupÃ¨re les informations dÃ©taillÃ©es sur le compte"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Account": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "readOnly": true
+                            },
+                            "company_id": {
+                                "format": "int64",
+                                "description": "Unique ID of the account",
+                                "type": "integer",
+                                "readOnly": true,
+                                "example": 2345
+                            },
+                            "created_by": {
+                                "format": "int64",
+                                "description": "ID of the company owner",
+                                "type": "integer",
+                                "readOnly": true,
+                                "example": 1242
+                            },
+                            "address_city": {
+                                "description": "Account/Default location personal info.",
+                                "type": "string",
+                                "example": "Los Angeles"
+                            },
+                            "address_country": {
+                                "description": "Account/Default location personal info.",
+                                "type": "string",
+                                "example": "USA"
+                            },
+                            "address_state": {
+                                "description": "Account/Default location personal info.",
+                                "type": "string",
+                                "example": "Nevada"
+                            },
+                            "address_street1": {
+                                "description": "Account/Default location personal info.",
+                                "type": "string",
+                                "example": "123 Street"
+                            },
+                            "address_street2": {
+                                "description": "Account/Default location personal info.",
+                                "type": "string",
+                                "example": ""
+                            },
+                            "addresszip": {
+                                "description": "Account/Default location personal info.",
+                                "type": "string",
+                                "example": "245235"
+                            },
+                            "send_to_contact": {
+                                "default": 0,
+                                "type": "integer"
+                            },
+                            "show_map_profile": {
+                                "default": false,
+                                "type": "boolean"
+                            },
+                            "splash": {
+                                "type": "string"
+                            },
+                            "map_url": {
+                                "format": "uri",
+                                "description": "An http address used for locations display",
+                                "type": "string",
+                                "example": ""
+                            },
+                            "return_url": {
+                                "type": "string"
+                            },
+                            "policies": {
+                                "type": "string"
+                            },
+                            "account_type": {
+                                "format": "int32",
+                                "description": "Account bussiness profile: 0 - Free User, 1 - Personal, 2 - Small Business, 4 - Medium Business, 5 - Large Business, 6 - Team",
+                                "enum": [
+                                    0,
+                                    1,
+                                    2,
+                                    4,
+                                    5,
+                                    6
+                                ],
+                                "type": "integer",
+                                "example": 0
+                            },
+                            "date_created": {
+                                "format": "date-time",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "no_views": {
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "notify_app_unconfirmed": {
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "notify_app_unpaid": {
+                                "default": true,
+                                "type": "boolean"
+                            },
+                            "lang": {
+                                "description": "Language",
+                                "default": "en",
+                                "enum": [
+                                    "en",
+                                    "fr",
+                                    "es"
+                                ],
+                                "type": "string"
+                            },
+                            "enable_locations": {
+                                "description": "Allow other location than the implicit one",
+                                "default": false,
+                                "type": "boolean"
+                            },
+                            "capture_leads": {
+                                "type": "string"
+                            },
+                            "settings": {
+                                "format": "json",
+                                "type": "string",
+                                "readOnly": true
+                            },
+                            "status": {
+                                "default": 0,
+                                "type": "integer",
+                                "readOnly": true
+                            },
+                            "directory": {
+                                "default": 0,
+                                "type": "integer"
+                            },
+                            "max_providers": {
+                                "format": "int32",
+                                "description": "The maximum number of locations and providers that the company is allowed to add",
+                                "default": 0,
+                                "type": "integer"
+                            },
+                            "business_hours_label": {
+                                "type": "string"
+                            },
+                            "policies_label": {
+                                "type": "string"
+                            },
+                            "paragraph_label": {
+                                "type": "string"
+                            },
+                            "timezone": {
+                                "format": "int32",
+                                "description": "Gmt offset in minutes",
+                                "default": 0,
+                                "type": "integer",
+                                "example": -480
+                            },
+                            "exchange_sync_settings": {
+                                "type": "object",
+                                "properties": {
+                                    "host": {
+                                        "type": "string"
+                                    },
+                                    "account": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "format": "password",
+                                        "type": "string"
+                                    },
+                                    "sync_period": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "readOnly": true
+                            }
+                        }
+                    }
+                ]
+            },
+            "Location": {
+                "title": "Location",
+                "description": "ReprÃ©sentation d'un lieu",
+                "required": [
+                    "name",
+                    "UID"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "Name of the location",
+                        "type": "string",
+                        "example": "Spa center"
+                    },
+                    "description": {
+                        "description": "Description of the location",
+                        "default": "",
+                        "type": "string"
+                    },
+                    "is_main": {
+                        "description": "DÃ©termine s'il s'agit du lieu du sinistre",
+                        "default": false,
+                        "type": "boolean",
+                        "readOnly": true
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/PostalAddress"
+                    },
+                    "photo": {
+                        "format": "uri",
+                        "description": "Photo URL",
+                        "type": "string",
+                        "example": ""
+                    },
+                    "phone": {
+                        "description": "Phone number",
+                        "default": "",
+                        "type": "string"
+                    },
+                    "tags": {
+                        "default": "",
+                        "type": "string"
+                    },
+                    "timezone_id": {
+                        "description": "The ID of the time zone",
+                        "type": "string",
+                        "example": "553"
+                    },
+                    "lat": {
+                        "format": "float",
+                        "description": "The latitude of the location automatically calculated based on its address",
+                        "type": "number"
+                    },
+                    "lng": {
+                        "format": "float",
+                        "description": "The longitude of the location automatically calculated based on its address",
+                        "type": "number"
+                    },
+                    "update_lat_lng": {
+                        "writeOnly": true,
+                        "description": "Available only on update. If true (1) then the lat and lng values will be automatically calculated",
+                        "default": false,
+                        "type": "boolean"
+                    },
+                    "ord": {
+                        "default": 0,
+                        "type": "integer",
+                        "readOnly": true
+                    },
+                    "UID": {
+                        "description": "Identifiant unique du lieu",
+                        "type": "string"
+                    }
+                },
+                "x-examples": {}
+            },
+            "Appointment": {
+                "required": [
+                    "client_email",
+                    "client_name",
+                    "service_id",
+                    "start_date"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int64",
+                        "description": "Unique ID of the appointment",
+                        "type": "integer",
+                        "readOnly": true,
+                        "example": 2342
+                    },
+                    "client_id": {
+                        "format": "int64",
+                        "description": "The ID of the client that made the appointment",
+                        "type": "integer",
+                        "readOnly": true,
+                        "example": 23113
+                    },
+                    "company_id": {
+                        "format": "int64",
+                        "description": "The ID of the company that the appointment belongs to. Field is writable when entity is owned by child account",
+                        "type": "integer",
+                        "example": 3123
+                    },
+                    "client_email": {
+                        "format": "email",
+                        "description": "The email of the client that made the appointment",
+                        "type": "string"
+                    },
+                    "client_name": {
+                        "description": "The client name",
+                        "type": "string"
+                    },
+                    "client_phone": {
+                        "description": "The client phone number",
+                        "type": "string",
+                        "example": "+33 6 12345678"
+                    },
+                    "client_address": {
+                        "description": "The client address",
+                        "type": "string"
+                    },
+                    "employee_id": {
+                        "format": "int64",
+                        "description": "The ID of the employee (provider) that the appointment is made for",
+                        "type": "integer",
+                        "example": 12412
+                    },
+                    "location_id": {
+                        "format": "int64",
+                        "description": "The ID of the location where the appointment will take place at",
+                        "type": "integer",
+                        "example": 54232
+                    },
+                    "service_id": {
+                        "format": "int64",
+                        "description": "The ID of the service that the appointment is made for",
+                        "type": "integer",
+                        "example": 453
+                    },
+                    "start_date": {
+                        "description": "The date and time when the appointment is scheduled to start.\nThe time is local to the company timezone or the location timezone (if the location is in a different timezone).\nThe format of the date is `yyyy-mm-dd hh:mm:ss`\n",
+                        "type": "string",
+                        "example": "2019-09-01T12:00"
+                    },
+                    "end_date": {
+                        "description": "The date and time when the appointment is scheduled to end.\nThe time is local to the company timezone or the location timezone (if the location is in a different timezone).\nThe format of the date is `yyyy-mm-dd hh:mm:ss`\n",
+                        "type": "string",
+                        "readOnly": true,
+                        "example": "2019-09-01T13:00"
+                    },
+                    "length": {
+                        "description": "The duration of the appointment (in milliseconds). Example: 30 minutes = 1800000 milliseconds.",
+                        "type": "integer",
+                        "readOnly": true,
+                        "example": 1800000
+                    },
+                    "duration": {
+                        "writeOnly": true,
+                        "format": "int32",
+                        "description": "The duration of the appointment in minutes",
+                        "default": 15,
+                        "multipleOf": 15,
+                        "type": "integer"
+                    },
+                    "duration_padding": {
+                        "description": "The appointment time padding (in seconds) - the number of seconds, before and after an appointment, that cannon be used for another appointment",
+                        "default": 0,
+                        "type": "integer",
+                        "readOnly": true
+                    },
+                    "note": {
+                        "nullable": true,
+                        "description": "Custom client message",
+                        "type": "string"
+                    },
+                    "status": {
+                        "description": "Appointment status. Possible values:\n\n  - 0 - waiting email confirmation from the client\n  - 1 - email confirmed but not validated by the admin/provider\n  - 2 - email confirmed and validated or paid\n  - 3 - declined or canceled\n  - 4 - busy time imported from external sources (e.g. google)\n  - 6 - busy time imported from Zapier\n  - 8 - completed\n  - 9 - no show (the scheduled event did not take place)\n  - 10 - in progress\n  - 11 - checked in\n  - 12 - just arrived\n  - 13 - delayed\n",
+                        "enum": [
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            6,
+                            8,
+                            9,
+                            10,
+                            11,
+                            12,
+                            13
+                        ],
+                        "type": "integer"
+                    },
+                    "type": {
+                        "description": "The name of the service with ID service_id",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "last_updated": {
+                        "format": "date-time",
+                        "description": "The date and time when the latest change was made to the appointment",
+                        "type": "string",
+                        "readOnly": true,
+                        "example": "2019-09-01T12:00:00Z"
+                    },
+                    "created_at": {
+                        "format": "date-time",
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "subservices": {
+                        "description": "IDs of sub services that were selected for the appointment separated by comma",
+                        "type": "string"
+                    },
+                    "paid": {
+                        "description": "Whether the appointment has been paid or not, if the service requires a payment.",
+                        "default": false,
+                        "type": "boolean"
+                    },
+                    "price": {
+                        "default": 0,
+                        "type": "integer"
+                    },
+                    "ews_id": {
+                        "default": "",
+                        "type": "string"
+                    },
+                    "timezone_short": {
+                        "description": "The time zone short name (e.g. PST or GMT+4)",
+                        "type": "string",
+                        "readOnly": true,
+                        "example": "GMT -05:00"
+                    },
+                    "timezone_offset_seconds": {
+                        "description": "The time zone offset in seconds",
+                        "type": "integer",
+                        "readOnly": true,
+                        "example": -18000
+                    },
+                    "timezone_id": {
+                        "format": "int32",
+                        "description": "The ID of the time zone in our database",
+                        "type": "integer",
+                        "example": 553
+                    }
+                }
+            },
+            "AvailabilityDetails": {
+                "type": "object",
+                "properties": {
+                    "interval": {
+                        "format": "int32",
+                        "description": "The length (in minutes) of the appointment",
+                        "type": "integer",
+                        "example": 60
+                    },
+                    "boxInterval": {
+                        "format": "int32",
+                        "description": "Relevant only if return=boxes and represents the number of minutes in one box",
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "padding": {
+                        "format": "int32",
+                        "description": "Relevant only if return=boxes and represents the number of minutes between two adjacent appointments",
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "day": {
+                        "format": "int32",
+                        "description": "Selected day",
+                        "type": "integer",
+                        "example": 15
+                    },
+                    "month": {
+                        "format": "int32",
+                        "description": "Selected month",
+                        "type": "integer",
+                        "example": 8
+                    },
+                    "year": {
+                        "format": "int32",
+                        "description": "Selected year",
+                        "type": "integer",
+                        "example": 2012
+                    },
+                    "times": {
+                        "description": "Hash table of the start times of the available appointment slots, grouped by date",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "example": "09:00:00"
+                        }
+                    }
+                }
+            },
+            "ResponseStatus": {
+                "description": "ResponseStatus donne une information sur la réponse. Il contient un code numérique et une description.",
+                "required": [
+                    "value"
+                ],
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "format": "int32",
+                        "description": "Statut de l'opÃ©ration.",
+                        "enum": {
+                            "OK": 0,
+                            "INVALID_PARAMETERS": 1,
+                            "INVALID_CREDENTIALS": 2,
+                            "ACCOUNT_NOT_ACTIVE": 3,
+                            "INTERNAL_ERROR": 4,
+                            "ERROR_SAVING_ENTITY": 5,
+                            "ERROR_DELETING": 6,
+                            "NOT_FOUND": 7,
+                            "NOT_ALLOWED": 8,
+                            "SLOT_NOT_AVAILABLE": 9,
+                            "SLOT_OCCUPIED": 10,
+                            "ACCOUNTS_LIMIT_REACHED": 11
+                        },
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "descriptions": {
+                        "description": "Description of the status",
+                        "type": "string",
+                        "example": "OK"
+                    }
+                },
+                "x-examples": {
+                    "example": {
+                        "value": 0,
+                        "statusCode": 0,
+                        "statusDescription": "Cool Baby!"
+                    }
+                }
+            },
+            "Amount": {
+                "title": "Amount",
+                "description": "ReprÃ©sente une valeur monÃ©taire",
+                "required": [
+                    "value",
+                    "currency"
+                ],
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "description": "Montant en cientiÃ¨mes d'unitÃ©. Par exemple, la valeur de 123,45â¬ est 12345",
+                        "type": "integer"
+                    },
+                    "currency": {
+                        "description": "Code de la devise au format ISO 4217",
+                        "type": "string"
+                    }
+                },
+                "x-examples": {
+                    "example": {
+                        "value": -12345,
+                        "currency": "EUR"
+                    }
+                }
+            },
+            "PostalAddress": {
+                "title": "PostalAddress",
+                "description": "Structure générique pour représenter une dresse postale d'un lieu. Les propriétés street1 à  street4 contiennent sur 4 lignes max les informations, telles que le numéro, le nom de la voie, et toute information qui n'est pas définie par les autres propriétés.",
+                "required": [
+                    "street1",
+                    "zipcode",
+                    "city"
+                ],
+                "type": "object",
+                "properties": {
+                    "street1": {
+                        "description": "adresse postale, ligne 1",
+                        "type": "string"
+                    },
+                    "street2": {
+                        "type": "string"
+                    },
+                    "street3": {
+                        "type": "string"
+                    },
+                    "street4": {
+                        "type": "string"
+                    },
+                    "zipcode": {
+                        "description": "Code postal",
+                        "type": "string"
+                    },
+                    "city": {
+                        "description": "Ville",
+                        "type": "string"
+                    },
+                    "state": {
+                        "description": "RÃ©gion, dÃ©partement",
+                        "type": "string"
+                    },
+                    "country": {
+                        "description": "Code du pays au format ISO 3166-1 (2 caractÃ¨res).",
+                        "default": "FR",
+                        "type": "string"
+                    }
+                },
+                "x-examples": {
+                    "exemple": {
+                        "street1": "49-51, rue de Paris",
+                        "zipcode": "92110",
+                        "city": "Clichy",
+                        "state": "IDF",
+                        "country": "FR"
+                    }
+                }
+            },
+            "Claim": {
+                "title": "Claim",
+                "required": [
+                    "date",
+                    "sinisterDate",
+                    "type",
+                    "location",
+                    "ThirdPartyInvolved",
+                    "damagesCount"
+                ],
+                "type": "object",
+                "properties": {
+                    "date": {
+                        "format": "date",
+                        "type": "string"
+                    },
+                    "sinisterDate": {
+                        "format": "date",
+                        "type": "string"
+                    },
+                    "type": {
+                        "enum": [
+                            "DDE",
+                            "DE",
+                            "VOL",
+                            "INC",
+                            "CATNAT",
+                            "BDG",
+                            "CVT"
+                        ],
+                        "type": "string"
+                    },
+                    "location": {
+                        "$ref": "#/components/schemas/PostalAddress"
+                    },
+                    "ThirdPartyInvolved": {
+                        "type": "boolean"
+                    },
+                    "CostEstimate": {
+                        "$ref": "#/components/schemas/Amount"
+                    },
+                    "damagesCount": {
+                        "maxProperties": 2,
+                        "minProperties": 1,
+                        "type": "object",
+                        "properties": {
+                            "movables": {
+                                "type": "integer"
+                            },
+                            "rooms": {
+                                "type": "integer"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "session_token": {
+                "type": "apiKey",
+                "description": "To get the session_token, first you need to make a POST\nrequest to \"account/authenticate\" using your API key or\nusername and password. The session token is the element\n\"data.session_token\" from the response.\n",
+                "name": "session_token",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "session_token": []
+        }
+    ],
+    "tags": [
+        {
+            "name": "Account",
+            "description": ""
+        },
+        {
+            "name": "Appointment",
+            "description": "Rendez-vous"
+        },
+        {
+            "name": "Availability",
+            "description": "Créneau horaire disponible"
+        },
+        {
+            "name": "Client",
+            "description": ""
+        },
+        {
+            "name": "Location",
+            "description": "Emplacement/adresse d'un site"
+        },
+        {
+            "name": "Time Zone",
+            "description": ""
+        }
+    ]
+}
