@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: '1.0'
+  version: 1.0.0
   title: Claims IA Scheduling API
   description: |+
     L'API RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, elle doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.
@@ -16,8 +16,8 @@ info:
     name: Edouard Nojaroff
     email: e.nojaroff@claims-ia.fr
 servers:
-  - url: 'https://base_url/claims/v1'
-    description: ''
+  - url: 'https://base_url/claims/api/v1'
+    description: Base URL
 tags:
   - name: Account
     description: ''
@@ -106,7 +106,7 @@ paths:
         - Account
       summary: Logout
       security:
-        - session_token: []
+        - tk00001: []
       responses:
         '200':
           description: Logout successful
@@ -167,7 +167,7 @@ paths:
       summary: List locations
       description: Using this endpoint you can retrieve the attributes of all your locations
       security:
-        - session_token: []
+        - tk00001: []
       parameters:
         - name: id
           in: query
@@ -203,31 +203,11 @@ paths:
           in: query
           schema:
             type: string
-        - name: zip
-          in: query
-          schema:
-            type: string
         - name: phone
           in: query
           schema:
             type: string
         - name: email
-          in: query
-          schema:
-            type: string
-        - name: website
-          in: query
-          schema:
-            type: string
-        - name: lat
-          in: query
-          schema:
-            type: number
-        - name: lng
-          in: query
-          schema:
-            type: number
-        - name: country
           in: query
           schema:
             type: string
@@ -270,14 +250,11 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Location'
+                type: string
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
       operationId: LocationList
     post:
       tags:
@@ -285,7 +262,7 @@ paths:
       summary: Create location
       description: Using this endpoint you can create a new location within the account
       security:
-        - session_token: []
+        - tk00001: []
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -306,406 +283,15 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Location'
+                type: string
       operationId: LocationCreate
-  '/location/{locationId}':
-    get:
-      tags:
-        - Location
-      summary: Get a location
-      security:
-        - session_token: []
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Location'
-                    required:
-                      - data
-      operationId: LocationGetInfo
-      description: Get a Location
-    put:
-      tags:
-        - Location
-      summary: Modify location
-      description: Using this endpoint you can change the attributes of a location within the account
-      security:
-        - session_token: []
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                data:
-                  $ref: '#/components/schemas/Location'
-          application/json:
-            schema:
-              type: object
-              properties:
-                data:
-                  $ref: '#/components/schemas/Location'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Location'
-      operationId: LocationModify
-    delete:
-      tags:
-        - Location
-      summary: Delete a location
-      description: Using this endpoint you can delete a location within the account
-      security:
-        - session_token: []
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        nullable: true
-      operationId: LocationDelete
-    parameters:
-      - schema:
-          type: string
-        name: locationId
-        in: path
-        required: true
-  /availability:
-    get:
-      tags:
-        - Availability
-      summary: Get Availability Info
-      description: 'Retrieve available time intervals '
-      security:
-        - session_token: []
-      parameters:
-        - name: service_id
-          in: query
-          required: true
-          example: 2116
-          description: The ID of the selected service
-          schema:
-            type: integer
-            format: int64
-        - name: location_id
-          in: query
-          example: 2116
-          description: The ID of the selected location
-          schema:
-            type: integer
-            format: int64
-        - name: provider_id
-          in: query
-          example: 2116
-          description: The ID of the provider (employee)
-          schema:
-            type: integer
-            format: int64
-        - name: start_date
-          in: query
-          required: true
-          example: '2014-05-15'
-          description: (YYYY-mm-dd) The day for which the availability is requested
-          schema:
-            type: string
-            format: date
-        - name: t
-          in: query
-          required: true
-          description: " - If 'weekly', then the availability for the whole week of 'start_date' will be returned.\n- If 'daily', only the availability for 'start_date' will be returned"
-          example: daily
-          schema:
-            type: string
-            enum:
-              - daily
-              - weekly
-        - name: return
-          in: query
-          required: true
-          description: " - If 'boxes', the availability will be returned as a set of boxes representing fractions of an hour.\n- If 'times', the availability will be returned as times when the availability slots begin. "
-          example: boxes
-          schema:
-            type: string
-            enum:
-              - boxes
-              - times
-        - name: timezone_id
-          in: query
-          description: The ID of the timezone relative to which the availability is calculated. Defaults to the location timezone.
-          schema:
-            type: integer
-            format: int32
-          example: 553
-        - name: first_available
-          in: query
-          description: 'When there is no availability from start_date to the end of the interval(t - daily/weekly), whole agenda is scanned until a first available time slot is returned.'
-          schema:
-            type: boolean
-        - name: available_seats
-          in: query
-          description: 'Retrieve available seats for an appointment start time. This will return the number of seats for an employee. If none is provided, a random employee will be selected and the number of seats for that employee will be returned.'
-          schema:
-            type: boolean
-        - name: total_seats
-          in: query
-          description: Use this parameter to get the total number of seats for all employees
-          schema:
-            type: boolean
-        - name: no_of_weeks
-          in: query
-          description: Used to retreive the availability for one month. Accepted values are between 1 and 5
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 5
-          example: 4
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        $ref: '#/components/schemas/AvailabilityDetails'
-      operationId: AvailibilityGetInfo
-  /appointment:
-    get:
-      tags:
-        - Appointment
-      summary: Lister les rendez-vous
-      description: "Using this endpoint you can retrieve the attributes of all your existing Setster appointments. We advise using filters to fetch appointments on specific date ranges or attributes. See Filtering appointments in the Introduction section. \n\n---\n\n\n> dsfdfds  \n>\n> dsfdsfdsfsdf\n\n\n"
-      security:
-        - session_token: []
-      parameters:
-        - name: id
-          in: query
-          description: The appointment id
-          schema:
-            type: integer
-        - name: company_id
-          in: query
-          schema:
-            type: integer
-          description: "Code de la compagnie d'assurance"
-        - name: employee_id
-          in: query
-          schema:
-            type: integer
-        - name: location_id
-          in: query
-          schema:
-            type: integer
-        - name: client_id
-          in: query
-          schema:
-            type: integer
-        - name: timezone_id
-          in: query
-          description: Returns appointments date fields with specified time offset
-          schema:
-            type: integer
-            example: 553
-        - name: status
-          in: query
-          schema:
-            type: string
-        - name: search_text
-          in: query
-          schema:
-            type: string
-        - name: client_name
-          in: query
-          schema:
-            type: string
-        - name: client_email
-          in: query
-          schema:
-            type: string
-        - name: start_date
-          in: query
-          schema:
-            type: string
-        - name: end_date
-          in: query
-          schema:
-            type: string
-        - name: paid
-          in: query
-          schema:
-            type: integer
-            enum:
-              - 0
-              - 1
-        - name: start
-          in: query
-          description: List pager
-          schema:
-            type: integer
-            default: 0
-        - name: end
-          in: query
-          description: "List pager / 'all' - no limit"
-          schema:
-            oneOf:
-              - type: integer
-              - type: string
-                enum:
-                  - all
-            default: 100
-        - name: updated_after
-          in: query
-          description: Lower date limit for which the appointment was updated
-          schema:
-            type: string
-            format: date-time
-        - name: updated_before
-          in: query
-          description: Upper date limit for which the appointment was updated
-          schema:
-            type: string
-            format: date-time
-        - name: created_after
-          in: query
-          description: Lower date limit for which the appointment was created
-          schema:
-            type: string
-            format: date-time
-        - name: created_before
-          in: query
-          description: Upper date limit for which the appointment was created
-          schema:
-            type: string
-            format: date-time
-        - name: num_results
-          in: query
-          description: 'If 1, the call returns only the number of appointments found'
-          schema:
-            type: integer
-            default: 0
-            enum:
-              - 0
-              - 1
-        - name: sort_by
-          in: query
-          schema:
-            type: string
-            default: start_date
-            enum:
-              - start_date
-              - created
-        - name: sort_order
-          in: query
-          schema:
-            type: string
-            default: asc
-            enum:
-              - asc
-              - desc
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Appointment'
-      operationId: AppointmentGetList
-    post:
-      tags:
-        - Appointment
-      summary: Create appointment
-      description: "Using this endpoint you can create a new appointment within the account. You will have to specify the service and the service provider you are creating the appointment for, along with all the other appointment attributes. This will initiate the scheduling process within Setster. \n\n### Documentation\n\n- [Codes des compagnies](docs/companies.md)\n"
-      security:
-        - session_token: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                data:
-                  $ref: '#/components/schemas/Appointment'
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                data:
-                  $ref: '#/components/schemas/Appointment'
-      responses:
-        '200':
-          description: The appointment has been created
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        $ref: '#/components/schemas/Appointment'
-        '403':
-          description: The appointment can not be created
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        nullable: true
-      operationId: AppointmentCreate
-  '/appointment/{id}':
+  '/appointments/{id}':
     get:
       tags:
         - Appointment
       summary: "LIRE les détails d'un rendez-vous"
       security:
-        - session_token: []
+        - tk00001: []
       responses:
         '200':
           description: successful operation
@@ -728,7 +314,7 @@ paths:
       summary: Modify appointment
       description: Using this endpoint you can modify the attributes for an appointment
       security:
-        - session_token: []
+        - tk00001: []
       parameters:
         - name: id
           in: path
@@ -770,7 +356,7 @@ paths:
       summary: Delete appointment
       description: Using this endpoint you can delete an appointment within the account.
       security:
-        - session_token: []
+        - tk00001: []
       parameters:
         - name: id
           in: path
@@ -799,124 +385,13 @@ paths:
         name: id
         in: path
         required: true
-  /appointment/listView:
-    get:
-      tags:
-        - Appointment
-      summary: List appointments
-      security:
-        - session_token: []
-      parameters:
-        - name: location_id
-          in: query
-          description: Location ID
-          schema:
-            type: integer
-            default: 0
-        - name: employee_id
-          in: query
-          description: Employee ID
-          schema:
-            type: integer
-            default: 0
-        - name: skip
-          in: query
-          description: The number of results to skip
-          schema:
-            type: integer
-            default: 0
-        - name: count
-          in: query
-          description: The number of results to return
-          schema:
-            type: integer
-            default: 10
-        - name: q
-          in: query
-          description: Search query
-          schema:
-            type: string
-            default: ''
-        - name: start_date
-          in: query
-          description: Start date
-          schema:
-            type: string
-            default: ''
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          results:
-                            type: array
-                            items:
-                              $ref: '#/components/schemas/Appointment'
-                          last_rows:
-                            type: integer
-                            example: 100
-      operationId: AppointmentsListView
-      description: List appointments
-  '/appointment/{id}/confirm':
-    post:
-      tags:
-        - Appointment
-      summary: CONFIRMER un rendez-vous
-      description: Using this endpoint you can confirm an appointment
-      security:
-        - session_token: []
-      requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              properties:
-                appointment_id:
-                  type: integer
-                  example: 123
-          application/json:
-            schema:
-              type: object
-              properties:
-                appointment_id:
-                  type: integer
-                  example: 123
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        $ref: '#/components/schemas/Appointment'
-      operationId: AppointmentConfirm
+  '/appointment/{id}/schedule':
     parameters:
       - schema:
           type: string
         name: id
         in: path
         required: true
-        description: Identifiant unique du rendez-vous
-  '/appointment/{id}/reschedule':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-        description: Appointment ID
     get:
       summary: "Demande de replanification d'un rendez-vous"
       tags:
@@ -924,10 +399,12 @@ paths:
       responses:
         '200':
           description: OK
+        '409':
+          description: Conflict. Timeslot is not avalailable.
       operationId: AppointmentReschedule
       security:
-        - session_token: []
-      description: "Demande de replanification d'un rendez-vous"
+        - tk00001: []
+      description: "Lecture de l'horaire d'un rendez-vous"
   /account:
     get:
       tags:
@@ -935,7 +412,7 @@ paths:
       summary: Lire les informations sur le compte
       description: Récupère les informations détaillées sur le compte
       security:
-        - session_token: []
+        - tk00001: []
       parameters:
         - name: company_id
           schema:
@@ -954,9 +431,388 @@ paths:
                       data:
                         $ref: '#/components/schemas/Account'
       operationId: AccountGetInfo
+  '/availabilities/{id}':
+    get:
+      tags:
+        - Availability
+      summary: Get Availability Info
+      description: Retrieve timeslot
+      security:
+        - tk00001: []
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Timeslot'
+      operationId: AvailibilityGetInfo
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Timeslot id. This value identifies one of the avalilable timeslots returned by the POST request.
+  /availabilities:
+    post:
+      summary: ''
+      operationId: post-availability
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Timeslot'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClaimSummary'
+            required: true
+      description: |
+        Request available timeslots.
+        La requête contient les informations sur le type d'intervention
+
+        **Expert**:
+        - Type d'expertise
+        - Informations sur l'assurance et le contrat
+        - Garantie en jeu
+        - Adresse
+        - Qualification du sinistre, selon la codification Sinapps (origine, cause, détail)
+
+        - Des données d'analyse de ClaimsIA (tiers, recours,...)
+        - La pesée de l'enjeu
+
+
+        **RENeur**:
+        - Type de mission (???)
+        - Informations sur l'assurance
+        - Garantie en jeu
+        - Adresse
+        - Qualification du sinistre
+      tags:
+        - Availability
+      security:
+        - tk00001: []
+    parameters: []
+  /rdv:
+    get:
+      summary: get-appointment-info
+      tags:
+        - Appointment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Appointment'
+        '404':
+          description: Not Found
+      operationId: get-rdv
+      description: Get appointment list
+      parameters:
+        - name: id
+          in: query
+          description: The appointment id
+          schema:
+            type: integer
+        - name: location_id
+          in: query
+          schema:
+            type: integer
+        - name: client_id
+          in: query
+          schema:
+            type: integer
+        - name: timezone_id
+          in: query
+          description: Returns appointments date fields with specified time offset
+          schema:
+            type: integer
+            example: 553
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: search_text
+          in: query
+          schema:
+            type: string
+        - name: client_name
+          in: query
+          schema:
+            type: string
+        - name: client_email
+          in: query
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          schema:
+            type: string
+        - name: start
+          in: query
+          description: List pager
+          schema:
+            type: integer
+            default: 0
+        - name: end
+          in: query
+          description: "List pager / 'all' - no limit"
+          schema:
+            oneOf:
+              - type: integer
+              - type: string
+                enum:
+                  - all
+            default: 100
+        - name: updated_after
+          in: query
+          description: Lower date limit for which the appointment was updated
+          schema:
+            type: string
+            format: date-time
+        - name: updated_before
+          in: query
+          description: Upper date limit for which the appointment was updated
+          schema:
+            type: string
+            format: date-time
+        - name: num_results
+          in: query
+          description: 'If 1, the call returns only the number of appointments found'
+          schema:
+            type: integer
+            default: 0
+            enum:
+              - 0
+              - 1
+        - name: sort_by
+          in: query
+          schema:
+            type: string
+            default: start_date
+            enum:
+              - start_date
+              - created
+        - name: sort_order
+          in: query
+          schema:
+            type: string
+            default: asc
+            enum:
+              - asc
+              - desc
+      security:
+        - tk00001: []
+    post:
+      summary: create-appointment
+      tags:
+        - Appointment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+      operationId: post-rdv
+      description: create appointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Timeslot'
+                - $ref: '#/components/schemas/Claim'
+  /appointments:
+    get:
+      tags:
+        - Appointment
+      summary: Lister les rendez-vous
+      description: "Using this endpoint you can retrieve the attributes of all your existing Setster appointments. We advise using filters to fetch appointments on specific date ranges or attributes. See Filtering appointments in the Introduction section. \n\n---\n\n<!-- theme: warning -->\n\n> dsfdfds  \n>\n> dsfdsfdsfsdf\n\n\n"
+      security:
+        - tk00001: []
+      parameters:
+        - name: id
+          in: query
+          description: The appointment id
+          schema:
+            type: integer
+        - name: location_id
+          in: query
+          schema:
+            type: integer
+        - name: client_id
+          in: query
+          schema:
+            type: integer
+        - name: timezone_id
+          in: query
+          description: Returns appointments date fields with specified time offset
+          schema:
+            type: integer
+            example: 553
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: search_text
+          in: query
+          schema:
+            type: string
+        - name: client_name
+          in: query
+          schema:
+            type: string
+        - name: client_email
+          in: query
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          schema:
+            type: string
+        - name: start
+          in: query
+          description: List pager
+          schema:
+            type: integer
+            default: 0
+        - name: end
+          in: query
+          description: "List pager / 'all' - no limit"
+          schema:
+            oneOf:
+              - type: integer
+              - type: string
+                enum:
+                  - all
+            default: 100
+        - name: updated_after
+          in: query
+          description: Lower date limit for which the appointment was updated
+          schema:
+            type: string
+            format: date-time
+        - name: updated_before
+          in: query
+          description: Upper date limit for which the appointment was updated
+          schema:
+            type: string
+            format: date-time
+        - name: num_results
+          in: query
+          description: 'If 1, the call returns only the number of appointments found'
+          schema:
+            type: integer
+            default: 0
+            enum:
+              - 0
+              - 1
+        - name: sort_by
+          in: query
+          schema:
+            type: string
+            default: start_date
+            enum:
+              - start_date
+              - created
+        - name: sort_order
+          in: query
+          schema:
+            type: string
+            default: asc
+            enum:
+              - asc
+              - desc
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    description: Array of appointments
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Appointment'
+                    required:
+                      - data
+          headers: {}
+      operationId: AppointmentsGetList
+    post:
+      tags:
+        - Appointment
+      summary: Create appointment
+      description: "Using this endpoint you can create a new appointment within the account. You will have to specify the service and the service provider you are creating the appointment for, along with all the other appointment attributes. This will initiate the scheduling process within Setster. \n\n### Documentation\n\n- [Codes des compagnies](docs/companies.md)\n"
+      security:
+        - tk00001: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Appointment'
+                timeslot:
+                  $ref: '#/components/schemas/Timeslot'
+                claim:
+                  $ref: '#/components/schemas/Claim'
+              required:
+                - timeslot
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Appointment'
+      responses:
+        '200':
+          description: The appointment has been created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+        '403':
+          description: The appointment can not be created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        nullable: true
+      operationId: AppointmentCreate
+    parameters: []
 components:
   securitySchemes:
-    session_token:
+    tk00001:
       type: apiKey
       name: session_token
       in: query
@@ -1106,6 +962,347 @@ components:
                 sync_period:
                   type: integer
       type: object
+    AvailabilityDetails:
+      type: object
+      properties:
+        interval:
+          type: integer
+          format: int32
+          description: The length (in minutes) of the appointment
+          example: 60
+        day:
+          type: integer
+          format: int32
+          description: Selected day
+          example: 15
+        month:
+          type: integer
+          format: int32
+          description: Selected month
+          example: 8
+        year:
+          type: integer
+          format: int32
+          description: Selected year
+          example: 2012
+        times:
+          type: array
+          description: 'Hash table of the start times of the available appointment slots, grouped by date'
+          items:
+            type: string
+            example: '09:00:00'
+    AppointmentType:
+      type: string
+      title: AppointmentType
+      enum:
+        - Site
+        - Visio
+        - Telephonique
+      description: '[Valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typedurendez-vous)'
+      x-tags:
+        - Common
+        - Sinapps
+    ZZZ_Damages:
+      title: Damages
+      type: object
+      properties:
+        buildings:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildingDamage'
+        contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentDamage'
+      x-tags:
+        - ClaimsIA
+    ContentDamage:
+      title: ContentDamage
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        brandAndModel:
+          type: string
+        category:
+          type: string
+        age:
+          $ref: ./models/CIAC_Age.v1.yaml
+        buyingPrice:
+          $ref: ./models/CIAC_Amount.v1.yaml
+        marketPrice:
+          $ref: ./models/CIAC_Amount.v1.yaml
+        invoice:
+          $ref: ./models/CIAC_Attachment.v1.yaml
+        pictures:
+          type: array
+          items:
+            $ref: ./models/CIAC_Attachment.v1.yaml
+    Customer:
+      title: Customer
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        gender:
+          type: string
+        coordinates:
+          $ref: ./models/CIAC_Coordinates.v1.yaml
+    Estimation:
+      title: Estimation
+      type: object
+      properties:
+        cost:
+          $ref: ./models/CIAC_Amount.v1.yaml
+        contentsCount:
+          type: integer
+        roomsCount:
+          type: integer
+    Contract:
+      title: Contract
+      type: object
+      properties:
+        company:
+          $ref: ./models/CIAC_Company.v1.yaml
+        name:
+          type: string
+          description: Nom du contrat
+      required:
+        - company
+        - name
+    ClaimSummary:
+      title: Claim
+      type: object
+      description: ''
+      x-tags:
+        - ClaimsIA
+      x-examples:
+        example-1:
+          claimDate: '2020-04-02'
+          guarantee: DegatDesEaux
+          company:
+            id: AVIVA
+            name: Aviva
+            acam: aviva
+          location:
+            country: FR
+            city: Paris
+            zipcode: '92200'
+            street1: '49, rue de Paris'
+          sinister:
+            code: DegatDesEaux
+            date: '2020-03-30'
+            type: DegatDesEaux
+      properties:
+        claimDate:
+          type: string
+          format: date
+          description: Date de déclaration
+        guarantee:
+          $ref: ./models/CIAC_WarrantyType.v1.yaml
+        company:
+          $ref: ./models/CIAC_Company.v1.yaml
+        location:
+          $ref: ./models/CIAC_PostalAddress.v1.yaml
+        sinister:
+          $ref: '#/components/schemas/Sinister'
+        estimation:
+          $ref: '#/components/schemas/Estimation'
+      required:
+        - claimDate
+        - guarantee
+        - company
+        - location
+    Qualification:
+      title: Qualification
+      type: object
+      description: |
+        Le sinistre est qualifié par le trio de données **Nature/Cause/Détail**.
+
+        Selon les sinistres, le détail de la cause peut ne pas être renseigné. Les valeurs de ces trois informations suivent la codification **Sinapps**.
+
+        [Liste des valeurs possibles](docs/sinapps/Nature-du-sinistre.md)
+
+        Le complément correspond aux informations définies par Claims IA et est optionnel.
+      properties:
+        characteristic:
+          $ref: ./models/CIAC_SinisterCharacteristic.v1.yaml
+        complement:
+          $ref: '#/components/schemas/QualificationComplement'
+      required:
+        - characteristic
+    QualificationComplement:
+      title: QualificationComplement
+      description: "Le complément de qualification regroupe des informations établies par Claims IA à l'issue de la déclaration de sinistre."
+      type: object
+      properties:
+        thirdParty:
+          type: boolean
+          description: Tiers en cause?
+        insuredResponsible:
+          type: boolean
+          description: "Est-ce que l'assuré est responsable?"
+        remedy:
+          type: boolean
+          description: Recours possible?
+        recourse:
+          type: boolean
+          description: Action en remboursement possible?
+    BuildingDamage:
+      title: BuildingDamage
+      type: object
+      description: "Description de dommage immobilier\n\n- Nom de la pièce\n- Tableau de surfaces\n\n### Surface\n\n* Nom\n* Superficie\n* Revêtement\n  - Nom\n  - Nature (Darva 9079.01.01 - Nature objet ou corps d'état)\n  - Qualité du revêtement (Darva 9711.01.01 - catégorie du risque)\n    - (1: Normal, 2: Standing, 3: Luxe)\n  - niveau d'usure (1: neuf, 2: état d'usage, 3: ancien)\n      \n\n"
+      properties:
+        name:
+          type: string
+          description: Nom de la pièce
+        surfaces:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Surface'
+        pictures:
+          type: array
+          items:
+            $ref: ./models/CIAC_Attachment.v1.yaml
+        size:
+          type: number
+      required:
+        - name
+        - surfaces
+    Timeslot:
+      title: Timeslot
+      type: object
+      description: |-
+        Le Timeslot est un créneau horaire retourné par le partenaire. Il est défini au minimum par une heure de début et une heure de fin.
+        Une adresse peut être renseignée si elle est différente de l'adresse fournie dans la demande.
+      properties:
+        id:
+          type: string
+        startTime:
+          type: string
+        endTime:
+          type: string
+        location:
+          $ref: ./models/CIAC_PostalAddress.v1.yaml
+      required:
+        - id
+        - startTime
+        - endTime
+    SurfaceCovering:
+      title: Covering
+      type: object
+      description: |-
+        Revêtement d'une surface.
+
+        Le type de revêtement correspond globalement aux corps d'état. On s'appuie sur la codification Sinapps pour les valeurs (_cf. fichier [Detail-nature-dommage](docs/sinapps/Detail-nature-dommages.md)_)
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          description: "Nature du revêtement. \nListe des valeurs: cf.Sinapps - detailNatureDommages \n(anciennement DARVA 9711.01.01)"
+        state:
+          type: integer
+          description: "Niveau d'usure. 1:neuf, 2:état d'usage, 3:ancien"
+          enum:
+            - 1
+            - 2
+            - 3
+        quality:
+          type: integer
+          description: 'Qualité du revêtement. 1:normal, 2:standing, 3:luxe'
+          enum:
+            - 1
+            - 2
+            - 3
+      required:
+        - name
+        - type
+        - state
+    Surface:
+      title: Surface
+      type: object
+      description: |
+        Surface d'une pièce: mur, sol, plafond
+      properties:
+        name:
+          type: string
+          description: Nom de la surface
+        size:
+          type: string
+          description: Superficie en m2
+        covering:
+          $ref: '#/components/schemas/SurfaceCovering'
+        condition:
+          type: string
+          description: Etat général de la surface
+      required:
+        - name
+        - size
+        - covering
+    Sinister:
+      title: Sinister
+      type: object
+      properties:
+        code:
+          type: string
+          minLength: 2
+          maxLength: 2
+          pattern: '[a-zA-Z0-9][a-zA-Z0-9]'
+          description: Nature du sinistre - code DARVA
+        date:
+          type: string
+          format: date
+          description: Date du sinistre
+        type:
+          type: string
+          description: Code DARVA 9209.01.01-NATURE DU SINISTRE
+        qualification:
+          $ref: '#/components/schemas/Qualification'
+        damages:
+          $ref: ./models/CIAC_Damages.v1.yaml
+      required:
+        - code
+        - date
+        - type
+    ResponseStatus:
+      type: object
+      description: ResponseStatus donne une information sur la réponse. Il contient un code numérique et une description.
+      x-examples:
+        example:
+          value: 0
+          statusCode: 0
+          statusDescription: 'Cool Baby!'
+      properties:
+        value:
+          type: integer
+          format: int32
+          description: "Statut de l'opération."
+          example: 0
+          enum:
+            OK: 0
+            INVALID_PARAMETERS: 1
+            INVALID_CREDENTIALS: 2
+            ACCOUNT_NOT_ACTIVE: 3
+            INTERNAL_ERROR: 4
+            ERROR_SAVING_ENTITY: 5
+            ERROR_DELETING: 6
+            NOT_FOUND: 7
+            NOT_ALLOWED: 8
+            SLOT_NOT_AVAILABLE: 9
+            SLOT_OCCUPIED: 10
+            ACCOUNTS_LIMIT_REACHED: 11
+        descriptions:
+          type: string
+          example: OK
+          description: Description of the status
+      required:
+        - value
     Location:
       type: object
       x-examples: {}
@@ -1126,7 +1323,7 @@ components:
           default: false
           description: "Détermine s'il s'agit du lieu du sinistre"
         address:
-          $ref: '#/components/schemas/PostalAddress'
+          $ref: ./models/CIAC_PostalAddress.v1.yaml
         photo:
           type: string
           format: uri
@@ -1166,338 +1363,115 @@ components:
       required:
         - name
         - UID
-    Appointment:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          readOnly: true
-          description: Unique ID of the appointment
-          example: 2342
-        client_id:
-          type: integer
-          format: int64
-          readOnly: true
-          description: The ID of the client that made the appointment
-          example: 23113
-        company_id:
-          type: integer
-          format: int64
-          description: The ID of the company that the appointment belongs to. Field is writable when entity is owned by child account
-          example: 3123
-        client_email:
-          type: string
-          format: email
-          description: The email of the client that made the appointment
-        client_name:
-          type: string
-          description: The client name
-        client_phone:
-          type: string
-          description: The client phone number
-          example: +33 6 12345678
-        client_address:
-          type: string
-          description: The client address
-        employee_id:
-          type: integer
-          format: int64
-          description: The ID of the employee (provider) that the appointment is made for
-          example: 12412
-        location_id:
-          type: integer
-          format: int64
-          description: The ID of the location where the appointment will take place at
-          example: 54232
-        service_id:
-          type: integer
-          format: int64
-          description: The ID of the service that the appointment is made for
-          example: 453
-        start_date:
-          type: string
-          description: |
-            The date and time when the appointment is scheduled to start.
-            The time is local to the company timezone or the location timezone (if the location is in a different timezone).
-            The format of the date is `yyyy-mm-dd hh:mm:ss`
-          example: '2019-09-01T12:00'
-        end_date:
-          type: string
-          description: |
-            The date and time when the appointment is scheduled to end.
-            The time is local to the company timezone or the location timezone (if the location is in a different timezone).
-            The format of the date is `yyyy-mm-dd hh:mm:ss`
-          readOnly: true
-          example: '2019-09-01T13:00'
-        length:
-          type: integer
-          readOnly: true
-          description: 'The duration of the appointment (in milliseconds). Example: 30 minutes = 1800000 milliseconds.'
-          example: 1800000
-        duration:
-          type: integer
-          format: int32
-          writeOnly: true
-          multipleOf: 15
-          description: The duration of the appointment in minutes
-          default: 15
-        duration_padding:
-          type: integer
-          description: 'The appointment time padding (in seconds) - the number of seconds, before and after an appointment, that cannon be used for another appointment'
-          readOnly: true
-          default: 0
-        note:
-          type: string
-          description: Custom client message
-          nullable: true
-        status:
-          type: integer
-          description: |
-            Appointment status. Possible values:
-
-              - 0 - waiting email confirmation from the client
-              - 1 - email confirmed but not validated by the admin/provider
-              - 2 - email confirmed and validated or paid
-              - 3 - declined or canceled
-              - 4 - busy time imported from external sources (e.g. google)
-              - 6 - busy time imported from Zapier
-              - 8 - completed
-              - 9 - no show (the scheduled event did not take place)
-              - 10 - in progress
-              - 11 - checked in
-              - 12 - just arrived
-              - 13 - delayed
-          enum:
-            - 0
-            - 1
-            - 2
-            - 3
-            - 4
-            - 6
-            - 8
-            - 9
-            - 10
-            - 11
-            - 12
-            - 13
-        type:
-          type: string
-          description: The name of the service with ID service_id
-          readOnly: true
-        last_updated:
-          type: string
-          description: The date and time when the latest change was made to the appointment
-          readOnly: true
-          format: date-time
-          example: '2019-09-01T12:00:00Z'
-        created_at:
-          type: string
-          format: date-time
-          readOnly: true
-        subservices:
-          type: string
-          description: IDs of sub services that were selected for the appointment separated by comma
-        paid:
-          type: boolean
-          description: 'Whether the appointment has been paid or not, if the service requires a payment.'
-          default: false
-        price:
-          type: integer
-          default: 0
-        ews_id:
-          type: string
-          default: ''
-        timezone_short:
-          type: string
-          description: The time zone short name (e.g. PST or GMT+4)
-          readOnly: true
-          example: 'GMT -05:00'
-        timezone_offset_seconds:
-          type: integer
-          description: The time zone offset in seconds
-          example: -18000
-          readOnly: true
-        timezone_id:
-          type: integer
-          format: int32
-          description: The ID of the time zone in our database
-          example: 553
-      required:
-        - client_email
-        - client_name
-        - service_id
-        - start_date
-    AvailabilityDetails:
-      type: object
-      properties:
-        interval:
-          type: integer
-          format: int32
-          description: The length (in minutes) of the appointment
-          example: 60
-        boxInterval:
-          type: integer
-          format: int32
-          description: Relevant only if return=boxes and represents the number of minutes in one box
-          example: 5
-        padding:
-          type: integer
-          format: int32
-          description: Relevant only if return=boxes and represents the number of minutes between two adjacent appointments
-          example: 0
-        day:
-          type: integer
-          format: int32
-          description: Selected day
-          example: 15
-        month:
-          type: integer
-          format: int32
-          description: Selected month
-          example: 8
-        year:
-          type: integer
-          format: int32
-          description: Selected year
-          example: 2012
-        times:
-          type: array
-          description: 'Hash table of the start times of the available appointment slots, grouped by date'
-          items:
-            type: string
-            example: '09:00:00'
-    ResponseStatus:
-      type: object
-      description: ResponseStatus donne une information sur la réponse. Il contient un code numérique et une description.
-      x-examples:
-        example:
-          value: 0
-          statusCode: 0
-          statusDescription: 'Cool Baby!'
-      properties:
-        value:
-          type: integer
-          format: int32
-          description: "Statut de l'opération."
-          example: 0
-          enum:
-            OK: 0
-            INVALID_PARAMETERS: 1
-            INVALID_CREDENTIALS: 2
-            ACCOUNT_NOT_ACTIVE: 3
-            INTERNAL_ERROR: 4
-            ERROR_SAVING_ENTITY: 5
-            ERROR_DELETING: 6
-            NOT_FOUND: 7
-            NOT_ALLOWED: 8
-            SLOT_NOT_AVAILABLE: 9
-            SLOT_OCCUPIED: 10
-            ACCOUNTS_LIMIT_REACHED: 11
-        descriptions:
-          type: string
-          example: OK
-          description: Description of the status
-      required:
-        - value
-    Amount:
-      title: Amount
-      type: object
-      description: Représente une valeur monétaire
-      properties:
-        value:
-          type: integer
-          description: "Montant en cientièmes d'unité. Par exemple, la valeur de 123,45€ est 12345"
-        currency:
-          type: string
-          description: Code de la devise au format ISO 4217
-      required:
-        - value
-        - currency
-      x-examples:
-        example:
-          value: -12345
-          currency: EUR
-    PostalAddress:
-      title: PostalAddress
-      type: object
-      description: "Structure générique pour représenter une dresse postale d'un lieu. Les propriétés street1 à street4 contiennent sur 4 lignes max les informations, telles que le numéro, le nom de la voie, et toute information qui n'est pas définie par les autres propriétés."
-      x-examples:
-        exemple:
-          street1: '49-51, rue de Paris'
-          zipcode: '92110'
-          city: Clichy
-          state: IDF
-          country: FR
-      properties:
-        street1:
-          type: string
-          description: 'adresse postale, ligne 1'
-        street2:
-          type: string
-        street3:
-          type: string
-        street4:
-          type: string
-        zipcode:
-          type: string
-          description: Code postal
-        city:
-          type: string
-          description: Ville
-        state:
-          type: string
-          description: 'Région, département'
-        country:
-          type: string
-          default: FR
-          description: Code du pays au format ISO 3166-1 (2 caractères).
-      required:
-        - street1
-        - zipcode
-        - city
     Claim:
       title: Claim
       type: object
+      description: ''
       properties:
         date:
           type: string
           format: date
-        sinisterDate:
+          description: Date de déclaration
+        guarantee:
+          $ref: ./models/CIAC_WarrantyType.v1.yaml
+        customer:
+          $ref: '#/components/schemas/Customer'
+        sinister:
+          $ref: ./models/CIAC_Sinister.v1.yaml
+        documents:
+          type: array
+          items:
+            $ref: ./models/CIAC_Attachment.v1.yaml
+        estimation:
+          $ref: '#/components/schemas/Estimation'
+        contract:
+          $ref: '#/components/schemas/Contract'
+        reference:
           type: string
-          format: date
+          description: Référence ClaimsIA de la déclaration
+      required:
+        - date
+        - guarantee
+      x-tags:
+        - ClaimsIA
+    AppointmentChangeReason:
+      type: string
+      title: AppointmentChangeReason
+      enum:
+        - ErreurDeSaisie
+        - ClientIndisponible
+        - ExpertIndisponible
+        - TiersIndisponible
+        - DossierIncomplet
+        - RendezVousNonUtile
+        - Autre
+      description: Motif de changement de rendez-vous
+      x-tags:
+        - ClaimsIA
+        - Sinapps
+    Appointment:
+      type: object
+      properties:
+        address:
+          $ref: ./models/CIAC_PostalAddress.v1.yaml
+        notes:
+          $ref: ./models/CIAC_NonEmptyString.v1.yaml
+        createdAt:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+        type:
+          $ref: '#/components/schemas/AppointmentType'
+        schedule:
+          $ref: '#/components/schemas/AppointmentSchedule'
+        customer:
+          $ref: '#/components/schemas/Customer'
+      required:
+        - type
+        - schedule
+    AppointmentSchedule:
+      title: AppointmentTime
+      type: object
+      description: Horaire de rendez-vous
+      x-examples:
+        Horaire fixe:
+          type: HoraireFixe
+          startTime: '2020-05-14T10:00:00Z'
+          endTime: '2020-05-14T11:30:00Z'
+          duration: 90
+        Plage horaire:
+          type: HorairePlage
+          startTime: '2020-05-14T09:00:00Z'
+          endTime: '2020-05-14T10:00:00Z'
+          duration: 60
+      properties:
         type:
           type: string
           enum:
-            - DDE
-            - DE
-            - VOL
-            - INC
-            - CATNAT
-            - BDG
-            - CVT
-        location:
-          $ref: '#/components/schemas/PostalAddress'
-        ThirdPartyInvolved:
-          type: boolean
-        CostEstimate:
-          $ref: '#/components/schemas/Amount'
-        damagesCount:
-          type: object
-          additionalProperties: false
-          minProperties: 1
-          maxProperties: 2
-          properties:
-            movables:
-              type: integer
-            rooms:
-              type: integer
+            - HoraireFixe
+            - HorairePlage
+          description: |-
+            Si "HoraireFixe", le rendez commence à "startTime" et fini à "endTime"
+
+            Si "HorairePlage", le rendez-vous de "duration" minutes aura lieu n'importe quand entre "startTime" et "endTime"
+        startTime:
+          type: string
+          format: date-time
+          example: '2020-05-14T09:00:00Z'
+        endTime:
+          type: string
+          format: date-time
+          example: '2020-05-14T09:00:00Z'
+        duration:
+          $ref: ./models/CIAC_Duration.v1.yaml
       required:
-        - date
-        - sinisterDate
         - type
-        - location
-        - ThirdPartyInvolved
-        - damagesCount
+        - startTime
+        - endTime
+      x-tags:
+        - ClaimsIA
+        - Appointment
 security:
   - session_token: []

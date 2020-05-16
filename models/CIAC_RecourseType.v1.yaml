@@ -1,0 +1,12 @@
+type: string
+title: CIAC_RecourseType
+enum:
+  - Recours
+  - AbandonDeRecours
+  - ActionEnRemboursement
+  - ActionEnContribution
+  - ActionEnRecuperation
+description: Type de recours
+x-tags:
+  - Common
+  - Sinapps

@@ -1,0 +1,3776 @@
+openapi: 3.0.0
+info:
+  title: KAIROS API
+  contact: {}
+  version: '3.0'
+  description: Polyexpert Kairos Application REST API
+servers:
+  - url: 'http://example.com/api/v3/kairos/1'
+    variables: {}
+paths:
+  /disponibilites:
+    post:
+      tags:
+        - Misc
+      summary: disponibilites custom
+      operationId: disponibilitescustom
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/disponibilitescustomrequest'
+            example:
+              numDossier: temp_54231
+              refSinistre: test5
+              mtOuverture: '0'
+              requiredResources: 'RAU,BGP'
+              dureeRdv: '00:45'
+              assure:
+                nomComplet: 'A MODIFIER A MODIFIER '
+                nom: A MODIFIER
+                prenom: A MODIFIER
+                raisonSociale: ''
+                tel: ''
+                email: ''
+                adresse:
+                  adr1: ''
+                  adr2: ''
+                  adr3: ''
+                  adr4: ''
+                  cp: ''
+                  ville: ''
+                type: PART
+              compagnie:
+                code: 69AAAAAAEUROFIL
+                raisSoc: AVIVA
+              sinistre:
+                date: 04/06/2019
+                codeType: VOL
+                libelleType: Vol
+                codeTypeCentral: VOL
+                libelleTypeCentral: Vol
+                adresse:
+                  adr1: ' '
+                  adr2: ''
+                  adr3: ''
+                  adr4: ''
+                  cp: '84000'
+                  ville: AVIGNON
+              lieuRDV:
+                adr1: ' '
+                adr2: ''
+                adr3: ''
+                adr4: ''
+                cp: '84000'
+                ville: AVIGNON
+              typeExpertise: TELE
+              modeExpertise: EAD
+              delaiPlancher: 1jo
+              delaiPlafond: 5jo
+              dosKairos: O
+              dosAxaPromium: 'N'
+              dosRecepAgeCode: PU
+              dosBraCode: MRH
+              expertCgn: 'N'
+              dosTypeCode: COURR
+              dosEntreprise: 'N'
+              dosCiePolice: NC
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers:
+            Server:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Apache-Coyote/1.1
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Servlet/3.0; JBossAS-6
+            Transfer-Encoding:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: chunked
+            Content-Encoding:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: gzip
+            Vary:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Accept-Encoding
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 'Tue, 21 Jan 2020 14:34:29 GMT'
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/disponibilitescustom'
+              example:
+                statut: true
+                listeMessage: ''
+                contenu:
+                  ReponseGetNewOptimResult:
+                    result:
+                      success: true
+                      detail: The solutions are described in the response
+                    optimizationResult:
+                      optimizationId: 'd0e58120-e584-489e-9338-74697000e6bb,b8ead0f0-59d2-4c55-abea-5a2a5e65aee8'
+                      appointmentId: PGD_AP_28429254
+                      appointmentKey: ''
+                      appointmentDuration:
+                        value: 60
+                        unit: MINUTE
+                      optimizationSolutions:
+                        optimizationSolution:
+                          - optimizationSolutionId: '1'
+                            cost: 3306.3433333333332
+                            moveTimeAdded:
+                              value: 124
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 175.4
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 61
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 87.415
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 63
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 87.886
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: CAL
+                                  resourceKey: '438'
+                            startDateTime: '2020-01-22T09:01:00'
+                            endDateTime: '2020-01-22T10:01:00'
+                            startDateTimeCommunicated: '2020-01-22T06:00:00'
+                            endDateTimeCommunicated: '2020-01-22T12:00:00'
+                          - optimizationSolutionId: '2'
+                            cost: 3306.3433333333332
+                            moveTimeAdded:
+                              value: 124
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 175.4
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 61
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 87.415
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 63
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 87.886
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: CAL
+                                  resourceKey: '438'
+                            startDateTime: '2020-01-22T16:36:00'
+                            endDateTime: '2020-01-22T17:36:00'
+                            startDateTimeCommunicated: '2020-01-22T12:00:00'
+                            endDateTimeCommunicated: '2020-01-22T20:00:00'
+                          - optimizationSolutionId: '3'
+                            cost: 3372.4701999999997
+                            moveTimeAdded:
+                              value: 124
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 175.4
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 61
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 87.415
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 63
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 87.886
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: CAL
+                                  resourceKey: '438'
+                            startDateTime: '2020-01-23T09:01:00'
+                            endDateTime: '2020-01-23T10:01:00'
+                            startDateTimeCommunicated: '2020-01-23T06:00:00'
+                            endDateTimeCommunicated: '2020-01-23T12:00:00'
+                          - optimizationSolutionId: '4'
+                            cost: 3372.4701999999997
+                            moveTimeAdded:
+                              value: 124
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 175.4
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 61
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 87.415
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 63
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 87.886
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: CAL
+                                  resourceKey: '438'
+                            startDateTime: '2020-01-23T16:36:00'
+                            endDateTime: '2020-01-23T17:36:00'
+                            startDateTimeCommunicated: '2020-01-23T12:00:00'
+                            endDateTimeCommunicated: '2020-01-23T20:00:00'
+                          - optimizationSolutionId: '5'
+                            cost: 3723.4796071840647
+                            moveTimeAdded:
+                              value: 124
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 175.4
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 61
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 87.415
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 63
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 87.886
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: CAL
+                                  resourceKey: '438'
+                            startDateTime: '2020-01-28T09:01:00'
+                            endDateTime: '2020-01-28T10:01:00'
+                            startDateTimeCommunicated: '2020-01-28T06:00:00'
+                            endDateTimeCommunicated: '2020-01-28T12:00:00'
+                          - optimizationSolutionId: '6'
+                            cost: 3723.4796071840647
+                            moveTimeAdded:
+                              value: 124
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 175.4
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 61
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 87.415
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 63
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 87.886
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: CAL
+                                  resourceKey: '438'
+                            startDateTime: '2020-01-28T16:36:00'
+                            endDateTime: '2020-01-28T17:36:00'
+                            startDateTimeCommunicated: '2020-01-28T12:00:00'
+                            endDateTimeCommunicated: '2020-01-28T20:00:00'
+                          - optimizationSolutionId: '7'
+                            cost: 4553.326666666667
+                            moveTimeAdded:
+                              value: 2
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 462.7
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 231.085
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 231.581
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: BGP
+                                  resourceKey: '929'
+                            startDateTime: '2020-01-22T11:31:00'
+                            endDateTime: '2020-01-22T12:31:00'
+                            startDateTimeCommunicated: '2020-01-22T06:00:00'
+                            endDateTimeCommunicated: '2020-01-22T12:00:00'
+                          - optimizationSolutionId: '8'
+                            cost: 4644.3932
+                            moveTimeAdded:
+                              value: 2
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 462.7
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 231.085
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 231.581
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: BGP
+                                  resourceKey: '929'
+                            startDateTime: '2020-01-23T11:31:00'
+                            endDateTime: '2020-01-23T12:31:00'
+                            startDateTimeCommunicated: '2020-01-23T06:00:00'
+                            endDateTimeCommunicated: '2020-01-23T12:00:00'
+                          - optimizationSolutionId: '9'
+                            cost: 4737.281064
+                            moveTimeAdded:
+                              value: 2
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 462.7
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 231.085
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 231.581
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: BGP
+                                  resourceKey: '929'
+                            startDateTime: '2020-01-24T11:31:00'
+                            endDateTime: '2020-01-24T12:31:00'
+                            startDateTimeCommunicated: '2020-01-24T06:00:00'
+                            endDateTimeCommunicated: '2020-01-24T12:00:00'
+                          - optimizationSolutionId: '10'
+                            cost: 4737.281064
+                            moveTimeAdded:
+                              value: 2
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 462.7
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 231.085
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 231.581
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: BGP
+                                  resourceKey: '929'
+                            startDateTime: '2020-01-24T18:29:00'
+                            endDateTime: '2020-01-24T19:29:00'
+                            startDateTimeCommunicated: '2020-01-24T12:00:00'
+                            endDateTimeCommunicated: '2020-01-24T20:00:00'
+                          - optimizationSolutionId: '11'
+                            cost: 4781.289984
+                            moveTimeAdded:
+                              value: 2
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 466.9
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 233.013
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 233.883
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: RAU
+                                  resourceKey: '627'
+                            startDateTime: '2020-01-24T09:01:00'
+                            endDateTime: '2020-01-24T10:01:00'
+                            startDateTimeCommunicated: '2020-01-24T06:00:00'
+                            endDateTimeCommunicated: '2020-01-24T12:00:00'
+                          - optimizationSolutionId: '12'
+                            cost: 5027.2405633653125
+                            moveTimeAdded:
+                              value: 2
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 462.7
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 231.085
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 231.581
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: BGP
+                                  resourceKey: '929'
+                            startDateTime: '2020-01-27T11:31:00'
+                            endDateTime: '2020-01-27T12:31:00'
+                            startDateTimeCommunicated: '2020-01-27T06:00:00'
+                            endDateTimeCommunicated: '2020-01-27T12:00:00'
+                          - optimizationSolutionId: '13'
+                            cost: 5027.2405633653125
+                            moveTimeAdded:
+                              value: 2
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 462.7
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 231.085
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 231.581
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: BGP
+                                  resourceKey: '929'
+                            startDateTime: '2020-01-27T18:29:00'
+                            endDateTime: '2020-01-27T19:29:00'
+                            startDateTimeCommunicated: '2020-01-27T12:00:00'
+                            endDateTimeCommunicated: '2020-01-27T20:00:00'
+                          - optimizationSolutionId: '14'
+                            cost: 5073.943181340673
+                            moveTimeAdded:
+                              value: 2
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 466.9
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 233.013
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 233.883
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: RAU
+                                  resourceKey: '627'
+                            startDateTime: '2020-01-27T07:00:00'
+                            endDateTime: '2020-01-27T08:00:00'
+                            startDateTimeCommunicated: '2020-01-27T06:00:00'
+                            endDateTimeCommunicated: '2020-01-27T12:00:00'
+                          - optimizationSolutionId: '15'
+                            cost: 5127.785374632619
+                            moveTimeAdded:
+                              value: 2
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 462.7
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 231.085
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 1
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 231.581
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: BGP
+                                  resourceKey: '929'
+                            startDateTime: '2020-01-28T11:31:00'
+                            endDateTime: '2020-01-28T12:31:00'
+                            startDateTimeCommunicated: '2020-01-28T06:00:00'
+                            endDateTimeCommunicated: '2020-01-28T12:00:00'
+                          - optimizationSolutionId: '16'
+                            cost: -70.22748846530304
+                            moveTimeAdded:
+                              value: 0
+                              unit: MINUTE
+                            moveDistanceAdded:
+                              value: 3.8
+                              unit: KM
+                            moveTimeToGoTo:
+                              value: 0
+                              unit: MINUTE
+                            moveDistanceToGoTo:
+                              value: 1.723
+                              unit: KM
+                            moveTimeToComeFrom:
+                              value: 0
+                              unit: MINUTE
+                            moveDistanceToComeFrom:
+                              value: 2.041
+                              unit: KM
+                            resources:
+                              resource:
+                                - resourceId: RAU
+                                  resourceKey: '627'
+                            startDateTime: '2020-01-28T17:00:00'
+                            endDateTime: '2020-01-28T18:00:00'
+                            startDateTimeCommunicated: '2020-01-28T12:00:00'
+                            endDateTimeCommunicated: '2020-01-28T20:00:00'
+                  datePlancherCalculee: 22/01/2020
+                  datePlafondCalculee: 28/01/2020
+                  numDossier: 'temp_1,356'
+      deprecated: false
+      description: disponibilites custom
+    parameters: []
+  /annulerProposition:
+    post:
+      tags:
+        - Misc
+      summary: abort disponibilites custom
+      operationId: abortdisponibilitescustom
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/abortdisponibilitescustomrequest'
+            example:
+              dossier:
+                numDossier: 'temp_1,356'
+              optimizationId: d0e58120-e584-489e-9338-74697000e6bb
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers:
+            Server:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Apache-Coyote/1.1
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Servlet/3.0; JBossAS-6
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '50'
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 'Tue, 21 Jan 2020 14:36:28 GMT'
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/abortdisponibilitescustom'
+              example:
+                statut: true
+                listeMessage: ''
+                contenu: true
+      deprecated: false
+      description: abort disponibilites custom
+    parameters: []
+  /validerProposition:
+    post:
+      tags:
+        - Misc
+      summary: commit disponibilites custom
+      operationId: commitdisponibilitescustom
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commitdisponibilitescustomrequest'
+            example:
+              dossier:
+                numDossier: 'temp_1,358'
+                refSinistre: test5
+                mtOuverture: 0
+                assure:
+                  nomComplet: A MODIFIER A MODIFIER
+                  nom: A MODIFIER
+                  prenom: A MODIFIER
+                  raisonSociale: testPostmanAviva
+                  tel: '683602973'
+                  email: a_modifier@modifier.fr
+                  adresse:
+                    adr1: rue de republique
+                    adr2: ''
+                    adr3: ''
+                    adr4: ''
+                    cp: '75016'
+                    ville: PARIS
+                  type: PRO
+                compagnie:
+                  code: 69AAAAAAEUROFIL
+                  raisSoc: EUROFIL
+                sinistre:
+                  date: 11/02/2019
+                  codeType: DDE
+                  libelleType: Hors vol
+                  codeTypeCentral: DDE
+                  libelleTypeCentral: Hors vol
+                  adresse:
+                    adr1: ''
+                    adr2: ''
+                    adr3: ''
+                    adr4: ''
+                    cp: '75016'
+                    ville: PARIS
+                lieuRDV:
+                  adr1: ''
+                  adr2: ''
+                  adr3: ''
+                  adr4: ''
+                  cp: '75016'
+                  ville: PARIS
+                typeExpertise: TELE
+                modeExpertise: EAD
+                delaiPlancher: 1jo
+                delaiPlafond: 5jo
+              apptId: PGD_AP_28429256
+              expertUtiCode: CAL
+              optimizationId: 64a4c128-7182-445d-80ff-d383437301aa
+              optimizationSolutionId: '1'
+              dateRdv: 22/01/2020
+              heureRdv: '09:01'
+              dureeRdv: '01:00'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers:
+            Server:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Apache-Coyote/1.1
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Servlet/3.0; JBossAS-6
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '1308'
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 'Tue, 21 Jan 2020 14:40:39 GMT'
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/commitdisponibilitescustom'
+              example:
+                statut: true
+                listeMessage: ''
+                contenu:
+                  numDossier: '2020000023'
+                  assure:
+                    nomComplet: A MODIFIER A MODIFIER
+                    nom: A MODIFIER
+                    prenom: A MODIFIER
+                    raisonSociale: testPostmanAviva
+                    adresse:
+                      adr1: rue de republique
+                      adr2: ''
+                      adr3: ''
+                      adr4: ''
+                      cp: '75016'
+                      pays: ''
+                      ville: PARIS
+                    tel: '683602973'
+                    type: PRO
+                    email: a_modifier@modifier.fr
+                    mobile: ''
+                  bureau: ''
+                  expert: ''
+                  intermediaire: ''
+                  gestionnaire: ''
+                  division: ''
+                  compagnie:
+                    code: 69AAAAAAEUROFIL
+                    raisSoc: EUROFIL
+                    codeGta: ''
+                  numMission: ''
+                  numPolice: ''
+                  refSinistre: test5
+                  sinistre:
+                    date: 11/02/2019
+                    codeType: DDE
+                    libelleType: Hors vol
+                    codeTypeCentral: DDE
+                    libelleTypeCentral: Hors vol
+                    adresse:
+                      adr1: ''
+                      adr2: ''
+                      adr3: ''
+                      adr4: ''
+                      cp: '75016'
+                      pays: ''
+                      ville: PARIS
+                    causesCirc: ''
+                  lieuRDV:
+                    adr1: ''
+                    adr2: ''
+                    adr3: ''
+                    adr4: ''
+                    cp: '75016'
+                    pays: ''
+                    ville: PARIS
+                  rapportA: ''
+                  dosRecepAgeCode: ''
+                  dureeRdv: ''
+                  requiredResources: ''
+                  delaiPlafond: 5jo
+                  delaiPlancher: 1jo
+                  rapports: ''
+                  cloture: false
+                  mtOuverture: 0
+                  dateDernierRdv: ''
+                  modeExpertise: EAD
+                  dosAxaPromium: ''
+                  dosKairos: ''
+                  dosEntreprise: ''
+                  dosBraCode: ''
+                  dosCiePolice: ''
+                  dosTypeCode: ''
+                  expertCgn: ''
+                  typeExpertise: TELE
+      deprecated: false
+      description: commit disponibilites custom
+    parameters: []
+security:
+  - httpBasic: []
+tags:
+  - name: Misc
+    description: ''
+components:
+  schemas:
+    Result:
+      title: Result
+      required:
+        - success
+        - detail
+      type: object
+      properties:
+        success:
+          type: boolean
+        detail:
+          type: string
+      example:
+        success: true
+        detail: The initial address was geocoded
+    OptimizationResult:
+      title: OptimizationResult
+      required:
+        - optimizationId
+        - appointmentId
+        - appointmentKey
+        - appointmentDuration
+        - optimizationSolutions
+      type: object
+      properties:
+        optimizationId:
+          type: string
+        appointmentId:
+          type: string
+        appointmentKey:
+          type: string
+        appointmentDuration:
+          $ref: '#/components/schemas/AppointmentDuration'
+        optimizationSolutions:
+          $ref: '#/components/schemas/OptimizationSolutions'
+      example:
+        optimizationId: 51da1fe2-5e90-4653-ae02-aae868916aed
+        appointmentId: PGD_AP_27943736
+        appointmentKey: '3228283'
+        appointmentDuration:
+          value: 60
+          unit: MINUTE
+        optimizationSolutions:
+          optimizationSolution:
+            - optimizationSolutionId: '1'
+              cost: -71.6320382346091
+              moveTimeAdded:
+                value: 0
+                unit: MINUTE
+              moveDistanceAdded:
+                value: 3.8
+                unit: KM
+              moveTimeToGoTo:
+                value: 0
+                unit: MINUTE
+              moveDistanceToGoTo:
+                value: 1.723
+                unit: KM
+              moveTimeToComeFrom:
+                value: 0
+                unit: MINUTE
+              moveDistanceToComeFrom:
+                value: 2.041
+                unit: KM
+              resources:
+                resource:
+                  - resourceId: RAU
+                    resourceKey: '627'
+              startDateTime: '2020-10-06T17:00:00'
+              endDateTime: '2020-10-06T18:00:00'
+              startDateTimeCommunicated: '2020-10-06T12:00:00'
+              endDateTimeCommunicated: '2020-10-06T20:00:00'
+            - optimizationSolutionId: '2'
+              cost: -62.36
+              moveTimeAdded:
+                value: 0
+                unit: MINUTE
+              moveDistanceAdded:
+                value: 3.8
+                unit: KM
+              moveTimeToGoTo:
+                value: 0
+                unit: MINUTE
+              moveDistanceToGoTo:
+                value: 1.723
+                unit: KM
+              moveTimeToComeFrom:
+                value: 0
+                unit: MINUTE
+              moveDistanceToComeFrom:
+                value: 2.041
+                unit: KM
+              resources:
+                resource:
+                  - resourceId: RAU
+                    resourceKey: '627'
+              startDateTime: '2020-09-29T17:00:00'
+              endDateTime: '2020-09-29T18:00:00'
+              startDateTimeCommunicated: '2020-09-29T12:00:00'
+              endDateTimeCommunicated: '2020-09-29T20:00:00'
+            - optimizationSolutionId: '3'
+              cost: 262.4660719731718
+              moveTimeAdded:
+                value: 0
+                unit: MINUTE
+              moveDistanceAdded:
+                value: 3.8
+                unit: KM
+              moveTimeToGoTo:
+                value: 0
+                unit: MINUTE
+              moveDistanceToGoTo:
+                value: 1.723
+                unit: KM
+              moveTimeToComeFrom:
+                value: 0
+                unit: MINUTE
+              moveDistanceToComeFrom:
+                value: 2.041
+                unit: KM
+              resources:
+                resource:
+                  - resourceId: RAU
+                    resourceKey: '627'
+              startDateTime: '2020-10-13T17:00:00'
+              endDateTime: '2020-10-13T18:00:00'
+              startDateTimeCommunicated: '2020-10-13T12:00:00'
+              endDateTimeCommunicated: '2020-10-13T20:00:00'
+            - optimizationSolutionId: '4'
+              cost: 479.7982474540473
+              moveTimeAdded:
+                value: 0
+                unit: MINUTE
+              moveDistanceAdded:
+                value: 3.8
+                unit: KM
+              moveTimeToGoTo:
+                value: 0
+                unit: MINUTE
+              moveDistanceToGoTo:
+                value: 1.723
+                unit: KM
+              moveTimeToComeFrom:
+                value: 0
+                unit: MINUTE
+              moveDistanceToComeFrom:
+                value: 2.041
+                unit: KM
+              resources:
+                resource:
+                  - resourceId: RAU
+                    resourceKey: '627'
+              startDateTime: '2020-10-20T17:00:00'
+              endDateTime: '2020-10-20T18:00:00'
+              startDateTimeCommunicated: '2020-10-20T12:00:00'
+              endDateTimeCommunicated: '2020-10-20T20:00:00'
+            - optimizationSolutionId: '5'
+              cost: 877.0899664452858
+              moveTimeAdded:
+                value: 0
+                unit: MINUTE
+              moveDistanceAdded:
+                value: 3.8
+                unit: KM
+              moveTimeToGoTo:
+                value: 0
+                unit: MINUTE
+              moveDistanceToGoTo:
+                value: 1.723
+                unit: KM
+              moveTimeToComeFrom:
+                value: 0
+                unit: MINUTE
+              moveDistanceToComeFrom:
+                value: 2.041
+                unit: KM
+              resources:
+                resource:
+                  - resourceId: RAU
+                    resourceKey: '627'
+              startDateTime: '2020-10-27T17:00:00'
+              endDateTime: '2020-10-27T18:00:00'
+              startDateTimeCommunicated: '2020-10-27T12:00:00'
+              endDateTimeCommunicated: '2020-10-27T20:00:00'
+    AppointmentDuration:
+      title: AppointmentDuration
+      required:
+        - value
+        - unit
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int32
+        unit:
+          type: string
+      example:
+        value: 60
+        unit: MINUTE
+    OptimizationSolutions:
+      title: OptimizationSolutions
+      required:
+        - optimizationSolution
+      type: object
+      properties:
+        optimizationSolution:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationSolution'
+          description: ''
+      example:
+        optimizationSolution:
+          - optimizationSolutionId: '1'
+            cost: -71.6320382346091
+            moveTimeAdded:
+              value: 0
+              unit: MINUTE
+            moveDistanceAdded:
+              value: 3.8
+              unit: KM
+            moveTimeToGoTo:
+              value: 0
+              unit: MINUTE
+            moveDistanceToGoTo:
+              value: 1.723
+              unit: KM
+            moveTimeToComeFrom:
+              value: 0
+              unit: MINUTE
+            moveDistanceToComeFrom:
+              value: 2.041
+              unit: KM
+            resources:
+              resource:
+                - resourceId: RAU
+                  resourceKey: '627'
+            startDateTime: '2020-10-06T17:00:00'
+            endDateTime: '2020-10-06T18:00:00'
+            startDateTimeCommunicated: '2020-10-06T12:00:00'
+            endDateTimeCommunicated: '2020-10-06T20:00:00'
+          - optimizationSolutionId: '2'
+            cost: -62.36
+            moveTimeAdded:
+              value: 0
+              unit: MINUTE
+            moveDistanceAdded:
+              value: 3.8
+              unit: KM
+            moveTimeToGoTo:
+              value: 0
+              unit: MINUTE
+            moveDistanceToGoTo:
+              value: 1.723
+              unit: KM
+            moveTimeToComeFrom:
+              value: 0
+              unit: MINUTE
+            moveDistanceToComeFrom:
+              value: 2.041
+              unit: KM
+            resources:
+              resource:
+                - resourceId: RAU
+                  resourceKey: '627'
+            startDateTime: '2020-09-29T17:00:00'
+            endDateTime: '2020-09-29T18:00:00'
+            startDateTimeCommunicated: '2020-09-29T12:00:00'
+            endDateTimeCommunicated: '2020-09-29T20:00:00'
+          - optimizationSolutionId: '3'
+            cost: 262.4660719731718
+            moveTimeAdded:
+              value: 0
+              unit: MINUTE
+            moveDistanceAdded:
+              value: 3.8
+              unit: KM
+            moveTimeToGoTo:
+              value: 0
+              unit: MINUTE
+            moveDistanceToGoTo:
+              value: 1.723
+              unit: KM
+            moveTimeToComeFrom:
+              value: 0
+              unit: MINUTE
+            moveDistanceToComeFrom:
+              value: 2.041
+              unit: KM
+            resources:
+              resource:
+                - resourceId: RAU
+                  resourceKey: '627'
+            startDateTime: '2020-10-13T17:00:00'
+            endDateTime: '2020-10-13T18:00:00'
+            startDateTimeCommunicated: '2020-10-13T12:00:00'
+            endDateTimeCommunicated: '2020-10-13T20:00:00'
+          - optimizationSolutionId: '4'
+            cost: 479.7982474540473
+            moveTimeAdded:
+              value: 0
+              unit: MINUTE
+            moveDistanceAdded:
+              value: 3.8
+              unit: KM
+            moveTimeToGoTo:
+              value: 0
+              unit: MINUTE
+            moveDistanceToGoTo:
+              value: 1.723
+              unit: KM
+            moveTimeToComeFrom:
+              value: 0
+              unit: MINUTE
+            moveDistanceToComeFrom:
+              value: 2.041
+              unit: KM
+            resources:
+              resource:
+                - resourceId: RAU
+                  resourceKey: '627'
+            startDateTime: '2020-10-20T17:00:00'
+            endDateTime: '2020-10-20T18:00:00'
+            startDateTimeCommunicated: '2020-10-20T12:00:00'
+            endDateTimeCommunicated: '2020-10-20T20:00:00'
+          - optimizationSolutionId: '5'
+            cost: 877.0899664452858
+            moveTimeAdded:
+              value: 0
+              unit: MINUTE
+            moveDistanceAdded:
+              value: 3.8
+              unit: KM
+            moveTimeToGoTo:
+              value: 0
+              unit: MINUTE
+            moveDistanceToGoTo:
+              value: 1.723
+              unit: KM
+            moveTimeToComeFrom:
+              value: 0
+              unit: MINUTE
+            moveDistanceToComeFrom:
+              value: 2.041
+              unit: KM
+            resources:
+              resource:
+                - resourceId: RAU
+                  resourceKey: '627'
+            startDateTime: '2020-10-27T17:00:00'
+            endDateTime: '2020-10-27T18:00:00'
+            startDateTimeCommunicated: '2020-10-27T12:00:00'
+            endDateTimeCommunicated: '2020-10-27T20:00:00'
+    OptimizationSolution:
+      title: OptimizationSolution
+      required:
+        - optimizationSolutionId
+        - cost
+        - moveTimeAdded
+        - moveDistanceAdded
+        - moveTimeToGoTo
+        - moveDistanceToGoTo
+        - moveTimeToComeFrom
+        - moveDistanceToComeFrom
+        - resources
+        - startDateTime
+        - endDateTime
+        - startDateTimeCommunicated
+        - endDateTimeCommunicated
+      type: object
+      properties:
+        optimizationSolutionId:
+          type: string
+        cost:
+          type: number
+        moveTimeAdded:
+          $ref: '#/components/schemas/MoveTimeAdded'
+        moveDistanceAdded:
+          $ref: '#/components/schemas/MoveDistanceAdded'
+        moveTimeToGoTo:
+          $ref: '#/components/schemas/MoveTimeToGoTo'
+        moveDistanceToGoTo:
+          $ref: '#/components/schemas/MoveDistanceToGoTo'
+        moveTimeToComeFrom:
+          $ref: '#/components/schemas/MoveTimeToComeFrom'
+        moveDistanceToComeFrom:
+          $ref: '#/components/schemas/MoveDistanceToComeFrom'
+        resources:
+          $ref: '#/components/schemas/Resources'
+        startDateTime:
+          type: string
+        endDateTime:
+          type: string
+        startDateTimeCommunicated:
+          type: string
+        endDateTimeCommunicated:
+          type: string
+      example:
+        optimizationSolutionId: '1'
+        cost: -71.6320382346091
+        moveTimeAdded:
+          value: 0
+          unit: MINUTE
+        moveDistanceAdded:
+          value: 3.8
+          unit: KM
+        moveTimeToGoTo:
+          value: 0
+          unit: MINUTE
+        moveDistanceToGoTo:
+          value: 1.723
+          unit: KM
+        moveTimeToComeFrom:
+          value: 0
+          unit: MINUTE
+        moveDistanceToComeFrom:
+          value: 2.041
+          unit: KM
+        resources:
+          resource:
+            - resourceId: RAU
+              resourceKey: '627'
+        startDateTime: '2020-10-06T17:00:00'
+        endDateTime: '2020-10-06T18:00:00'
+        startDateTimeCommunicated: '2020-10-06T12:00:00'
+        endDateTimeCommunicated: '2020-10-06T20:00:00'
+    MoveTimeAdded:
+      title: MoveTimeAdded
+      required:
+        - value
+        - unit
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int32
+        unit:
+          type: string
+      example:
+        value: 0
+        unit: MINUTE
+    MoveDistanceAdded:
+      title: MoveDistanceAdded
+      required:
+        - value
+        - unit
+      type: object
+      properties:
+        value:
+          type: number
+        unit:
+          type: string
+      example:
+        value: 3.8
+        unit: KM
+    MoveTimeToGoTo:
+      title: MoveTimeToGoTo
+      required:
+        - value
+        - unit
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int32
+        unit:
+          type: string
+      example:
+        value: 0
+        unit: MINUTE
+    MoveDistanceToGoTo:
+      title: MoveDistanceToGoTo
+      required:
+        - value
+        - unit
+      type: object
+      properties:
+        value:
+          type: number
+        unit:
+          type: string
+      example:
+        value: 1.723
+        unit: KM
+    MoveTimeToComeFrom:
+      title: MoveTimeToComeFrom
+      required:
+        - value
+        - unit
+      type: object
+      properties:
+        value:
+          type: integer
+          format: int32
+        unit:
+          type: string
+      example:
+        value: 0
+        unit: MINUTE
+    MoveDistanceToComeFrom:
+      title: MoveDistanceToComeFrom
+      required:
+        - value
+        - unit
+      type: object
+      properties:
+        value:
+          type: number
+        unit:
+          type: string
+      example:
+        value: 2.041
+        unit: KM
+    Resources:
+      title: Resources
+      required:
+        - resource
+      type: object
+      properties:
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+          description: ''
+      example:
+        resource:
+          - resourceId: RAU
+            resourceKey: '627'
+    Resource:
+      title: Resource
+      required:
+        - resourceId
+        - resourceKey
+      type: object
+      properties:
+        resourceId:
+          type: string
+        resourceKey:
+          type: string
+      example:
+        resourceId: RAU
+        resourceKey: '627'
+    Assure:
+      title: Assure
+      required:
+        - nomComplet
+        - nom
+        - prenom
+        - raisonSociale
+        - tel
+        - email
+        - adresse
+        - type
+      type: object
+      properties:
+        nomComplet:
+          type: string
+        nom:
+          type: string
+        prenom:
+          type: string
+        raisonSociale:
+          type: string
+        tel:
+          type: string
+        email:
+          type: string
+        adresse:
+          $ref: '#/components/schemas/Adresse'
+        type:
+          type: string
+      example:
+        nomComplet: 'A MODIFIER A MODIFIER '
+        nom: A MODIFIER
+        prenom: A MODIFIER
+        raisonSociale: ''
+        tel: ''
+        email: ''
+        adresse:
+          adr1: ''
+          adr2: ''
+          adr3: ''
+          adr4: ''
+          cp: ''
+          ville: ''
+        type: PART
+    Adresse:
+      title: Adresse
+      required:
+        - adr1
+        - adr2
+        - adr3
+        - adr4
+        - cp
+        - ville
+      type: object
+      properties:
+        adr1:
+          type: string
+        adr2:
+          type: string
+        adr3:
+          type: string
+        adr4:
+          type: string
+        cp:
+          type: string
+        ville:
+          type: string
+      example:
+        adr1: ''
+        adr2: ''
+        adr3: ''
+        adr4: ''
+        cp: ''
+        ville: ''
+    Compagnie:
+      title: Compagnie
+      required:
+        - code
+        - raisSoc
+      type: object
+      properties:
+        code:
+          type: string
+        raisSoc:
+          type: string
+      example:
+        code: 69AAAAAAEUROFIL
+        raisSoc: AVIVA
+    Sinistre:
+      title: Sinistre
+      required:
+        - date
+        - codeType
+        - libelleType
+        - codeTypeCentral
+        - libelleTypeCentral
+        - adresse
+      type: object
+      properties:
+        date:
+          type: string
+        codeType:
+          type: string
+        libelleType:
+          type: string
+        codeTypeCentral:
+          type: string
+        libelleTypeCentral:
+          type: string
+        adresse:
+          $ref: '#/components/schemas/Adresse'
+      example:
+        date: 04/06/2019
+        codeType: VOL
+        libelleType: Vol
+        codeTypeCentral: VOL
+        libelleTypeCentral: Vol
+        adresse:
+          adr1: ' '
+          adr2: ''
+          adr3: ''
+          adr4: ''
+          cp: '84000'
+          ville: AVIGNON
+    LieuRDV:
+      title: LieuRDV
+      required:
+        - adr1
+        - adr2
+        - adr3
+        - adr4
+        - cp
+        - ville
+      type: object
+      properties:
+        adr1:
+          type: string
+        adr2:
+          type: string
+        adr3:
+          type: string
+        adr4:
+          type: string
+        cp:
+          type: string
+        ville:
+          type: string
+      example:
+        adr1: ' '
+        adr2: ''
+        adr3: ''
+        adr4: ''
+        cp: '84000'
+        ville: AVIGNON
+    disponibilitescustom:
+      title: disponibilitescustom
+      required:
+        - statut
+        - listeMessage
+        - contenu
+      type: object
+      properties:
+        statut:
+          type: boolean
+        listeMessage:
+          type: string
+          nullable: true
+        contenu:
+          $ref: '#/components/schemas/Contenu'
+      example:
+        statut: true
+        listeMessage: ''
+        contenu:
+          ReponseGetNewOptimResult:
+            result:
+              success: true
+              detail: The solutions are described in the response
+            optimizationResult:
+              optimizationId: 'd0e58120-e584-489e-9338-74697000e6bb,b8ead0f0-59d2-4c55-abea-5a2a5e65aee8'
+              appointmentId: PGD_AP_28429254
+              appointmentKey: ''
+              appointmentDuration:
+                value: 60
+                unit: MINUTE
+              optimizationSolutions:
+                optimizationSolution:
+                  - optimizationSolutionId: '1'
+                    cost: 3306.3433333333332
+                    moveTimeAdded:
+                      value: 124
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 175.4
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 61
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 87.415
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 63
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 87.886
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: CAL
+                          resourceKey: '438'
+                    startDateTime: '2020-01-22T09:01:00'
+                    endDateTime: '2020-01-22T10:01:00'
+                    startDateTimeCommunicated: '2020-01-22T06:00:00'
+                    endDateTimeCommunicated: '2020-01-22T12:00:00'
+                  - optimizationSolutionId: '2'
+                    cost: 3306.3433333333332
+                    moveTimeAdded:
+                      value: 124
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 175.4
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 61
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 87.415
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 63
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 87.886
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: CAL
+                          resourceKey: '438'
+                    startDateTime: '2020-01-22T16:36:00'
+                    endDateTime: '2020-01-22T17:36:00'
+                    startDateTimeCommunicated: '2020-01-22T12:00:00'
+                    endDateTimeCommunicated: '2020-01-22T20:00:00'
+                  - optimizationSolutionId: '3'
+                    cost: 3372.4701999999997
+                    moveTimeAdded:
+                      value: 124
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 175.4
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 61
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 87.415
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 63
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 87.886
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: CAL
+                          resourceKey: '438'
+                    startDateTime: '2020-01-23T09:01:00'
+                    endDateTime: '2020-01-23T10:01:00'
+                    startDateTimeCommunicated: '2020-01-23T06:00:00'
+                    endDateTimeCommunicated: '2020-01-23T12:00:00'
+                  - optimizationSolutionId: '4'
+                    cost: 3372.4701999999997
+                    moveTimeAdded:
+                      value: 124
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 175.4
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 61
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 87.415
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 63
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 87.886
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: CAL
+                          resourceKey: '438'
+                    startDateTime: '2020-01-23T16:36:00'
+                    endDateTime: '2020-01-23T17:36:00'
+                    startDateTimeCommunicated: '2020-01-23T12:00:00'
+                    endDateTimeCommunicated: '2020-01-23T20:00:00'
+                  - optimizationSolutionId: '5'
+                    cost: 3723.4796071840647
+                    moveTimeAdded:
+                      value: 124
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 175.4
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 61
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 87.415
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 63
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 87.886
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: CAL
+                          resourceKey: '438'
+                    startDateTime: '2020-01-28T09:01:00'
+                    endDateTime: '2020-01-28T10:01:00'
+                    startDateTimeCommunicated: '2020-01-28T06:00:00'
+                    endDateTimeCommunicated: '2020-01-28T12:00:00'
+                  - optimizationSolutionId: '6'
+                    cost: 3723.4796071840647
+                    moveTimeAdded:
+                      value: 124
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 175.4
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 61
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 87.415
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 63
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 87.886
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: CAL
+                          resourceKey: '438'
+                    startDateTime: '2020-01-28T16:36:00'
+                    endDateTime: '2020-01-28T17:36:00'
+                    startDateTimeCommunicated: '2020-01-28T12:00:00'
+                    endDateTimeCommunicated: '2020-01-28T20:00:00'
+                  - optimizationSolutionId: '7'
+                    cost: 4553.326666666667
+                    moveTimeAdded:
+                      value: 2
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 462.7
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 231.085
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 231.581
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: BGP
+                          resourceKey: '929'
+                    startDateTime: '2020-01-22T11:31:00'
+                    endDateTime: '2020-01-22T12:31:00'
+                    startDateTimeCommunicated: '2020-01-22T06:00:00'
+                    endDateTimeCommunicated: '2020-01-22T12:00:00'
+                  - optimizationSolutionId: '8'
+                    cost: 4644.3932
+                    moveTimeAdded:
+                      value: 2
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 462.7
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 231.085
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 231.581
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: BGP
+                          resourceKey: '929'
+                    startDateTime: '2020-01-23T11:31:00'
+                    endDateTime: '2020-01-23T12:31:00'
+                    startDateTimeCommunicated: '2020-01-23T06:00:00'
+                    endDateTimeCommunicated: '2020-01-23T12:00:00'
+                  - optimizationSolutionId: '9'
+                    cost: 4737.281064
+                    moveTimeAdded:
+                      value: 2
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 462.7
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 231.085
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 231.581
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: BGP
+                          resourceKey: '929'
+                    startDateTime: '2020-01-24T11:31:00'
+                    endDateTime: '2020-01-24T12:31:00'
+                    startDateTimeCommunicated: '2020-01-24T06:00:00'
+                    endDateTimeCommunicated: '2020-01-24T12:00:00'
+                  - optimizationSolutionId: '10'
+                    cost: 4737.281064
+                    moveTimeAdded:
+                      value: 2
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 462.7
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 231.085
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 231.581
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: BGP
+                          resourceKey: '929'
+                    startDateTime: '2020-01-24T18:29:00'
+                    endDateTime: '2020-01-24T19:29:00'
+                    startDateTimeCommunicated: '2020-01-24T12:00:00'
+                    endDateTimeCommunicated: '2020-01-24T20:00:00'
+                  - optimizationSolutionId: '11'
+                    cost: 4781.289984
+                    moveTimeAdded:
+                      value: 2
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 466.9
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 233.013
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 233.883
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: RAU
+                          resourceKey: '627'
+                    startDateTime: '2020-01-24T09:01:00'
+                    endDateTime: '2020-01-24T10:01:00'
+                    startDateTimeCommunicated: '2020-01-24T06:00:00'
+                    endDateTimeCommunicated: '2020-01-24T12:00:00'
+                  - optimizationSolutionId: '12'
+                    cost: 5027.2405633653125
+                    moveTimeAdded:
+                      value: 2
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 462.7
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 231.085
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 231.581
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: BGP
+                          resourceKey: '929'
+                    startDateTime: '2020-01-27T11:31:00'
+                    endDateTime: '2020-01-27T12:31:00'
+                    startDateTimeCommunicated: '2020-01-27T06:00:00'
+                    endDateTimeCommunicated: '2020-01-27T12:00:00'
+                  - optimizationSolutionId: '13'
+                    cost: 5027.2405633653125
+                    moveTimeAdded:
+                      value: 2
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 462.7
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 231.085
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 231.581
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: BGP
+                          resourceKey: '929'
+                    startDateTime: '2020-01-27T18:29:00'
+                    endDateTime: '2020-01-27T19:29:00'
+                    startDateTimeCommunicated: '2020-01-27T12:00:00'
+                    endDateTimeCommunicated: '2020-01-27T20:00:00'
+                  - optimizationSolutionId: '14'
+                    cost: 5073.943181340673
+                    moveTimeAdded:
+                      value: 2
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 466.9
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 233.013
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 233.883
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: RAU
+                          resourceKey: '627'
+                    startDateTime: '2020-01-27T07:00:00'
+                    endDateTime: '2020-01-27T08:00:00'
+                    startDateTimeCommunicated: '2020-01-27T06:00:00'
+                    endDateTimeCommunicated: '2020-01-27T12:00:00'
+                  - optimizationSolutionId: '15'
+                    cost: 5127.785374632619
+                    moveTimeAdded:
+                      value: 2
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 462.7
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 231.085
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 1
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 231.581
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: BGP
+                          resourceKey: '929'
+                    startDateTime: '2020-01-28T11:31:00'
+                    endDateTime: '2020-01-28T12:31:00'
+                    startDateTimeCommunicated: '2020-01-28T06:00:00'
+                    endDateTimeCommunicated: '2020-01-28T12:00:00'
+                  - optimizationSolutionId: '16'
+                    cost: -70.22748846530304
+                    moveTimeAdded:
+                      value: 0
+                      unit: MINUTE
+                    moveDistanceAdded:
+                      value: 3.8
+                      unit: KM
+                    moveTimeToGoTo:
+                      value: 0
+                      unit: MINUTE
+                    moveDistanceToGoTo:
+                      value: 1.723
+                      unit: KM
+                    moveTimeToComeFrom:
+                      value: 0
+                      unit: MINUTE
+                    moveDistanceToComeFrom:
+                      value: 2.041
+                      unit: KM
+                    resources:
+                      resource:
+                        - resourceId: RAU
+                          resourceKey: '627'
+                    startDateTime: '2020-01-28T17:00:00'
+                    endDateTime: '2020-01-28T18:00:00'
+                    startDateTimeCommunicated: '2020-01-28T12:00:00'
+                    endDateTimeCommunicated: '2020-01-28T20:00:00'
+          datePlancherCalculee: 22/01/2020
+          datePlafondCalculee: 28/01/2020
+          numDossier: 'temp_1,356'
+    Contenu:
+      title: Contenu
+      required:
+        - ReponseGetNewOptimResult
+        - datePlancherCalculee
+        - datePlafondCalculee
+        - numDossier
+      type: object
+      properties:
+        ReponseGetNewOptimResult:
+          $ref: '#/components/schemas/ReponseGetNewOptimResult'
+        datePlancherCalculee:
+          type: string
+        datePlafondCalculee:
+          type: string
+        numDossier:
+          type: string
+      example:
+        ReponseGetNewOptimResult:
+          result:
+            success: true
+            detail: The solutions are described in the response
+          optimizationResult:
+            optimizationId: 'd0e58120-e584-489e-9338-74697000e6bb,b8ead0f0-59d2-4c55-abea-5a2a5e65aee8'
+            appointmentId: PGD_AP_28429254
+            appointmentKey: ''
+            appointmentDuration:
+              value: 60
+              unit: MINUTE
+            optimizationSolutions:
+              optimizationSolution:
+                - optimizationSolutionId: '1'
+                  cost: 3306.3433333333332
+                  moveTimeAdded:
+                    value: 124
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 175.4
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 61
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 87.415
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 63
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 87.886
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: CAL
+                        resourceKey: '438'
+                  startDateTime: '2020-01-22T09:01:00'
+                  endDateTime: '2020-01-22T10:01:00'
+                  startDateTimeCommunicated: '2020-01-22T06:00:00'
+                  endDateTimeCommunicated: '2020-01-22T12:00:00'
+                - optimizationSolutionId: '2'
+                  cost: 3306.3433333333332
+                  moveTimeAdded:
+                    value: 124
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 175.4
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 61
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 87.415
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 63
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 87.886
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: CAL
+                        resourceKey: '438'
+                  startDateTime: '2020-01-22T16:36:00'
+                  endDateTime: '2020-01-22T17:36:00'
+                  startDateTimeCommunicated: '2020-01-22T12:00:00'
+                  endDateTimeCommunicated: '2020-01-22T20:00:00'
+                - optimizationSolutionId: '3'
+                  cost: 3372.4701999999997
+                  moveTimeAdded:
+                    value: 124
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 175.4
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 61
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 87.415
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 63
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 87.886
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: CAL
+                        resourceKey: '438'
+                  startDateTime: '2020-01-23T09:01:00'
+                  endDateTime: '2020-01-23T10:01:00'
+                  startDateTimeCommunicated: '2020-01-23T06:00:00'
+                  endDateTimeCommunicated: '2020-01-23T12:00:00'
+                - optimizationSolutionId: '4'
+                  cost: 3372.4701999999997
+                  moveTimeAdded:
+                    value: 124
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 175.4
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 61
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 87.415
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 63
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 87.886
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: CAL
+                        resourceKey: '438'
+                  startDateTime: '2020-01-23T16:36:00'
+                  endDateTime: '2020-01-23T17:36:00'
+                  startDateTimeCommunicated: '2020-01-23T12:00:00'
+                  endDateTimeCommunicated: '2020-01-23T20:00:00'
+                - optimizationSolutionId: '5'
+                  cost: 3723.4796071840647
+                  moveTimeAdded:
+                    value: 124
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 175.4
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 61
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 87.415
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 63
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 87.886
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: CAL
+                        resourceKey: '438'
+                  startDateTime: '2020-01-28T09:01:00'
+                  endDateTime: '2020-01-28T10:01:00'
+                  startDateTimeCommunicated: '2020-01-28T06:00:00'
+                  endDateTimeCommunicated: '2020-01-28T12:00:00'
+                - optimizationSolutionId: '6'
+                  cost: 3723.4796071840647
+                  moveTimeAdded:
+                    value: 124
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 175.4
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 61
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 87.415
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 63
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 87.886
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: CAL
+                        resourceKey: '438'
+                  startDateTime: '2020-01-28T16:36:00'
+                  endDateTime: '2020-01-28T17:36:00'
+                  startDateTimeCommunicated: '2020-01-28T12:00:00'
+                  endDateTimeCommunicated: '2020-01-28T20:00:00'
+                - optimizationSolutionId: '7'
+                  cost: 4553.326666666667
+                  moveTimeAdded:
+                    value: 2
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 462.7
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 231.085
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 231.581
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: BGP
+                        resourceKey: '929'
+                  startDateTime: '2020-01-22T11:31:00'
+                  endDateTime: '2020-01-22T12:31:00'
+                  startDateTimeCommunicated: '2020-01-22T06:00:00'
+                  endDateTimeCommunicated: '2020-01-22T12:00:00'
+                - optimizationSolutionId: '8'
+                  cost: 4644.3932
+                  moveTimeAdded:
+                    value: 2
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 462.7
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 231.085
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 231.581
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: BGP
+                        resourceKey: '929'
+                  startDateTime: '2020-01-23T11:31:00'
+                  endDateTime: '2020-01-23T12:31:00'
+                  startDateTimeCommunicated: '2020-01-23T06:00:00'
+                  endDateTimeCommunicated: '2020-01-23T12:00:00'
+                - optimizationSolutionId: '9'
+                  cost: 4737.281064
+                  moveTimeAdded:
+                    value: 2
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 462.7
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 231.085
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 231.581
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: BGP
+                        resourceKey: '929'
+                  startDateTime: '2020-01-24T11:31:00'
+                  endDateTime: '2020-01-24T12:31:00'
+                  startDateTimeCommunicated: '2020-01-24T06:00:00'
+                  endDateTimeCommunicated: '2020-01-24T12:00:00'
+                - optimizationSolutionId: '10'
+                  cost: 4737.281064
+                  moveTimeAdded:
+                    value: 2
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 462.7
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 231.085
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 231.581
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: BGP
+                        resourceKey: '929'
+                  startDateTime: '2020-01-24T18:29:00'
+                  endDateTime: '2020-01-24T19:29:00'
+                  startDateTimeCommunicated: '2020-01-24T12:00:00'
+                  endDateTimeCommunicated: '2020-01-24T20:00:00'
+                - optimizationSolutionId: '11'
+                  cost: 4781.289984
+                  moveTimeAdded:
+                    value: 2
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 466.9
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 233.013
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 233.883
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: RAU
+                        resourceKey: '627'
+                  startDateTime: '2020-01-24T09:01:00'
+                  endDateTime: '2020-01-24T10:01:00'
+                  startDateTimeCommunicated: '2020-01-24T06:00:00'
+                  endDateTimeCommunicated: '2020-01-24T12:00:00'
+                - optimizationSolutionId: '12'
+                  cost: 5027.2405633653125
+                  moveTimeAdded:
+                    value: 2
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 462.7
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 231.085
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 231.581
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: BGP
+                        resourceKey: '929'
+                  startDateTime: '2020-01-27T11:31:00'
+                  endDateTime: '2020-01-27T12:31:00'
+                  startDateTimeCommunicated: '2020-01-27T06:00:00'
+                  endDateTimeCommunicated: '2020-01-27T12:00:00'
+                - optimizationSolutionId: '13'
+                  cost: 5027.2405633653125
+                  moveTimeAdded:
+                    value: 2
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 462.7
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 231.085
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 231.581
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: BGP
+                        resourceKey: '929'
+                  startDateTime: '2020-01-27T18:29:00'
+                  endDateTime: '2020-01-27T19:29:00'
+                  startDateTimeCommunicated: '2020-01-27T12:00:00'
+                  endDateTimeCommunicated: '2020-01-27T20:00:00'
+                - optimizationSolutionId: '14'
+                  cost: 5073.943181340673
+                  moveTimeAdded:
+                    value: 2
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 466.9
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 233.013
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 233.883
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: RAU
+                        resourceKey: '627'
+                  startDateTime: '2020-01-27T07:00:00'
+                  endDateTime: '2020-01-27T08:00:00'
+                  startDateTimeCommunicated: '2020-01-27T06:00:00'
+                  endDateTimeCommunicated: '2020-01-27T12:00:00'
+                - optimizationSolutionId: '15'
+                  cost: 5127.785374632619
+                  moveTimeAdded:
+                    value: 2
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 462.7
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 231.085
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 1
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 231.581
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: BGP
+                        resourceKey: '929'
+                  startDateTime: '2020-01-28T11:31:00'
+                  endDateTime: '2020-01-28T12:31:00'
+                  startDateTimeCommunicated: '2020-01-28T06:00:00'
+                  endDateTimeCommunicated: '2020-01-28T12:00:00'
+                - optimizationSolutionId: '16'
+                  cost: -70.22748846530304
+                  moveTimeAdded:
+                    value: 0
+                    unit: MINUTE
+                  moveDistanceAdded:
+                    value: 3.8
+                    unit: KM
+                  moveTimeToGoTo:
+                    value: 0
+                    unit: MINUTE
+                  moveDistanceToGoTo:
+                    value: 1.723
+                    unit: KM
+                  moveTimeToComeFrom:
+                    value: 0
+                    unit: MINUTE
+                  moveDistanceToComeFrom:
+                    value: 2.041
+                    unit: KM
+                  resources:
+                    resource:
+                      - resourceId: RAU
+                        resourceKey: '627'
+                  startDateTime: '2020-01-28T17:00:00'
+                  endDateTime: '2020-01-28T18:00:00'
+                  startDateTimeCommunicated: '2020-01-28T12:00:00'
+                  endDateTimeCommunicated: '2020-01-28T20:00:00'
+        datePlancherCalculee: 22/01/2020
+        datePlafondCalculee: 28/01/2020
+        numDossier: 'temp_1,356'
+    ReponseGetNewOptimResult:
+      title: ReponseGetNewOptimResult
+      required:
+        - result
+        - optimizationResult
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/Result'
+        optimizationResult:
+          $ref: '#/components/schemas/OptimizationResult'
+      example:
+        result:
+          success: true
+          detail: The solutions are described in the response
+        optimizationResult:
+          optimizationId: 'd0e58120-e584-489e-9338-74697000e6bb,b8ead0f0-59d2-4c55-abea-5a2a5e65aee8'
+          appointmentId: PGD_AP_28429254
+          appointmentKey: ''
+          appointmentDuration:
+            value: 60
+            unit: MINUTE
+          optimizationSolutions:
+            optimizationSolution:
+              - optimizationSolutionId: '1'
+                cost: 3306.3433333333332
+                moveTimeAdded:
+                  value: 124
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 175.4
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 61
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 87.415
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 63
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 87.886
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: CAL
+                      resourceKey: '438'
+                startDateTime: '2020-01-22T09:01:00'
+                endDateTime: '2020-01-22T10:01:00'
+                startDateTimeCommunicated: '2020-01-22T06:00:00'
+                endDateTimeCommunicated: '2020-01-22T12:00:00'
+              - optimizationSolutionId: '2'
+                cost: 3306.3433333333332
+                moveTimeAdded:
+                  value: 124
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 175.4
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 61
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 87.415
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 63
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 87.886
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: CAL
+                      resourceKey: '438'
+                startDateTime: '2020-01-22T16:36:00'
+                endDateTime: '2020-01-22T17:36:00'
+                startDateTimeCommunicated: '2020-01-22T12:00:00'
+                endDateTimeCommunicated: '2020-01-22T20:00:00'
+              - optimizationSolutionId: '3'
+                cost: 3372.4701999999997
+                moveTimeAdded:
+                  value: 124
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 175.4
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 61
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 87.415
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 63
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 87.886
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: CAL
+                      resourceKey: '438'
+                startDateTime: '2020-01-23T09:01:00'
+                endDateTime: '2020-01-23T10:01:00'
+                startDateTimeCommunicated: '2020-01-23T06:00:00'
+                endDateTimeCommunicated: '2020-01-23T12:00:00'
+              - optimizationSolutionId: '4'
+                cost: 3372.4701999999997
+                moveTimeAdded:
+                  value: 124
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 175.4
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 61
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 87.415
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 63
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 87.886
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: CAL
+                      resourceKey: '438'
+                startDateTime: '2020-01-23T16:36:00'
+                endDateTime: '2020-01-23T17:36:00'
+                startDateTimeCommunicated: '2020-01-23T12:00:00'
+                endDateTimeCommunicated: '2020-01-23T20:00:00'
+              - optimizationSolutionId: '5'
+                cost: 3723.4796071840647
+                moveTimeAdded:
+                  value: 124
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 175.4
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 61
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 87.415
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 63
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 87.886
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: CAL
+                      resourceKey: '438'
+                startDateTime: '2020-01-28T09:01:00'
+                endDateTime: '2020-01-28T10:01:00'
+                startDateTimeCommunicated: '2020-01-28T06:00:00'
+                endDateTimeCommunicated: '2020-01-28T12:00:00'
+              - optimizationSolutionId: '6'
+                cost: 3723.4796071840647
+                moveTimeAdded:
+                  value: 124
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 175.4
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 61
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 87.415
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 63
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 87.886
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: CAL
+                      resourceKey: '438'
+                startDateTime: '2020-01-28T16:36:00'
+                endDateTime: '2020-01-28T17:36:00'
+                startDateTimeCommunicated: '2020-01-28T12:00:00'
+                endDateTimeCommunicated: '2020-01-28T20:00:00'
+              - optimizationSolutionId: '7'
+                cost: 4553.326666666667
+                moveTimeAdded:
+                  value: 2
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 462.7
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 231.085
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 231.581
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: BGP
+                      resourceKey: '929'
+                startDateTime: '2020-01-22T11:31:00'
+                endDateTime: '2020-01-22T12:31:00'
+                startDateTimeCommunicated: '2020-01-22T06:00:00'
+                endDateTimeCommunicated: '2020-01-22T12:00:00'
+              - optimizationSolutionId: '8'
+                cost: 4644.3932
+                moveTimeAdded:
+                  value: 2
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 462.7
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 231.085
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 231.581
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: BGP
+                      resourceKey: '929'
+                startDateTime: '2020-01-23T11:31:00'
+                endDateTime: '2020-01-23T12:31:00'
+                startDateTimeCommunicated: '2020-01-23T06:00:00'
+                endDateTimeCommunicated: '2020-01-23T12:00:00'
+              - optimizationSolutionId: '9'
+                cost: 4737.281064
+                moveTimeAdded:
+                  value: 2
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 462.7
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 231.085
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 231.581
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: BGP
+                      resourceKey: '929'
+                startDateTime: '2020-01-24T11:31:00'
+                endDateTime: '2020-01-24T12:31:00'
+                startDateTimeCommunicated: '2020-01-24T06:00:00'
+                endDateTimeCommunicated: '2020-01-24T12:00:00'
+              - optimizationSolutionId: '10'
+                cost: 4737.281064
+                moveTimeAdded:
+                  value: 2
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 462.7
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 231.085
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 231.581
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: BGP
+                      resourceKey: '929'
+                startDateTime: '2020-01-24T18:29:00'
+                endDateTime: '2020-01-24T19:29:00'
+                startDateTimeCommunicated: '2020-01-24T12:00:00'
+                endDateTimeCommunicated: '2020-01-24T20:00:00'
+              - optimizationSolutionId: '11'
+                cost: 4781.289984
+                moveTimeAdded:
+                  value: 2
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 466.9
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 233.013
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 233.883
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: RAU
+                      resourceKey: '627'
+                startDateTime: '2020-01-24T09:01:00'
+                endDateTime: '2020-01-24T10:01:00'
+                startDateTimeCommunicated: '2020-01-24T06:00:00'
+                endDateTimeCommunicated: '2020-01-24T12:00:00'
+              - optimizationSolutionId: '12'
+                cost: 5027.2405633653125
+                moveTimeAdded:
+                  value: 2
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 462.7
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 231.085
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 231.581
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: BGP
+                      resourceKey: '929'
+                startDateTime: '2020-01-27T11:31:00'
+                endDateTime: '2020-01-27T12:31:00'
+                startDateTimeCommunicated: '2020-01-27T06:00:00'
+                endDateTimeCommunicated: '2020-01-27T12:00:00'
+              - optimizationSolutionId: '13'
+                cost: 5027.2405633653125
+                moveTimeAdded:
+                  value: 2
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 462.7
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 231.085
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 231.581
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: BGP
+                      resourceKey: '929'
+                startDateTime: '2020-01-27T18:29:00'
+                endDateTime: '2020-01-27T19:29:00'
+                startDateTimeCommunicated: '2020-01-27T12:00:00'
+                endDateTimeCommunicated: '2020-01-27T20:00:00'
+              - optimizationSolutionId: '14'
+                cost: 5073.943181340673
+                moveTimeAdded:
+                  value: 2
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 466.9
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 233.013
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 233.883
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: RAU
+                      resourceKey: '627'
+                startDateTime: '2020-01-27T07:00:00'
+                endDateTime: '2020-01-27T08:00:00'
+                startDateTimeCommunicated: '2020-01-27T06:00:00'
+                endDateTimeCommunicated: '2020-01-27T12:00:00'
+              - optimizationSolutionId: '15'
+                cost: 5127.785374632619
+                moveTimeAdded:
+                  value: 2
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 462.7
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 231.085
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 1
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 231.581
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: BGP
+                      resourceKey: '929'
+                startDateTime: '2020-01-28T11:31:00'
+                endDateTime: '2020-01-28T12:31:00'
+                startDateTimeCommunicated: '2020-01-28T06:00:00'
+                endDateTimeCommunicated: '2020-01-28T12:00:00'
+              - optimizationSolutionId: '16'
+                cost: -70.22748846530304
+                moveTimeAdded:
+                  value: 0
+                  unit: MINUTE
+                moveDistanceAdded:
+                  value: 3.8
+                  unit: KM
+                moveTimeToGoTo:
+                  value: 0
+                  unit: MINUTE
+                moveDistanceToGoTo:
+                  value: 1.723
+                  unit: KM
+                moveTimeToComeFrom:
+                  value: 0
+                  unit: MINUTE
+                moveDistanceToComeFrom:
+                  value: 2.041
+                  unit: KM
+                resources:
+                  resource:
+                    - resourceId: RAU
+                      resourceKey: '627'
+                startDateTime: '2020-01-28T17:00:00'
+                endDateTime: '2020-01-28T18:00:00'
+                startDateTimeCommunicated: '2020-01-28T12:00:00'
+                endDateTimeCommunicated: '2020-01-28T20:00:00'
+    abortdisponibilitescustomrequest:
+      title: abortdisponibilitescustomrequest
+      required:
+        - dossier
+        - optimizationId
+      type: object
+      properties:
+        dossier:
+          $ref: '#/components/schemas/Dossier'
+        optimizationId:
+          type: string
+      example:
+        dossier:
+          numDossier: 'temp_1,356'
+        optimizationId: d0e58120-e584-489e-9338-74697000e6bb
+    Dossier:
+      title: Dossier
+      required:
+        - numDossier
+      type: object
+      properties:
+        numDossier:
+          type: string
+      example:
+        numDossier: 'temp_1,356'
+    abortdisponibilitescustom:
+      title: abortdisponibilitescustom
+      required:
+        - statut
+        - listeMessage
+        - contenu
+      type: object
+      properties:
+        statut:
+          type: boolean
+        listeMessage:
+          type: string
+          nullable: true
+        contenu:
+          type: boolean
+      example:
+        statut: true
+        listeMessage: ''
+        contenu: true
+    commitdisponibilitescustomrequest:
+      title: commitdisponibilitescustomrequest
+      required:
+        - dossier
+        - apptId
+        - expertUtiCode
+        - optimizationId
+        - optimizationSolutionId
+        - dateRdv
+        - heureRdv
+        - dureeRdv
+      type: object
+      properties:
+        dossier:
+          $ref: '#/components/schemas/Dossier1'
+        apptId:
+          type: string
+        expertUtiCode:
+          type: string
+        optimizationId:
+          type: string
+        optimizationSolutionId:
+          type: string
+        dateRdv:
+          type: string
+        heureRdv:
+          type: string
+        dureeRdv:
+          type: string
+      example:
+        dossier:
+          numDossier: 'temp_1,358'
+          refSinistre: test5
+          mtOuverture: 0
+          assure:
+            nomComplet: A MODIFIER A MODIFIER
+            nom: A MODIFIER
+            prenom: A MODIFIER
+            raisonSociale: testPostmanAviva
+            tel: '683602973'
+            email: a_modifier@modifier.fr
+            adresse:
+              adr1: rue de republique
+              adr2: ''
+              adr3: ''
+              adr4: ''
+              cp: '75016'
+              ville: PARIS
+            type: PRO
+          compagnie:
+            code: 69AAAAAAEUROFIL
+            raisSoc: EUROFIL
+          sinistre:
+            date: 11/02/2019
+            codeType: DDE
+            libelleType: Hors vol
+            codeTypeCentral: DDE
+            libelleTypeCentral: Hors vol
+            adresse:
+              adr1: ''
+              adr2: ''
+              adr3: ''
+              adr4: ''
+              cp: '75016'
+              ville: PARIS
+          lieuRDV:
+            adr1: ''
+            adr2: ''
+            adr3: ''
+            adr4: ''
+            cp: '75016'
+            ville: PARIS
+          typeExpertise: TELE
+          modeExpertise: EAD
+          delaiPlancher: 1jo
+          delaiPlafond: 5jo
+        apptId: PGD_AP_28429256
+        expertUtiCode: CAL
+        optimizationId: 64a4c128-7182-445d-80ff-d383437301aa
+        optimizationSolutionId: '1'
+        dateRdv: 22/01/2020
+        heureRdv: '09:01'
+        dureeRdv: '01:00'
+    Dossier1:
+      title: Dossier1
+      required:
+        - numDossier
+        - refSinistre
+        - mtOuverture
+        - assure
+        - compagnie
+        - sinistre
+        - lieuRDV
+        - typeExpertise
+        - modeExpertise
+        - delaiPlancher
+        - delaiPlafond
+      type: object
+      properties:
+        numDossier:
+          type: string
+        refSinistre:
+          type: string
+        mtOuverture:
+          type: integer
+          format: int32
+        assure:
+          $ref: '#/components/schemas/Assure'
+        compagnie:
+          $ref: '#/components/schemas/Compagnie'
+        sinistre:
+          $ref: '#/components/schemas/Sinistre'
+        lieuRDV:
+          $ref: '#/components/schemas/LieuRDV'
+        typeExpertise:
+          type: string
+        modeExpertise:
+          type: string
+        delaiPlancher:
+          type: string
+        delaiPlafond:
+          type: string
+      example:
+        numDossier: 'temp_1,358'
+        refSinistre: test5
+        mtOuverture: 0
+        assure:
+          nomComplet: A MODIFIER A MODIFIER
+          nom: A MODIFIER
+          prenom: A MODIFIER
+          raisonSociale: testPostmanAviva
+          tel: '683602973'
+          email: a_modifier@modifier.fr
+          adresse:
+            adr1: rue de republique
+            adr2: ''
+            adr3: ''
+            adr4: ''
+            cp: '75016'
+            ville: PARIS
+          type: PRO
+        compagnie:
+          code: 69AAAAAAEUROFIL
+          raisSoc: EUROFIL
+        sinistre:
+          date: 11/02/2019
+          codeType: DDE
+          libelleType: Hors vol
+          codeTypeCentral: DDE
+          libelleTypeCentral: Hors vol
+          adresse:
+            adr1: ''
+            adr2: ''
+            adr3: ''
+            adr4: ''
+            cp: '75016'
+            ville: PARIS
+        lieuRDV:
+          adr1: ''
+          adr2: ''
+          adr3: ''
+          adr4: ''
+          cp: '75016'
+          ville: PARIS
+        typeExpertise: TELE
+        modeExpertise: EAD
+        delaiPlancher: 1jo
+        delaiPlafond: 5jo
+    commitdisponibilitescustom:
+      title: commitdisponibilitescustom
+      required:
+        - statut
+        - listeMessage
+        - contenu
+      type: object
+      properties:
+        statut:
+          type: boolean
+        listeMessage:
+          type: string
+          nullable: true
+        contenu:
+          $ref: '#/components/schemas/Contenu1'
+      example:
+        statut: true
+        listeMessage: ''
+        contenu:
+          numDossier: '2020000023'
+          refSinistre: test5
+          numPolice: ''
+          numMission: ''
+          compagnie:
+            code: 69AAAAAAEUROFIL
+            raisSoc: EUROFIL
+            codeGta: ''
+          division: ''
+          gestionnaire: ''
+          intermediaire: ''
+          expert: ''
+          bureau: ''
+          assure:
+            nomComplet: A MODIFIER A MODIFIER
+            nom: A MODIFIER
+            prenom: A MODIFIER
+            raisonSociale: testPostmanAviva
+            adresse:
+              adr1: rue de republique
+              adr2: ''
+              adr3: ''
+              adr4: ''
+              cp: '75016'
+              ville: PARIS
+              pays: ''
+            tel: '683602973'
+            mobile: ''
+            email: a_modifier@modifier.fr
+            type: PRO
+          sinistre:
+            date: 11/02/2019
+            codeType: DDE
+            libelleType: Hors vol
+            codeTypeCentral: DDE
+            libelleTypeCentral: Hors vol
+            adresse:
+              adr1: ''
+              adr2: ''
+              adr3: ''
+              adr4: ''
+              cp: '75016'
+              ville: PARIS
+              pays: ''
+            causesCirc: ''
+          dateDernierRdv: ''
+          mtOuverture: 0
+          cloture: false
+          rapports: ''
+          delaiPlancher: 1jo
+          delaiPlafond: 5jo
+          requiredResources: ''
+          dureeRdv: ''
+          dosRecepAgeCode: ''
+          rapportA: ''
+          lieuRDV:
+            adr1: ''
+            adr2: ''
+            adr3: ''
+            adr4: ''
+            cp: '75016'
+            ville: PARIS
+            pays: ''
+          typeExpertise: TELE
+          expertCgn: ''
+          dosTypeCode: ''
+          dosCiePolice: ''
+          dosBraCode: ''
+          dosEntreprise: ''
+          dosKairos: ''
+          dosAxaPromium: ''
+          modeExpertise: EAD
+    Contenu1:
+      title: Contenu1
+      required:
+        - numDossier
+        - refSinistre
+        - numPolice
+        - numMission
+        - compagnie
+        - division
+        - gestionnaire
+        - intermediaire
+        - expert
+        - bureau
+        - assure
+        - sinistre
+        - dateDernierRdv
+        - mtOuverture
+        - cloture
+        - rapports
+        - delaiPlancher
+        - delaiPlafond
+        - requiredResources
+        - dureeRdv
+        - dosRecepAgeCode
+        - rapportA
+        - lieuRDV
+        - typeExpertise
+        - expertCgn
+        - dosTypeCode
+        - dosCiePolice
+        - dosBraCode
+        - dosEntreprise
+        - dosKairos
+        - dosAxaPromium
+        - modeExpertise
+      type: object
+      properties:
+        numDossier:
+          type: string
+        refSinistre:
+          type: string
+        numPolice:
+          type: string
+          nullable: true
+        numMission:
+          type: string
+          nullable: true
+        compagnie:
+          $ref: '#/components/schemas/Compagnie2'
+        division:
+          type: string
+          nullable: true
+        gestionnaire:
+          type: string
+          nullable: true
+        intermediaire:
+          type: string
+          nullable: true
+        expert:
+          type: string
+          nullable: true
+        bureau:
+          type: string
+          nullable: true
+        assure:
+          $ref: '#/components/schemas/Assure2'
+        sinistre:
+          $ref: '#/components/schemas/Sinistre2'
+        dateDernierRdv:
+          type: string
+          nullable: true
+        mtOuverture:
+          type: integer
+          format: int32
+        cloture:
+          type: boolean
+        rapports:
+          type: string
+          nullable: true
+        delaiPlancher:
+          type: string
+        delaiPlafond:
+          type: string
+        requiredResources:
+          type: string
+          nullable: true
+        dureeRdv:
+          type: string
+          nullable: true
+        dosRecepAgeCode:
+          type: string
+          nullable: true
+        rapportA:
+          type: string
+          nullable: true
+        lieuRDV:
+          $ref: '#/components/schemas/LieuRDV2'
+        typeExpertise:
+          type: string
+        expertCgn:
+          type: string
+          nullable: true
+        dosTypeCode:
+          type: string
+          nullable: true
+        dosCiePolice:
+          type: string
+          nullable: true
+        dosBraCode:
+          type: string
+          nullable: true
+        dosEntreprise:
+          type: string
+          nullable: true
+        dosKairos:
+          type: string
+          nullable: true
+        dosAxaPromium:
+          type: string
+          nullable: true
+        modeExpertise:
+          type: string
+      example:
+        numDossier: '2020000023'
+        refSinistre: test5
+        numPolice: ''
+        numMission: ''
+        compagnie:
+          code: 69AAAAAAEUROFIL
+          raisSoc: EUROFIL
+          codeGta: ''
+        division: ''
+        gestionnaire: ''
+        intermediaire: ''
+        expert: ''
+        bureau: ''
+        assure:
+          nomComplet: A MODIFIER A MODIFIER
+          nom: A MODIFIER
+          prenom: A MODIFIER
+          raisonSociale: testPostmanAviva
+          adresse:
+            adr1: rue de republique
+            adr2: ''
+            adr3: ''
+            adr4: ''
+            cp: '75016'
+            ville: PARIS
+            pays: ''
+          tel: '683602973'
+          mobile: ''
+          email: a_modifier@modifier.fr
+          type: PRO
+        sinistre:
+          date: 11/02/2019
+          codeType: DDE
+          libelleType: Hors vol
+          codeTypeCentral: DDE
+          libelleTypeCentral: Hors vol
+          adresse:
+            adr1: ''
+            adr2: ''
+            adr3: ''
+            adr4: ''
+            cp: '75016'
+            ville: PARIS
+            pays: ''
+          causesCirc: ''
+        dateDernierRdv: ''
+        mtOuverture: 0
+        cloture: false
+        rapports: ''
+        delaiPlancher: 1jo
+        delaiPlafond: 5jo
+        requiredResources: ''
+        dureeRdv: ''
+        dosRecepAgeCode: ''
+        rapportA: ''
+        lieuRDV:
+          adr1: ''
+          adr2: ''
+          adr3: ''
+          adr4: ''
+          cp: '75016'
+          ville: PARIS
+          pays: ''
+        typeExpertise: TELE
+        expertCgn: ''
+        dosTypeCode: ''
+        dosCiePolice: ''
+        dosBraCode: ''
+        dosEntreprise: ''
+        dosKairos: ''
+        dosAxaPromium: ''
+        modeExpertise: EAD
+    Compagnie2:
+      title: Compagnie2
+      required:
+        - code
+        - raisSoc
+        - codeGta
+      type: object
+      properties:
+        code:
+          type: string
+        raisSoc:
+          type: string
+        codeGta:
+          type: string
+          nullable: true
+      example:
+        code: 69AAAAAAEUROFIL
+        raisSoc: EUROFIL
+        codeGta: ''
+    Assure2:
+      title: Assure2
+      required:
+        - nomComplet
+        - nom
+        - prenom
+        - raisonSociale
+        - adresse
+        - tel
+        - mobile
+        - email
+        - type
+      type: object
+      properties:
+        nomComplet:
+          type: string
+        nom:
+          type: string
+        prenom:
+          type: string
+        raisonSociale:
+          type: string
+        adresse:
+          $ref: '#/components/schemas/Adresse4'
+        tel:
+          type: string
+        mobile:
+          type: string
+          nullable: true
+        email:
+          type: string
+        type:
+          type: string
+      example:
+        nomComplet: A MODIFIER A MODIFIER
+        nom: A MODIFIER
+        prenom: A MODIFIER
+        raisonSociale: testPostmanAviva
+        adresse:
+          adr1: rue de republique
+          adr2: ''
+          adr3: ''
+          adr4: ''
+          cp: '75016'
+          ville: PARIS
+          pays: ''
+        tel: '683602973'
+        mobile: ''
+        email: a_modifier@modifier.fr
+        type: PRO
+    Adresse4:
+      title: Adresse4
+      required:
+        - adr1
+        - adr2
+        - adr3
+        - adr4
+        - cp
+        - ville
+        - pays
+      type: object
+      properties:
+        adr1:
+          type: string
+        adr2:
+          type: string
+        adr3:
+          type: string
+        adr4:
+          type: string
+        cp:
+          type: string
+        ville:
+          type: string
+        pays:
+          type: string
+          nullable: true
+      example:
+        adr1: rue de republique
+        adr2: ''
+        adr3: ''
+        adr4: ''
+        cp: '75016'
+        ville: PARIS
+        pays: ''
+    Sinistre2:
+      title: Sinistre2
+      type: object
+      example:
+        date: 11/02/2019
+        codeType: DDE
+        libelleType: Hors vol
+        codeTypeCentral: DDE
+        libelleTypeCentral: Hors vol
+        adresse:
+          adr1: ''
+          adr2: ''
+          adr3: ''
+          adr4: ''
+          cp: '75016'
+          ville: PARIS
+          pays: ''
+        causesCirc: ''
+      properties:
+        date:
+          type: string
+        codeType:
+          type: string
+        libelleType:
+          type: string
+        codeTypeCentral:
+          type: string
+        libelleTypeCentral:
+          type: string
+        adresse:
+          $ref: '#/components/schemas/Adresse4'
+        causesCirc:
+          type: string
+          nullable: true
+      required:
+        - date
+        - codeType
+        - libelleType
+        - codeTypeCentral
+        - libelleTypeCentral
+        - adresse
+        - causesCirc
+    LieuRDV2:
+      title: LieuRDV2
+      required:
+        - adr1
+        - adr2
+        - adr3
+        - adr4
+        - cp
+        - ville
+        - pays
+      type: object
+      properties:
+        adr1:
+          type: string
+        adr2:
+          type: string
+        adr3:
+          type: string
+        adr4:
+          type: string
+        cp:
+          type: string
+        ville:
+          type: string
+        pays:
+          type: string
+          nullable: true
+      example:
+        adr1: ''
+        adr2: ''
+        adr3: ''
+        adr4: ''
+        cp: '75016'
+        ville: PARIS
+        pays: ''
+    disponibilitescustomrequest:
+      title: disponibilitescustomrequest
+      required:
+        - numDossier
+        - refSinistre
+        - mtOuverture
+        - requiredResources
+        - dureeRdv
+        - assure
+        - compagnie
+        - sinistre
+        - lieuRDV
+        - typeExpertise
+        - modeExpertise
+        - delaiPlancher
+        - delaiPlafond
+        - dosKairos
+        - dosAxaPromium
+        - dosRecepAgeCode
+        - dosBraCode
+        - expertCgn
+        - dosTypeCode
+        - dosEntreprise
+        - dosCiePolice
+      type: object
+      properties:
+        numDossier:
+          type: string
+        refSinistre:
+          type: string
+        mtOuverture:
+          type: string
+        requiredResources:
+          type: string
+        dureeRdv:
+          type: string
+        assure:
+          $ref: '#/components/schemas/Assure'
+        compagnie:
+          $ref: '#/components/schemas/Compagnie'
+        sinistre:
+          $ref: '#/components/schemas/Sinistre'
+        lieuRDV:
+          $ref: '#/components/schemas/LieuRDV'
+        typeExpertise:
+          type: string
+        modeExpertise:
+          type: string
+        delaiPlancher:
+          type: string
+        delaiPlafond:
+          type: string
+        dosKairos:
+          type: string
+        dosAxaPromium:
+          type: string
+        dosRecepAgeCode:
+          type: string
+        dosBraCode:
+          type: string
+        expertCgn:
+          type: string
+        dosTypeCode:
+          type: string
+        dosEntreprise:
+          type: string
+        dosCiePolice:
+          type: string
+      example:
+        numDossier: temp_54231
+        refSinistre: test5
+        mtOuverture: '0'
+        requiredResources: 'RAU,BGP'
+        dureeRdv: '00:45'
+        assure:
+          nomComplet: 'A MODIFIER A MODIFIER '
+          nom: A MODIFIER
+          prenom: A MODIFIER
+          raisonSociale: ''
+          tel: ''
+          email: ''
+          adresse:
+            adr1: ''
+            adr2: ''
+            adr3: ''
+            adr4: ''
+            cp: ''
+            ville: ''
+          type: PART
+        compagnie:
+          code: 69AAAAAAEUROFIL
+          raisSoc: AVIVA
+        sinistre:
+          date: 04/06/2019
+          codeType: VOL
+          libelleType: Vol
+          codeTypeCentral: VOL
+          libelleTypeCentral: Vol
+          adresse:
+            adr1: ' '
+            adr2: ''
+            adr3: ''
+            adr4: ''
+            cp: '84000'
+            ville: AVIGNON
+        lieuRDV:
+          adr1: ' '
+          adr2: ''
+          adr3: ''
+          adr4: ''
+          cp: '84000'
+          ville: AVIGNON
+        typeExpertise: TELE
+        modeExpertise: EAD
+        delaiPlancher: 1jo
+        delaiPlafond: 5jo
+        dosKairos: O
+        dosAxaPromium: 'N'
+        dosRecepAgeCode: PU
+        dosBraCode: MRH
+        expertCgn: 'N'
+        dosTypeCode: COURR
+        dosEntreprise: 'N'
+        dosCiePolice: NC
+  securitySchemes:
+    httpBasic:
+      type: http
+      scheme: basic

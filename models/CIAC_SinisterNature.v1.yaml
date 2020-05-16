@@ -1,0 +1,38 @@
+title: "Sinister's Nature"
+type: string
+x-tags:
+  - Common
+  - Sinapps
+description: "Nature du sinistre, selon codification Darva.\n\nListe des valeurs possibles: \n[Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)\n"
+enum:
+  - AutresDommages
+  - Assistance
+  - BrisDeGlace
+  - BrisDeMachine
+  - CatastropheNaturelle
+  - CatastropheTechnologique
+  - Choc
+  - DefenseRecours
+  - DegatsDesEaux
+  - Divers
+  - DMMT
+  - DommagesAuxBiens
+  - DommagesElectriques
+  - DommagesMenagers
+  - DommageOuvrage
+  - EvtNaturel
+  - Explosion
+  - FraisSupplementaireExploitation
+  - FoudreSansIncendie
+  - Incendie
+  - Malfacon
+  - MTR
+  - PerteExploitation
+  - PerteDeLiquide
+  - PerteDeValeur
+  - ProtectionJuridique
+  - ResponsabiliteCivile
+  - RisqueInformatique
+  - TempeteNeigeGrele
+  - ValeurFondExploitation
+  - Vol

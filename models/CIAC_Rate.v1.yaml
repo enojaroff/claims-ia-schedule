@@ -1,0 +1,5 @@
+type: number
+title: Rate
+description: Taux (pourcentage)
+format: float
+example: 75.25

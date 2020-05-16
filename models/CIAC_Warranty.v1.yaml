@@ -1,0 +1,20 @@
+title: Warranty
+type: object
+x-tags:
+  - Common
+  - Sinapps
+description: Description de la garantie
+properties:
+  franchise:
+    $ref: ./CIAC_Franchise.v1.yaml
+  plafonds:
+    type: array
+    items:
+      $ref: '#/definitions/TypePlafonds'
+  additionalWarranty:
+    $ref: ./CIAC_AdditionalWarrantyType.v1.yaml
+  warrantyType:
+    $ref: ./CIAC_WarrantyType.v1.yaml
+required:
+  - plafonds
+  - warrantyType

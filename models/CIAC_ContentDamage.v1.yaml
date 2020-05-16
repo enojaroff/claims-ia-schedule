@@ -1,0 +1,26 @@
+title: CIAC_ContentDamage
+type: object
+properties:
+  pictures:
+    type: array
+    items:
+      $ref: ./CIAC_Attachment.v1.yaml
+  invoice:
+    $ref: ./CIAC_Attachment.v1.yaml
+  marketPrice:
+    $ref: ./CIAC_Amount.v1.yaml
+  buyingPrice:
+    $ref: ./CIAC_Amount.v1.yaml
+  age:
+    $ref: ./CIAC_Age.v1.yaml
+  category:
+    type: string
+  brandAndModel:
+    type: string
+  description:
+    type: string
+  name:
+    type: string
+x-tags:
+  - ClaimsIA
+  - Common

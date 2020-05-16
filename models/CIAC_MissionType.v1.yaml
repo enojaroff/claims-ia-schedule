@@ -1,0 +1,14 @@
+type: string
+title: MissionType
+description: Type de mission
+enum:
+  - RenDirecte
+  - RenSuiteExpertise
+  - RechercheDeFuite
+  - Reparation
+  - ExpertiseCovea
+  - RenMobiliereDirecte
+  - RenMobiliereSuiteExpertise
+x-tags:
+  - Common
+  - Sinapps

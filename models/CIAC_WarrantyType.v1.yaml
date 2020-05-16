@@ -1,0 +1,62 @@
+type: string
+title: WarrantyType
+default: DegatsDesEaux
+description: 'Type de garantie (valeurs Sinapps). cf. doc [Type-de-garantie.md](../docs/sinapps/Type-de-garantie.md)'
+enum:
+  - Arbres
+  - ArbresPot
+  - Attentat
+  - Autre
+  - BienEnValeurDeclaree
+  - BiensDeLoisirs
+  - BiensMultimedias
+  - BiensProfessionnelsEnTousLieux
+  - BiensScolaires
+  - Bijoux
+  - BrisDeGlace
+  - BrisDeGlaceMobilier
+  - Canalisation
+  - CanalisationsExterieures
+  - CatastropheNaturelle
+  - ChocVtm
+  - DegatsDesEaux
+  - Divers
+  - DiversImmobilier
+  - DommageOuvrage
+  - DommagesAuxBiens
+  - DommagesElectriques
+  - DommagesMenagers
+  - Effondrement
+  - EquipementDeLoisir
+  - EvenementNaturel
+  - Explosion
+  - FoudreSansIncendie
+  - Fumee
+  - Gel
+  - HorsGaranties
+  - Incendie
+  - IncidentsDomestiques
+  - InstallationExterieure
+  - Jardin
+  - LocationEnMeuble
+  - Malfacon
+  - NouvelleTechnologie
+  - ObjetPrecieux
+  - PanneElectromenager
+  - Perte
+  - PerteCongelateur
+  - PerteDeLiquide
+  - PerteEauInterieur
+  - Piscine
+  - RisquesAnnexes
+  - TogOuTng
+  - TousRisques
+  - ValeurANeuf
+  - Vandalisme
+  - Vol
+  - VolCave
+  - VolLieuPublic
+example: DegatsDesEaux
+x-tags:
+  - ClaimsIA
+  - Common

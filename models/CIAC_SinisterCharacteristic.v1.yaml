@@ -1,0 +1,13 @@
+title: SinisterCharacteristic
+type: object
+x-tags:
+  - Common
+  - Sinapps
+properties:
+  nature:
+    $ref: ./CIAC_SinisterNature.v1.yaml
+  cause:
+    $ref: ./CIAC_SinisterCause.v1.yaml
+  detail:
+    $ref: ./CIAC_SinisterCauseDetail.v1.yaml
+description: Nature-Cause-Détail

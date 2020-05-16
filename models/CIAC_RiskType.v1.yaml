@@ -1,0 +1,26 @@
+type: string
+title: RiskType
+enum:
+  - Appartement
+  - MaisonParticuliere
+  - Immeuble
+  - LocalProfessionnel
+  - ResidenceMobile
+  - BatimentNonHabitable
+  - TerrainNonBati
+  - ResidenceDeRetraite
+  - Bungalow
+  - Chambre
+  - CaveRemise
+  - HabitationEnConstruction
+  - Indetermine
+  - AutreRisque
+  - BatimentTertiaire
+  - BatimentCommercial
+  - BatimentIndustriel
+  - ConstructionLegere
+  - LogementJeune
+description: '[Liste des valeurs possibles (Sinapps)](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typederisque)'
+x-tags:
+  - Common
+  - Sinapps

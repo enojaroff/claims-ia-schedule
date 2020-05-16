@@ -1,0 +1,24 @@
+title: CIAC_BuildingDamage
+type: object
+description: "Description de dommage immobilier\n\n- Nom de la pièce\n- Tableau de surfaces\n\n### Surface\n\n* Nom\n* Superficie\n* Revêtement\n  - Nom\n  - Nature (Darva 9079.01.01 - Nature objet ou corps d'état)\n  - Qualité du revêtement (Darva 9711.01.01 - catégorie du risque)\n    - (1: Normal, 2: Standing, 3: Luxe)\n  - niveau d'usure (1: neuf, 2: état d'usage, 3: ancien)\n      \n\n"
+x-tags:
+  - ClaimsIA
+  - Common
+properties:
+  size:
+    type: number
+  pictures:
+    type: array
+    items:
+      $ref: ./CIAC_Attachment.v1.yaml
+  surfaces:
+    type: array
+    minItems: 1
+    items:
+      $ref: '../Claims_Appointment_API.v1.yaml#/components/schemas/Surface'
+  name:
+    type: string
+    description: Nom de la pièce
+required:
+  - surfaces
+  - name

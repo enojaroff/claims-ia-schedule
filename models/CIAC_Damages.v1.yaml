@@ -1,0 +1,14 @@
+title: CIAC_Damages
+type: object
+x-tags:
+  - ClaimsIA
+  - Common
+properties:
+  contents:
+    type: array
+    items:
+      $ref: ./CIAC_ContentDamage.v1.yaml
+  buildings:
+    type: array
+    items:
+      $ref: ./CIAC_BuildingDamage.v1.yaml

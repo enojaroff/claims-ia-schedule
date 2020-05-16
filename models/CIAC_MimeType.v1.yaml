@@ -1,0 +1,36 @@
+title: MimeType
+type: string
+enum:
+  - application/pdf
+  - application/json
+  - application/xml
+  - application/zip
+  - application/vnd.oasis.opendocument.text
+  - application/vnd.oasis.opendocument.spreadsheet
+  - application/vnd.oasis.opendocument.presentation
+  - application/vnd.ms-excel
+  - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+  - application/vnd.ms-powerpoint
+  - application/vnd.openxmlformats-officedocument.presentationml.presentation
+  - application/msword
+  - application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  - audio/mpeg
+  - audio/x-ms-wma
+  - audio/x-wav
+  - image/gif
+  - image/jpeg
+  - image/png
+  - image/tiff
+  - image/svg+xml
+  - text/csv
+  - text/plain
+  - text/xml
+  - video/mpeg
+  - video/mp4
+  - video/quicktime
+  - video/x-ms-wmv
+  - video/x-msvideo
+  - video/web
+x-tags:
+  - ClaimsIA
+  - Common

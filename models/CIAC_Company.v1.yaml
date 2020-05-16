@@ -1,0 +1,21 @@
+title: Company
+type: object
+'-tags':
+  - ClaimsIA
+required:
+  - id
+  - acam
+properties:
+  id:
+    type: string
+    description: Identifiant unique de la compagnie
+  name:
+    type: string
+  acam:
+    type: string
+    maxLength: 8
+    description: Code ACAM ur 8 caractère
+description: "Société d'assurance"
+x-tags:
+  - ClaimsIA
+  - Common
