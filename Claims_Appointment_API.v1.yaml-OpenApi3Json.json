@@ -1,0 +1,3034 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Claims IA Scheduling API",
+    "description": "L'API RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, elle doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.\n\nL'API respecte le standard REST et utilise le protocole HTTP. Les messages échangés sont au format JSON.\n\n\nUne clé est nécessaire pour utiliser l'API. Cette clé doit être fournie par la société qui implémente l'API.\n\n\n\n\n",
+    "contact": {
+      "name": "Edouard Nojaroff",
+      "email": "e.nojaroff@claims-ia.fr"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://base_url/claims/api/v1",
+      "description": "Base URL",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/account/authenticate": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "AccountAuthenticate",
+        "description": "La première étape dans l'utilisation de l'API Claims est l'authentification via un compte.\nLes informations envoyées sont l'email, le mot de passe du compte, et la clé de l'API.\n\nLa réponse contient un jeton de session (session_token) qui sera utilisé à chaque appel de l'API.\nPour des raisons de sécurité, le jeton de session doit expirer au bout de 24 heures; une nouvelle authentification est alors nécessaire.\n\n\n\n",
+        "operationId": "AccountAuthenticate",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Account owner email address",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "Account owner password",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "description": "API key",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountAuthenticateResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Compte inactif ou clé d'API incorrecte",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountAuthenticate401Error"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/account/logout": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "AccountLogout",
+        "description": "Logout",
+        "operationId": "AccountLogout",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Logout successful",
+            "headers": {}
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/account/reset_password": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "AccountResetPassword",
+        "description": "Modifies the account password using the valid hash_code that was used when initiating the password reset process.",
+        "operationId": "AccountResetPassword",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "email@company.com"
+            }
+          },
+          {
+            "name": "hash_code",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "test_hash_code"
+            }
+          },
+          {
+            "name": "new_password",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "test_new_password"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResetPasswordResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/account": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "AccountGetInfo",
+        "description": "Récupère les informations détaillées sur le compte",
+        "operationId": "AccountGetInfo",
+        "parameters": [
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/appointments/{id}": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "AppointmentGetInfo",
+        "description": "LIRE les détails d'un rendez-vous",
+        "operationId": "AppointmentGetInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentsResponse"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "AppointmentModify",
+        "description": "Using this endpoint you can modify the attributes for an appointment",
+        "operationId": "AppointmentModify",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Appointment id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "encoding": {},
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentsResponse1"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "AppointmentDelete",
+        "description": "Using this endpoint you can delete an appointment within the account.",
+        "operationId": "AppointmentDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Appointment id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentsResponse2"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/appointment/{id}/schedule": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "AppointmentReschedule",
+        "description": "Lecture de l'horaire d'un rendez-vous",
+        "operationId": "AppointmentReschedule",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "409": {
+            "description": "Conflict. Timeslot is not avalailable."
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/rdv": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "get-rdv",
+        "description": "Get appointment list",
+        "operationId": "get-rdv",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The appointment id",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "timezone_id",
+            "in": "query",
+            "description": "Returns appointments date fields with specified time offset",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 553
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search_text",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "client_name",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "client_email",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "List pager",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0,
+              "example": 0
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "List pager / 'all' - no limit",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "object",
+              "default": "100",
+              "example": 100
+            }
+          },
+          {
+            "name": "updated_after",
+            "in": "query",
+            "description": "Lower date limit for which the appointment was updated",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "updated_before",
+            "in": "query",
+            "description": "Upper date limit for which the appointment was updated",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "num_results",
+            "in": "query",
+            "description": "If 1, the call returns only the number of appointments found",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "$ref": "#/components/schemas/num_results"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "$ref": "#/components/schemas/sort_by"
+            }
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "$ref": "#/components/schemas/sort_order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  },
+                  "description": "OK"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "post-rdv",
+        "description": "create appointment",
+        "operationId": "post-rdv",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RdvRequest"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/appointments": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "AppointmentsGetList",
+        "description": "Using this endpoint you can retrieve the attributes of all your existing Setster appointments. We advise using filters to fetch appointments on specific date ranges or attributes. See Filtering appointments in the Introduction section. \n\n---\n\n<!-- theme: warning -->\n\n> dsfdfds  \n>\n> dsfdsfdsfsdf\n\n\n",
+        "operationId": "AppointmentsGetList",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The appointment id",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "timezone_id",
+            "in": "query",
+            "description": "Returns appointments date fields with specified time offset",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "example": 553
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search_text",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "client_name",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "client_email",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "List pager",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0,
+              "example": 0
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "List pager / 'all' - no limit",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "object",
+              "default": "100",
+              "example": 100
+            }
+          },
+          {
+            "name": "updated_after",
+            "in": "query",
+            "description": "Lower date limit for which the appointment was updated",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "updated_before",
+            "in": "query",
+            "description": "Upper date limit for which the appointment was updated",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "num_results",
+            "in": "query",
+            "description": "If 1, the call returns only the number of appointments found",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "$ref": "#/components/schemas/num_results"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "$ref": "#/components/schemas/sort_by"
+            }
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "$ref": "#/components/schemas/sort_order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentsResponse3"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "AppointmentCreate",
+        "description": "Using this endpoint you can create a new appointment within the account. You will have to specify the service and the service provider you are creating the appointment for, along with all the other appointment attributes. This will initiate the scheduling process within Setster. \n\n### Documentation\n\n- [Codes des compagnies](docs/companies.md)\n",
+        "operationId": "AppointmentCreate",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "encoding": {},
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "The appointment has been created",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseStatus"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The appointment can not be created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentsResponse2"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/availabilities/{id}": {
+      "get": {
+        "tags": [
+          "Availability"
+        ],
+        "summary": "AvailibilityGetInfo",
+        "description": "Retrieve timeslot",
+        "operationId": "AvailibilityGetInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Timeslot id. This value identifies one of the avalilable timeslots returned by the POST request.",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Timeslot"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/availabilities": {
+      "post": {
+        "tags": [
+          "Availability"
+        ],
+        "summary": "request-availabilities",
+        "description": "Request available timeslots.\nLa requête contient les informations sur le type d'intervention\n\n**Expert**:\n- Type d'expertise\n- Informations sur l'assurance et le contrat\n- Garantie en jeu\n- Adresse\n- Qualification du sinistre, selon la codification Sinapps (origine, cause, détail)\n\n- Des données d'analyse de ClaimsIA (tiers, recours,...)\n- La pesée de l'enjeu\n\n\n**RENeur**:\n- Type de mission (???)\n- Informations sur l'assurance\n- Garantie en jeu\n- Adresse\n- Qualification du sinistre\n",
+        "operationId": "request-availabilities",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Claim"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Timeslot"
+                  },
+                  "description": "OK"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/location": {
+      "get": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "LocationList",
+        "description": "Using this endpoint you can retrieve the attributes of all your locations",
+        "operationId": "LocationList",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Location ID",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "company_id",
+            "in": "query",
+            "description": "Company id",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "street1",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "street2",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "phone",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "photo",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paypal_email",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "timezone_id",
+            "in": "query",
+            "description": "The timezone id",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "virtual",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "tmp_default",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "has_links",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "include_links",
+            "in": "query",
+            "description": "",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "description": "successful operation"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "tags": [
+          "Location"
+        ],
+        "summary": "LocationCreate",
+        "description": "Using this endpoint you can create a new location within the account",
+        "operationId": "LocationCreate",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "encoding": {},
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "$ref": "#/components/schemas/Location"
+                  }
+                }
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "description": "successful operation"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AvailabilityDetails": {
+        "title": "AvailabilityDetails",
+        "type": "object",
+        "properties": {
+          "interval": {
+            "type": "integer",
+            "description": "The length (in minutes) of the appointment",
+            "format": "int32",
+            "example": 60
+          },
+          "day": {
+            "type": "integer",
+            "description": "Selected day",
+            "format": "int32",
+            "example": 15
+          },
+          "month": {
+            "type": "integer",
+            "description": "Selected month",
+            "format": "int32",
+            "example": 8
+          },
+          "year": {
+            "type": "integer",
+            "description": "Selected year",
+            "format": "int32",
+            "example": 2012
+          },
+          "times": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Hash table of the start times of the available appointment slots, grouped by date"
+          }
+        }
+      },
+      "AppointmentType": {
+        "title": "AppointmentType",
+        "enum": [
+          "Site",
+          "Visio",
+          "Telephonique"
+        ],
+        "type": "string",
+        "description": "[Valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typedurendez-vous)"
+      },
+      "ContentDamage": {
+        "title": "ContentDamage",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "brandAndModel": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "age": {
+            "$ref": "#/components/schemas/Age"
+          },
+          "buyingPrice": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "marketPrice": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "invoice": {
+            "$ref": "#/components/schemas/Attachment"
+          },
+          "pictures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            },
+            "description": ""
+          }
+        }
+      },
+      "Customer": {
+        "title": "Customer",
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "coordinates": {
+            "$ref": "#/components/schemas/Coordinates"
+          }
+        }
+      },
+      "Estimation": {
+        "title": "Estimation",
+        "type": "object",
+        "properties": {
+          "cost": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "contentsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roomsCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Contract": {
+        "title": "Contract",
+        "required": [
+          "company",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "company": {
+            "$ref": "#/components/schemas/Company"
+          },
+          "name": {
+            "type": "string",
+            "description": "Nom du contrat"
+          }
+        }
+      },
+      "Claim": {
+        "title": "Claim",
+        "required": [
+          "claimDate",
+          "guarantee",
+          "company",
+          "location"
+        ],
+        "type": "object",
+        "properties": {
+          "claimDate": {
+            "type": "string",
+            "description": "Date de déclaration",
+            "format": "date"
+          },
+          "guarantee": {
+            "$ref": "#/components/schemas/WarrantyType"
+          },
+          "company": {
+            "$ref": "#/components/schemas/Company"
+          },
+          "location": {
+            "$ref": "#/components/schemas/PostalAddress"
+          },
+          "sinister": {
+            "$ref": "#/components/schemas/Sinister"
+          },
+          "estimation": {
+            "$ref": "#/components/schemas/Estimation"
+          }
+        }
+      },
+      "Qualification": {
+        "title": "Qualification",
+        "required": [
+          "characteristic"
+        ],
+        "type": "object",
+        "properties": {
+          "characteristic": {
+            "$ref": "#/components/schemas/SinisterCharacteristic"
+          },
+          "complement": {
+            "$ref": "#/components/schemas/QualificationComplement"
+          }
+        },
+        "description": "Le sinistre est qualifié par le trio de données **Nature/Cause/Détail**.\n\nSelon les sinistres, le détail de la cause peut ne pas être renseigné. Les valeurs de ces trois informations suivent la codification **Sinapps**.\n\n[Liste des valeurs possibles](docs/sinapps/Nature-du-sinistre.md)\n\nLe complément correspond aux informations définies par Claims IA et est optionnel."
+      },
+      "QualificationComplement": {
+        "title": "QualificationComplement",
+        "type": "object",
+        "properties": {
+          "thirdParty": {
+            "type": "boolean",
+            "description": "Tiers en cause?"
+          },
+          "insuredResponsible": {
+            "type": "boolean",
+            "description": "Est-ce que l'assuré est responsable?"
+          },
+          "remedy": {
+            "type": "boolean",
+            "description": "Recours possible?"
+          },
+          "recourse": {
+            "type": "boolean",
+            "description": "Action en remboursement possible?"
+          }
+        },
+        "description": "Le complément de qualification regroupe des informations établies par Claims IA à l'issue de la déclaration de sinistre."
+      },
+      "BuildingDamage": {
+        "title": "BuildingDamage",
+        "required": [
+          "name",
+          "surfaces"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nom de la pièce"
+          },
+          "surfaces": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Surface"
+            },
+            "description": ""
+          },
+          "pictures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            },
+            "description": ""
+          },
+          "size": {
+            "type": "number"
+          }
+        },
+        "description": "Description de dommage immobilier\n\n- Nom de la pièce\n- Tableau de surfaces\n\n### Surface\n\n* Nom\n* Superficie\n* Revêtement\n  - Nom\n  - Nature (Darva 9079.01.01 - Nature objet ou corps d'état)\n  - Qualité du revêtement (Darva 9711.01.01 - catégorie du risque)\n    - (1: Normal, 2: Standing, 3: Luxe)\n  - niveau d'usure (1: neuf, 2: état d'usage, 3: ancien)"
+      },
+      "Timeslot": {
+        "title": "Timeslot",
+        "required": [
+          "id",
+          "date",
+          "schedule"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/AppointmentSchedule"
+          }
+        },
+        "description": "Le Timeslot est un créneau horaire retourné par le partenaire. Il est défini au minimum par une heure de début et une heure de fin.\nUne adresse peut être renseignée si elle est différente de l'adresse fournie dans la demande."
+      },
+      "Covering": {
+        "title": "Covering",
+        "required": [
+          "name",
+          "type",
+          "state"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "Nature du revêtement. \nListe des valeurs: cf.Sinapps - detailNatureDommages \n(anciennement DARVA 9711.01.01)"
+          },
+          "state": {
+            "$ref": "#/components/schemas/State"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/Quality"
+          }
+        },
+        "description": "Revêtement d'une surface.\n\nLe type de revêtement correspond globalement aux corps d'état. On s'appuie sur la codification Sinapps pour les valeurs (_cf. fichier [Detail-nature-dommage](docs/sinapps/Detail-nature-dommages.md)_)"
+      },
+      "Surface": {
+        "title": "Surface",
+        "required": [
+          "name",
+          "size",
+          "covering"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nom de la surface"
+          },
+          "size": {
+            "type": "string",
+            "description": "Superficie en m2"
+          },
+          "covering": {
+            "$ref": "#/components/schemas/Covering"
+          },
+          "condition": {
+            "type": "string",
+            "description": "Etat général de la surface"
+          }
+        },
+        "description": "Surface d'une pièce: mur, sol, plafond"
+      },
+      "Sinister": {
+        "title": "Sinister",
+        "required": [
+          "code",
+          "date",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "maxLength": 2,
+            "minLength": 2,
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9]",
+            "type": "string",
+            "description": "Nature du sinistre - code DARVA"
+          },
+          "date": {
+            "type": "string",
+            "description": "Date du sinistre",
+            "format": "date"
+          },
+          "type": {
+            "type": "string",
+            "description": "Code DARVA 9209.01.01-NATURE DU SINISTRE"
+          },
+          "qualification": {
+            "$ref": "#/components/schemas/Qualification"
+          },
+          "damages": {
+            "$ref": "#/components/schemas/Damages"
+          }
+        }
+      },
+      "ResponseStatus": {
+        "title": "ResponseStatus",
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "description": "Statut de l'opération.\n\n| Statut | Code |\n|--------|------|\n| OK | 0 |\n| INVALID_PARAMETERS | 1 |\n| INVALID_CREDENTIALS | 2 |\n| ACCOUNT_NOT_ACTIVE | 3 |\n| INTERNAL_ERROR | 4 |\n| ERROR_SAVING_ENTITY | 5 |\n| ERROR_DELETING | 6 |\n| NOT_FOUND | 7 |\n| NOT_ALLOWED | 8 |\n| SLOT_NOT_AVAILABLE | 9 |\n| SLOT_OCCUPIED | 10 |\n| ACCOUNTS_LIMIT_REACHED | 11 |",
+            "format": "int32",
+            "example": 0
+          },
+          "descriptions": {
+            "type": "string",
+            "description": "Description of the status",
+            "example": "OK"
+          }
+        },
+        "description": "ResponseStatus donne une information sur la réponse. Il contient un code numérique et une description."
+      },
+      "Location": {
+        "title": "Location",
+        "required": [
+          "name",
+          "UID"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the location",
+            "example": "Spa center"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the location"
+          },
+          "is_main": {
+            "type": "boolean",
+            "description": "Détermine s'il s'agit du lieu du sinistre",
+            "example": false
+          },
+          "address": {
+            "$ref": "#/components/schemas/PostalAddress"
+          },
+          "photo": {
+            "type": "string",
+            "description": "Photo URL"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone number"
+          },
+          "tags": {
+            "type": "string"
+          },
+          "timezone_id": {
+            "type": "string",
+            "description": "The ID of the time zone",
+            "example": "553"
+          },
+          "lat": {
+            "type": "number",
+            "description": "The latitude of the location automatically calculated based on its address"
+          },
+          "lng": {
+            "type": "number",
+            "description": "The longitude of the location automatically calculated based on its address"
+          },
+          "update_lat_lng": {
+            "type": "boolean",
+            "description": "Available only on update. If true (1) then the lat and lng values will be automatically calculated",
+            "example": false
+          },
+          "ord": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "UID": {
+            "type": "string",
+            "description": "Identifiant unique du lieu"
+          }
+        },
+        "description": "Représentation d'un lieu"
+      },
+      "Claim1": {
+        "title": "Claim1",
+        "required": [
+          "date",
+          "guarantee"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Date de déclaration",
+            "format": "date"
+          },
+          "guarantee": {
+            "$ref": "#/components/schemas/WarrantyType"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "sinister": {
+            "$ref": "#/components/schemas/Sinister1"
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            },
+            "description": ""
+          },
+          "estimation": {
+            "$ref": "#/components/schemas/Estimation"
+          },
+          "contract": {
+            "$ref": "#/components/schemas/Contract"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Référence ClaimsIA de la déclaration"
+          }
+        }
+      },
+      "AppointmentChangeReason": {
+        "title": "AppointmentChangeReason",
+        "enum": [
+          "ErreurDeSaisie",
+          "ClientIndisponible",
+          "ExpertIndisponible",
+          "TiersIndisponible",
+          "DossierIncomplet",
+          "RendezVousNonUtile",
+          "Autre"
+        ],
+        "type": "string",
+        "description": "Motif de changement de rendez-vous"
+      },
+      "Appointment": {
+        "title": "Appointment",
+        "required": [
+          "type",
+          "schedule"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/PostalAddress"
+          },
+          "notes": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AppointmentType"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/AppointmentSchedule"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          }
+        }
+      },
+      "AppointmentSchedule": {
+        "title": "AppointmentSchedule",
+        "required": [
+          "type",
+          "startTime",
+          "endTime"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/Type"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-05-14T09:00:00Z"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-05-14T09:00:00Z"
+          },
+          "duration": {
+            "minimum": 0.0,
+            "type": "integer",
+            "description": "Durée en minutes",
+            "format": "int32",
+            "example": 90
+          }
+        },
+        "description": "Horaire de rendez-vous"
+      },
+      "Damages": {
+        "title": "Damages",
+        "type": "object",
+        "properties": {
+          "buildings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BuildingDamage"
+            },
+            "description": ""
+          },
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentDamage"
+            },
+            "description": ""
+          }
+        }
+      },
+      "Account": {
+        "title": "Account",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "company_id": {
+            "type": "integer",
+            "description": "Unique ID of the account",
+            "format": "int64",
+            "example": 2345
+          },
+          "created_by": {
+            "type": "integer",
+            "description": "ID of the company owner",
+            "format": "int64",
+            "example": 1242
+          },
+          "address_city": {
+            "type": "string",
+            "description": "Account/Default location personal info.",
+            "example": "Los Angeles"
+          },
+          "address_country": {
+            "type": "string",
+            "description": "Account/Default location personal info.",
+            "example": "USA"
+          },
+          "address_state": {
+            "type": "string",
+            "description": "Account/Default location personal info.",
+            "example": "Nevada"
+          },
+          "address_street1": {
+            "type": "string",
+            "description": "Account/Default location personal info.",
+            "example": "123 Street"
+          },
+          "address_street2": {
+            "type": "string",
+            "description": "Account/Default location personal info."
+          },
+          "addresszip": {
+            "type": "string",
+            "description": "Account/Default location personal info.",
+            "example": "245235"
+          },
+          "send_to_contact": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "show_map_profile": {
+            "type": "boolean",
+            "example": false
+          },
+          "splash": {
+            "type": "string"
+          },
+          "map_url": {
+            "type": "string",
+            "description": "An http address used for locations display"
+          },
+          "return_url": {
+            "type": "string"
+          },
+          "policies": {
+            "type": "string"
+          },
+          "account_type": {
+            "$ref": "#/components/schemas/AccountType"
+          },
+          "date_created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "no_views": {
+            "type": "string"
+          },
+          "notify_app_unconfirmed": {
+            "type": "boolean",
+            "example": true
+          },
+          "notify_app_unpaid": {
+            "type": "boolean",
+            "example": true
+          },
+          "lang": {
+            "$ref": "#/components/schemas/Lang"
+          },
+          "enable_locations": {
+            "type": "boolean",
+            "description": "Allow other location than the implicit one",
+            "example": false
+          },
+          "capture_leads": {
+            "type": "string"
+          },
+          "settings": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "directory": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "max_providers": {
+            "type": "integer",
+            "description": "The maximum number of locations and providers that the company is allowed to add",
+            "format": "int32",
+            "example": 0
+          },
+          "business_hours_label": {
+            "type": "string"
+          },
+          "policies_label": {
+            "type": "string"
+          },
+          "paragraph_label": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "integer",
+            "description": "Gmt offset in minutes",
+            "format": "int32",
+            "example": -480
+          },
+          "exchange_sync_settings": {
+            "$ref": "#/components/schemas/ExchangeSyncSettings"
+          }
+        }
+      },
+      "AccountAuthenticate401Error": {
+        "title": "AccountAuthenticate401Error",
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "statusDescriptions": {
+            "type": "string",
+            "example": "Account is not active"
+          },
+          "data": {
+            "type": "object",
+            "nullable": true
+          }
+        }
+      },
+      "AccountAuthenticateResponse": {
+        "title": "AccountAuthenticateResponse",
+        "type": "object",
+        "properties": {
+          "responseStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "AccountResetPasswordResponse": {
+        "title": "AccountResetPasswordResponse",
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "description": "Status of the operation",
+            "format": "int32",
+            "example": 0
+          },
+          "statusDescriptions": {
+            "type": "string",
+            "description": "Description of the status",
+            "example": "Password changed"
+          },
+          "data": {
+            "type": "object",
+            "nullable": true
+          }
+        }
+      },
+      "AccountResponse": {
+        "title": "AccountResponse",
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "description": "Statut de l'opération.\n\n| Statut | Code |\n|--------|------|\n| OK | 0 |\n| INVALID_PARAMETERS | 1 |\n| INVALID_CREDENTIALS | 2 |\n| ACCOUNT_NOT_ACTIVE | 3 |\n| INTERNAL_ERROR | 4 |\n| ERROR_SAVING_ENTITY | 5 |\n| ERROR_DELETING | 6 |\n| NOT_FOUND | 7 |\n| NOT_ALLOWED | 8 |\n| SLOT_NOT_AVAILABLE | 9 |\n| SLOT_OCCUPIED | 10 |\n| ACCOUNTS_LIMIT_REACHED | 11 |",
+            "format": "int32",
+            "example": 0
+          },
+          "descriptions": {
+            "type": "string",
+            "description": "Description of the status",
+            "example": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Account"
+          }
+        }
+      },
+      "AccountType": {
+        "title": "AccountType",
+        "enum": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "description": "Account bussiness profile: 0 - Free User, 1 - Personal, 2 - Small Business, 4 - Medium Business, 5 - Large Business, 6 - Team",
+        "example": 0
+      },
+      "Age": {
+        "title": "Age",
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/Unit"
+          }
+        }
+      },
+      "Amount": {
+        "title": "Amount",
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "description": "Valeur monétaire. Montant en cientièmes d'unité. Par exemple, la valeur de 123,45€ est 12345",
+            "format": "int32",
+            "example": 12345
+          },
+          "currency": {
+            "type": "string",
+            "description": "Code de la devise au format ISO 4217",
+            "example": "EUR"
+          }
+        },
+        "description": "Représente une valeur monétaire"
+      },
+      "AppointmentsResponse": {
+        "title": "AppointmentsResponse",
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "description": "Statut de l'opération.\n\n| Statut | Code |\n|--------|------|\n| OK | 0 |\n| INVALID_PARAMETERS | 1 |\n| INVALID_CREDENTIALS | 2 |\n| ACCOUNT_NOT_ACTIVE | 3 |\n| INTERNAL_ERROR | 4 |\n| ERROR_SAVING_ENTITY | 5 |\n| ERROR_DELETING | 6 |\n| NOT_FOUND | 7 |\n| NOT_ALLOWED | 8 |\n| SLOT_NOT_AVAILABLE | 9 |\n| SLOT_OCCUPIED | 10 |\n| ACCOUNTS_LIMIT_REACHED | 11 |",
+            "format": "int32",
+            "example": 0
+          },
+          "descriptions": {
+            "type": "string",
+            "description": "Description of the status",
+            "example": "OK"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Appointment"
+            },
+            "description": ""
+          }
+        }
+      },
+      "AppointmentsResponse1": {
+        "title": "AppointmentsResponse1",
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "description": "Statut de l'opération.\n\n| Statut | Code |\n|--------|------|\n| OK | 0 |\n| INVALID_PARAMETERS | 1 |\n| INVALID_CREDENTIALS | 2 |\n| ACCOUNT_NOT_ACTIVE | 3 |\n| INTERNAL_ERROR | 4 |\n| ERROR_SAVING_ENTITY | 5 |\n| ERROR_DELETING | 6 |\n| NOT_FOUND | 7 |\n| NOT_ALLOWED | 8 |\n| SLOT_NOT_AVAILABLE | 9 |\n| SLOT_OCCUPIED | 10 |\n| ACCOUNTS_LIMIT_REACHED | 11 |",
+            "format": "int32",
+            "example": 0
+          },
+          "descriptions": {
+            "type": "string",
+            "description": "Description of the status",
+            "example": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Appointment"
+          }
+        }
+      },
+      "AppointmentsResponse2": {
+        "title": "AppointmentsResponse2",
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "description": "Statut de l'opération.\n\n| Statut | Code |\n|--------|------|\n| OK | 0 |\n| INVALID_PARAMETERS | 1 |\n| INVALID_CREDENTIALS | 2 |\n| ACCOUNT_NOT_ACTIVE | 3 |\n| INTERNAL_ERROR | 4 |\n| ERROR_SAVING_ENTITY | 5 |\n| ERROR_DELETING | 6 |\n| NOT_FOUND | 7 |\n| NOT_ALLOWED | 8 |\n| SLOT_NOT_AVAILABLE | 9 |\n| SLOT_OCCUPIED | 10 |\n| ACCOUNTS_LIMIT_REACHED | 11 |",
+            "format": "int32",
+            "example": 0
+          },
+          "descriptions": {
+            "type": "string",
+            "description": "Description of the status",
+            "example": "OK"
+          },
+          "data": {
+            "type": "object",
+            "nullable": true
+          }
+        }
+      },
+      "AppointmentsResponse3": {
+        "title": "AppointmentsResponse3",
+        "required": [
+          "value",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "description": "Statut de l'opération.\n\n| Statut | Code |\n|--------|------|\n| OK | 0 |\n| INVALID_PARAMETERS | 1 |\n| INVALID_CREDENTIALS | 2 |\n| ACCOUNT_NOT_ACTIVE | 3 |\n| INTERNAL_ERROR | 4 |\n| ERROR_SAVING_ENTITY | 5 |\n| ERROR_DELETING | 6 |\n| NOT_FOUND | 7 |\n| NOT_ALLOWED | 8 |\n| SLOT_NOT_AVAILABLE | 9 |\n| SLOT_OCCUPIED | 10 |\n| ACCOUNTS_LIMIT_REACHED | 11 |",
+            "format": "int32",
+            "example": 0
+          },
+          "descriptions": {
+            "type": "string",
+            "description": "Description of the status",
+            "example": "OK"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Appointment"
+            },
+            "description": ""
+          }
+        }
+      },
+      "Attachment": {
+        "title": "Attachment",
+        "required": [
+          "type",
+          "href"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "mimeType": {
+            "$ref": "#/components/schemas/MimeType"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AttachmentType"
+          },
+          "href": {
+            "type": "string"
+          }
+        },
+        "description": "Pièce-jointe d'un élément."
+      },
+      "AttachmentType": {
+        "title": "AttachmentType",
+        "enum": [
+          "document",
+          "image",
+          "ConstatAmiable",
+          "ConvocationAExpertise",
+          "Courrier",
+          "DocumentAdministratif",
+          "DevisDetaille",
+          "EtatDePertes",
+          "Facture",
+          "ProcesVerbalDePolice",
+          "Rapport",
+          "DescriptionDesDommages",
+          "PhotoCroquis",
+          "LettreAcceptationDesDommages",
+          "LettreAcceptationIndemnisationQuittance",
+          "ChiffrageDetaille",
+          "Bail",
+          "PVExpertiseProtocole",
+          "RapportDeRechercheDeFuite",
+          "DelegationDePaiement",
+          "FactureAutrePrestataire",
+          "Autre",
+          "Kbis",
+          "AttestationDePropriete",
+          "NoteHonoraires"
+        ],
+        "type": "string",
+        "description": "Type de document."
+      },
+      "CIAC_CauseRemoval": {
+        "title": "CIAC_CauseRemoval",
+        "required": [
+          "done"
+        ],
+        "type": "object",
+        "properties": {
+          "done": {
+            "type": "boolean"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/Reason"
+          }
+        },
+        "description": "Cause réparée?"
+      },
+      "Company": {
+        "title": "Company",
+        "required": [
+          "id",
+          "acam"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifiant unique de la compagnie"
+          },
+          "name": {
+            "type": "string"
+          },
+          "acam": {
+            "maxLength": 8,
+            "type": "string",
+            "description": "Code ACAM ur 8 caractère"
+          }
+        },
+        "description": "Société d'assurance"
+      },
+      "Coordinates": {
+        "title": "Coordinates",
+        "type": "object",
+        "properties": {
+          "personalPhone": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "professionalPhone": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "mobilePhone": {
+            "maxLength": 20,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 50,
+            "type": "string"
+          }
+        },
+        "description": "Coordonnées d'un individu"
+      },
+      "ExchangeSyncSettings": {
+        "title": "ExchangeSyncSettings",
+        "type": "object",
+        "properties": {
+          "host": {
+            "type": "string"
+          },
+          "account": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "sync_period": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Lang": {
+        "title": "Lang",
+        "enum": [
+          "en",
+          "fr",
+          "es"
+        ],
+        "type": "string",
+        "description": "Language"
+      },
+      "MimeType": {
+        "title": "MimeType",
+        "enum": [
+          "application/pdf",
+          "application/json",
+          "application/xml",
+          "application/zip",
+          "application/vnd.oasis.opendocument.text",
+          "application/vnd.oasis.opendocument.spreadsheet",
+          "application/vnd.oasis.opendocument.presentation",
+          "application/vnd.ms-excel",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/vnd.ms-powerpoint",
+          "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "audio/mpeg",
+          "audio/x-ms-wma",
+          "audio/x-wav",
+          "image/gif",
+          "image/jpeg",
+          "image/png",
+          "image/tiff",
+          "image/svg+xml",
+          "text/csv",
+          "text/plain",
+          "text/xml",
+          "video/mpeg",
+          "video/mp4",
+          "video/quicktime",
+          "video/x-ms-wmv",
+          "video/x-msvideo",
+          "video/web"
+        ],
+        "type": "string"
+      },
+      "num_results": {
+        "title": "num_results",
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "example": 0
+      },
+      "PostalAddress": {
+        "title": "PostalAddress",
+        "required": [
+          "street1",
+          "zipcode",
+          "city"
+        ],
+        "type": "object",
+        "properties": {
+          "street1": {
+            "maxLength": 38,
+            "type": "string",
+            "description": "adresse postale, ligne 1"
+          },
+          "street2": {
+            "maxLength": 38,
+            "type": "string"
+          },
+          "street3": {
+            "maxLength": 38,
+            "type": "string"
+          },
+          "street4": {
+            "maxLength": 38,
+            "type": "string"
+          },
+          "zipcode": {
+            "maxLength": 5,
+            "type": "string",
+            "description": "Code postal"
+          },
+          "city": {
+            "maxLength": 32,
+            "type": "string",
+            "description": "Ville"
+          },
+          "countryCode": {
+            "type": "string",
+            "description": "Code du pays au format ISO 3166-1 (2 caractères).",
+            "example": "FR"
+          },
+          "country": {
+            "maxLength": 28,
+            "type": "string",
+            "description": "Code du pays au format ISO 3166-1 (2 caractères)."
+          },
+          "state": {
+            "maxLength": 28,
+            "type": "string",
+            "description": "Région, département"
+          }
+        },
+        "description": "Structure générique pour représenter l'adresse postale d'un lieu. Les propriétés `street1` à `street4` contiennent sur 4 lignes max les informations, telles que le numéro, le nom de la voie, et toute information qui n'est pas définie par les autres propriétés."
+      },
+      "Quality": {
+        "title": "Quality",
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "description": "Qualité du revêtement. 1:normal, 2:standing, 3:luxe",
+        "example": 1
+      },
+      "RdvRequest": {
+        "title": "RdvRequest",
+        "required": [
+          "id",
+          "date",
+          "schedule",
+          "guarantee"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "description": "Date de déclaration",
+            "format": "date"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/AppointmentSchedule"
+          },
+          "guarantee": {
+            "$ref": "#/components/schemas/WarrantyType"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "sinister": {
+            "$ref": "#/components/schemas/Sinister1"
+          },
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attachment"
+            },
+            "description": ""
+          },
+          "estimation": {
+            "$ref": "#/components/schemas/Estimation"
+          },
+          "contract": {
+            "$ref": "#/components/schemas/Contract"
+          },
+          "reference": {
+            "type": "string",
+            "description": "Référence ClaimsIA de la déclaration"
+          }
+        }
+      },
+      "Reason": {
+        "title": "Reason",
+        "enum": [
+          "EnCoursDeReparation",
+          "NonRepare",
+          "RechercheEnCours",
+          "ReparationPrevue",
+          "Autre"
+        ],
+        "type": "string",
+        "description": "Motif de non suppression de cause (Sinapps)"
+      },
+      "Sinister1": {
+        "title": "Sinister1",
+        "required": [
+          "characteristic",
+          "address",
+          "date"
+        ],
+        "type": "object",
+        "properties": {
+          "characteristic": {
+            "$ref": "#/components/schemas/SinisterCharacteristic"
+          },
+          "circonstancesDeclarees": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "declaredDamages": {
+            "$ref": "#/components/schemas/Damages"
+          },
+          "conservationMeasures": {
+            "type": "boolean",
+            "description": "Mesures conservatoires prises ?"
+          },
+          "causeRemoval": {
+            "$ref": "#/components/schemas/CIAC_CauseRemoval"
+          },
+          "address": {
+            "$ref": "#/components/schemas/PostalAddress"
+          },
+          "time": {
+            "type": "string",
+            "description": "Heure du sinistre"
+          },
+          "date": {
+            "type": "string",
+            "description": "Date du sinistre",
+            "format": "date"
+          }
+        },
+        "description": "Sinistre"
+      },
+      "SinisterCause": {
+        "title": "SinisterCause",
+        "enum": [
+          "Alarrache",
+          "ALExterieur",
+          "AutresLiquides",
+          "AccessoireDomestique",
+          "Accident",
+          "AccidentDeMenage",
+          "AccidentOuVandalisme",
+          "Accidentel",
+          "AchatVenteImmeuble",
+          "ActeCriminel",
+          "ActionDeChasse",
+          "Administration",
+          "Agression",
+          "Animal",
+          "AppareilAutre",
+          "AppareilChauffage",
+          "AppareilElectromenager",
+          "AppareilMedical",
+          "ArretElectriqueOuFuiteProduit",
+          "Attentat",
+          "Avalanche",
+          "AvecEffraction",
+          "Bail",
+          "BienAnimal",
+          "BrisDeteriorationPanne",
+          "BrulureParExcesChaleur",
+          "BrulureParMatiereIncandescente",
+          "CanalisationsExterieures",
+          "CauseInconnue",
+          "ChocMecaniqueDesVagues",
+          "Chute",
+          "ChuteDarbre",
+          "ChuteDeConstruction",
+          "Communale",
+          "Condensation",
+          "ConsoBiens",
+          "ConsoVPrive",
+          "Construction",
+          "Copropriete",
+          "Criminel",
+          "Cyclone",
+          "DeCles",
+          "Decollements",
+          "DefautsDeStabilite",
+          "DefautsEtancheiteAe",
+          "Deterioration",
+          "DeteriorationImmeubleParVehicule",
+          "Divers",
+          "DommageElectrique",
+          "DroitDeLaFamilleSuccessionDonations",
+          "DroitDesAssurances",
+          "DroitDuTravail",
+          "DroitFiscal",
+          "Ecoulement",
+          "EffetDuGel",
+          "Effondrement",
+          "EffondrementDeTerrain",
+          "Electrique",
+          "Emeute",
+          "EnCours",
+          "EruptionVolcanique",
+          "EvenementImmobilier",
+          "ExplosionImplosion",
+          "Externe",
+          "ExtraScolaire",
+          "FaitAccidentelDunTiers",
+          "FaitIntentionnel",
+          "FeuDeForetEcobuage",
+          "Fissurations",
+          "Fonctionnement",
+          "ForceDeLaNature",
+          "Foudre",
+          "FoudreElectriciteAtmospherique",
+          "FoyerOuvertFerme",
+          "FuiteRupture",
+          "FuitesAutres",
+          "FumeeSansIncendie",
+          "Gel",
+          "GlissementMouvementDeTerrain",
+          "Grele",
+          "HorsActionDeChasse",
+          "Incendie",
+          "IncendieExplosion",
+          "IncidentSurtensionSurLeReseau",
+          "Indeterminee",
+          "Infiltration",
+          "Inondation",
+          "InstallationElectrique",
+          "InstallationGaz",
+          "InstrumentsDeMusique",
+          "Interne",
+          "InterventionHumaine",
+          "Mrh",
+          "ObjetVolantAeronef",
+          "Occupant",
+          "OrigineCriminelle",
+          "PanneElectromenager",
+          "Penal",
+          "Perte",
+          "PerteContenuCongelateurCellulesRefrigerantes",
+          "PerteEauInterieure",
+          "PluieOuNeige",
+          "PoidsDeLaNeigeGlace",
+          "Pollution",
+          "PollutionGraduelle",
+          "Pro",
+          "Professionnelle",
+          "Proprietaire",
+          "ProtectionPersonne",
+          "ProtectionSociale",
+          "RazDeMaree",
+          "RefoulementEngorgement",
+          "RenversementDebordement",
+          "Rupture",
+          "SansEffraction",
+          "Scolaire",
+          "Secheresse",
+          "Seisme",
+          "SurLaVoiePublique",
+          "Surtension",
+          "TempeteOuragan",
+          "TerrorismeAttentat",
+          "TravauxImmobiliers",
+          "Urbanisme",
+          "Vandalisme",
+          "VandalismeEmeuteMouvementPopulaire",
+          "VandalismeEmeuteMouvementPopulaireTerrorisme",
+          "VandalismeSurSerrure",
+          "Vehicule",
+          "VehiculeAutre",
+          "VehiculeTerrestreAMoteur",
+          "ViceEtMalfacon",
+          "ViceOuMalfacon",
+          "ViePrivee",
+          "Voisinage",
+          "VolDeMarchandises",
+          "VolDuVehicule",
+          "Autoinflammation",
+          "Comportement",
+          "Defense",
+          "EauExtinctionPompiers",
+          "PollutionAmiante",
+          "PorositeCapillarite",
+          "RecoursNonSubroge",
+          "SansIntroductionLieux",
+          "TentativeEffraction",
+          "VandalismeElementsExterieurs",
+          "VandalismeInterieurLocaux",
+          "SurintensiteSurtensionSoustension",
+          "Echauffement",
+          "DefautInsuffisanceProtection",
+          "DefautEtancheiteProduitEquipementIndustriel",
+          "Depotage",
+          "TravailParPointChaud",
+          "ErreurManipulation",
+          "NonRespectConsignesSecurite",
+          "MelangeProduits",
+          "DefautDeFixation",
+          "DefautDeSurface",
+          "Autre",
+          "DommageMecanique",
+          "CommunImmeubleVoisin",
+          "ChocOuChute",
+          "Mobilier",
+          "DommageDeMouille",
+          "AppareilNavigationAerienne",
+          "ReconstitutionDesMedias",
+          "MurDuSon",
+          "ChuteAeronef"
+        ],
+        "type": "string",
+        "description": "Cause du sinistre, selon le standard Sinapps.\n\nListe des valeurs possibles: \n- [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)\n- [Documentation Sinapps](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Caract%C3%A9ristiqueSinistre)"
+      },
+      "SinisterCauseDetail": {
+        "title": "SinisterCauseDetail",
+        "enum": [
+          "Abattoirs",
+          "AccidentDeSki",
+          "ActionDeLElectriciteAtmospherique",
+          "ActionDeLElectriciteCanalisee",
+          "ActionDirecteDuVent",
+          "AerienChuteDObjetDeLEspace",
+          "AireDeJeux",
+          "Animal",
+          "Appareil",
+          "AppareilAEffetDEau",
+          "AppareilAEffetDEauEtAccessoires",
+          "AppareilDeProductionDEauChaudeSanitaire",
+          "AppareilElectromenagerInstallationAmovible",
+          "AppareilInstallationEauCollective",
+          "AppareilInstallationEauPrivative",
+          "ApresLivraisonReception",
+          "AssistanceMaternelle",
+          "Autre",
+          "AutreAssure",
+          "AvecViolence",
+          "AvecVol",
+          "BarrieresBornes",
+          "CanalisationAlimentationPriveeAccessible",
+          "CanalisationCollectiveAccessible",
+          "CanalisationCollectiveNonAccessible",
+          "CanalisationElectriqueBatiment",
+          "CanalisationEnterree",
+          "CanalisationNonEnterree",
+          "CanalisationPriveeAccessible",
+          "CanalisationPriveeNonAccessible",
+          "CauseInconnue",
+          "ChausseesGlissantes",
+          "CheneauxGouttieres",
+          "ChuteArbreRacines",
+          "ChuteDirecte",
+          "CimetiereCulte",
+          "CollaborateurBenevole",
+          "Containers",
+          "CouleeDeBoue",
+          "Cuisine",
+          "DeRecipients",
+          "DebordementCoursDEau",
+          "DebordementCoursDEauBassins",
+          "Dechetteries",
+          "DefautSignalisation",
+          "DefautEclairage",
+          "DefautUsage",
+          "DegradationsChaussee",
+          "DommagesAuxVehicules",
+          "DommagesLunettes",
+          "DommagesMaterielElectriqueAudio",
+          "DuFaitDUnBienImmobilier",
+          "DuFaitDUnBienMobilier",
+          "DuFaitEnfantAssure",
+          "EauxRuisselement",
+          "EboulementsGlissementTerrains",
+          "EdificesMenacantRuine",
+          "EgoutOrganeCollecteEauCommunale",
+          "EnfantsPlaces",
+          "Escalade",
+          "EtancheiteTerrasse",
+          "Exploitation",
+          "Facade",
+          "FauteErreurNegligence",
+          "Fourriere",
+          "FoyerFerme",
+          "FoyerOuvert",
+          "HygieneEtSantePublique",
+          "IncendieHorsLocaux",
+          "Indetermine",
+          "InstallationGaz",
+          "JointPeripherique",
+          "MenuiserieFermeeOuNon",
+          "MurDeSoutenement",
+          "NuissancesSonores",
+          "ObstaclesChaussee",
+          "Ocean",
+          "PenetrationClandestine",
+          "PistesCyclables",
+          "PlaqueDEgouts",
+          "PlongeonsEtNoyades",
+          "PompeAChaleur",
+          "PortsMouillage",
+          "Privative",
+          "RemonteeDeNappePhreatique",
+          "RuissellementEau",
+          "RuptureCanalisation",
+          "Ruse",
+          "SansVol",
+          "SitesNaturels",
+          "SportivesLoisirs",
+          "SurchageReseauInsuffisanceReseau",
+          "TondeuseDebroussailleuse",
+          "UrbanismeExpropriation",
+          "UrbanismePCUrbanismeCU",
+          "UrbanismePOSUrbanismePLU",
+          "UrbanismePreemption",
+          "UsageFaussesCles",
+          "VoieDeFaitEmpriseIrreguliere",
+          "VolEtVandalisme",
+          "ZAC",
+          "AccidentDeFumeur",
+          "Administrative",
+          "AideBenevole",
+          "AvantLivraisonReception",
+          "BabySitting",
+          "Bougie",
+          "CanalisationCollective",
+          "CanalisationEvacuationPriveeAccessible",
+          "CanalisationEvacuationPriveeNonAccessible",
+          "CarrelageFaience",
+          "Chaudiere",
+          "ConduitDeCheminee",
+          "ConduitDeChemineeVentilation",
+          "Couverture",
+          "DAppoint",
+          "Distributeur",
+          "EmployeDeMaison",
+          "FeuDeFriteuse",
+          "Immeuble",
+          "InstallationChauffageCollectif",
+          "InstallationChauffageIndividuel",
+          "InstallationPhotovoltaique",
+          "MenuiserieOuverte",
+          "MurEnterre",
+          "ObjetProjeteChuteArbre",
+          "OuvertureConduitAbsenceToitureToitureBachee",
+          "PanneVMC",
+          "PollutionAmiante",
+          "ProductionEauChaude",
+          "RadiateurElectrique",
+          "TableauElectrique",
+          "Terrestre",
+          "VentilationVMC",
+          "ViceConstruction",
+          "Reservoirs",
+          "Citernes",
+          "ConduitesCanalisations",
+          "Turbines",
+          "LocalStockage",
+          "DispositifsThermiques",
+          "Process",
+          "ViceCache",
+          "DefautProduit",
+          "CommunicationDIncendie",
+          "ErreurPrepose",
+          "DefautControle",
+          "Negligence",
+          "NonRespectCahierDesCharges",
+          "DefautConseils",
+          "FoudreElectriciteAtmospherique",
+          "SurtensionSurReseau",
+          "RuptureNeutre",
+          "RuptureTransmission",
+          "UsureParFrottement",
+          "Corrosion",
+          "CanalisationAlimentationPriveeNonAccessible",
+          "CanalisationPrivative",
+          "Explosion",
+          "DefautConception",
+          "AccueilAuDomicile"
+        ],
+        "type": "string",
+        "description": "Détail sur la cause du sinistre, selon la codification Sinapps.\n\nListe des valeurs possibles:\n- [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)\n- [Documentation Sinapps](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Caract%C3%A9ristiqueSinistre)"
+      },
+      "SinisterCharacteristic": {
+        "title": "SinisterCharacteristic",
+        "type": "object",
+        "properties": {
+          "nature": {
+            "$ref": "#/components/schemas/Sinister%27sNature"
+          },
+          "cause": {
+            "$ref": "#/components/schemas/SinisterCause"
+          },
+          "detail": {
+            "$ref": "#/components/schemas/SinisterCauseDetail"
+          }
+        },
+        "description": "Nature-Cause-Détail"
+      },
+      "Sinister'sNature": {
+        "title": "Sinister'sNature",
+        "enum": [
+          "AutresDommages",
+          "Assistance",
+          "BrisDeGlace",
+          "BrisDeMachine",
+          "CatastropheNaturelle",
+          "CatastropheTechnologique",
+          "Choc",
+          "DefenseRecours",
+          "DegatsDesEaux",
+          "Divers",
+          "DMMT",
+          "DommagesAuxBiens",
+          "DommagesElectriques",
+          "DommagesMenagers",
+          "DommageOuvrage",
+          "EvtNaturel",
+          "Explosion",
+          "FraisSupplementaireExploitation",
+          "FoudreSansIncendie",
+          "Incendie",
+          "Malfacon",
+          "MTR",
+          "PerteExploitation",
+          "PerteDeLiquide",
+          "PerteDeValeur",
+          "ProtectionJuridique",
+          "ResponsabiliteCivile",
+          "RisqueInformatique",
+          "TempeteNeigeGrele",
+          "ValeurFondExploitation",
+          "Vol"
+        ],
+        "type": "string",
+        "description": "Nature du sinistre, selon codification Darva.\n\nListe des valeurs possibles: \n[Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)"
+      },
+      "sort_by": {
+        "title": "sort_by",
+        "enum": [
+          "start_date",
+          "created"
+        ],
+        "type": "string"
+      },
+      "sort_order": {
+        "title": "sort_order",
+        "enum": [
+          "asc",
+          "desc"
+        ],
+        "type": "string"
+      },
+      "State": {
+        "title": "State",
+        "enum": [
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "description": "Niveau d'usure. 1:neuf, 2:état d'usage, 3:ancien",
+        "example": 1
+      },
+      "Type": {
+        "title": "Type",
+        "enum": [
+          "HoraireFixe",
+          "HorairePlage"
+        ],
+        "type": "string",
+        "description": "Si \"HoraireFixe\", le rendez commence à \"startTime\" et fini à \"endTime\"\n\nSi \"HorairePlage\", le rendez-vous de \"duration\" minutes aura lieu n'importe quand entre \"startTime\" et \"endTime\""
+      },
+      "Unit": {
+        "title": "Unit",
+        "enum": [
+          "y",
+          "m",
+          "d"
+        ],
+        "type": "string"
+      },
+      "WarrantyType": {
+        "title": "WarrantyType",
+        "enum": [
+          "Arbres",
+          "ArbresPot",
+          "Attentat",
+          "Autre",
+          "BienEnValeurDeclaree",
+          "BiensDeLoisirs",
+          "BiensMultimedias",
+          "BiensProfessionnelsEnTousLieux",
+          "BiensScolaires",
+          "Bijoux",
+          "BrisDeGlace",
+          "BrisDeGlaceMobilier",
+          "Canalisation",
+          "CanalisationsExterieures",
+          "CatastropheNaturelle",
+          "ChocVtm",
+          "DegatsDesEaux",
+          "Divers",
+          "DiversImmobilier",
+          "DommageOuvrage",
+          "DommagesAuxBiens",
+          "DommagesElectriques",
+          "DommagesMenagers",
+          "Effondrement",
+          "EquipementDeLoisir",
+          "EvenementNaturel",
+          "Explosion",
+          "FoudreSansIncendie",
+          "Fumee",
+          "Gel",
+          "HorsGaranties",
+          "Incendie",
+          "IncidentsDomestiques",
+          "InstallationExterieure",
+          "Jardin",
+          "LocationEnMeuble",
+          "Malfacon",
+          "NouvelleTechnologie",
+          "ObjetPrecieux",
+          "PanneElectromenager",
+          "Perte",
+          "PerteCongelateur",
+          "PerteDeLiquide",
+          "PerteEauInterieur",
+          "Piscine",
+          "RisquesAnnexes",
+          "TogOuTng",
+          "TousRisques",
+          "ValeurANeuf",
+          "Vandalisme",
+          "Vol",
+          "VolCave",
+          "VolLieuPublic"
+        ],
+        "type": "string",
+        "description": "Type de garantie (valeurs Sinapps). cf. doc [Type-de-garantie.md](../docs/sinapps/Type-de-garantie.md)"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Account",
+      "description": ""
+    },
+    {
+      "name": "Appointment",
+      "description": "Rendez-vous"
+    },
+    {
+      "name": "Availability",
+      "description": "Créneau horaire disponible"
+    },
+    {
+      "name": "Client",
+      "description": ""
+    },
+    {
+      "name": "Custom Field",
+      "description": ""
+    },
+    {
+      "name": "Location",
+      "description": "Emplacement/adresse d'un site"
+    },
+    {
+      "name": "Time Zone",
+      "description": ""
+    }
+  ]
+}
