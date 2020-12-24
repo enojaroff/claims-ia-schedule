@@ -3,7 +3,6 @@ type: object
 description: Représente une valeur monétaire
 x-tags:
   - ClaimsIA
-  - Common
 x-examples:
   example:
     value: -12345

@@ -2320,38 +2320,34 @@ definitions:
         $ref: '#/definitions/LinksPrestationExpert'
   RessourceMission:
     type: object
-    required:
-      - href
-      - links
-      - properties
     properties:
       href:
         type: string
       properties:
+        type: object
         required:
+          - dossier
+          - mission
+          - id
+          - version
           - dateDeCreation
           - dateDeDerniereModification
-          - dossier
-          - id
-          - mission
-          - version
-        type: object
         properties:
           dossier:
             $ref: '#/definitions/DossierRepresentation'
           mission:
+            type: object
             required:
-              - assureurId
-              - commentaires
-              - dateDeMissionnement
-              - dossierId
-              - missionHasChiffrage
-              - missionHasChiffrageAssure
-              - numero
               - prestataireId
+              - assureurId
+              - dossierId
+              - dateDeMissionnement
+              - numero
+              - commentaires
               - statut
               - typeMission
-            type: object
+              - missionHasChiffrage
+              - missionHasChiffrageAssure
             properties:
               prestataireId:
                 $ref: '#/definitions/BSONObjectID'
@@ -2397,6 +2393,10 @@ definitions:
             format: date-time
       links:
         $ref: '#/definitions/LinksMissionExpert'
+    required:
+      - href
+      - properties
+      - links
   RessourceDifficulte:
     type: object
     required:
@@ -2459,7 +2459,6 @@ definitions:
             $ref: '#/definitions/NonEmptyString'
       links:
         $ref: '#/definitions/LinksDifficulte'
-    example: "        {\n            \"href\": \"/core/api/covea-expert/difficulte/5b1a7ebe2700003e04a7f7a6\",\n            \"properties\": {\n                \"id\": \"5b1a7ebe2700003e04a7f7a6\",\n                \"version\": 1,\n                \"dateDeCreation\": \"2018-06-08T15:03:58+0200\",\n                \"dateDeDerniereModification\": \"2018-06-08T15:03:58+0200\",\n                \"missionId\": \"5b1a73a32700008302a7f666\",\n                \"bloquante\": false,\n                \"traitement\": {\n                    \"levee\": false,\n                    \"date\": \"2018-06-08T15:03:58.729\"\n                },\n                \"typeDifficulte\": {\n                    \"name\": \"Delai\",\n                    \"label\": \"Délai\"\n                },\n                \"motif\": {\n                    \"name\": \"ClientIndisponible\",\n                    \"label\": \"Client indisponible\"\n                },\n                \"etape\": {\n                    \"name\": \"Expertise\",\n                    \"label\": \"Expertise\"\n                },\n                \"datePrevisionnelleReprise\": \"2018-06-14\",\n                \"complement\": \"Il est en tournoi\"\n            },\n            \"links\": [\n                {\n                    \"rel\": \"commands\",\n                    \"href\": \"/core/api/covea-expert/difficulte/5b1a7ebe2700003e04a7f7a6/commands?referer=commands\"\n                },\n                {\n                    \"rel\": \"events\",\n                    \"href\": \"/core/api/covea-expert/difficulte/5b1a7ebe2700003e04a7f7a6/events?referer=events\"\n                },\n                {\n                    \"rel\": \"linked-events\",\n                    \"href\": \"/core/api/covea-expert/difficulte/5b1a7ebe2700003e04a7f7a6/linkedEvents?referer=linked-events\"\n                },\n                {\n                    \"rel\": \"eventsNotCreatedByMe\",\n                    \"href\": \"/core/api/covea-expert/difficulte/5b1a7ebe2700003e04a7f7a6/othersEvents?referer=eventsNotCreatedByMe\"\n                }\n            ]\n        }"
   RessourceAbstractMissions:
     type: object
     required:
@@ -2541,49 +2540,6 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Link'
-    example: |-
-      {
-                  "href": "/core/api/covea-expert/missions/5b1fae412700007fa3a81716",
-                  "properties": {
-                      "id": "5b1fae412700007fa3a81716",
-                      "assureurId": "5b1a6c451300005b00470ab9",
-                      "lieu": "PARIS, 75000",
-                      "departement": "75",
-                      "difficulteBloquante": false,
-                      "typeMission": {
-                          "name": "ExpertiseCovea",
-                          "label": "Expertise"
-                      },
-                      "pourcentageAvancement": 75,
-                      "prestataireId": "5b1a6ddc100000c800d6f359",
-                      "numero": "001",
-                      "dateDeMissionnement": "2018-04-09T14:40:48+0200",
-                      "difficulteNonBloquante": false,
-                      "etapeMission": {
-                          "name": "PrestataireMissionne",
-                          "label": "Prestataire missionné"
-                      },
-                      "cloture": false,
-                      "nature": {
-                          "name": "BrisDeGlace",
-                          "label": "Bris de glace"
-                      },
-                      "finDeMissionDemandee": false,
-                      "referenceSinistre": "1206JMO003",
-                      "cause": {
-                          "name": "Accidentel",
-                          "label": "Accidentel"
-                      },
-                      "assure": "M Stéphane Dupond",
-                      "etatPrestation": {
-                          "name": "CompteRenduDepose",
-                          "label": "Compte rendu déposé"
-                      },
-                      "mandant": "covea-expert",
-                      "dateCreation": "2018-06-12T13:28:01+0200"
-                  },
-                  "links": []
-              }
   RessourceUser:
     type: object
     required:
@@ -2641,79 +2597,74 @@ definitions:
             format: date-time
       links:
         $ref: '#/definitions/LinksUser'
-    example: |-
-      {
-          "href": "/core/api/partenaire/users/5b1a6ddc21000047002db11c",
-          "properties": {
-              "partenaireId": "5b1a6ddc100000c800d6f359",
-              "personne": {
-                  "nom": "SINAPPS",
-                  "prenom": "",
-                  "adresse": {},
-                  "coordonnees": {
-                      "telPersonnel": "               ",
-                      "email": "jonathan.moreau@darva.com"
-                  }
-              },
-              "login": "99999sinapps",
-              "roles": [
-                  {
-                      "name": "Qualifieur",
-                      "label": "Prestataire Qualifieur"
-                  },
-                  {
-                      "name": "Chiffreur",
-                      "label": "Prestataire Chiffreur"
-                  },
-                  {
-                      "name": "Planificateur",
-                      "label": "Prestataire Planificateur"
-                  },
-                  {
-                      "name": "Comptable",
-                      "label": "Prestataire Comptable"
-                  }
-              ],
-              "id": "5b1a6ddc21000047002db11c",
-              "version": 1,
-              "dateDeCreation": "2018-06-08T13:51:56+0200",
-              "dateDeDerniereModification": "2018-06-08T13:51:56+0200"
-          },
-          "links": [
-              {
-                  "rel": "commands",
-                  "href": "/core/api/partenaire/users/5b1a6ddc21000047002db11c/commands?referer=commands"
-              },
-              {
-                  "rel": "events",
-                  "href": "/core/api/partenaire/users/5b1a6ddc21000047002db11c/events?referer=events"
-              },
-              {
-                  "rel": "linked-events",
-                  "href": "/core/api/partenaire/users/5b1a6ddc21000047002db11c/linkedEvents?referer=linked-events"
-              },
-              {
-                  "rel": "eventsNotCreatedByMe",
-                  "href": "/core/api/partenaire/users/5b1a6ddc21000047002db11c/othersEvents?referer=eventsNotCreatedByMe"
-              },
-              {
-                  "rel": "partenaire",
-                  "href": "/core/api/partenaire/partenaires/5b1a6ddc100000c800d6f359?referer=partenaire"
-              },
-              {
-                  "rel": "abstractMissions",
-                  "href": "/core/api/common/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=abstractMissions"
-              },
-              {
-                  "rel": "missions",
-                  "href": "/core/api/covea/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=missions"
-              },
-              {
-                  "rel": "marcheRenMissions",
-                  "href": "/core/api/marche-ren/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=marcheRenMissions"
-              }
-          ]
-      }
+    example:
+      href: /core/api/partenaire/users/5b1a6ddc21000047002db11c
+      properties:
+        partenaireId: 5b1a6ddc100000c800d6f359
+        personne:
+          nom: SINAPPS
+          prenom: ''
+          adresse: {}
+          coordonnees:
+            telPersonnel: '               '
+            email: jonathan.moreau@darva.com
+        login: 99999sinapps
+        roles:
+          - name: Qualifieur
+            label: Prestataire Qualifieur
+          - name: Chiffreur
+            label: Prestataire Chiffreur
+          - name: Planificateur
+            label: Prestataire Planificateur
+          - name: Comptable
+            label: Prestataire Comptable
+        id: 5b1a6ddc21000047002db11c
+        version: 1
+        dateDeCreation: '2018-06-08T13:51:56+0200'
+        dateDeDerniereModification: '2018-06-08T13:51:56+0200'
+      links:
+        - rel: commands
+          href: /core/api/partenaire/users/5b1a6ddc21000047002db11c/commands?referer=commands
+        - rel: events
+          href: /core/api/partenaire/users/5b1a6ddc21000047002db11c/events?referer=events
+        - rel: linked-events
+          href: /core/api/partenaire/users/5b1a6ddc21000047002db11c/linkedEvents?referer=linked-events
+        - rel: eventsNotCreatedByMe
+          href: /core/api/partenaire/users/5b1a6ddc21000047002db11c/othersEvents?referer=eventsNotCreatedByMe
+        - rel: partenaire
+          href: /core/api/partenaire/partenaires/5b1a6ddc100000c800d6f359?referer=partenaire
+        - rel: abstractMissions
+          href: '/core/api/common/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=abstractMissions'
+        - rel: missions
+          href: '/core/api/covea/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=missions'
+        - rel: marcheRenMissions
+          href: '/core/api/marche-ren/missions?prestataireId=5b1a6ddc100000c800d6f359&etatMission=MissionRecue&etatMission=RendezVousChiffragePris&etatMission=ChiffrageEnAttenteDeValidation&etatMission=ChiffrageValide&etatMission=TravauxPlanifies&etatMission=FactureTravauxDeposee&etatMission=FactureGestionDeposee&referer=marcheRenMissions'
+    x-examples:
+      example-1:
+        href: /core/api/partenaire/users/5b1a6ddc21000047002db11c
+        properties:
+          partenaireId: 5b1a6ddc100000c800d6f359
+          personne:
+            nom: SINAPPS
+            prenom: ''
+            adresse: {}
+            coordonnees:
+              telPersonnel: '               '
+              email: jonathan.moreau@darva.com
+          login: 99999sinapps
+          roles:
+            - name: Qualifieur
+              label: Prestataire Qualifieur
+            - name: Chiffreur
+              label: Prestataire Chiffreur
+            - name: Planificateur
+              label: Prestataire Planificateur
+            - name: Comptable
+              label: Prestataire Comptable
+          id: 5b1a6ddc21000047002db11c
+          version: 1
+          dateDeCreation: '2018-06-08T13:51:56+0200'
+          dateDeDerniereModification: '2018-06-08T13:51:56+0200'
   RessourceEvenements:
     type: object
     required:
@@ -2772,7 +2723,25 @@ definitions:
                       description: "A la génération de l'event PiecesJointesTransferees"
             links:
               $ref: '#/definitions/LinksListeRessource'
-    example: "        {\r\n            \"href\": \"/core/api/events/2\",\r\n            \"properties\": {\r\n                \"id\": 2\r\n            },\r\n            \"items\": [\r\n                {\r\n                    \"href\": \"/core/api/events/2/CB78ED72B7DA73D4A9FADD3E9B791E01BBEE801D\",\r\n                    \"properties\": {\r\n                        \"ontologyId\": \"common\",\r\n                        \"resourceType\": \"commands\",\r\n                        \"name\": \"CommandeAcceptee\",\r\n                        \"userId\": \"5b1a6e5b21000017012db13a\"\r\n                    },\r\n                    \"links\": [\r\n                        {\r\n                            \"rel\": \"user\",\r\n                            \"href\": \"/core/api/partenaire/users/5b1a6e5b21000017012db13a?referer=user\"\r\n                        },\r\n                        {\r\n                            \"rel\": \"resource\",\r\n                            \"href\": \"/core/api/covea-expert/partenaires/5b1a6c451300005c00470ac1/commands/missionnerCoveaExpert/5b1a6e90120000b3015390f9?referer=resource\"\r\n                        },\r\n                        {\r\n                            \"rel\": \"commandEvent\",\r\n                            \"href\": \"/core/api/events/2?referer=commandEvent\"\r\n                        }\r\n                    ]\r\n                }\r\n              ]\r\n        }"
+    x-examples:
+      example-1:
+        href: /core/api/events/2
+        properties:
+          id: 2
+        items:
+          - href: /core/api/events/2/CB78ED72B7DA73D4A9FADD3E9B791E01BBEE801D
+            properties:
+              ontologyId: common
+              resourceType: commands
+              name: CommandeAcceptee
+              userId: 5b1a6e5b21000017012db13a
+            links:
+              - rel: user
+                href: /core/api/partenaire/users/5b1a6e5b21000017012db13a?referer=user
+              - rel: resource
+                href: /core/api/covea-expert/partenaires/5b1a6c451300005c00470ac1/commands/missionnerCoveaExpert/5b1a6e90120000b3015390f9?referer=resource
+              - rel: commandEvent
+                href: /core/api/events/2?referer=commandEvent
   EvenementsPartenaire:
     type: object
     required:
@@ -2796,62 +2765,73 @@ definitions:
           $ref: '#/definitions/LinkEventPartenaire'
       filters:
         $ref: '#/definitions/FiltreEvenement'
-    example: |-
-      {
-          "href": "/core/api/partenaire/partenaires/5b1a6ddc100000c800d6f359/linkedEvents?since=0&maxEvents=15",
-          "properties": {},
-          "items": [
-              {
-                  "href": "/core/api/events/2",
-                  "properties": {
-                      "id": 2
-                  },
-                  "items": [
-                      {
-                          "href": "/core/api/events/2/CB78ED72B7DA73D4A9FADD3E9B791E01BBEE801D",
-                          "properties": {
-                              "ontologyId": "common",
-                              "resourceType": "commands",
-                              "name": "CommandeAcceptee",
-                              "userId": "5b1a6e5b21000017012db13a"
-                          },
-                          "links": [
-                              {
-                                  "rel": "user",
-                                  "href": "/core/api/partenaire/users/5b1a6e5b21000017012db13a?referer=user"
-                              },
-                              {
-                                  "rel": "resource",
-                                  "href": "/core/api/covea-expert/partenaires/5b1a6c451300005c00470ac1/commands/missionnerCoveaExpert/5b1a6e90120000b3015390f9?referer=resource"
-                              },
-                              {
-                                  "rel": "commandEvent",
-                                  "href": "/core/api/events/2?referer=commandEvent"
-                              }
-                          ]
-                      }
-                    ]
-              }
-            ],
-          "filters": {
-              "/since": {
-                  "type": "long",
-                  "optional": true
-              },
-              "/maxEvents": {
-                  "type": "long",
-                  "optional": true
-              },
-              "/eventNames": {
-                  "type": {
-                      "array": {
-                          "type": "string"
-                      }
-                  },
-                  "optional": true
-              }
-          }
-      }
+    example:
+      href: '/core/api/partenaire/partenaires/5b1a6ddc100000c800d6f359/linkedEvents?since=0&maxEvents=15'
+      properties: {}
+      items:
+        - href: /core/api/events/2
+          properties:
+            id: 2
+          items:
+            - href: /core/api/events/2/CB78ED72B7DA73D4A9FADD3E9B791E01BBEE801D
+              properties:
+                ontologyId: common
+                resourceType: commands
+                name: CommandeAcceptee
+                userId: 5b1a6e5b21000017012db13a
+              links:
+                - rel: user
+                  href: /core/api/partenaire/users/5b1a6e5b21000017012db13a?referer=user
+                - rel: resource
+                  href: /core/api/covea-expert/partenaires/5b1a6c451300005c00470ac1/commands/missionnerCoveaExpert/5b1a6e90120000b3015390f9?referer=resource
+                - rel: commandEvent
+                  href: /core/api/events/2?referer=commandEvent
+      filters:
+        /since:
+          type: long
+          optional: true
+        /maxEvents:
+          type: long
+          optional: true
+        /eventNames:
+          type:
+            array:
+              type: string
+          optional: true
+    x-examples:
+      example-1:
+        href: '/core/api/partenaire/partenaires/5b1a6ddc100000c800d6f359/linkedEvents?since=0&maxEvents=15'
+        properties: {}
+        items:
+          - href: /core/api/events/2
+            properties:
+              id: 2
+            items:
+              - href: /core/api/events/2/CB78ED72B7DA73D4A9FADD3E9B791E01BBEE801D
+                properties:
+                  ontologyId: common
+                  resourceType: commands
+                  name: CommandeAcceptee
+                  userId: 5b1a6e5b21000017012db13a
+                links:
+                  - rel: user
+                    href: /core/api/partenaire/users/5b1a6e5b21000017012db13a?referer=user
+                  - rel: resource
+                    href: /core/api/covea-expert/partenaires/5b1a6c451300005c00470ac1/commands/missionnerCoveaExpert/5b1a6e90120000b3015390f9?referer=resource
+                  - rel: commandEvent
+                    href: /core/api/events/2?referer=commandEvent
+        filters:
+          /since:
+            type: long
+            optional: true
+          /maxEvents:
+            type: long
+            optional: true
+          /eventNames:
+            type:
+              array:
+                type: string
+            optional: true
   RessourceChiffrage:
     type: object
     required:
@@ -3015,163 +2995,121 @@ definitions:
               $ref: '#/definitions/BienVoleRepresentation'
       links:
         $ref: '#/definitions/LinksChiffrageExpert'
-    example: |-
-      {
-          "href": "/core/api/covea-expert/chiffrages/5b43262a13000090643e7eba",
-          "properties": {
-              "missionId": "5b3f8714130000a8013e7163",
-              "acteurId": "5b3f8714130000a8013e7162",
-              "beneficiaireId": "5b3f8714130000a8013e7162",
-              "dommages": [
-                  {
-                      "beneficiaireId": "5b3f8714130000a8013e7162",
-                      "dommage": {
-                          "natureDommages": {
-                              "name": "Embellissement",
-                              "label": "Embellissement"
-                          },
-                          "plafond": 0,
-                          "montantHT": 4700,
-                          "montantTVA": 258.5,
-                          "montantTTC": 4958.5,
-                          "montantVetuste": 0,
-                          "montantVetusteRecuperable": 0,
-                          "montantImmediat": 0,
-                          "montantDiffere": 0
-                      },
-                      "detailDommage": {
-                          "beneficiaireId": "5b3f8714130000a8013e7162",
-                          "detailNature": {
-                              "name": "PeinturePapiersPeints",
-                              "label": "Peinture / P. peints"
-                          },
-                          "montantHT": 4700,
-                          "tauxTVA": {
-                              "tpe": {
-                                  "name": "Normal",
-                                  "label": "Taux normal"
-                              },
-                              "application": {
-                                  "name": "FranceMetropolitaineEtCorse",
-                                  "label": "France métropolitaine et Corse"
-                              },
-                              "taux": 5.5
-                          },
-                          "montantTTC": 4958.5,
-                          "tauxVetuste": 30,
-                          "tauxVetusteMax": 50,
-                          "montantImmediat": 0,
-                          "montantDiffere": 0,
-                          "plafond": 20000
-                      }
-                  },
-                  {
-                      "beneficiaireId": "5b3f8714130000a8013e7162",
-                      "dommage": {
-                          "natureDommages": {
-                              "name": "Immobilier",
-                              "label": "Immobilier"
-                          },
-                          "plafond": 3300,
-                          "montantHT": 333,
-                          "montantTVA": 2200,
-                          "montantTTC": 2533,
-                          "montantVetuste": 20,
-                          "montantVetusteRecuperable": 40,
-                          "montantImmediat": 313,
-                          "montantDiffere": 20
-                      }
-                  },
-                  {
-                      "beneficiaireId": "5b3f8714130000a8013e7162",
-                      "dommage": {
-                          "natureDommages": {
-                              "name": "Mobilier",
-                              "label": "Mobilier"
-                          },
-                          "plafond": 4000,
-                          "montantHT": 0,
-                          "montantTVA": 0,
-                          "montantTTC": 0,
-                          "montantVetuste": 0,
-                          "montantVetusteRecuperable": 0,
-                          "montantImmediat": 0,
-                          "montantDiffere": 0
-                      }
-                  },
-                  {
-                      "beneficiaireId": "5b3f8714130000a8013e7162",
-                      "dommage": {
-                          "natureDommages": {
-                              "name": "ObjetDeValeur",
-                              "label": "Objet de valeur"
-                          },
-                          "plafond": 0,
-                          "montantHT": 0,
-                          "montantTVA": 0,
-                          "montantTTC": 0,
-                          "montantVetuste": 0,
-                          "montantVetusteRecuperable": 0,
-                          "montantImmediat": 0,
-                          "montantDiffere": 0
-                      }
-                  }
-              ],
-              "indemnite": {
-                  "positionIndemnite": {
-                      "name": "AttentePositionClient",
-                      "label": "En attente position client"
-                  },
-                  "modeIndemnite": {
-                      "name": "ReparationEnNature",
-                      "label": "Réparation en nature"
-                  },
-                  "dateIndemniteSoumise": "2018-07-09T11:08:58.205",
-                  "dateIndemnite": "2018-07-09T11:08:58.205",
-                  "questions": [],
-                  "tvaRecuperable": false,
-                  "garantieIndemnites": [
-                      {
-                          "garantieId": "5b3f8714130000a8013e7160",
-                          "franchise": 110,
-                          "penaliteAppliquee": 200,
-                          "montantIndemniteImmediat": 3243,
-                          "montantIndemniteDiffere": 1430,
-                          "indemnisation": 3603
-                      }
-                  ],
-                  "applicationPenalite": "oui",
-                  "montantIndemnite": 3290
-              },
-              "archived": false,
-              "id": "5b43262a13000090643e7eba",
-              "version": 3,
-              "dateDeCreation": "2018-07-09T11:08:58+0200",
-              "dateDeDerniereModification": "2018-07-10T09:33:11+0200"
-          },
-          "links": [
-              {
-                  "rel": "commands",
-                  "href": "/core/api/covea-expert/chiffrages/5b43262a13000090643e7eba/commands?referer=commands"
-              },
-              {
-                  "rel": "events",
-                  "href": "/core/api/covea-expert/chiffrages/5b43262a13000090643e7eba/events?referer=events"
-              },
-              {
-                  "rel": "linked-events",
-                  "href": "/core/api/covea-expert/chiffrages/5b43262a13000090643e7eba/linkedEvents?referer=linked-events"
-              },
-              {
-                  "rel": "eventsNotCreatedByMe",
-                  "href": "/core/api/covea-expert/chiffrages/5b43262a13000090643e7eba/othersEvents?referer=eventsNotCreatedByMe"
-              },
-              {
-                  "rel": "mission",
-                  "href": "/core/api/covea-expert/missions/5b3f8714130000a8013e7163?referer=mission"
-              }
-          ]
-      }
+    example:
+      href: /core/api/covea-expert/chiffrages/5b43262a13000090643e7eba
+      properties:
+        missionId: 5b3f8714130000a8013e7163
+        acteurId: 5b3f8714130000a8013e7162
+        beneficiaireId: 5b3f8714130000a8013e7162
+        dommages:
+          - beneficiaireId: 5b3f8714130000a8013e7162
+            dommage:
+              natureDommages:
+                name: Embellissement
+                label: Embellissement
+              plafond: 0
+              montantHT: 4700
+              montantTVA: 258.5
+              montantTTC: 4958.5
+              montantVetuste: 0
+              montantVetusteRecuperable: 0
+              montantImmediat: 0
+              montantDiffere: 0
+            detailDommage:
+              beneficiaireId: 5b3f8714130000a8013e7162
+              detailNature:
+                name: PeinturePapiersPeints
+                label: Peinture / P. peints
+              montantHT: 4700
+              tauxTVA:
+                tpe:
+                  name: Normal
+                  label: Taux normal
+                application:
+                  name: FranceMetropolitaineEtCorse
+                  label: France métropolitaine et Corse
+                taux: 5.5
+              montantTTC: 4958.5
+              tauxVetuste: 30
+              tauxVetusteMax: 50
+              montantImmediat: 0
+              montantDiffere: 0
+              plafond: 20000
+          - beneficiaireId: 5b3f8714130000a8013e7162
+            dommage:
+              natureDommages:
+                name: Immobilier
+                label: Immobilier
+              plafond: 3300
+              montantHT: 333
+              montantTVA: 2200
+              montantTTC: 2533
+              montantVetuste: 20
+              montantVetusteRecuperable: 40
+              montantImmediat: 313
+              montantDiffere: 20
+          - beneficiaireId: 5b3f8714130000a8013e7162
+            dommage:
+              natureDommages:
+                name: Mobilier
+                label: Mobilier
+              plafond: 4000
+              montantHT: 0
+              montantTVA: 0
+              montantTTC: 0
+              montantVetuste: 0
+              montantVetusteRecuperable: 0
+              montantImmediat: 0
+              montantDiffere: 0
+          - beneficiaireId: 5b3f8714130000a8013e7162
+            dommage:
+              natureDommages:
+                name: ObjetDeValeur
+                label: Objet de valeur
+              plafond: 0
+              montantHT: 0
+              montantTVA: 0
+              montantTTC: 0
+              montantVetuste: 0
+              montantVetusteRecuperable: 0
+              montantImmediat: 0
+              montantDiffere: 0
+        indemnite:
+          positionIndemnite:
+            name: AttentePositionClient
+            label: En attente position client
+          modeIndemnite:
+            name: ReparationEnNature
+            label: Réparation en nature
+          dateIndemniteSoumise: '2018-07-09T11:08:58.205'
+          dateIndemnite: '2018-07-09T11:08:58.205'
+          questions: []
+          tvaRecuperable: false
+          garantieIndemnites:
+            - garantieId: 5b3f8714130000a8013e7160
+              franchise: 110
+              penaliteAppliquee: 200
+              montantIndemniteImmediat: 3243
+              montantIndemniteDiffere: 1430
+              indemnisation: 3603
+          applicationPenalite: oui
+          montantIndemnite: 3290
+        archived: false
+        id: 5b43262a13000090643e7eba
+        version: 3
+        dateDeCreation: '2018-07-09T11:08:58+0200'
+        dateDeDerniereModification: '2018-07-10T09:33:11+0200'
+      links:
+        - rel: commands
+          href: /core/api/covea-expert/chiffrages/5b43262a13000090643e7eba/commands?referer=commands
+        - rel: events
+          href: /core/api/covea-expert/chiffrages/5b43262a13000090643e7eba/events?referer=events
+        - rel: linked-events
+          href: /core/api/covea-expert/chiffrages/5b43262a13000090643e7eba/linkedEvents?referer=linked-events
+        - rel: eventsNotCreatedByMe
+          href: /core/api/covea-expert/chiffrages/5b43262a13000090643e7eba/othersEvents?referer=eventsNotCreatedByMe
+        - rel: mission
+          href: /core/api/covea-expert/missions/5b3f8714130000a8013e7163?referer=mission
   RessourcePieceJointe:
     type: object
     required:
@@ -8290,11 +8228,6 @@ definitions:
         $ref: '#/definitions/Franchise'
   GarantieRepresentation:
     type: object
-    required:
-      - id
-      - mentions
-      - plafonds
-      - typeGarantie
     properties:
       id:
         $ref: '#/definitions/BSONObjectID'
@@ -8314,6 +8247,11 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Mention'
+    required:
+      - id
+      - typeGarantie
+      - plafonds
+      - mentions
   Horaire:
     type: object
     required:

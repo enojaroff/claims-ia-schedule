@@ -1,0 +1,1491 @@
+openapi: 3.0.0
+info:
+  version: 0.9.1
+  title: Claims IA Appointment API
+  description: |+
+    L'API RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, elle doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.
+
+    La prise de rendez-vous s'effectue en 2 temps:
+
+    - **Etape 1** : Claims IA fait de demande de créneaux disponibles pour le rendez-vous.
+      - La demande est accompagnée d'informations sur la déclaration de sinistre
+      - Le partenaire fournit en retour une liste de créneaux
+    - **Etape 2** :Claims IA réserve un créneau, qui devient affecté au rendez-vous
+      - Le partenaire fournit en retour les informations sur le rendez-vous
+
+    L'API intègre également d'autres méthodes pour
+    - Modifier certaines informations du rendez-vous
+    - Annuler et replanifier un rendez-vous
+
+    L'API respecte le standard REST et utilise le protocole HTTP. Les messages échangés sont au format JSON.
+
+
+    Une clé est nécessaire pour utiliser l'API. Cette clé doit être fournie par la société qui implémente l'API.
+
+
+
+  contact:
+    name: Edouard Nojaroff
+    email: e.nojaroff@claims-ia.fr
+servers:
+  - url: 'https://base_url/claims/api/v1'
+    description: Base URL
+tags:
+  - name: Account
+    description: ''
+  - name: Appointment
+    description: Gestion des rendez-vous.
+  - name: Availability
+    description: Recherche de créneaux horaires disponibles
+  - name: Client
+    description: ''
+  - name: Custom Field
+    description: ''
+  - name: Location
+    description: "Emplacement/adresse d'un site"
+  - name: Time Zone
+    description: ''
+  - name: Timeslot
+    description: Créneau horaire
+paths:
+  /account/login:
+    post:
+      tags:
+        - Account
+      summary: Login
+      operationId: AccountLogin
+      description: |+
+        Cette requête est utilisée dans le cas où l'accès est protégé par un jeton de session (API Key).
+
+        La première étape est l'authentification via un compte.
+        Les informations envoyées sont un nom de compte, un mot de passe du compte, et la clé de l'API.
+
+        La réponse contient un jeton de session (session_token) qui sera utilisé à chaque appel de l'API.
+        Pour des raisons de sécurité, le jeton de session doit expirer au bout de 24 heures; une nouvelle authentification est alors nécessaire.
+
+
+      parameters:
+        - in: query
+          name: username
+          description: Account owner email address
+          required: true
+          schema:
+            type: string
+            format: email
+        - in: query
+          name: password
+          description: Account owner password
+          schema:
+            type: string
+            format: password
+        - in: query
+          name: token
+          description: API key
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  responseStatus:
+                    type: string
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  '':
+                    type: string
+        '401':
+          description: "Compte inactif ou clé d'API incorrecte"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 3
+                  statusDescriptions:
+                    type: string
+                    example: Account is not active
+    parameters: []
+  /account/logout:
+    get:
+      tags:
+        - Account
+      summary: Logout
+      security: []
+      responses:
+        '200':
+          description: Logout successful
+      operationId: AccountLogout
+      description: Ferme la session courante et rend le jeton de session périmé.
+  /availabilities:
+    post:
+      summary: RequestDisponibilites
+      operationId: post-Disponibilites
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Timeslot'
+        '401':
+          description: Unauthorized
+      security:
+        - http_basic: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MissionRequest'
+      tags:
+        - Availability
+      description: |
+        Request available timeslots.
+        -
+        La requête contient les informations sur le type d'intervention
+
+        **Expert**:
+        - Type d'expertise
+        - Informations sur l'assurance et le contrat
+        - Garantie en jeu
+        - Adresse
+        - Qualification du sinistre, selon la codification Sinapps (origine, cause, détail)
+
+        - Des données d'analyse de ClaimsIA (tiers, recours,...)
+        - La pesée de l'enjeu
+
+        **RENeur**:
+        - Type de mission (???)
+        - Informations sur l'assurance
+        - Garantie en jeu
+        - Adresse
+        - Qualification du sinistre
+    parameters: []
+  '/availabilities/{id}':
+    get:
+      tags:
+        - Availability
+      summary: Get Availability Info
+      description: Retrieve timeslot
+      security: []
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Timeslot'
+      operationId: AvailibilityGetInfo
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: Timeslot id. This value identifies one of the avalilable timeslots returned by the POST request.
+  /appointments:
+    get:
+      tags:
+        - Appointment
+      summary: LISTER les rendez-vous
+      description: "Using this endpoint you can retrieve the attributes of all your existing Setster appointments. We advise using filters to fetch appointments on specific date ranges or attributes. See Filtering appointments in the Introduction section. \n\n---\n\n<!-- theme: warning -->\n\n> dsfdfds  \n>\n> dsfdsfdsfsdf\n\n\n"
+      security: []
+      parameters:
+        - name: id
+          in: query
+          description: The appointment id
+          schema:
+            type: integer
+        - name: location_id
+          in: query
+          schema:
+            type: integer
+        - name: client_id
+          in: query
+          schema:
+            type: integer
+        - name: timezone_id
+          in: query
+          description: Returns appointments date fields with specified time offset
+          schema:
+            type: integer
+            example: 553
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: search_text
+          in: query
+          schema:
+            type: string
+        - name: client_name
+          in: query
+          schema:
+            type: string
+        - name: client_email
+          in: query
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          schema:
+            type: string
+        - name: start
+          in: query
+          description: List pager
+          schema:
+            type: integer
+            default: 0
+        - name: end
+          in: query
+          description: "List pager / 'all' - no limit"
+          schema:
+            oneOf:
+              - type: integer
+              - type: string
+                enum:
+                  - all
+            default: 100
+        - name: num_results
+          in: query
+          description: 'If 1, the call returns only the number of appointments found'
+          schema:
+            type: integer
+            default: 0
+            enum:
+              - 0
+              - 1
+        - name: sort_by
+          in: query
+          schema:
+            type: string
+            default: start_date
+            enum:
+              - start_date
+              - created
+        - name: sort_order
+          in: query
+          schema:
+            type: string
+            default: asc
+            enum:
+              - asc
+              - desc
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    description: Array of appointments
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Appointment'
+                    required:
+                      - data
+          headers: {}
+      operationId: AppointmentsGetList
+    post:
+      tags:
+        - Appointment
+      summary: CREER un rendez-vous
+      description: "Using this endpoint you can create a new appointment within the account. You will have to specify the service and the service provider you are creating the appointment for, along with all the other appointment attributes. This will initiate the scheduling process within Setster. \n\n### Documentation\n\n- [Codes des compagnies](docs/companies.md)\n"
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Appointment'
+                timeslot:
+                  $ref: '#/components/schemas/Timeslot'
+                claim:
+                  $ref: '#/components/schemas/Claim'
+              required:
+                - timeslot
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Appointment'
+      responses:
+        '200':
+          description: The appointment has been created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+        '403':
+          description: The appointment can not be created
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        nullable: true
+      operationId: AppointmentCreate
+    parameters: []
+  '/appointments/{id}':
+    get:
+      tags:
+        - Appointment
+      summary: "LIRE les détails d'un rendez-vous"
+      security: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Appointment'
+      operationId: AppointmentGetInfo
+      description: "LIRE les détails d'un rendez-vous"
+    put:
+      tags:
+        - Appointment
+      summary: MODIFIER un rendez-vous
+      description: Using this endpoint you can modify the attributes for an appointment
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Appointment'
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/Appointment'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        $ref: '#/components/schemas/Appointment'
+      operationId: AppointmentModify
+    delete:
+      tags:
+        - Appointment
+      summary: ANNULER un rendez-vous
+      description: Using this endpoint you can delete an appointment within the account.
+      security: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ResponseStatus'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        nullable: true
+      operationId: AppointmentDelete
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+  '/appointment/{id}/schedule':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: REPLANIFIER un rendez-vous
+      tags:
+        - Appointment
+      responses:
+        '200':
+          description: OK
+        '409':
+          description: Conflict. Timeslot is not avalailable.
+      operationId: AppointmentReschedule
+      security: []
+      description: "Lecture de l'horaire d'un rendez-vous"
+  /rdv:
+    get:
+      summary: get-appointment-info
+      tags:
+        - Appointment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Appointment'
+        '404':
+          description: Not Found
+      operationId: get-rdv
+      description: Get appointment list
+      parameters:
+        - name: id
+          in: query
+          description: The appointment id
+          schema:
+            type: integer
+        - name: location_id
+          in: query
+          schema:
+            type: integer
+        - name: client_id
+          in: query
+          schema:
+            type: integer
+        - name: timezone_id
+          in: query
+          description: Returns appointments date fields with specified time offset
+          schema:
+            type: integer
+            example: 553
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: search_text
+          in: query
+          schema:
+            type: string
+        - name: client_name
+          in: query
+          schema:
+            type: string
+        - name: client_email
+          in: query
+          schema:
+            type: string
+        - name: start_date
+          in: query
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          schema:
+            type: string
+        - name: start
+          in: query
+          description: List pager
+          schema:
+            type: integer
+            default: 0
+        - name: end
+          in: query
+          description: "List pager / 'all' - no limit"
+          schema:
+            oneOf:
+              - type: integer
+              - type: string
+                enum:
+                  - all
+            default: 100
+        - name: updated_after
+          in: query
+          description: Lower date limit for which the appointment was updated
+          schema:
+            type: string
+            format: date-time
+        - name: updated_before
+          in: query
+          description: Upper date limit for which the appointment was updated
+          schema:
+            type: string
+            format: date-time
+        - name: num_results
+          in: query
+          description: 'If 1, the call returns only the number of appointments found'
+          schema:
+            type: integer
+            default: 0
+            enum:
+              - 0
+              - 1
+        - name: sort_by
+          in: query
+          schema:
+            type: string
+            default: start_date
+            enum:
+              - start_date
+              - created
+        - name: sort_order
+          in: query
+          schema:
+            type: string
+            default: asc
+            enum:
+              - asc
+              - desc
+      security: []
+    post:
+      summary: create-appointment
+      tags:
+        - Appointment
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+      operationId: post-rdv
+      description: create appointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Timeslot'
+                - $ref: '#/components/schemas/Claim'
+components:
+  securitySchemes:
+    header_token:
+      type: apiKey
+      in: header
+    http_basic:
+      type: http
+      scheme: basic
+      description: ''
+    http_bearer:
+      type: http
+      scheme: bearer
+  schemas:
+    AppointmentType:
+      type: string
+      title: AppointmentType
+      enum:
+        - Site
+        - Visio
+        - Telephonique
+      description: '[Valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typedurendez-vous)'
+      x-tags:
+        - Appointment
+    ContentDamage:
+      title: ContentDamage
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        brandAndModel:
+          type: string
+        category:
+          type: string
+        age:
+          $ref: ./models/CIAC_Age.v1.yaml
+        buyingPrice:
+          $ref: ./models/CIAC_Amount.v1.yaml
+        marketPrice:
+          $ref: ./models/CIAC_Amount.v1.yaml
+        invoice:
+          $ref: ./models/CIAC_Attachment.v1.yaml
+        pictures:
+          type: array
+          items:
+            $ref: ./models/CIAC_Attachment.v1.yaml
+      x-tags:
+        - Claim
+    Customer:
+      title: Customer
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        gender:
+          type: string
+        coordinates:
+          $ref: ./models/CIAC_Coordinates.v1.yaml
+    Estimation:
+      title: Estimation
+      type: object
+      properties:
+        cost:
+          $ref: ./models/CIAC_Amount.v1.yaml
+        contentsCount:
+          type: integer
+        roomsCount:
+          type: integer
+      x-tags:
+        - Claim
+    Contract:
+      title: Contract
+      type: object
+      properties:
+        company:
+          $ref: ./models/CIAC_Company.v1.yaml
+        name:
+          type: string
+          description: Nom du contrat
+      required:
+        - company
+        - name
+      x-tags:
+        - Claim
+    ClaimSummary:
+      title: ClaimSummary
+      type: object
+      description: Déclaration de sinistre résumée.
+      x-examples:
+        example-1:
+          claimDate: '2020-04-02'
+          guarantee: DegatDesEaux
+          company:
+            id: AVIVA
+            name: Aviva
+            acam: aviva
+          location:
+            country: FR
+            city: Paris
+            zipcode: '92200'
+            street1: '49, rue de Paris'
+          sinister:
+            code: DegatDesEaux
+            date: '2020-03-30'
+            type: DegatDesEaux
+      x-tags:
+        - Claim
+      properties:
+        claimDate:
+          type: string
+          format: date
+          description: Date de déclaration
+        guarantee:
+          $ref: ./models/CIAC_WarrantyType.v1.yaml
+        company:
+          $ref: ./models/CIAC_Company.v1.yaml
+        location:
+          $ref: ./models/CIAC_PostalAddress.v1.yaml
+        sinister:
+          $ref: '#/components/schemas/Sinister'
+        estimation:
+          $ref: '#/components/schemas/Estimation'
+      required:
+        - claimDate
+        - guarantee
+        - company
+        - location
+    Qualification:
+      title: Qualification
+      description: |-
+        La qualification regroupe des informations établies par Claims IA à l'issue de la déclaration de sinistre.
+        Les données dépendent du type de sinistre, et sont optionnelles.
+      type: object
+      x-tags:
+        - Claim
+      properties:
+        thirdParty:
+          type: boolean
+          description: Tiers en cause?
+        insuredResponsible:
+          type: boolean
+          description: "Est-ce que l'assuré est responsable?"
+        remedy:
+          type: boolean
+          description: Recours possible?
+        recourse:
+          type: boolean
+          description: Action en remboursement possible?
+        covenant:
+          type: string
+          description: Convention applicable
+    BuildingDamage:
+      title: BuildingDamage
+      type: object
+      description: "Description de dommage immobilier\n\n- Nom de la pièce\n- Tableau de surfaces\n\n### Surface\n\n* Nom\n* Superficie\n* Revêtement\n  - Nom\n  - Nature (Darva 9079.01.01 - Nature objet ou corps d'état)\n  - Qualité du revêtement (Darva 9711.01.01 - catégorie du risque)\n    - (1: Normal, 2: Standing, 3: Luxe)\n  - niveau d'usure (1: neuf, 2: état d'usage, 3: ancien)\n      \n\n"
+      properties:
+        name:
+          type: string
+          description: Nom de la pièce
+        surfaces:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Surface'
+        pictures:
+          type: array
+          items:
+            $ref: ./models/CIAC_Attachment.v1.yaml
+        size:
+          type: number
+      required:
+        - name
+        - surfaces
+      x-tags:
+        - Claim
+    Timeslot:
+      title: Timeslot
+      type: object
+      description: |-
+        Le Timeslot est un créneau horaire retourné par le partenaire. Il est défini au minimum par une heure de début et une heure de fin.
+        Une adresse peut être renseignée si elle est différente de l'adresse fournie dans la demande.
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+          format: date
+        schedule:
+          $ref: '#/components/schemas/AppointmentSchedule'
+      required:
+        - id
+        - date
+        - schedule
+      x-tags:
+        - Availability
+    SurfaceCovering:
+      title: Covering
+      type: object
+      description: |-
+        Revêtement d'une surface.
+
+        Le type de revêtement correspond globalement aux corps d'état. On s'appuie sur la codification Sinapps pour les valeurs (_cf. fichier [Detail-nature-dommage](docs/sinapps/Detail-nature-dommages.md)_)
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          description: "Nature du revêtement. \nListe des valeurs: cf.Sinapps - detailNatureDommages \n(anciennement DARVA 9711.01.01)"
+        state:
+          type: integer
+          description: "Niveau d'usure. 1:neuf, 2:état d'usage, 3:ancien"
+          enum:
+            - 1
+            - 2
+            - 3
+        quality:
+          type: integer
+          description: 'Qualité du revêtement. 1:normal, 2:standing, 3:luxe'
+          enum:
+            - 1
+            - 2
+            - 3
+      required:
+        - name
+        - type
+        - state
+      x-tags:
+        - Claim
+    Surface:
+      title: Surface
+      type: object
+      description: |
+        Surface d'une pièce: mur, sol, plafond
+      properties:
+        name:
+          type: string
+          description: Nom de la surface
+        size:
+          type: string
+          description: Superficie en m2
+        covering:
+          $ref: '#/components/schemas/SurfaceCovering'
+        condition:
+          type: string
+          description: Etat général de la surface
+      required:
+        - name
+        - size
+        - covering
+      x-tags:
+        - Claim
+    Sinister:
+      title: Sinister
+      type: object
+      x-tags:
+        - Claim
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date du sinistre
+        characteristics:
+          $ref: '#/components/schemas/SinisterCharacteristics'
+        qualification:
+          $ref: '#/components/schemas/Qualification'
+        damages:
+          $ref: '#/components/schemas/Damages'
+        address:
+          $ref: ./models/CIAC_PostalAddress.v1.yaml
+      required:
+        - date
+        - characteristics
+        - address
+    ResponseStatus:
+      type: object
+      description: ResponseStatus donne une information sur la réponse. Il contient un code numérique et une description.
+      x-examples:
+        example:
+          value: 0
+          statusCode: 0
+          statusDescription: 'Cool Baby!'
+      properties:
+        value:
+          type: integer
+          description: |
+            Statut de l'opération.
+            | Statut                 | Code |
+            |------------------------|------|
+            | OK                     |   0  |
+            | INVALID_PARAMETERS     |   1  |
+            | INVALID_CREDENTIALS    |   2  |
+            | ACCOUNT_NOT_ACTIVE     |   3  |
+            | INTERNAL_ERROR         |   4  |
+            | ERROR_SAVING_ENTITY    |   5  |
+            | ERROR_DELETING         |   6  |
+            | NOT_FOUND              |   7  |
+            | NOT_ALLOWED            |   8  |
+            | SLOT_NOT_AVAILABLE     |   9  |
+            | SLOT_OCCUPIED          |  10  |
+            | ACCOUNTS_LIMIT_REACHED |  11  |
+          example: 0
+        descriptions:
+          type: string
+          example: OK
+          description: Description of the status
+      required:
+        - value
+    Claim:
+      title: Claim
+      type: object
+      description: Déclaration de sinistre
+      x-tags:
+        - Claim
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date de déclaration
+        guarantee:
+          $ref: ./models/CIAC_WarrantyType.v1.yaml
+        customer:
+          $ref: '#/components/schemas/Customer'
+        sinister:
+          $ref: ./models/CIAC_Sinister.v1.yaml
+        documents:
+          type: array
+          items:
+            $ref: ./models/CIAC_Attachment.v1.yaml
+        estimation:
+          $ref: '#/components/schemas/Estimation'
+        contract:
+          $ref: '#/components/schemas/Contract'
+        reference:
+          type: string
+          description: Référence ClaimsIA de la déclaration
+        risk:
+          $ref: '#/components/schemas/Risk'
+        company:
+          $ref: ./models/CIAC_Company.v1.yaml
+      required:
+        - date
+        - guarantee
+        - company
+    AppointmentChangeReason:
+      type: string
+      title: AppointmentChangeReason
+      enum:
+        - ErreurDeSaisie
+        - ClientIndisponible
+        - ExpertIndisponible
+        - TiersIndisponible
+        - DossierIncomplet
+        - RendezVousNonUtile
+        - Autre
+      description: Motif de changement de rendez-vous
+      x-tags:
+        - Appointment
+    Appointment:
+      type: object
+      properties:
+        address:
+          $ref: ./models/CIAC_PostalAddress.v1.yaml
+        notes:
+          $ref: ./models/CIAC_NonEmptyString.v1.yaml
+        createdAt:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+        type:
+          $ref: '#/components/schemas/AppointmentType'
+        schedule:
+          $ref: '#/components/schemas/AppointmentSchedule'
+        customer:
+          $ref: '#/components/schemas/Customer'
+      required:
+        - type
+        - schedule
+      x-tags:
+        - Appointment
+    AppointmentSchedule:
+      title: AppointmentSchedule
+      type: object
+      description: Horaire de rendez-vous
+      x-examples:
+        Horaire fixe:
+          type: HoraireFixe
+          startTime: '2020-05-14T10:00:00Z'
+          endTime: '2020-05-14T11:30:00Z'
+          duration: 90
+        Plage horaire:
+          type: HorairePlage
+          startTime: '2020-05-14T09:00:00Z'
+          endTime: '2020-05-14T10:00:00Z'
+          duration: 60
+      properties:
+        type:
+          type: string
+          enum:
+            - HoraireFixe
+            - HorairePlage
+          description: |-
+            Si "HoraireFixe", le rendez commence à "startTime" et fini à "endTime"
+
+            Si "HorairePlage", le rendez-vous de "duration" minutes aura lieu n'importe quand entre "startTime" et "endTime"
+        startTime:
+          type: string
+          format: date-time
+          example: '2020-05-14T09:00:00Z'
+        endTime:
+          type: string
+          format: date-time
+          example: '2020-05-14T09:00:00Z'
+        duration:
+          $ref: ./models/CIAC_Duration.v1.yaml
+      required:
+        - type
+        - startTime
+        - endTime
+      x-tags:
+        - Appointment
+    Damages:
+      title: Damages
+      x-tags:
+        - Claim
+      anyOf:
+        - $ref: '#/components/schemas/BuildingDamage'
+        - $ref: '#/components/schemas/ContentDamage'
+    Risk:
+      title: Risk
+      type: object
+      description: Représentation du risque
+      properties:
+        type:
+          $ref: ./models/CIAC_RiskType.v1.yaml
+        relationship:
+          $ref: ./models/CIAC_RiskRelationship.v1.yaml
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+        address:
+          $ref: ./models/CIAC_PostalAddress.v1.yaml
+        description:
+          type: string
+      required:
+        - type
+        - address
+    Measure:
+      title: Measure
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - NombreDePieces
+            - Effectif
+            - Superficie
+            - SuperficieVeranda
+            - SuperficieExploitation
+            - SurfaceDesDependances
+            - SurfaceDesDependancesContigues
+            - SurfaceDesDependancesNonContigues
+            - Piscine
+            - Activite
+            - ChiffreAffaireAnnuel
+            - NombreJoursInhabitation
+            - NumeroEtage
+            - NombreDePiecesSuperieures30m2
+            - AgeDeLaConstruction
+            - NombreNiveaux
+            - NombreColocataires
+            - PiscineExterieureAvecDome
+        value:
+          type: number
+      required:
+        - type
+        - value
+    MissionRequest:
+      title: MissionRequest
+      type: object
+      description: "Demande d'intervention"
+      properties:
+        type:
+          $ref: ./models/CIAC_MissionType.v1.yaml
+        claim:
+          $ref: '#/components/schemas/ClaimSummary'
+        dateFrom:
+          type: string
+          format: date
+        dateTo:
+          type: string
+          format: date
+    SinisterCharacteristics:
+      title: SinisterCharacteristic
+      type: object
+      description: |
+        Caractéristiques du sinistre.
+        Le sinistre est défini par le trio **Nature / Cause / Détail**.
+
+        Selon les sinistres, le détail de la cause peut ne pas être renseigné. Les valeurs de ces trois informations suivent la codification **Sinapps**.
+
+        [Liste des valeurs possibles](docs/sinapps/Nature-du-sinistre.md)
+      x-tags:
+        - Sinapps
+      properties:
+        nature:
+          $ref: '#/components/schemas/SinisterNature'
+        cause:
+          $ref: '#/components/schemas/SinisterCause'
+        detail:
+          $ref: '#/components/schemas/SinisterCauseDetail'
+      required:
+        - nature
+    SinisterNature:
+      title: SinisterNature
+      type: string
+      x-tags:
+        - Sinapps
+      description: "Nature du sinistre, selon codification Darva.\n\nListe des valeurs possibles: \n[Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)\n"
+      enum:
+        - AutresDommages
+        - Assistance
+        - BrisDeGlace
+        - BrisDeMachine
+        - CatastropheNaturelle
+        - CatastropheTechnologique
+        - Choc
+        - DegatsDesEaux
+        - Divers
+        - DommagesAuxBiens
+        - DommagesElectriques
+        - DommagesMenagers
+        - EvtNaturel
+        - Explosion
+        - FoudreSansIncendie
+        - Incendie
+        - ResponsabiliteCivile
+        - RisqueInformatique
+        - TempeteNeigeGrele
+        - Vol
+    SinisterCause:
+      type: string
+      title: SinisterCause
+      description: "Cause du sinistre, selon le standard Sinapps.\n\nListe des valeurs possibles: \n- [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)\n"
+      enum:
+        - ALExterieur
+        - AutresLiquides
+        - AccessoireDomestique
+        - Accident
+        - AccidentDeMenage
+        - AccidentOuVandalisme
+        - Accidentel
+        - AchatVenteImmeuble
+        - ActeCriminel
+        - ActionDeChasse
+        - Administration
+        - Agression
+        - Animal
+        - AppareilAutre
+        - AppareilChauffage
+        - AppareilElectromenager
+        - AppareilMedical
+        - ArretElectriqueOuFuiteProduit
+        - Attentat
+        - Avalanche
+        - AvecEffraction
+        - Bail
+        - BienAnimal
+        - BrisDeteriorationPanne
+        - BrulureParExcesChaleur
+        - BrulureParMatiereIncandescente
+        - CanalisationsExterieures
+        - CauseInconnue
+        - ChocMecaniqueDesVagues
+        - Chute
+        - ChuteDarbre
+        - ChuteDeConstruction
+        - Communale
+        - Condensation
+        - ConsoBiens
+        - ConsoVPrive
+        - Construction
+        - Copropriete
+        - Criminel
+        - Cyclone
+        - DeCles
+        - Decollements
+        - DefautsDeStabilite
+        - DefautsEtancheiteAe
+        - Deterioration
+        - DeteriorationImmeubleParVehicule
+        - Divers
+        - DommageElectrique
+        - DroitDeLaFamilleSuccessionDonations
+        - DroitDesAssurances
+        - DroitDuTravail
+        - DroitFiscal
+        - Ecoulement
+        - EffetDuGel
+        - Effondrement
+        - EffondrementDeTerrain
+        - Electrique
+        - Emeute
+        - EnCours
+        - EruptionVolcanique
+        - EvenementImmobilier
+        - ExplosionImplosion
+        - Externe
+        - ExtraScolaire
+        - FaitAccidentelDunTiers
+        - FaitIntentionnel
+        - FeuDeForetEcobuage
+        - Fissurations
+        - Fonctionnement
+        - ForceDeLaNature
+        - Foudre
+        - FoudreElectriciteAtmospherique
+        - FoyerOuvertFerme
+        - FuiteRupture
+        - FuitesAutres
+        - FumeeSansIncendie
+        - Gel
+        - GlissementMouvementDeTerrain
+        - Grele
+        - HorsActionDeChasse
+        - Incendie
+        - IncendieExplosion
+        - IncidentSurtensionSurLeReseau
+        - Indeterminee
+        - Infiltration
+        - Inondation
+        - InstallationElectrique
+        - InstallationGaz
+        - InstrumentsDeMusique
+        - Interne
+        - InterventionHumaine
+        - Mrh
+        - ObjetVolantAeronef
+        - Occupant
+        - OrigineCriminelle
+        - PanneElectromenager
+        - Penal
+        - Perte
+        - PerteContenuCongelateurCellulesRefrigerantes
+        - PerteEauInterieure
+        - PluieOuNeige
+        - PoidsDeLaNeigeGlace
+        - Pollution
+        - PollutionGraduelle
+        - Pro
+        - Professionnelle
+        - Proprietaire
+        - ProtectionPersonne
+        - ProtectionSociale
+        - RazDeMaree
+        - RefoulementEngorgement
+        - RenversementDebordement
+        - Rupture
+        - SansEffraction
+        - Scolaire
+        - Secheresse
+        - Seisme
+        - SurLaVoiePublique
+        - Surtension
+        - TempeteOuragan
+        - TerrorismeAttentat
+        - TravauxImmobiliers
+        - Urbanisme
+        - Vandalisme
+        - VandalismeEmeuteMouvementPopulaire
+        - VandalismeEmeuteMouvementPopulaireTerrorisme
+        - VandalismeSurSerrure
+        - Vehicule
+        - VehiculeAutre
+        - VehiculeTerrestreAMoteur
+        - ViceEtMalfacon
+        - ViceOuMalfacon
+        - Voisinage
+        - VolDeMarchandises
+        - VolDuVehicule
+        - Comportement
+        - Defense
+        - EauExtinctionPompiers
+        - PorositeCapillarite
+        - RecoursNonSubroge
+        - SansIntroductionLieux
+        - TentativeEffraction
+        - VandalismeElementsExterieurs
+        - VandalismeInterieurLocaux
+        - SurintensiteSurtensionSoustension
+        - Echauffement
+        - DefautInsuffisanceProtection
+        - Depotage
+        - TravailParPointChaud
+        - ErreurManipulation
+        - MelangeProduits
+        - DefautDeFixation
+        - DefautDeSurface
+        - Autre
+        - DommageMecanique
+        - CommunImmeubleVoisin
+        - ChocOuChute
+        - Mobilier
+        - DommageDeMouille
+      x-tags:
+        - Sinapps
+    SinisterCauseDetail:
+      title: SinisterCauseDetail
+      type: string
+      x-tags:
+        - Sinapps
+      description: |-
+        Détail sur la cause du sinistre, selon la codification Sinapps.
+
+        Liste des valeurs possibles:
+        - [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)
+        - [Documentation Sinapps](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Caract%C3%A9ristiqueSinistre)
+      enum:
+        - Abattoirs
+        - AccidentDeSki
+        - ActionDeLElectriciteAtmospherique
+        - ActionDeLElectriciteCanalisee
+        - ActionDirecteDuVent
+        - AerienChuteDObjetDeLEspace
+        - AireDeJeux
+        - Animal
+        - Appareil
+        - AppareilAEffetDEau
+        - AppareilAEffetDEauEtAccessoires
+        - AppareilDeProductionDEauChaudeSanitaire
+        - AppareilElectromenagerInstallationAmovible
+        - AppareilInstallationEauCollective
+        - AppareilInstallationEauPrivative
+        - ApresLivraisonReception
+        - Autre
+        - AutreAssure
+        - AvecViolence
+        - AvecVol
+        - BarrieresBornes
+        - CanalisationAlimentationPriveeAccessible
+        - CanalisationCollectiveAccessible
+        - CanalisationCollectiveNonAccessible
+        - CanalisationElectriqueBatiment
+        - CanalisationEnterree
+        - CanalisationNonEnterree
+        - CanalisationPriveeAccessible
+        - CanalisationPriveeNonAccessible
+        - CauseInconnue
+        - ChausseesGlissantes
+        - CheneauxGouttieres
+        - ChuteArbreRacines
+        - ChuteDirecte
+        - CimetiereCulte
+        - CollaborateurBenevole
+        - Containers
+        - CouleeDeBoue
+        - Cuisine
+        - DeRecipients
+        - DebordementCoursDEau
+        - DebordementCoursDEauBassins
+        - Dechetteries
+        - DefautSignalisation
+        - DefautEclairage
+        - DefautUsage
+        - DegradationsChaussee
+        - DommagesAuxVehicules
+        - DommagesLunettes
+        - DommagesMaterielElectriqueAudio
+        - DuFaitDUnBienImmobilier
+        - DuFaitDUnBienMobilier
+        - DuFaitEnfantAssure
+        - EauxRuisselement
+        - EboulementsGlissementTerrains
+        - EdificesMenacantRuine
+        - EgoutOrganeCollecteEauCommunale
+        - EnfantsPlaces
+        - Escalade
+        - EtancheiteTerrasse
+        - Exploitation
+        - Facade
+        - FauteErreurNegligence
+        - Fourriere
+        - FoyerFerme
+        - FoyerOuvert
+        - HygieneEtSantePublique
+        - IncendieHorsLocaux
+        - Indetermine
+        - InstallationGaz
+        - JointPeripherique
+        - MenuiserieFermeeOuNon
+        - MurDeSoutenement
+        - NuissancesSonores
+        - ObstaclesChaussee
+        - Ocean
+        - PenetrationClandestine
+        - PistesCyclables
+        - PlaqueDEgouts
+        - PlongeonsEtNoyades
+        - PompeAChaleur
+        - PortsMouillage
+        - Privative
+        - RemonteeDeNappePhreatique
+        - RuissellementEau
+        - RuptureCanalisation
+        - Ruse
+        - SansVol
+        - SitesNaturels
+        - SportivesLoisirs
+        - SurchageReseauInsuffisanceReseau
+        - TondeuseDebroussailleuse
+        - UrbanismeExpropriation
+        - UrbanismePCUrbanismeCU
+        - UrbanismePOSUrbanismePLU
+        - UrbanismePreemption
+        - UsageFaussesCles
+        - VoieDeFaitEmpriseIrreguliere
+        - VolEtVandalisme
+        - ZAC
+        - AccidentDeFumeur
+        - Administrative
+        - AideBenevole
+        - AvantLivraisonReception
+        - BabySitting
+        - Bougie
+        - CanalisationCollective
+        - CanalisationEvacuationPriveeAccessible
+        - CanalisationEvacuationPriveeNonAccessible
+        - CarrelageFaience
+        - Chaudiere
+        - ConduitDeCheminee
+        - ConduitDeChemineeVentilation
+        - Couverture
+        - DAppoint
+        - Distributeur
+        - EmployeDeMaison
+        - FeuDeFriteuse
+        - Immeuble
+        - InstallationChauffageCollectif
+        - InstallationChauffageIndividuel
+        - InstallationPhotovoltaique
+        - MenuiserieOuverte
+        - MurEnterre
+        - ObjetProjeteChuteArbre
+        - OuvertureConduitAbsenceToitureToitureBachee
+        - PanneVMC
+        - ProductionEauChaude
+        - RadiateurElectrique
+        - TableauElectrique
+        - Terrestre
+        - VentilationVMC
+        - ViceConstruction
+        - Reservoirs
+        - ConduitesCanalisations
+        - LocalStockage
+        - DispositifsThermiques
+        - Process
+        - ViceCache
+        - DefautProduit
+        - CommunicationDIncendie
+        - ErreurPrepose
+        - DefautControle
+        - Negligence
+        - DefautConseils
+        - FoudreElectriciteAtmospherique
+        - SurtensionSurReseau
+        - RuptureNeutre
+        - RuptureTransmission
+        - UsureParFrottement
+        - Corrosion
+        - CanalisationAlimentationPriveeNonAccessible
+        - CanalisationPrivative
+        - Explosion
+        - DefautConception
+        - AccueilAuDomicile
+    Deductible:
+      title: Deductible
+      type: object
+      description: "Franchise. \nSi de type \"fixed\", seul value est défini. \nSi \"proportional\", value est un pourcentage. min et max sont des valeurs optionnelles de montants plancher et plafond."
+      properties:
+        type:
+          type: string
+          enum:
+            - fixed
+            - proportional
+        value:
+          type: number
+        min:
+          type: number
+        max:
+          type: number
+      required:
+        - type
+        - value
+security:
+  - http_basic: []

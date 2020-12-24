@@ -29,6 +29,3 @@ properties:
 required:
   - type
   - href
-x-tags:
-  - ClaimsIA
-  - Common

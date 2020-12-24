@@ -2,7 +2,6 @@ title: Age
 type: object
 x-tags:
   - ClaimsIA
-  - Common
 properties:
   value:
     type: number

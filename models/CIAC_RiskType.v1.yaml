@@ -20,7 +20,9 @@ enum:
   - BatimentIndustriel
   - ConstructionLegere
   - LogementJeune
-description: '[Liste des valeurs possibles (Sinapps)](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typederisque)'
+description: |-
+  Type de risque
+  [Liste des valeurs possibles (Sinapps)]
 x-tags:
   - Common
   - Sinapps

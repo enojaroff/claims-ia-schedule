@@ -3,6 +3,12 @@ type: object
 x-tags:
   - Common
   - Sinapps
+description: |
+  Le sinistre est défini par le trio **Nature / Cause / Détail**.
+
+  Selon les sinistres, le détail de la cause peut ne pas être renseigné. Les valeurs de ces trois informations suivent la codification **Sinapps**.
+
+  [Liste des valeurs possibles](docs/sinapps/Nature-du-sinistre.md)
 properties:
   nature:
     $ref: ./CIAC_SinisterNature.v1.yaml
@@ -10,4 +16,5 @@ properties:
     $ref: ./CIAC_SinisterCause.v1.yaml
   detail:
     $ref: ./CIAC_SinisterCauseDetail.v1.yaml
-description: Nature-Cause-Détail
+required:
+  - nature

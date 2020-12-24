@@ -34,5 +34,4 @@ enum:
   - Explosion
 description: Type de garantie complémentaire
 x-tags:
-  - Common
   - Sinapps

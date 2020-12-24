@@ -1,10 +1,22 @@
 title: Postal Address
 type: object
+x-examples:
+  exemple:
+    street1: '49-51, rue de Paris'
+    zipcode: '92110'
+    city: Clichy
+    state: IDF
+    countryCode: FR
+    country: France
+description: "Adresse postale d'un lieu."
+x-tags:
+  - ClaimsIA
+  - Common
 properties:
   street1:
     type: string
     maxLength: 38
-    description: 'adresse postale, ligne 1'
+    description: "adresse postale, ligne 1. Les propriétés `street1` à `street4` contiennent sur 4 lignes max les informations, telles que le numéro, le nom de la voie, et toute information qui n'est pas définie par les autres propriétés."
   street2:
     type: string
     maxLength: 38
@@ -29,7 +41,7 @@ properties:
   country:
     type: string
     maxLength: 28
-    description: Code du pays au format ISO 3166-1 (2 caractères).
+    description: Nom du Pays
   state:
     type: string
     maxLength: 28
@@ -38,17 +50,3 @@ required:
   - street1
   - zipcode
   - city
-x-examples:
-  exemple:
-    street1: '49-51, rue de Paris'
-    zipcode: '92110'
-    city: Clichy
-    state: IDF
-    countryCode: FR
-    country: France
-description: "Structure générique pour représenter l'adresse postale d'un lieu. Les propriétés `street1` à `street4` contiennent sur 4 lignes max les informations, telles que le numéro, le nom de la voie, et toute information qui n'est pas définie par les autres propriétés."
-x-tags:
-  - ClaimsIA
-  - Common
-
-

@@ -1,5 +1,5 @@
-title: SinisterCauseDetail
 type: string
+title: SinisterCauseDetail
 x-tags:
   - Common
   - Sinapps
@@ -26,7 +26,6 @@ enum:
   - AppareilInstallationEauCollective
   - AppareilInstallationEauPrivative
   - ApresLivraisonReception
-  - AssistanceMaternelle
   - Autre
   - AutreAssure
   - AvecViolence
@@ -138,7 +137,6 @@ enum:
   - ObjetProjeteChuteArbre
   - OuvertureConduitAbsenceToitureToitureBachee
   - PanneVMC
-  - PollutionAmiante
   - ProductionEauChaude
   - RadiateurElectrique
   - TableauElectrique
@@ -146,9 +144,7 @@ enum:
   - VentilationVMC
   - ViceConstruction
   - Reservoirs
-  - Citernes
   - ConduitesCanalisations
-  - Turbines
   - LocalStockage
   - DispositifsThermiques
   - Process
@@ -158,7 +154,6 @@ enum:
   - ErreurPrepose
   - DefautControle
   - Negligence
-  - NonRespectCahierDesCharges
   - DefautConseils
   - FoudreElectriciteAtmospherique
   - SurtensionSurReseau

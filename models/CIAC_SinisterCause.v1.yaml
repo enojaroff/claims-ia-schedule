@@ -1,8 +1,7 @@
 type: string
 title: SinisterCause
-description: "Cause du sinistre, selon le standard Sinapps.\n\nListe des valeurs possibles: \n- [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)\n- [Documentation Sinapps](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Caract%C3%A9ristiqueSinistre)"
+description: "Cause du sinistre, selon le standard Sinapps.\n\nListe des valeurs possibles: \n- [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)\n"
 enum:
-  - Alarrache
   - ALExterieur
   - AutresLiquides
   - AccessoireDomestique
@@ -135,15 +134,12 @@ enum:
   - VehiculeTerrestreAMoteur
   - ViceEtMalfacon
   - ViceOuMalfacon
-  - ViePrivee
   - Voisinage
   - VolDeMarchandises
   - VolDuVehicule
-  - Autoinflammation
   - Comportement
   - Defense
   - EauExtinctionPompiers
-  - PollutionAmiante
   - PorositeCapillarite
   - RecoursNonSubroge
   - SansIntroductionLieux
@@ -153,11 +149,9 @@ enum:
   - SurintensiteSurtensionSoustension
   - Echauffement
   - DefautInsuffisanceProtection
-  - DefautEtancheiteProduitEquipementIndustriel
   - Depotage
   - TravailParPointChaud
   - ErreurManipulation
-  - NonRespectConsignesSecurite
   - MelangeProduits
   - DefautDeFixation
   - DefautDeSurface
@@ -167,10 +161,6 @@ enum:
   - ChocOuChute
   - Mobilier
   - DommageDeMouille
-  - AppareilNavigationAerienne
-  - ReconstitutionDesMedias
-  - MurDuSon
-  - ChuteAeronef
 x-tags:
   - Common
   - Sinapps

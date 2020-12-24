@@ -1,5 +1,5 @@
-title: "Sinister's Nature"
 type: string
+title: "Sinister's Nature"
 x-tags:
   - Common
   - Sinapps
@@ -12,27 +12,16 @@ enum:
   - CatastropheNaturelle
   - CatastropheTechnologique
   - Choc
-  - DefenseRecours
   - DegatsDesEaux
   - Divers
-  - DMMT
   - DommagesAuxBiens
   - DommagesElectriques
   - DommagesMenagers
-  - DommageOuvrage
   - EvtNaturel
   - Explosion
-  - FraisSupplementaireExploitation
   - FoudreSansIncendie
   - Incendie
-  - Malfacon
-  - MTR
-  - PerteExploitation
-  - PerteDeLiquide
-  - PerteDeValeur
-  - ProtectionJuridique
   - ResponsabiliteCivile
   - RisqueInformatique
   - TempeteNeigeGrele
-  - ValeurFondExploitation
   - Vol

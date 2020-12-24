@@ -1,0 +1,21 @@
+type: string
+title: RiskUse
+description: "Usage du risque par l'assuré (qualité de l'assuré)"
+enum:
+  - ResidencePrincipale
+  - ResidenceSecondaire
+  - ResidencePrincipale
+  - ResidenceSecondaire
+  - BienDonneEnLocation
+  - EnConstruction
+  - BailVide
+  - NonOccupeMeuble
+  - VideOccupant
+  - ImmeubleDonneEnLocationVide
+  - ImmeubleDonneEnLocationMeuble
+  - BatimentDivers
+  - Professionnel
+  - Autres
+  - HabitationEnRenovation
+  - DonneeEnLocationSaisonniere
+  - DonneeEnLocationALAnnee

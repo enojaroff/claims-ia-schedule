@@ -5,7 +5,7 @@ x-tags:
   - ClaimsIA
 description: Sinistre
 properties:
-  characteristic:
+  characteristics:
     $ref: ./CIAC_SinisterCharacteristic.v1.yaml
   circonstancesDeclarees:
     $ref: ./CIAC_NonEmptyString.v1.yaml
@@ -26,6 +26,6 @@ properties:
     format: date
     description: Date du sinistre
 required:
+  - characteristics
   - address
   - date
-  - characteristic

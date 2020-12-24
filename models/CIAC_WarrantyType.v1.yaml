@@ -1,7 +1,7 @@
 type: string
-title: WarrantyType
+title: Type de garantie
 default: DegatsDesEaux
-description: 'Type de garantie (valeurs Sinapps). cf. doc [Type-de-garantie.md](../docs/sinapps/Type-de-garantie.md)'
+description: Type de garantie. Les valeurs possibles sont issues de Sinapps.
 enum:
   - Arbres
   - ArbresPot
