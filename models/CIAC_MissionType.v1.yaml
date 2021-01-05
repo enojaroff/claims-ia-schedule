@@ -1,6 +1,6 @@
 type: string
 title: MissionType
-description: Type de prestation
+description: '**Type de prestation**'
 enum:
   - RenDirecte
   - RenSuiteExpertise

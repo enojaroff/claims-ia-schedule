@@ -1,7 +1,6 @@
 type: string
-title: Type de garantie
-default: DegatsDesEaux
-description: Type de garantie. Les valeurs possibles sont issues de Sinapps.
+title: Warranty Type
+description: '**Type de garantie**. Les valeurs possibles sont tirées de **Sinapps**.'
 enum:
   - Arbres
   - ArbresPot
@@ -60,3 +59,4 @@ example: DegatsDesEaux
 x-tags:
   - ClaimsIA
   - Common
+  - Sinapps

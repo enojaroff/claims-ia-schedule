@@ -1,26 +1,27 @@
-title: CIAC_ContentDamage
+title: ContentDamage
 type: object
 properties:
-  pictures:
-    type: array
-    items:
-      $ref: ./CIAC_Attachment.v1.yaml
-  invoice:
-    $ref: ./CIAC_Attachment.v1.yaml
-  marketPrice:
-    $ref: ./CIAC_Amount.v1.yaml
-  buyingPrice:
-    $ref: ./CIAC_Amount.v1.yaml
-  age:
-    $ref: ./CIAC_Age.v1.yaml
+  name:
+    type: string
+  description:
+    type: string
   category:
     type: string
   brandAndModel:
     type: string
-  description:
-    type: string
-  name:
-    type: string
+  age:
+    $ref: ./CIAC_Age.v1.yaml
+  marketPrice:
+    $ref: ./CIAC_Amount.v1.yaml
+  buyingPrice:
+    $ref: ./CIAC_Amount.v1.yaml
+  invoice:
+    $ref: ./CIAC_Attachment.v1.yaml
+  pictures:
+    type: array
+    items:
+      $ref: ./CIAC_Attachment.v1.yaml
 x-tags:
   - ClaimsIA
   - Common
+description: Dommage mobilier

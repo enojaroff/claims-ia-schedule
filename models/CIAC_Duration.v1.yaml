@@ -1,5 +1,5 @@
 type: integer
-title: CIAC_Duration
+title: Duration
 description: |
   Durée en minutes
 example: 90

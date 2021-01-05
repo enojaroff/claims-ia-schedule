@@ -13,8 +13,8 @@ properties:
       $ref: '#/definitions/TypePlafonds'
   additionalWarranty:
     $ref: ./CIAC_AdditionalWarrantyType.v1.yaml
-  warrantyType:
+  type:
     $ref: ./CIAC_WarrantyType.v1.yaml
 required:
   - plafonds
-  - warrantyType
+  - type

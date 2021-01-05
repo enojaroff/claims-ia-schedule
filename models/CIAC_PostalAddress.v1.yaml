@@ -8,7 +8,7 @@ x-examples:
     state: IDF
     countryCode: FR
     country: France
-description: "Adresse postale d'un lieu."
+description: '**Adresse postale** d''un lieu.'
 x-tags:
   - ClaimsIA
   - Common
@@ -16,7 +16,7 @@ properties:
   street1:
     type: string
     maxLength: 38
-    description: "adresse postale, ligne 1. Les propriétés `street1` à `street4` contiennent sur 4 lignes max les informations, telles que le numéro, le nom de la voie, et toute information qui n'est pas définie par les autres propriétés."
+    description: 'adresse postale, ligne 1. Les propriétés `street1` à `street4` contiennent sur 4 lignes max les informations, telles que le numéro, le nom de la voie, et toute information qui n''est pas définie par les autres propriétés.'
   street2:
     type: string
     maxLength: 38
@@ -26,7 +26,7 @@ properties:
   street4:
     type: string
     maxLength: 38
-  zipcode:
+  zipCode:
     type: string
     maxLength: 5
     description: Code postal
@@ -48,5 +48,5 @@ properties:
     description: 'Région, département'
 required:
   - street1
-  - zipcode
+  - zipCode
   - city

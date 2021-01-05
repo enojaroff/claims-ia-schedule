@@ -21,7 +21,8 @@ enum:
   - ConstructionLegere
   - LogementJeune
 description: |-
-  Type de risque
+  **Type de risque**
+
   [Liste des valeurs possibles (Sinapps)]
 x-tags:
   - Common

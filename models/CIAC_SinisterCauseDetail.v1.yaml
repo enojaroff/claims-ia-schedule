@@ -4,7 +4,7 @@ x-tags:
   - Common
   - Sinapps
 description: |-
-  Détail sur la cause du sinistre, selon la codification Sinapps.
+  **Détail sur la cause du sinistre**, selon la codification Sinapps.
 
   Liste des valeurs possibles:
   - [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)

@@ -1,6 +1,6 @@
 title: Amount
 type: object
-description: Représente une valeur monétaire
+description: Représente une **valeur monétaire**
 x-tags:
   - ClaimsIA
 x-examples:

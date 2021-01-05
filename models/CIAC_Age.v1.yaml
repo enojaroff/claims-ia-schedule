@@ -11,3 +11,4 @@ properties:
       - 'y'
       - m
       - d
+description: 'Age d''un bien (en jours, mois, ou années)'

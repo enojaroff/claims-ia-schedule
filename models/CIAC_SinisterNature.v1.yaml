@@ -1,9 +1,13 @@
 type: string
-title: "Sinister's Nature"
+title: Sinister's Nature
 x-tags:
   - Common
   - Sinapps
-description: "Nature du sinistre, selon codification Darva.\n\nListe des valeurs possibles: \n[Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)\n"
+description: |
+  **Nature du sinistre**, selon codification Darva.
+
+  Liste des valeurs possibles: 
+  [Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)
 enum:
   - AutresDommages
   - Assistance

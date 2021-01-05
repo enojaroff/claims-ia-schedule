@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: 0.9.1
   title: Claims IA Appointment API
-  description: |+
+  description: |
     L'API RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, elle doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.
 
     La prise de rendez-vous s'effectue en 2 temps:
@@ -21,9 +21,6 @@ info:
 
 
     Une clé est nécessaire pour utiliser l'API. Cette clé doit être fournie par la société qui implémente l'API.
-
-
-
   contact:
     name: Edouard Nojaroff
     email: e.nojaroff@claims-ia.fr
@@ -42,7 +39,7 @@ tags:
   - name: Custom Field
     description: ''
   - name: Location
-    description: "Emplacement/adresse d'un site"
+    description: Emplacement/adresse d'un site
   - name: Time Zone
     description: ''
   - name: Timeslot
@@ -54,7 +51,7 @@ paths:
         - Account
       summary: Login
       operationId: AccountLogin
-      description: |+
+      description: |
         Cette requête est utilisée dans le cas où l'accès est protégé par un jeton de session (API Key).
 
         La première étape est l'authentification via un compte.
@@ -62,8 +59,6 @@ paths:
 
         La réponse contient un jeton de session (session_token) qui sera utilisé à chaque appel de l'API.
         Pour des raisons de sécurité, le jeton de session doit expirer au bout de 24 heures; une nouvelle authentification est alors nécessaire.
-
-
       parameters:
         - in: query
           name: username
@@ -101,7 +96,7 @@ paths:
                   '':
                     type: string
         '401':
-          description: "Compte inactif ou clé d'API incorrecte"
+          description: Compte inactif ou clé d'API incorrecte
           content:
             application/json:
               schema:
@@ -199,7 +194,16 @@ paths:
       tags:
         - Appointment
       summary: LISTER les rendez-vous
-      description: "Using this endpoint you can retrieve the attributes of all your existing Setster appointments. We advise using filters to fetch appointments on specific date ranges or attributes. See Filtering appointments in the Introduction section. \n\n---\n\n<!-- theme: warning -->\n\n> dsfdfds  \n>\n> dsfdsfdsfsdf\n\n\n"
+      description: |
+        Using this endpoint you can retrieve the attributes of all your existing Setster appointments. We advise using filters to fetch appointments on specific date ranges or attributes. See Filtering appointments in the Introduction section. 
+
+        ---
+
+        <!-- theme: warning -->
+
+        > dsfdfds  
+        >
+        > dsfdsfdsfsdf
       security: []
       parameters:
         - name: id
@@ -253,7 +257,7 @@ paths:
             default: 0
         - name: end
           in: query
-          description: "List pager / 'all' - no limit"
+          description: List pager / 'all' - no limit
           schema:
             oneOf:
               - type: integer
@@ -309,7 +313,12 @@ paths:
       tags:
         - Appointment
       summary: CREER un rendez-vous
-      description: "Using this endpoint you can create a new appointment within the account. You will have to specify the service and the service provider you are creating the appointment for, along with all the other appointment attributes. This will initiate the scheduling process within Setster. \n\n### Documentation\n\n- [Codes des compagnies](docs/companies.md)\n"
+      description: |
+        Using this endpoint you can create a new appointment within the account. You will have to specify the service and the service provider you are creating the appointment for, along with all the other appointment attributes. This will initiate the scheduling process within Setster. 
+
+        ### Documentation
+
+        - [Codes des compagnies](docs/companies.md)
       security: []
       requestBody:
         content:
@@ -357,7 +366,7 @@ paths:
     get:
       tags:
         - Appointment
-      summary: "LIRE les détails d'un rendez-vous"
+      summary: LIRE les détails d'un rendez-vous
       security: []
       responses:
         '200':
@@ -374,7 +383,7 @@ paths:
                         items:
                           $ref: '#/components/schemas/Appointment'
       operationId: AppointmentGetInfo
-      description: "LIRE les détails d'un rendez-vous"
+      description: LIRE les détails d'un rendez-vous
     put:
       tags:
         - Appointment
@@ -452,7 +461,7 @@ paths:
           description: Conflict. Timeslot is not avalailable.
       operationId: AppointmentReschedule
       security: []
-      description: "Lecture de l'horaire d'un rendez-vous"
+      description: Lecture de l'horaire d'un rendez-vous
   /rdv:
     get:
       summary: get-appointment-info
@@ -523,7 +532,7 @@ paths:
             default: 0
         - name: end
           in: query
-          description: "List pager / 'all' - no limit"
+          description: List pager / 'all' - no limit
           schema:
             oneOf:
               - type: integer
@@ -650,8 +659,8 @@ components:
           type: string
         coordinates:
           $ref: ./models/CIAC_Coordinates.v1.yaml
-    Estimation:
-      title: Estimation
+    Valuation:
+      title: Valuation
       type: object
       properties:
         cost:
@@ -700,7 +709,7 @@ components:
       x-tags:
         - Claim
       properties:
-        claimDate:
+        date:
           type: string
           format: date
           description: Date de déclaration
@@ -712,10 +721,10 @@ components:
           $ref: ./models/CIAC_PostalAddress.v1.yaml
         sinister:
           $ref: '#/components/schemas/Sinister'
-        estimation:
-          $ref: '#/components/schemas/Estimation'
+        valuation:
+          $ref: '#/components/schemas/Valuation'
       required:
-        - claimDate
+        - date
         - guarantee
         - company
         - location
@@ -733,7 +742,7 @@ components:
           description: Tiers en cause?
         insuredResponsible:
           type: boolean
-          description: "Est-ce que l'assuré est responsable?"
+          description: Est-ce que l'assuré est responsable?
         remedy:
           type: boolean
           description: Recours possible?
@@ -746,7 +755,23 @@ components:
     BuildingDamage:
       title: BuildingDamage
       type: object
-      description: "Description de dommage immobilier\n\n- Nom de la pièce\n- Tableau de surfaces\n\n### Surface\n\n* Nom\n* Superficie\n* Revêtement\n  - Nom\n  - Nature (Darva 9079.01.01 - Nature objet ou corps d'état)\n  - Qualité du revêtement (Darva 9711.01.01 - catégorie du risque)\n    - (1: Normal, 2: Standing, 3: Luxe)\n  - niveau d'usure (1: neuf, 2: état d'usage, 3: ancien)\n      \n\n"
+      description: |
+        Description de dommage immobilier
+
+        - Nom de la pièce
+        - Tableau de surfaces
+
+        ### Surface
+
+        * Nom
+        * Superficie
+        * Revêtement
+          - Nom
+          - Nature (Darva 9079.01.01 - Nature objet ou corps d'état)
+          - Qualité du revêtement (Darva 9711.01.01 - catégorie du risque)
+            - (1: Normal, 2: Standing, 3: Luxe)
+          - niveau d'usure (1: neuf, 2: état d'usage, 3: ancien)
+              
       properties:
         name:
           type: string
@@ -771,7 +796,11 @@ components:
       title: Timeslot
       type: object
       description: |-
-        Le Timeslot est un créneau horaire retourné par le partenaire. Il est défini au minimum par une heure de début et une heure de fin.
+        Le Timeslot est un créneau horaire retourné par le partenaire. Il est défini au minimum par 
+
+        - une heure de début
+        - une heure de fin
+
         Une adresse peut être renseignée si elle est différente de l'adresse fournie dans la demande.
       properties:
         id:
@@ -799,10 +828,13 @@ components:
           type: string
         type:
           type: string
-          description: "Nature du revêtement. \nListe des valeurs: cf.Sinapps - detailNatureDommages \n(anciennement DARVA 9711.01.01)"
+          description: |-
+            Nature du revêtement. 
+            Liste des valeurs: cf.Sinapps - detailNatureDommages 
+            (anciennement DARVA 9711.01.01)
         state:
           type: integer
-          description: "Niveau d'usure. 1:neuf, 2:état d'usage, 3:ancien"
+          description: 'Niveau d''usure. 1:neuf, 2:état d''usage, 3:ancien'
           enum:
             - 1
             - 2
@@ -872,7 +904,7 @@ components:
         example:
           value: 0
           statusCode: 0
-          statusDescription: 'Cool Baby!'
+          statusDescription: Cool Baby!
       properties:
         value:
           type: integer
@@ -920,8 +952,8 @@ components:
           type: array
           items:
             $ref: ./models/CIAC_Attachment.v1.yaml
-        estimation:
-          $ref: '#/components/schemas/Estimation'
+        valuation:
+          $ref: '#/components/schemas/Valuation'
         contract:
           $ref: '#/components/schemas/Contract'
         reference:
@@ -935,20 +967,6 @@ components:
         - date
         - guarantee
         - company
-    AppointmentChangeReason:
-      type: string
-      title: AppointmentChangeReason
-      enum:
-        - ErreurDeSaisie
-        - ClientIndisponible
-        - ExpertIndisponible
-        - TiersIndisponible
-        - DossierIncomplet
-        - RendezVousNonUtile
-        - Autre
-      description: Motif de changement de rendez-vous
-      x-tags:
-        - Appointment
     Appointment:
       type: object
       properties:
@@ -1074,7 +1092,7 @@ components:
     MissionRequest:
       title: MissionRequest
       type: object
-      description: "Demande d'intervention"
+      description: Demande d'intervention
       properties:
         type:
           $ref: ./models/CIAC_MissionType.v1.yaml
@@ -1112,7 +1130,11 @@ components:
       type: string
       x-tags:
         - Sinapps
-      description: "Nature du sinistre, selon codification Darva.\n\nListe des valeurs possibles: \n[Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)\n"
+      description: |
+        Nature du sinistre, selon codification Darva.
+
+        Liste des valeurs possibles: 
+        [Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)
       enum:
         - AutresDommages
         - Assistance
@@ -1137,7 +1159,11 @@ components:
     SinisterCause:
       type: string
       title: SinisterCause
-      description: "Cause du sinistre, selon le standard Sinapps.\n\nListe des valeurs possibles: \n- [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)\n"
+      description: |
+        Cause du sinistre, selon le standard Sinapps.
+
+        Liste des valeurs possibles: 
+        - [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)
       enum:
         - ALExterieur
         - AutresLiquides
@@ -1471,7 +1497,10 @@ components:
     Deductible:
       title: Deductible
       type: object
-      description: "Franchise. \nSi de type \"fixed\", seul value est défini. \nSi \"proportional\", value est un pourcentage. min et max sont des valeurs optionnelles de montants plancher et plafond."
+      description: |-
+        **Franchise**. 
+        Si de type "fixed", seul value est défini. 
+        Si "proportional", value est un pourcentage. min et max sont des valeurs optionnelles de montants plancher et plafond.
       properties:
         type:
           type: string
@@ -1487,5 +1516,19 @@ components:
       required:
         - type
         - value
+    AppointmentChangeReason:
+      type: string
+      title: AppointmentChangeReason
+      enum:
+        - ErreurDeSaisie
+        - ClientIndisponible
+        - ExpertIndisponible
+        - TiersIndisponible
+        - DossierIncomplet
+        - RendezVousNonUtile
+        - Autre
+      description: Motif de changement de rendez-vous
+      x-tags:
+        - Appointment
 security:
   - http_basic: []
