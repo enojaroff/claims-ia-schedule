@@ -4,29 +4,31 @@
 
 <!-- theme: info -->
 
-> ### ddsfdsfs
+> #### ddsfdsfs
 >
 > fdsfdsfds
 
 <!-- theme: success -->
 
-> ### ddsfdsfs
+> #### ddsfdsfs
 >
 > fdsfdsfds
 
 <!-- theme: warning -->
 
-> ### ddsfdsfs
+> #### ddsfdsfs
 >
 > fdsfdsfds
 
 <!-- theme: danger -->
 
-> ### ddsfdsfs
+> #### ddsfdsfs
 >
 > fdsfdsfds
 
----
+## Ligne horizontale
+
+* * *
 
 ## Présentation du JSON
 
@@ -84,7 +86,7 @@
 }
 ```
 
----
+* * *
 
 ## Onglets
 
@@ -150,7 +152,7 @@ title: Format JSON schema
 
 <!-- type: tab-end -->
 
----
+* * *
 
 ## Présentation du code
 
@@ -200,11 +202,11 @@ class toto {
 }
 ```
 
----
+* * *
 
 ## Tableaux
 
-<!-- title: My Table Title -->
+<!-- title: Titre de tableau -->
 
 | Tables        |      Are      |   Cool |
 | :------------ | :-----------: | -----: |
@@ -212,10 +214,11 @@ class toto {
 | col 2 is      |    centered   |   12 € |
 | zebra stripes |    are neat   |    1 € |
 
----
+* * *
 
 ## Liste de tâches
 
 - [x] Write the press release
 - [ ] Update the website
 - [ ] Contact the media
+

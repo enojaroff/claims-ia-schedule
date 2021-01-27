@@ -1,0 +1,12 @@
+title: Company
+type: object
+description: "Société d'assurance"
+properties:
+  id:
+    type: string
+    description: Identifiant unique de la compagnie
+  name:
+    type: string
+required:
+  - id
+  - name

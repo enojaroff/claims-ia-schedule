@@ -1,0 +1,19 @@
+title: Coordinates
+type: object
+description: "Coordonnées d'un individu"
+properties:
+  personalPhone:
+    type: string
+    maxLength: 20
+  professionalPhone:
+    type: string
+    maxLength: 20
+  mobilePhone:
+    type: string
+    maxLength: 20
+  email:
+    type: string
+    maxLength: 50
+x-tags:
+  - ClaimsIA
+  - Common

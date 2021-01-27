@@ -1,0 +1,29 @@
+type: string
+title: RiskType
+enum:
+  - Appartement
+  - MaisonParticuliere
+  - Immeuble
+  - LocalProfessionnel
+  - ResidenceMobile
+  - BatimentNonHabitable
+  - TerrainNonBati
+  - ResidenceDeRetraite
+  - Bungalow
+  - Chambre
+  - CaveRemise
+  - HabitationEnConstruction
+  - Indetermine
+  - AutreRisque
+  - BatimentTertiaire
+  - BatimentCommercial
+  - BatimentIndustriel
+  - ConstructionLegere
+  - LogementJeune
+description: |-
+  **Type de risque**
+
+  [Liste des valeurs possibles (Sinapps)]
+x-tags:
+  - Common
+  - Sinapps

@@ -1,0 +1,35 @@
+title: Franchise
+description: 'La franchise est soit un montant fixe, soit un pourcentage du montant du sinistre.'
+x-tags:
+  - Common
+  - Sinapps
+x-examples:
+  Montant fixe:
+    type: fixed
+    value: 1245
+  Taux:
+    type: rate
+    value: 45.25
+    min: 0
+    max: 65.5
+type: object
+properties:
+  type:
+    type: string
+    enum:
+      - fixed
+      - rate
+  value:
+    oneOf:
+      - $ref: ./CIAC_MonetaryValueType.v1.yaml
+      - $ref: ./CIAC_Rate.v1.yaml
+    description: "Si la franchise est de type \"fixed\" alors le champ contient qu'une valeur monétaire; sinon c'est un pourcentage."
+  min:
+    type: number
+    description: Plancher
+  max:
+    type: number
+    description: Plafond
+required:
+  - type
+  - value

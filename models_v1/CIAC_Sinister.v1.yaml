@@ -1,0 +1,33 @@
+title: Sinister
+type: object
+x-tags:
+  - Common
+  - ClaimsIA
+description: '**Sinistre**'
+properties:
+  characteristics:
+    $ref: ./CIAC_SinisterCharacteristic.v1.yaml
+  circonstancesDeclarees:
+    $ref: ./CIAC_NonEmptyString.v1.yaml
+  declaredDamages:
+    $ref: ./CIAC_Damages.v1.yaml
+  conservationMeasures:
+    type: boolean
+    description: Mesures conservatoires prises ?
+  causeRemoval:
+    $ref: ./CIAC_CauseRemoval.v1.yaml
+  address:
+    $ref: ./CIAC_PostalAddress.v1.yaml
+  time:
+    type: string
+    description: Heure du sinistre
+  date:
+    type: string
+    format: date
+    description: Date du sinistre
+  qualification:
+    $ref: ./CIAC_Qualification.v1.yaml
+required:
+  - characteristics
+  - address
+  - date

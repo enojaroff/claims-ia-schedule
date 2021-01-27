@@ -1,0 +1,52 @@
+title: Postal Address
+type: object
+x-examples:
+  exemple:
+    street1: '49-51, rue de Paris'
+    zipcode: '92110'
+    city: Clichy
+    state: IDF
+    countryCode: FR
+    country: France
+description: '**Adresse postale** d''un lieu.'
+x-tags:
+  - ClaimsIA
+  - Common
+properties:
+  street1:
+    type: string
+    maxLength: 38
+    description: 'adresse postale, ligne 1. Les propriétés `street1` à `street4` contiennent sur 4 lignes max les informations, telles que le numéro, le nom de la voie, et toute information qui n''est pas définie par les autres propriétés.'
+  street2:
+    type: string
+    maxLength: 38
+  street3:
+    type: string
+    maxLength: 38
+  street4:
+    type: string
+    maxLength: 38
+  zipCode:
+    type: string
+    maxLength: 5
+    description: Code postal
+  city:
+    type: string
+    maxLength: 32
+    description: Ville
+  countryCode:
+    type: string
+    default: FR
+    description: Code du pays au format ISO 3166-1 (2 caractères).
+  country:
+    type: string
+    maxLength: 28
+    description: Nom du Pays
+  state:
+    type: string
+    maxLength: 28
+    description: 'Région, département'
+required:
+  - street1
+  - zipCode
+  - city

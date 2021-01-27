@@ -1,0 +1,27 @@
+title: ContentDamage
+type: object
+properties:
+  name:
+    type: string
+  description:
+    type: string
+  category:
+    type: string
+  brandAndModel:
+    type: string
+  age:
+    $ref: ./CIAC_Age.v1.yaml
+  marketPrice:
+    $ref: ./CIAC_Amount.v1.yaml
+  buyingPrice:
+    $ref: ./CIAC_Amount.v1.yaml
+  invoice:
+    $ref: ./CIAC_Attachment.v1.yaml
+  pictures:
+    type: array
+    items:
+      $ref: ./CIAC_Attachment.v1.yaml
+x-tags:
+  - ClaimsIA
+  - Common
+description: Dommage mobilier

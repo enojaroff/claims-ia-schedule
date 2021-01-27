@@ -1,0 +1,14 @@
+title: Age
+type: object
+x-tags:
+  - ClaimsIA
+properties:
+  value:
+    type: number
+  unit:
+    type: string
+    enum:
+      - 'y'
+      - m
+      - d
+description: 'Age d''un bien (en jours, mois, ou années)'

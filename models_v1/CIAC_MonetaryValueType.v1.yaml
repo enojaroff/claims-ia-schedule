@@ -1,0 +1,7 @@
+type: integer
+title: MonetaryValueType
+description: '**Valeur monétaire**. Montant en centièmes d''unité. Par exemple, la valeur de 123,45 € est 12345'
+example: 12345
+x-tags:
+  - Common
+  - ClaimsIA

@@ -1,0 +1,20 @@
+title: CauseRemoval
+type: object
+properties:
+  done:
+    type: boolean
+  reason:
+    type: string
+    enum:
+      - EnCoursDeReparation
+      - NonRepare
+      - RechercheEnCours
+      - ReparationPrevue
+      - Autre
+    description: Motif de non suppression de cause (Sinapps)
+required:
+  - done
+description: Cause réparée?
+x-tags:
+  - Common
+  - ClaimsIA

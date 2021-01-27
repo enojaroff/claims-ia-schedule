@@ -1,0 +1,14 @@
+title: LimitType
+type: object
+description: Plafond d'indemnisation
+x-tags:
+  - Common
+  - Sinapps
+properties:
+  type:
+    $ref: ./CIAC_LimitTypeValues.v1.yaml
+  value:
+    $ref: ./CIAC_Amount.v1.yaml
+required:
+  - type
+  - value

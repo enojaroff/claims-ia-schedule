@@ -1,0 +1,6 @@
+type: integer
+title: Duration
+description: |
+  Durée en minutes
+example: 90
+minimum: 0

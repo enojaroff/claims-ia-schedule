@@ -1,0 +1,37 @@
+type: string
+title: AdditionalWarrantyType
+enum:
+  - Inondation
+  - Bijoux
+  - DiversImmobilier
+  - Autres
+  - RisqueLocatif
+  - Grele
+  - BiensMultimedia
+  - ObjetPrecieux
+  - BiensProfessionnels
+  - CaveOuDependancesIsolees
+  - Veranda
+  - Television
+  - LieuPublicTransportEnCommun
+  - VitresInterieures
+  - DommagesAuxBiens
+  - AppareilsElectriques
+  - ValeurANeufMobilier
+  - ObjetConfie
+  - ImmobilierExterieur
+  - VolHorsDomicileHorsLocal
+  - EquipementDeLoisir
+  - MaterielProfessionnel
+  - AppareilsNomades
+  - Vol
+  - BrisDeMachine
+  - RcExploitation
+  - PerteExploitation
+  - SyndicBenevole
+  - RcDirigeants
+  - ObjetsDeValeurs
+  - Explosion
+description: Type de garantie complémentaire
+x-tags:
+  - Sinapps

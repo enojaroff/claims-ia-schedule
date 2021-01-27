@@ -1,0 +1,37 @@
+type: string
+title: LimitTypeValues
+enum:
+  - PlafondImmobilier
+  - PlafondMobilier
+  - PlafondBijoux
+  - CapitalDeBase
+  - PlafondDesObjetsDeValeur
+  - PlafondInstallationsExterieures
+  - PlafondMobilierDeclare
+  - PlafondMobilierOrdinaire
+  - PlafondVeranda
+  - PlafondContenuDependances
+  - PlafondPiscine
+  - PlafondDeRevente
+  - PlafondRechercheDeFuite
+  - PlafondAutresBiensExterieurs
+  - PlafondSurconsommationDEau
+  - PlafondBrisAccidentelDeBiensMultimedia
+  - PlafondVolALExterieur
+  - PlafondAutre
+  - PlafondDependances
+  - PlafondMobilierProfessionnel
+  - PlafondImmobilierDependanceMemeAdresse
+  - PlafondImmobilierDependanceAutreAdresse
+  - PlafondCanalisationsExterieures
+  - PlafondGtieVillegiature
+  - BienInvites
+  - BiensDepositaire
+  - EauRuissellementRefoulementEgouts
+  - FraisRéparationAppareilEffetDEauConduiteGel
+  - BiensEntreposesImmeubleConstruction
+  - PlafondMobilierDependanceAutreAdresse
+x-tags:
+  - Common
+  - Sinapps
+description: '**Type de plafond d''indemnisation**'

@@ -1,0 +1,21 @@
+type: string
+title: ConventionType
+enum:
+  - SansObjet
+  - Cidre
+  - CideCop
+  - AssuranceCumulative
+  - ConventionDtiVol
+  - OpposabiliteDeLExpertise
+  - Cora
+  - ConduitDeFumee
+  - RenonciationARecours
+  - Autre
+  - Cidpiecop
+  - ConventionSecheresse
+  - RisqueTechnologique
+  - Irsi
+description: Type de convention applicable
+x-tags:
+  - Common
+  - Sinapps

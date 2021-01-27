@@ -1,0 +1,32 @@
+title: AttachmentType
+type: string
+enum:
+  - document
+  - image
+  - ConstatAmiable
+  - ConvocationAExpertise
+  - Courrier
+  - DocumentAdministratif
+  - DevisDetaille
+  - EtatDePertes
+  - Facture
+  - ProcesVerbalDePolice
+  - Rapport
+  - DescriptionDesDommages
+  - PhotoCroquis
+  - LettreAcceptationDesDommages
+  - LettreAcceptationIndemnisationQuittance
+  - ChiffrageDetaille
+  - Bail
+  - PVExpertiseProtocole
+  - RapportDeRechercheDeFuite
+  - DelegationDePaiement
+  - FactureAutrePrestataire
+  - Autre
+  - Kbis
+  - AttestationDePropriete
+  - NoteHonoraires
+description: Type de document.
+x-tags:
+  - ClaimsIA
+  - Common

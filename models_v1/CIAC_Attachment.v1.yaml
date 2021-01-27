@@ -1,0 +1,31 @@
+title: Attachment
+type: object
+description: "Pièce-jointe d'un élément."
+x-examples:
+  exemple photo:
+    href: /core/api/covea-expert/piecesJointes/5b51c8ce510000c84e1dc8fe/presentation.png
+    id: 5b51c8ce510000c84e1dc8fe
+    fileName: presentation.png
+    mimeType: image/png
+  exemple justificatif:
+    href: /core/api/covea-expert/piecesJointes/5b51c8ce510000c84e1dc8fe/fnac.pdf
+    id: 5b51c8ce510000c84e1dc8fe
+    type: Facture
+    fileName: fnac.pdf
+    mimeType: application/pdf
+properties:
+  id:
+    type: string
+  description:
+    type: string
+  fileName:
+    type: string
+  mimeType:
+    $ref: ./CIAC_MimeType.v1.yaml
+  type:
+    $ref: ./CIAC_AttachmentType.v1.yaml
+  href:
+    type: string
+required:
+  - type
+  - href

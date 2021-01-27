@@ -1,0 +1,31 @@
+type: string
+title: RiskRelationship
+enum:
+  - Locataire
+  - LocataireMeuble
+  - LocataireEnVide
+  - LocataireNonOccupant
+  - Colocataire
+  - CoproprietaireOccupant
+  - CoproprietaireBailleur
+  - CoproprietaireNonOccupant
+  - CoproprietaireNonOccupantMeuble
+  - ProprietaireOccupant
+  - ProprietaireBailleur
+  - ProprietaireIndivisaire
+  - ProprietaireNonOccupant
+  - ProprietaireNonOccupantMeuble
+  - Usufruit
+  - Inconnu
+  - NuProprietaire
+  - SansObjet
+  - Autre
+  - Debirentier
+  - Credirentier
+  - SyndicDeCopropriete
+  - LocataireOccupantTotal
+  - LocataireAttributaireTotal
+  - Proprietaire
+  - MandataireOuGerant
+  - Coproprietaire
+description: '**Relation au risque**'

@@ -1,0 +1,23 @@
+title: Qualification
+description: |-
+  La qualification regroupe des informations établies par Claims IA à l'issue de la déclaration de sinistre.
+  Les données dépendent du type de sinistre, et sont optionnelles.
+type: object
+x-tags:
+  - Claim
+properties:
+  thirdParty:
+    type: boolean
+    description: Tiers en cause?
+  insuredResponsible:
+    type: boolean
+    description: Est-ce que l'assuré est responsable?
+  remedy:
+    type: boolean
+    description: Recours possible?
+  recourse:
+    type: boolean
+    description: Action en remboursement possible?
+  covenant:
+    type: string
+    description: Convention applicable

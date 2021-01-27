@@ -1,0 +1,30 @@
+type: string
+title: Sinister's Nature
+x-tags:
+  - Common
+  - Sinapps
+description: |
+  **Nature du sinistre**, codification Sinapps.
+
+  [Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)
+enum:
+  - AutresDommages
+  - Assistance
+  - BrisDeGlace
+  - BrisDeMachine
+  - CatastropheNaturelle
+  - CatastropheTechnologique
+  - Choc
+  - DegatsDesEaux
+  - Divers
+  - DommagesAuxBiens
+  - DommagesElectriques
+  - DommagesMenagers
+  - EvtNaturel
+  - Explosion
+  - FoudreSansIncendie
+  - Incendie
+  - ResponsabiliteCivile
+  - RisqueInformatique
+  - TempeteNeigeGrele
+  - Vol

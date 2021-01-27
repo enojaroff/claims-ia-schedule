@@ -1,0 +1,18 @@
+title: Amount
+type: object
+description: Représente une **valeur monétaire**
+x-tags:
+  - ClaimsIA
+x-examples:
+  example:
+    value: -12345
+    currency: EUR
+properties:
+  value:
+    $ref: ./CIAC_MonetaryValueType.v1.yaml
+  currency:
+    type: string
+    default: EUR
+    description: Code de la devise au format ISO 4217
+required:
+  - value
