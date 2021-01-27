@@ -10,10 +10,11 @@ info:
     - **Etape 1** : Claims IA fait de demande de créneaux disponibles pour le rendez-vous.
       - La demande est accompagnée d'informations sur la déclaration de sinistre
       - Le partenaire fournit en retour une liste de créneaux
-    - **Etape 2** :Claims IA réserve un créneau, qui devient affecté au rendez-vous
+    - **Etape 2** : L'utilisateur choisit un des créneaux horaires proposés
+    - **Etape 3** :Claims IA réserve un créneau, qui devient affecté au rendez-vous
       - Le partenaire fournit en retour les informations sur le rendez-vous
 
-    ![Philadelphia's Magic Gardens. This place was so cool!](https://stoplight.io/images/home/docs.png "Philadelphia's Magic Gardens")
+    ![Flux normal](assets/images/flux1.png "Flux normal")
 
 
 
