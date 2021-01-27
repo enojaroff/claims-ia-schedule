@@ -1,10 +1,10 @@
 type: string
 title: SinisterCause
 description: |
-  **Cause du sinistre**, selon le standard Sinapps.
+  **Cause du sinistre**, codification Sinapps.
 
   Liste des valeurs possibles: 
-  - [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)
+  - [Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)
 enum:
   - ALExterieur
   - AutresLiquides

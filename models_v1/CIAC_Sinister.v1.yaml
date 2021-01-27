@@ -25,6 +25,8 @@ properties:
     type: string
     format: date
     description: Date du sinistre
+  qualification:
+    $ref: ./CIAC_Qualification.v1.yaml
 required:
   - characteristics
   - address

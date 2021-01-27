@@ -1,0 +1,6 @@
+title: Justificative
+type: object
+description: '**Document justificatif**'
+properties:
+  type:
+    type: string

@@ -13,7 +13,11 @@ info:
     - **Etape 2** :Claims IA réserve un créneau, qui devient affecté au rendez-vous
       - Le partenaire fournit en retour les informations sur le rendez-vous
 
-    L'API intègre également d'autres méthodes pour
+    ![Philadelphia's Magic Gardens. This place was so cool!](https://stoplight.io/images/home/docs.png "Philadelphia's Magic Gardens")
+
+
+
+    L'API intègre également d'autres méthodes (optionnelles en v1) pour
     - Modifier certaines informations du rendez-vous
     - Annuler et replanifier un rendez-vous
 
@@ -360,6 +364,8 @@ paths:
                       data:
                         type: object
                         nullable: true
+        '404':
+          description: Not Found
       operationId: AppointmentCreate
     parameters: []
   '/appointments/{id}':
@@ -624,6 +630,8 @@ components:
     ContentDamage:
       title: ContentDamage
       type: object
+      x-tags:
+        - Claim
       properties:
         name:
           type: string
@@ -634,19 +642,19 @@ components:
         category:
           type: string
         age:
-          $ref: ./models/CIAC_Age.v1.yaml
+          $ref: ./models_v1/CIAC_Age.v1.yaml
         buyingPrice:
-          $ref: ./models/CIAC_Amount.v1.yaml
+          $ref: ./models_v1/CIAC_Amount.v1.yaml
         marketPrice:
-          $ref: ./models/CIAC_Amount.v1.yaml
+          $ref: ./models_v1/CIAC_Amount.v1.yaml
         invoice:
-          $ref: ./models/CIAC_Attachment.v1.yaml
+          $ref: ./models_v1/CIAC_Attachment.v1.yaml
         pictures:
           type: array
           items:
-            $ref: ./models/CIAC_Attachment.v1.yaml
-      x-tags:
-        - Claim
+            $ref: ./models_v1/CIAC_Attachment.v1.yaml
+      required:
+        - name
     Customer:
       title: Customer
       type: object
@@ -658,25 +666,26 @@ components:
         gender:
           type: string
         coordinates:
-          $ref: ./models/CIAC_Coordinates.v1.yaml
+          $ref: ./models_v1/CIAC_Coordinates.v1.yaml
     Valuation:
       title: Valuation
       type: object
       properties:
         cost:
-          $ref: ./models/CIAC_Amount.v1.yaml
+          $ref: ./models_v1/CIAC_Amount.v1.yaml
         contentsCount:
           type: integer
         roomsCount:
           type: integer
       x-tags:
         - Claim
+      description: Estimation
     Contract:
       title: Contract
       type: object
       properties:
         company:
-          $ref: ./models/CIAC_Company.v1.yaml
+          $ref: ./models_v1/CIAC_Company.v1.yaml
         name:
           type: string
           description: Nom du contrat
@@ -714,11 +723,11 @@ components:
           format: date
           description: Date de déclaration
         guarantee:
-          $ref: ./models/CIAC_WarrantyType.v1.yaml
+          $ref: ./models_v1/CIAC_WarrantyType.v1.yaml
         company:
-          $ref: ./models/CIAC_Company.v1.yaml
+          $ref: ./models_v1/CIAC_Company.v1.yaml
         location:
-          $ref: ./models/CIAC_PostalAddress.v1.yaml
+          $ref: ./models_v1/CIAC_PostalAddress.v1.yaml
         sinister:
           $ref: '#/components/schemas/Sinister'
         valuation:
@@ -784,7 +793,7 @@ components:
         pictures:
           type: array
           items:
-            $ref: ./models/CIAC_Attachment.v1.yaml
+            $ref: ./models_v1/CIAC_Attachment.v1.yaml
         size:
           type: number
       required:
@@ -892,7 +901,7 @@ components:
         damages:
           $ref: '#/components/schemas/Damages'
         address:
-          $ref: ./models/CIAC_PostalAddress.v1.yaml
+          $ref: ./models_v1/CIAC_PostalAddress.v1.yaml
       required:
         - date
         - characteristics
@@ -943,15 +952,15 @@ components:
           format: date
           description: Date de déclaration
         guarantee:
-          $ref: ./models/CIAC_WarrantyType.v1.yaml
+          $ref: ./models_v1/CIAC_WarrantyType.v1.yaml
         customer:
           $ref: '#/components/schemas/Customer'
         sinister:
-          $ref: ./models/CIAC_Sinister.v1.yaml
+          $ref: ./models_v1/CIAC_Sinister.v1.yaml
         documents:
           type: array
           items:
-            $ref: ./models/CIAC_Attachment.v1.yaml
+            $ref: ./models_v1/CIAC_Attachment.v1.yaml
         valuation:
           $ref: '#/components/schemas/Valuation'
         contract:
@@ -962,7 +971,7 @@ components:
         risk:
           $ref: '#/components/schemas/Risk'
         company:
-          $ref: ./models/CIAC_Company.v1.yaml
+          $ref: ./models_v1/CIAC_Company.v1.yaml
       required:
         - date
         - guarantee
@@ -971,9 +980,9 @@ components:
       type: object
       properties:
         address:
-          $ref: ./models/CIAC_PostalAddress.v1.yaml
+          $ref: ./models_v1/CIAC_PostalAddress.v1.yaml
         notes:
-          $ref: ./models/CIAC_NonEmptyString.v1.yaml
+          $ref: ./models_v1/CIAC_NonEmptyString.v1.yaml
         createdAt:
           type: string
           format: date-time
@@ -1025,7 +1034,7 @@ components:
           format: date-time
           example: '2020-05-14T09:00:00Z'
         duration:
-          $ref: ./models/CIAC_Duration.v1.yaml
+          $ref: ./models_v1/CIAC_Duration.v1.yaml
       required:
         - type
         - startTime
@@ -1045,15 +1054,15 @@ components:
       description: Représentation du risque
       properties:
         type:
-          $ref: ./models/CIAC_RiskType.v1.yaml
+          $ref: ./models_v1/CIAC_RiskType.v1.yaml
         relationship:
-          $ref: ./models/CIAC_RiskRelationship.v1.yaml
+          $ref: ./models_v1/CIAC_RiskRelationship.v1.yaml
         measures:
           type: array
           items:
             $ref: '#/components/schemas/Measure'
         address:
-          $ref: ./models/CIAC_PostalAddress.v1.yaml
+          $ref: ./models_v1/CIAC_PostalAddress.v1.yaml
         description:
           type: string
       required:
@@ -1095,7 +1104,7 @@ components:
       description: Demande d'intervention
       properties:
         type:
-          $ref: ./models/CIAC_MissionType.v1.yaml
+          $ref: ./models_v1/CIAC_MissionType.v1.yaml
         claim:
           $ref: '#/components/schemas/ClaimSummary'
         dateFrom:
@@ -1131,7 +1140,7 @@ components:
       x-tags:
         - Sinapps
       description: |
-        Nature du sinistre, selon codification Darva.
+        **Nature du sinistre**, codification SinApps.
 
         Liste des valeurs possibles: 
         [Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)
@@ -1160,10 +1169,9 @@ components:
       type: string
       title: SinisterCause
       description: |
-        Cause du sinistre, selon le standard Sinapps.
+        **Cause du sinistre**, codification Sinapps.
 
-        Liste des valeurs possibles: 
-        - [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)
+        [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)
       enum:
         - ALExterieur
         - AutresLiquides

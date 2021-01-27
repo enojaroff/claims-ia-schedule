@@ -4,11 +4,11 @@ x-tags:
   - ClaimsIA
   - Common
 properties:
-  contents:
+  contentDamages:
     type: array
     items:
       $ref: ./CIAC_ContentDamage.v1.yaml
-  buildings:
+  buildingDamages:
     type: array
     items:
       $ref: ./CIAC_BuildingDamage.v1.yaml

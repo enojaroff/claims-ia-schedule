@@ -1,11 +1,6 @@
 title: Company
 type: object
-'-tags':
-  - ClaimsIA
 description: "Société d'assurance"
-x-tags:
-  - ClaimsIA
-  - Common
 properties:
   id:
     type: string

@@ -4,9 +4,8 @@ x-tags:
   - Common
   - Sinapps
 description: |
-  **Nature du sinistre**, selon codification Darva.
+  **Nature du sinistre**, codification Sinapps.
 
-  Liste des valeurs possibles: 
   [Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)
 enum:
   - AutresDommages

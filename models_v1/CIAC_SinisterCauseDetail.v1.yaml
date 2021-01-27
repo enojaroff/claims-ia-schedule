@@ -7,7 +7,7 @@ description: |-
   **Détail sur la cause du sinistre**, selon la codification Sinapps.
 
   Liste des valeurs possibles:
-  - [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)
+  - [Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)
   - [Documentation Sinapps](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Caract%C3%A9ristiqueSinistre)
 enum:
   - Abattoirs
