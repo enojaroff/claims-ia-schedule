@@ -5,18 +5,16 @@ info:
   description: |
     L'API RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, elle doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.
 
-    La prise de rendez-vous s'effectue en 2 temps:
+    La prise de rendez-vous s'effectue en 3 temps:
 
     - **Etape 1** : Claims IA fait de demande de créneaux disponibles pour le rendez-vous.
       - La demande est accompagnée d'informations sur la déclaration de sinistre
       - Le partenaire fournit en retour une liste de créneaux
     - **Etape 2** : L'utilisateur choisit un des créneaux horaires proposés
-    - **Etape 3** :Claims IA réserve un créneau, qui devient affecté au rendez-vous
+    - **Etape 3** : Claims IA réserve un créneau, qui devient affecté au rendez-vous
       - Le partenaire fournit en retour les informations sur le rendez-vous
 
     ![Flux normal](assets/images/flux1.png "Flux normal")
-
-
 
     L'API intègre également d'autres méthodes (optionnelles en v1) pour
     - Modifier certaines informations du rendez-vous
@@ -126,32 +124,21 @@ paths:
       operationId: AccountLogout
       description: Ferme la session courante et rend le jeton de session périmé.
   /availabilities:
-    post:
-      summary: RequestDisponibilites
-      operationId: post-Disponibilites
+    parameters: []
+    get:
+      summary: ''
+      operationId: get-availabilities
       responses:
         '200':
           description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Timeslot'
+        '204':
+          description: No Content
         '401':
           description: Unauthorized
-      security:
-        - http_basic: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MissionRequest'
-      tags:
-        - Availability
       description: |
-        Request available timeslots.
-        -
+        Récupère les créneaux horaires disponibles
+        ---
+
         La requête contient les informations sur le type d'intervention
 
         **Expert**:
@@ -170,14 +157,24 @@ paths:
         - Garantie en jeu
         - Adresse
         - Qualification du sinistre
-    parameters: []
+      security:
+        - http_basic: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MissionRequest'
   '/availabilities/{id}':
     get:
       tags:
         - Availability
       summary: Get Availability Info
-      description: Retrieve timeslot
-      security: []
+      description: |
+        Récupère les informations sur un créneau horaire.
+
+        > N.B. Normalement, cette requête n'est pas nécessaire, dans la mesure où l'information a déjà été transmise dans la liste des créneaux disponibles lors d'un **GET /availabilities**.
+      security:
+        - http_basic: []
       parameters: []
       responses:
         '200':
@@ -186,7 +183,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Timeslot'
-      operationId: AvailibilityGetInfo
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      operationId: get-availibility-info
     parameters:
       - schema:
           type: string
@@ -200,16 +201,11 @@ paths:
         - Appointment
       summary: LISTER les rendez-vous
       description: |
-        Using this endpoint you can retrieve the attributes of all your existing Setster appointments. We advise using filters to fetch appointments on specific date ranges or attributes. See Filtering appointments in the Introduction section. 
+        Récupère une liste de rendez-vous fixés.
 
-        ---
-
-        <!-- theme: warning -->
-
-        > dsfdfds  
-        >
-        > dsfdsfdsfsdf
-      security: []
+        > Pas nécessaire en V1
+      security:
+        - http_basic: []
       parameters:
         - name: id
           in: query
@@ -224,25 +220,12 @@ paths:
           in: query
           schema:
             type: integer
-        - name: timezone_id
-          in: query
-          description: Returns appointments date fields with specified time offset
-          schema:
-            type: integer
-            example: 553
         - name: status
           in: query
           schema:
             type: string
+          description: Statut du rendez-vous
         - name: search_text
-          in: query
-          schema:
-            type: string
-        - name: client_name
-          in: query
-          schema:
-            type: string
-        - name: client_email
           in: query
           schema:
             type: string
@@ -250,35 +233,17 @@ paths:
           in: query
           schema:
             type: string
+            format: date
         - name: end_date
           in: query
           schema:
             type: string
-        - name: start
-          in: query
-          description: List pager
-          schema:
-            type: integer
-            default: 0
-        - name: end
-          in: query
-          description: List pager / 'all' - no limit
-          schema:
-            oneOf:
-              - type: integer
-              - type: string
-                enum:
-                  - all
-            default: 100
         - name: num_results
           in: query
-          description: 'If 1, the call returns only the number of appointments found'
+          description: 'Nombre de réponses attendue. Si 0 (ou absent), la totalité des réponses est retournée'
           schema:
             type: integer
-            default: 0
-            enum:
-              - 0
-              - 1
+          allowEmptyValue: true
         - name: sort_by
           in: query
           schema:
@@ -313,7 +278,7 @@ paths:
                     required:
                       - data
           headers: {}
-      operationId: AppointmentsGetList
+      operationId: get-appointments-list
     post:
       tags:
         - Appointment
@@ -358,13 +323,7 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        nullable: true
+                $ref: '#/components/schemas/ResponseStatus'
         '404':
           description: Not Found
       operationId: AppointmentCreate
@@ -469,142 +428,6 @@ paths:
       operationId: AppointmentReschedule
       security: []
       description: Lecture de l'horaire d'un rendez-vous
-  /rdv:
-    get:
-      summary: get-appointment-info
-      tags:
-        - Appointment
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Appointment'
-        '404':
-          description: Not Found
-      operationId: get-rdv
-      description: Get appointment list
-      parameters:
-        - name: id
-          in: query
-          description: The appointment id
-          schema:
-            type: integer
-        - name: location_id
-          in: query
-          schema:
-            type: integer
-        - name: client_id
-          in: query
-          schema:
-            type: integer
-        - name: timezone_id
-          in: query
-          description: Returns appointments date fields with specified time offset
-          schema:
-            type: integer
-            example: 553
-        - name: status
-          in: query
-          schema:
-            type: string
-        - name: search_text
-          in: query
-          schema:
-            type: string
-        - name: client_name
-          in: query
-          schema:
-            type: string
-        - name: client_email
-          in: query
-          schema:
-            type: string
-        - name: start_date
-          in: query
-          schema:
-            type: string
-        - name: end_date
-          in: query
-          schema:
-            type: string
-        - name: start
-          in: query
-          description: List pager
-          schema:
-            type: integer
-            default: 0
-        - name: end
-          in: query
-          description: List pager / 'all' - no limit
-          schema:
-            oneOf:
-              - type: integer
-              - type: string
-                enum:
-                  - all
-            default: 100
-        - name: updated_after
-          in: query
-          description: Lower date limit for which the appointment was updated
-          schema:
-            type: string
-            format: date-time
-        - name: updated_before
-          in: query
-          description: Upper date limit for which the appointment was updated
-          schema:
-            type: string
-            format: date-time
-        - name: num_results
-          in: query
-          description: 'If 1, the call returns only the number of appointments found'
-          schema:
-            type: integer
-            default: 0
-            enum:
-              - 0
-              - 1
-        - name: sort_by
-          in: query
-          schema:
-            type: string
-            default: start_date
-            enum:
-              - start_date
-              - created
-        - name: sort_order
-          in: query
-          schema:
-            type: string
-            default: asc
-            enum:
-              - asc
-              - desc
-      security: []
-    post:
-      summary: create-appointment
-      tags:
-        - Appointment
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Appointment'
-      operationId: post-rdv
-      description: create appointment
-      requestBody:
-        content:
-          application/json:
-            schema:
-              allOf:
-                - $ref: '#/components/schemas/Timeslot'
-                - $ref: '#/components/schemas/Claim'
 components:
   securitySchemes:
     header_token:
@@ -909,36 +732,40 @@ components:
         - address
     ResponseStatus:
       type: object
-      description: ResponseStatus donne une information sur la réponse. Il contient un code numérique et une description.
+      description: |
+        ResponseStatus donne une information sur la réponse. Il contient un code numérique et une description.
+
+        Statut de l'opération.
+
+        | Decription             | Value |
+        | ---------------------- | ----: |
+        | OK                     |    0  |
+        | INVALID_PARAMETERS     |    1  |
+        | INVALID_CREDENTIALS    |    2  |
+        | ACCOUNT_NOT_ACTIVE     |    3  |
+        | INTERNAL_ERROR         |    4  |
+        | ERROR_SAVING_ENTITY    |    5  |
+        | ERROR_DELETING         |    6  |
+        | NOT_FOUND              |    7  |
+        | NOT_ALLOWED            |    8  |
+        | SLOT_NOT_AVAILABLE     |    9  |
+        | SLOT_OCCUPIED          |   10  |
+        | ACCOUNTS_LIMIT_REACHED |   11  |
       x-examples:
         example:
           value: 0
           statusCode: 0
           statusDescription: Cool Baby!
+      title: Response Status
       properties:
         value:
           type: integer
-          description: |
-            Statut de l'opération.
-            | Statut                 | Code |
-            |------------------------|------|
-            | OK                     |   0  |
-            | INVALID_PARAMETERS     |   1  |
-            | INVALID_CREDENTIALS    |   2  |
-            | ACCOUNT_NOT_ACTIVE     |   3  |
-            | INTERNAL_ERROR         |   4  |
-            | ERROR_SAVING_ENTITY    |   5  |
-            | ERROR_DELETING         |   6  |
-            | NOT_FOUND              |   7  |
-            | NOT_ALLOWED            |   8  |
-            | SLOT_NOT_AVAILABLE     |   9  |
-            | SLOT_OCCUPIED          |  10  |
-            | ACCOUNTS_LIMIT_REACHED |  11  |
+          description: Statut de l'opération
           example: 0
-        descriptions:
+        description:
           type: string
           example: OK
-          description: Description of the status
+          description: Description
       required:
         - value
     Claim:
@@ -1503,28 +1330,6 @@ components:
         - Explosion
         - DefautConception
         - AccueilAuDomicile
-    Deductible:
-      title: Deductible
-      type: object
-      description: |-
-        **Franchise**. 
-        Si de type "fixed", seul value est défini. 
-        Si "proportional", value est un pourcentage. min et max sont des valeurs optionnelles de montants plancher et plafond.
-      properties:
-        type:
-          type: string
-          enum:
-            - fixed
-            - proportional
-        value:
-          type: number
-        min:
-          type: number
-        max:
-          type: number
-      required:
-        - type
-        - value
     AppointmentChangeReason:
       type: string
       title: AppointmentChangeReason

@@ -1,5 +1,8 @@
 title: Franchise
-description: 'La franchise est soit un montant fixe, soit un pourcentage du montant du sinistre.'
+description: |-
+  Somme retenue du montant des dommages
+  - Si de type "fixed", seul value est défini. 
+  - Si "proportional", value est un pourcentage. min et max sont des valeurs optionnelles de montants plancher et plafond.
 x-tags:
   - Common
   - Sinapps
@@ -23,7 +26,7 @@ properties:
     oneOf:
       - $ref: ./CIAC_MonetaryValueType.v1.yaml
       - $ref: ./CIAC_Rate.v1.yaml
-    description: "Si la franchise est de type \"fixed\" alors le champ contient qu'une valeur monétaire; sinon c'est un pourcentage."
+    description: Si la franchise est de type "fixed" alors le champ contient qu'une valeur monétaire; sinon c'est un pourcentage.
   min:
     type: number
     description: Plancher
