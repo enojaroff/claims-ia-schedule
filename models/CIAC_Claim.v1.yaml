@@ -1,0 +1,7 @@
+title: CIAC_Claim
+type: object
+x-tags:
+  - Claim
+properties:
+  id:
+    type: string

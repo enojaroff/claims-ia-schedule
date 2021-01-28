@@ -1,14 +1,14 @@
 openapi: 3.0.0
 info:
   version: 0.9.1
-  title: Claims IA API
-  description: |
-    L'API RDV de Claims IA est utilisée dans la cadre du service de prise de rendez-vous de Claims IA.
-    Cete API permet aux partenaires, après avoir fixé le rendez-vous, de récupérer les informations détaillées sur le sinistre et la déclaration de l'asuré.
+  title: Partner API
+  description: |+
+    L'API partenaire décrit les méthodes qui devront être implémentées par le partenaire (Expert ou REN) dans le cadre du module de prise de rendez-vous.
 
-    L'API respecte le standard REST et utilise le protocole HTTP. Les messages échangés sont au format JSON.
+    Le service RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, l'API partenaire doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.
 
-    Une clé est nécessaire pour utiliser l'API. Cette clé doit être fournie par la société qui implémente l'API.
+    Le service RDv de Claims IA est décrit plus en détails dans la documentation.
+
   contact:
     name: Edouard Nojaroff
     email: e.nojaroff@claims-ia.fr
@@ -406,29 +406,6 @@ paths:
       operationId: AppointmentReschedule
       security: []
       description: Lecture de l'horaire d'un rendez-vous
-  '/claims/{cid}':
-    parameters:
-      - schema:
-          type: string
-          example: cd83ea81-5ca1-4a1b-a155-2e4d99f04a6a
-          format: uuid
-        name: cid
-        in: path
-        required: true
-        description: Identifiant de la déclaration
-    get:
-      summary: LIRE les données d'une déclaration
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Claim'
-      operationId: get-claim
-      description: ''
-      parameters: []
 components:
   securitySchemes:
     header_token:
@@ -520,7 +497,7 @@ components:
         - name
       x-tags:
         - Claim
-    CIA-ClaimSummary:
+    ClaimSummary:
       title: ClaimSummary
       type: object
       description: Déclaration de sinistre résumée.
@@ -770,7 +747,7 @@ components:
           description: Description
       required:
         - value
-    CIA-Claim:
+    Claim:
       title: Claim
       type: object
       description: Déclaration de sinistre
