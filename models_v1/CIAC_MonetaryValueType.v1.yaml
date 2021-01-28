@@ -1,6 +1,9 @@
 type: integer
 title: MonetaryValueType
-description: 'Valeur monétaire. Montant en centièmes d''unité. Par exemple, la valeur de 123,45 € est 12345'
+description: |-
+  Valeur monétaire. Montant en euros, 2 chiffres après la virgule
+
+  Devise
 example: 12345
 x-tags:
   - Common

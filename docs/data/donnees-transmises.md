@@ -4,70 +4,70 @@ Liste des informations transmises lors des différents échanges
 
 <!-- title: Liste des champs transmis -->
 
-| Données                            | Créneau horaire | Rendez-vous | Remarques                       |
-| :--------------------------------- | :-------------: | :---------: | :------------------------------ |
-| Assureur                           |        O        |      O      |                                 |
-| Contrat                            |        O        |      O      | Nom du contrat                  |
-| _N° contrat_                       |                 |             |                                 |
-| **_Assuré_**                       |                 |      O      |                                 |
-| **_Qualité de l'assuré_**          |                 |      O      |                                 |
-| Lieu du sinistre                   |        O        |      O      |                                 |
-| Type de sinistre                   |        O        |      O      | _DDE, DE, CATNAT, VOL_          |
-| Type d'expertise                   |        O        |      O      |                                 |
-| Date du sinistre                   |        O        |      O      |                                 |
-| Date de la déclaration             |        O        |      O      |                                 |
-| Type d'habitation                  |        O        |      O      |                                 |
-| Adresse de l'habitaion             |        O        |      O      |                                 |
-| Pesée Claims                       |        O        |      O      | Varie selon le type de sinistre |
-| Lieu de RDV                        |        O        |      O      | Si **ESS**                      |
-| **_Liste des dommages immo_**      |        R        |      O      | Avec ou sans chiffrage ?        |
-| **_Liste des dommages mobiliers_** |        R        |      O      | Avec ou sans chiffrage ?        |
-| **_Pièces-jointes_**               |                 |      O      |                                 |
-| **_Identité de l'assuré_**         |                 |      O      | Différent du contact RDV        |
-| **_Identité du contact DV_**       |                 |      O      |                                 |
-| <hr>                               |      <hr>       |    <hr>     | <hr>                            |
-| `ESS` : Lieu de RDV souhaité       |        O        |      O      | Usage futur                     |
-| `EAD` : Données de connexion       |        O        |      O      | Usage futur                     |
+| Données                      | Créneau horaire | Rendez-vous | Remarques                         |
+| :--------------------------- | :-------------: | :---------: | :-------------------------------- |
+| Processus                    |      \|->       |    \|->     | Champ libre                       |
+| Assureur                     |      \|->       |    \|->     |                                   |
+| Contrat                      |                 |    \|<-     | Nom du contrat                    |
+| N° contrat                   |                 |    \|<-     |                                   |
+| Ref Claims IA                |                 |             |                                   |
+| Ref Sinistre                 |                 |    \|->     | Ref assureur                      |
+| Qualité de l'assuré          |                 |    \|<-     | CP, lOC,..                        |
+| Adresse du risque            |                 |    \|<-     |                                   |
+| Type de sinistre             |      \|->       |    \|->     | _DDE, DE, CATNAT, VOL_            |
+| Type d'expertise             |      \|->       |    \|->     | VISIO, EAD, ESS, CONTRADICTOIRE   |
+| Date du sinistre             |      \|->       |    \|->     |                                   |
+| Date de la déclaration       |                 |    \|->     |                                   |
+| Type d'habitation            |      \|->       |    \|->     |                                   |
+| Adresse de l'habitaion       |      \|->       |    \|->     |                                   |
+| Enjeu                        |      \|->       |    \|->     | Varie selon le type de sinistre   |
+| Enjeu DM                     |      \|->       |    \|->     |
+| Enjeu DI                     |      \|->       |    \|->     |                                   |
+| Lieu de RDV                  |      \|->       |    \|->     | Si **ESS**                        |
+| _Géocodage lieu RDV_         |      \|->       |    \|->     | V2                                |
+| Liste des dommages immo      |                 |    \|<-     | Avec ou sans chiffrage ?          |
+| Liste des dommages mobiliers |                 |    \|<-     | Avec ou sans chiffrage ?          |
+| Pièces-jointes               |                 |    \|<-     | URL des documents                 |
+| Identité de l'assuré         |                 |    \|<-     | Différent du contact RDV          |
+| Identité du contact RDV      |                 |    \|<-     | Si la personne n'est pas l'assuré |
+| <hr>                         |      <hr>       |    <hr>     | <hr>                              |
+| USAGE FUTUR                  |                 |             |                                   |
+| <hr>                         |      <hr>       |    <hr>     | <hr>                              |
+| `ESS` : Lieu de RDV souhaité |      \|->       |    \|->     |                                   |
+| `EAD` : Données de connexion |                 |    \|<-     |                                   |
+
+Réponse
+
+- ## Liste de créneaux
 
 <!-- theme: info -->
 
-> _**O**: Oui<br> **R**: Liste réduite aux seuls éléments, sans indication d'âge, de valeur et de vétusté_
->
-> - _Pour les biens immobiliers: surfaces, revêtement_
-> - _Pour les biens mobiliers, catégorie, sous-catégorie, nom_
+> _**\|->** : Données envoyées par Claims IA dans la requête<br>
+> **\|<-** : Données récupérées par le partenaire via des endpoints coté Claims IA
 
+CONTEXTE
 
-```
 ESS
 
+```
   --> Contact
         email
         téléphone
   --> Adresse du bien               (pas forcément limité à ESS)
-  --> Lieu de rendez-vous souhaité  (usage futur)
 
   <-- Lieu de rendez-vous           (si différent du souhaité)
-  <-- Informations complémentaires
-
+  <-- Informations complémentaires  (à définir)
+```
 
 VISIO
 
+```
   --> Contact
         email
         téléphone
-  --> Terminal                      (usage futur)
-  --> connexion                     (usage futur)
+  --> Adresse du bien               (pas forcément limité à ESS)
 
-  <-- Informations complémentaires (Procédure de connexion visio)
-
-
-TELEPHONE
-
-  --> Contact
-        email
-        téléphone
-
-  <-- Informations complémentaires
+  <-- Informations complémentaires  (Procédure de connexion visio)
 ```
 
 [Codes Sinapps utilisés](docs/sinapps/Type-de-risque.md)

@@ -131,6 +131,11 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
         '204':
           description: No Content
         '401':
@@ -916,7 +921,7 @@ components:
         - type
         - value
     MissionRequest:
-      title: MissionRequest
+      title: AppointmentRequest
       type: object
       description: Demande d'intervention
       properties:
@@ -930,6 +935,9 @@ components:
         dateTo:
           type: string
           format: date
+        limit:
+          type: integer
+          maximum: 30
     SinisterCharacteristics:
       title: SinisterCharacteristic
       type: object

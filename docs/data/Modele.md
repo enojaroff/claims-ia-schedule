@@ -46,10 +46,73 @@ flood               innondation
 
 # Modèle de données
 
+## Demande d'intervention
+
+Données envoyées aux prestataire lors de la demande de créneaux horaires
 ```
-Claim
-  - type
-  #Customer
+MissionRequest              Demande d'intervention
+  type                      Type de prestation (REN, EAD, ESS, ...)
+  claim                     Déclaration de sinistre (simplifiée)
+  dateFrom                  Début de période d'intervention
+  dateTo                    Fin de période d'intervention
+```
+
+## Déclaration de sinistre
+
+2 versions sont prévues:
+- Une version résumée envoyée lors de la première requête. Elle doit contenir le minimum d'informations necessaires pour pouvoir sélectionner des créneaux dans l'agenda.
+- Une version complète, envoyée une fois que l'assuré a choisi un créneau horaire, et que le rendez-vous est booké.
+
+### Déclaration résumée
+
+#### Expert:
+
+- Type d'expertise (EAD, ESS, ...)
+- Informations sur l'assurance et le contrat
+  - Compagnie
+  - Réf. produit (contrat assureur)
+- Garantie en jeu (DDE, DE, TNG, SECH, VOL)
+- Adresse du risque
+- Qualification du sinistre, selon la codification Sinapps (origine, cause, détail)
+- Des données d'analyse de ClaimsIA (tiers, recours,...)
+- La pesée de l'enjeu (ou chiffrage Claims pour les sinistres qui n'ont pas de pesée)
+
+#### RENeur:
+
+- Type de mission
+- Informations sur l'assurance et le contrat
+  - Compagnie
+  - Réf. produit (contrat assureur)
+- Garantie en jeu (DDE, DE, TNG, SECH, VOL)
+- Adresse du risque
+- Qualification du sinistre, selon la codification Sinapps (origine, cause, détail)
+
+
+```
+Claim                       Déclaration
+  - type                    Type de pres
+  #Customer                 Données assuré
+  #Sinister
+    - type
+    - housing
+    #Location
+  #Company
+  #Estimation
+  #SinisterDetails
+  #Documents
+```
+
+### Déclaration complète
+
+```
+```
+
+
+
+```
+Claim                       Déclaration
+  - type                    Type de pres
+  #Customer                 Données assuré
   #Sinister
     - type
     - housing
@@ -64,7 +127,7 @@ Damages
     BuildingDamage
       - Surface
       - Covering
-    BuildingDamage				# Dommage immobilier
+    BuildingDamage          # Dommage immobilier
     	Room
     		surface
           - size
