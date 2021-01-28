@@ -111,7 +111,7 @@ paths:
   /availabilities:
     parameters: []
     get:
-      summary: ''
+      summary: LISTER les créneaux horaires disponibles
       operationId: get-availabilities
       responses:
         '200':
@@ -650,7 +650,7 @@ components:
         - date
         - schedule
       x-tags:
-        - Availability
+        - Claim
     SurfaceCovering:
       title: Covering
       type: object
