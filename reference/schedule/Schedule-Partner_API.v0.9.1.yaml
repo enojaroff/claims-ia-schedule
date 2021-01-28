@@ -2,13 +2,12 @@ openapi: 3.0.0
 info:
   version: 0.9.1
   title: Partner API
-  description: |+
+  description: |
     L'API partenaire décrit les méthodes qui devront être implémentées par le partenaire (Expert ou REN) dans le cadre du module de prise de rendez-vous.
 
     Le service RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, l'API partenaire doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.
 
     Le service RDv de Claims IA est décrit plus en détails dans la documentation.
-
   contact:
     name: Edouard Nojaroff
     email: e.nojaroff@claims-ia.fr
@@ -119,8 +118,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties: {}
+                type: array
+                minItems: 10
+                maxItems: 30
+                items:
+                  $ref: ./Schedule-Claims_IA_API.v0.9.1.yaml#/components/schemas/Timeslot
         '204':
           description: No Content
         '401':
@@ -148,7 +150,7 @@ paths:
         - Adresse
         - Qualification du sinistre
       security:
-        - http_basic: []
+        - pid: []
       requestBody:
         content:
           application/json:
@@ -166,7 +168,7 @@ paths:
 
         > N.B. Normalement, cette requête n'est pas nécessaire, dans la mesure où l'information a déjà été transmise dans la liste des créneaux disponibles lors d'un **GET /availabilities**.
       security:
-        - http_basic: []
+        - '0123456789': []
       parameters: []
       responses:
         '200':
@@ -196,8 +198,6 @@ paths:
         Récupère une liste de rendez-vous fixés.
 
         > Pas nécessaire en V1
-      security:
-        - http_basic: []
       parameters:
         - name: id
           in: query
@@ -262,7 +262,11 @@ paths:
                     required:
                       - data
           headers: {}
+        '401':
+          description: Unauthorized
       operationId: get-appointments-list
+      security:
+        - pid: []
     post:
       tags:
         - Appointment
@@ -408,11 +412,11 @@ paths:
       description: Lecture de l'horaire d'un rendez-vous
 components:
   securitySchemes:
-    header_token:
+    pid:
       type: apiKey
       in: header
-      name: header_token
-    http_basic:
+      name: pid
+    '0123456789':
       type: http
       scheme: basic
       description: ''
