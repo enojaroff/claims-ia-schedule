@@ -18,7 +18,6 @@ description: |
     - niveau d'usure (1: neuf, 2: état d'usage, 3: ancien)
         
 x-tags:
-  - ClaimsIA
   - Common
 properties:
   name:

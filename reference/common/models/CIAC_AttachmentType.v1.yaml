@@ -28,5 +28,4 @@ enum:
   - NoteHonoraires
 description: Type de document.
 x-tags:
-  - ClaimsIA
   - Common

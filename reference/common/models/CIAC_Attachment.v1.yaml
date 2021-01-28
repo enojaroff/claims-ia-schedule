@@ -1,6 +1,6 @@
 title: Attachment
 type: object
-description: "Pièce-jointe d'un élément."
+description: Pièce-jointe d'un élément.
 x-examples:
   exemple photo:
     href: /core/api/covea-expert/piecesJointes/5b51c8ce510000c84e1dc8fe/presentation.png
@@ -29,3 +29,5 @@ properties:
 required:
   - type
   - href
+x-tags:
+  - Common
