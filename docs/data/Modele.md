@@ -9,7 +9,6 @@ cover               protection
 building cover      protection des biens immobiliers
 contents cover      protection des biens mobiliers
 
-damage              dommage
 buildingsDamages    dommages immobiliers
   buildingDamage    dommage immobilier
 contentsDamages     dommages mobiliers
@@ -24,27 +23,26 @@ lightning           foudre
 flood               innondation
 ```
 
-| Anglais              | Français                         |
-| -------------------- | -------------------------------- |
-| cover                | protection                       |
-| building cover       | protection des biens immobiliers |
-| contents cover       | protection des biens mobiliers   |
-| …………………………………………………… | ……………………………………………………             |
-| damage               | dommage                          |
-| **buildingsDamages** | **dommages immobiliers**         |
-| ›› buildingDamage    | dommage immobilier               |
-| **contentsDamages**  | **dommages mobiliers**           |
-| ›› contentDamage     | dommage mobilier                 |
-| …………………………………………………… | ……………………………………………………             |
-| **belongings**       | possessions, biens               |
-| **property**         | propriété, biens, immobilier     |
-| …………………………………………………… | ……………………………………………………             |
-| **SINISTRES**        |                                  |
-| ———————————————      | ————————————————                 |
-| **burglary**         | cambriolage                      |
-| **water damage**     | dégât des eaux                   |
-| **lightning**        | foudre                           |
-| **flood**            | innondation                      |
+| Français                         | Anglais            |
+| -------------------------------- | ------------------ |
+| **PROTECTION**                   | **COVER**          |
+| protection des biens immobiliers | building cover     |
+| protection des biens mobiliers   | contents cover     |
+| ———————————————                  | —————————————      |
+| **DOMMAGES**                     | **DAMAGES**        |
+| dommages immobiliers             | buildingsDamages   |
+|     dommage immobilier           |     buildingDamage |
+| dommages mobiliers               | contentsDamages    |
+|     dommage mobilier             |     contentDamage  |
+| ———————————————                  | —————————————      |
+| possessions, biens               | belongings         |
+| propriété, biens, immobilier     | property           |
+| ———————————————                  | —————————————      |
+| **SINISTRES**                    | **SINISTERS**      |
+| cambriolage                      | burglary           |
+| dégât des eaux                   | water damage       |
+| foudre                           | lightning          |
+| innondation                      | flood              |
 
 # Modèle de données
 

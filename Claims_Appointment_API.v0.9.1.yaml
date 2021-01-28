@@ -164,6 +164,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/MissionRequest'
+      tags:
+        - Availability
   '/availabilities/{id}':
     get:
       tags:
@@ -212,19 +214,11 @@ paths:
           description: The appointment id
           schema:
             type: integer
-        - name: location_id
-          in: query
-          schema:
-            type: integer
-        - name: client_id
-          in: query
-          schema:
-            type: integer
-        - name: status
+        - name: zip
           in: query
           schema:
             type: string
-          description: Statut du rendez-vous
+          description: Code postal
         - name: search_text
           in: query
           schema:
@@ -395,13 +389,7 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        nullable: true
+                allOf: []
       operationId: AppointmentDelete
     parameters:
       - schema:
@@ -433,6 +421,7 @@ components:
     header_token:
       type: apiKey
       in: header
+      name: header_token
     http_basic:
       type: http
       scheme: basic
@@ -1344,5 +1333,8 @@ components:
       description: Motif de changement de rendez-vous
       x-tags:
         - Appointment
+  responses: {}
+  parameters: {}
+  examples: {}
 security:
   - http_basic: []

@@ -27,3 +27,6 @@ tags: [Sinapps, documentation]
 | LocataireNonOccupant              |     |
 | Inconnu                           |     |
 | Autre                             |     |
+
+
+

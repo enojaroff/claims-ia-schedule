@@ -1,5 +1,5 @@
 type: number
 title: Rate
-description: '**Taux** (pourcentage)'
+description: Taux (pourcentage)
 format: float
 example: 75.25

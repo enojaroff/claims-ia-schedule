@@ -6,7 +6,7 @@ enum:
   - ActionEnRemboursement
   - ActionEnContribution
   - ActionEnRecuperation
-description: '**Type de recours**'
+description: Type de recours
 x-tags:
   - Common
   - Sinapps

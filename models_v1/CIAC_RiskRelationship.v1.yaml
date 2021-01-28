@@ -28,4 +28,4 @@ enum:
   - Proprietaire
   - MandataireOuGerant
   - Coproprietaire
-description: '**Relation au risque**'
+description: Relation au risque

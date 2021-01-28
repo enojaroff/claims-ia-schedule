@@ -2,31 +2,13 @@
 tags: [Sinapps, documentation]
 ---
 
+
 # Nature du sinistre
 
-- [Autres Dommages](#autres-dommages)
-
-- [Bris de glace](#bris-de-glace)
-- [Bris de machine](#bris-de-machine)
-- [Catastrophe naturelle](#catastrophe-naturelle)
-- [Catastrophe technologique](#catastrophe-technologique)
-- [Choc de véhicule terrestre](#choc-de-véhicule-terrestre)
-- [Défense recours](#défense-recours)
-- [Dégât des eaux](#dégât-des-eaux)
-
-- [Divers](#divers)
-- [DMMT](#dmmt)
-- [Dommages aux biens](#dommages-aux-biens)
-- [Dommages électriques](#dommages-électriques)
-- [Explosion](#explosion)
-- [Incendie](#incendie)
-- [Vol](#vol)
-
-## Autres dommages
-
-| **Nature**         | Cause | Détail |
-| ------------------ | ----- | ------ |
-| **AutresDommages** | ——    | ——     |
+<!--
+type: tab
+title: BDG
+-->
 
 ## Bris de glace
 
@@ -40,6 +22,11 @@ tags: [Sinapps, documentation]
 | BrisDeGlace     | ForceDeLaNature | ——     |
 | BrisDeGlace     | CauseInconnue   | ——     |
 
+<!--
+type: tab
+title: BDM
+-->
+
 ## Bris de machine
 
 | Nature        | Cause             | Détail |
@@ -49,6 +36,11 @@ tags: [Sinapps, documentation]
 | BrisDeMachine | Chute             | ——     |
 | BrisDeMachine | Interne           | ——     |
 | BrisDeMachine | Externe           | ——     |
+
+<!--
+type: tab
+title: CATNAT
+-->
 
 ## Catastrophe naturelle
 
@@ -81,12 +73,22 @@ tags: [Sinapps, documentation]
 | **TempeteNeigeGrele**    | **PoidsDeLaNeigeGlace**      | ——                            |
 | **TempeteNeigeGrele**    | **TempeteOuragan**           | **ActionDirecteDuVent**       |
 
+<!--
+type: tab
+title: CATTEC
+-->
+
 ## Catastrophe technologique
 
 | Nature                   | Cause             | Détail |
 | ------------------------ | ----------------- | ------ |
 | CatastropheTechnologique | IncendieExplosion | ——     |
 | CatastropheTechnologique | ——                | ——     |
+
+<!--
+type: tab
+title: CVT
+-->
 
 ## Choc de véhicule terrestre
 
@@ -100,12 +102,22 @@ tags: [Sinapps, documentation]
 | Choc     | VehiculeAutre                | ——     |
 | **Choc** | **VehiculeTerrestreAMoteur** | ——     |
 
+<!--
+type: tab
+title: DEFREC
+-->
+
 ## Défense recours
 
 | Nature         | Cause             | Détail |
 | -------------- | ----------------- | ------ |
 | DefenseRecours | Defense           | ——     |
 | DefenseRecours | RecoursNonSubroge | ——     |
+
+<!--
+type: tab
+title: DDE
+-->
 
 ## Dégât des eaux
 
@@ -175,6 +187,11 @@ tags: [Sinapps, documentation]
 | DegatsDesEaux     | RenversementDebordement | **CheneauxGouttieres**                      |
 | DegatsDesEaux     | RenversementDebordement | **DeRecipent**                              |
 
+<!--
+type: tab
+title: DIV
+-->
+
 ## Divers
 
 | Nature | Cause                            | Détail |
@@ -203,6 +220,11 @@ tags: [Sinapps, documentation]
 | Divers | Vandalisme                       | ——     |
 | Divers | ViceOuMalfacon                   | ——     |
 
+<!--
+type: tab
+title: DMMT
+-->
+
 ## DMMT
 
 | Nature | Cause                                        | Détail |
@@ -216,6 +238,11 @@ tags: [Sinapps, documentation]
 | DMMT   | VolDeMarchandises                            | ——     |
 | DMMT   | VolDuVehicule                                | ——     |
 
+<!--
+type: tab
+title: BIENS
+-->
+
 ## Dommages aux biens
 
 | Nature           | Cause                                        | Détail |
@@ -223,6 +250,11 @@ tags: [Sinapps, documentation]
 | DommagesAuxBiens | AppareilMedical                              | ——     |
 | DommagesAuxBiens | InstrumentsDeMusique                         | ——     |
 | DommagesAuxBiens | PerteContenuCongelateurCellulesRefrigerantes | ——     |
+
+<!--
+type: tab
+title: DE
+-->
 
 ## Dommages électriques
 
@@ -236,6 +268,11 @@ tags: [Sinapps, documentation]
 | **DommagesElectriques** | **IncidentSurtensionSurLeReseau**  | ——     |
 | **DommagesElectriques** | **Surtension**                     | ——     |
 | DommagesElectriques     | ViceOuMalfacon                     | ——     |
+
+<!--
+type: tab
+title: Explosion
+-->
 
 ## Explosion
 
@@ -252,6 +289,11 @@ tags: [Sinapps, documentation]
 | Explosion | InstallationElectrique                       | ——        |
 | Explosion | InstallationGaz                              | Privative |
 | Explosion | VandalismeEmeuteMouvementPopulaireTerrorisme | ——        |
+
+<!--
+type: tab
+title: INC
+-->
 
 ## Incendie
 
@@ -282,6 +324,11 @@ tags: [Sinapps, documentation]
 | Incendie     | Autre                                        | ——                                         |
 | Incendie     | FuiteRupture                                 | CanalisationAlimentationPriveeAccessible   |
 
+<!--
+type: tab
+title: VOL
+-->
+
 ## Vol
 
 | Nature | Cause                                        | Détail                 |
@@ -310,3 +357,16 @@ tags: [Sinapps, documentation]
 | Nature             | Cause  | Détail |
 | ------------------ | ------ | ------ |
 | FoudreSansIncendie | Divers | ——     |
+
+<!--
+type: tab
+title: Autres
+-->
+
+## Autres
+
+| **Nature**         | Cause | Détail |
+| ------------------ | ----- | ------ |
+| **AutresDommages** | ——    | ——     |
+
+<!-- type: tab-end -->

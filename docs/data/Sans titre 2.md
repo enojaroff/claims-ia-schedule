@@ -4,26 +4,6 @@ tags: [Data]
 
 # Glossaire
 
-```
-cover                     protection
-building cover            protection des biens immobiliers
-contents cover            protection des biens mobiliers
-
-damage                    dommage
-buildingsDamages          dommages immobiliers
-    buildingDamage        dommage immobilier
-contentsDamages           dommages mobiliers
-    contentDamage         dommage mobilier
-
-belongings                possessions, biens
-property                  propriété, biens, immobilier
-
-burglary                  cambriolage
-water damage              dégât des eaux
-lightning                 foudre
-flood                     innondation
-```
-
 | Anglais              | Français                         |
 | -------------------- | -------------------------------- |
 | cover                | protection                       |
@@ -33,9 +13,9 @@ flood                     innondation
 | **DOMMAGES**         |                                  |
 | damage               | dommage                          |
 | **buildingsDamages** | **dommages immobiliers**         |
-| _›› buildingDamage_  | _dommage immobilier_             |
+|     *buildingDamage* |     *dommage immobilier*         |
 | **contentsDamages**  | **dommages mobiliers**           |
-| _›› contentDamage_   | _dommage mobilier_               |
+|     *contentDamage*  |     *dommage mobilier*           |
 |                      |                                  |
 | belongings           | possessions, biens               |
 | property             | propriété, biens, immobilier     |
@@ -59,14 +39,16 @@ flood                     innondation
 
 ### Endpoints
 
-#### `  POST  ` /availabilities
-  - Body
-    - Claim Resume
+#### `POST` /availabilities
 
-#### `  POST  ` /appointments
-  - Body
-    - Timeslot
-    - Claim Data
+- Body
+  - Claim Resume
+
+#### `POST` /appointments
+
+- Body
+  - Timeslot
+  - Claim Data
 
 ## Modifier l'horaire d'un rendez-vous
 
@@ -80,24 +62,27 @@ flood                     innondation
 
 ### Endpoints
 
-#### `  GET  ` /appointments
-  - _parameters_
-    - datefrom
-    - dateto
-    - sinisterType
+#### `GET` /appointments
 
-#### `  PUT  ` /appointments/**{id}**/schedule
-#### `  PUT  ` /appointments/**{id}**/contact
+- _parameters_
+  - datefrom
+  - dateto
+  - sinisterType
+
+#### `PUT` /appointments/**{id}**/schedule
+
+#### `PUT` /appointments/**{id}**/contact
 
 ## Modifier les coordonnées du rdv
 
 L'assuré pourrait demander à modifier le rendez-vous
-* à une autre adresse
-* une autre personne (identité, coordonnées)
+
+- à une autre adresse
+- une autre personne (identité, coordonnées)
 
 ### Endpoints
 
-- `  PUT  ` /appointments/**{id}**
+- `PUT` /appointments/**{id}**
 
 ## ??? Annuler un rdv ????
 
@@ -108,9 +93,9 @@ L'annulation pose le problème de l'ordre de mission que le partenaire aura reç
 
 ### Endpoints
 
-- `  GET  ` /appointments/**{id}**
+- `GET` /appointments/**{id}**
 
-## 
+##
 
 # Modèle de données
 
