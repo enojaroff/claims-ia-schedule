@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   version: 0.9.1
-  title: Schedule - Claims IA API
+  title: Claims IA API
   description: |
     L'API RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, elle doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.
 
