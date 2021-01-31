@@ -164,9 +164,9 @@ paths:
       description: |
         Récupère les informations sur un créneau horaire.
 
-        > N.B. Normalement, cette requête n'est pas nécessaire, dans la mesure où l'information a déjà été transmise dans la liste des créneaux disponibles lors d'un **GET /availabilities**.
+        > N.B. Normalement, cette requête n'est pas nécessaire, dans la mesure où l'information a déjà été transmise dans la liste des créneaux disponibles lors d'un 'GET /availabilities'.
       security:
-        - http_basic: []
+        - Header Token: []
       parameters: []
       responses:
         '200':
@@ -431,10 +431,10 @@ paths:
       parameters: []
 components:
   securitySchemes:
-    header_token:
+    Header Token:
       type: apiKey
       in: header
-      name: header_token
+      name: ctok
     http_basic:
       type: http
       scheme: basic

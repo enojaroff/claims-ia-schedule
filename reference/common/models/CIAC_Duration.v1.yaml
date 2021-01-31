@@ -4,3 +4,4 @@ description: |
   Durée en minutes
 example: 90
 minimum: 0
+maximum: 240

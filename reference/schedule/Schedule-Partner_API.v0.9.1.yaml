@@ -2,13 +2,12 @@ openapi: 3.0.0
 info:
   version: 0.9.1
   title: Partner API
-  description: |+
+  description: |
     L'API partenaire décrit les méthodes qui devront être implémentées par le partenaire (Expert ou REN) dans le cadre du module de prise de rendez-vous.
 
     Le service RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, l'API partenaire doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.
 
     Le service RDv de Claims IA est décrit plus en détails dans la documentation.
-
   contact:
     name: Edouard Nojaroff
     email: e.nojaroff@claims-ia.fr
@@ -261,6 +260,68 @@ paths:
                           $ref: '#/components/schemas/Appointment'
                     required:
                       - data
+              examples:
+                example-1:
+                  value:
+                    value: 0
+                    description: OK
+                    data:
+                      - address:
+                          street1: '12, boulevard des Batignoles'
+                          street2: ''
+                          street3: ''
+                          street4: ''
+                          zipCode: '75008'
+                          city: Paris
+                          countryCode: FR
+                          country: France
+                          state: IDF
+                        notes: string
+                        createdAt: '2019-08-24T14:15:22Z'
+                        lastUpdated: '2019-08-24T14:15:22Z'
+                        type: Site
+                        schedule:
+                          type: HoraireFixe
+                          startTime: '2020-05-14T09:00:00Z'
+                          endTime: '2020-05-14T09:30:00Z'
+                          duration: 30
+                        customer:
+                          firstName: Jean
+                          lastName: Bonot
+                          gender: M
+                          coordinates:
+                            personalPhone: 01 23 45 67 89
+                            professionalPhone: ''
+                            mobilePhone: 06 12 34 56 78
+                            email: jean.bonot@gmail.com
+                      - address:
+                          street1: '54, rue des Petits Meurtres'
+                          street2: ''
+                          street3: ''
+                          street4: ''
+                          zipCode: '75019'
+                          city: Paris
+                          countryCode: FR
+                          country: France
+                          state: IDF
+                        notes: string
+                        createdAt: '2019-08-24T14:15:22Z'
+                        lastUpdated: '2019-08-24T14:15:22Z'
+                        type: Site
+                        schedule:
+                          type: HoraireFixe
+                          startTime: '2020-05-23T14:30:00Z'
+                          endTime: '2020-05-23T14:30:00Z'
+                          duration: 60
+                        customer:
+                          firstName: Jean
+                          lastName: Dupond
+                          gender: M
+                          coordinates:
+                            personalPhone: ''
+                            professionalPhone: ''
+                            mobilePhone: 06 12 34 56 78
+                            email: j.dupond@gmail.com
           headers: {}
       operationId: get-appointments-list
     post:
@@ -294,6 +355,7 @@ paths:
               properties:
                 data:
                   $ref: '#/components/schemas/Appointment'
+        description: ''
       responses:
         '200':
           description: The appointment has been created
@@ -302,6 +364,11 @@ paths:
               schema:
                 allOf:
                   - $ref: '#/components/schemas/ResponseStatus'
+              examples:
+                example:
+                  value:
+                    value: 0
+                    description: OK
         '403':
           description: The appointment can not be created
           content:
@@ -411,7 +478,7 @@ components:
     header_token:
       type: apiKey
       in: header
-      name: header_token
+      name: '0123456789'
     http_basic:
       type: http
       scheme: basic
@@ -1330,4 +1397,4 @@ components:
   parameters: {}
   examples: {}
 security:
-  - http_basic: []
+  - header_token: []
