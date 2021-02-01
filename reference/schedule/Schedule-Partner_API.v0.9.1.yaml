@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   version: 0.9.1
-  title: Partner API
+  title: API Partenaire
   description: |
     L'API partenaire décrit les méthodes qui devront être implémentées par le partenaire (Expert ou REN) dans le cadre du module de prise de rendez-vous.
 

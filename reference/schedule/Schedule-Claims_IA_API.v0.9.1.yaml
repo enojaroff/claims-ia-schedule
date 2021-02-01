@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   version: 0.9.1
-  title: Claims IA API
+  title: API Claims IA
   description: |
     L'API RDV de Claims IA est utilisée dans la cadre du service de prise de rendez-vous de Claims IA.
     Cete API permet aux partenaires, après avoir fixé le rendez-vous, de récupérer les informations détaillées sur le sinistre et la déclaration de l'asuré.
@@ -71,7 +71,14 @@ paths:
     get:
       summary: LIRE un fichier
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+                properties: {}
       operationId: get-claim-file
       description: Récupère un fichier de la déclaration
 components:
