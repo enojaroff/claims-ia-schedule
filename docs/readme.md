@@ -19,16 +19,16 @@ La prise de rendez-vous s'effectue en 3 temps:
 ![Flux normal](../assets/images/flux2.png "Flux normal")
 
 **Etape 4** : En différé, le partenaire peut récupérer
+
 - les informations détaillées sur le dossier de déclaration
 - les documents fournis par l'assuré
 
-
 L'API intègre également d'autres méthodes (optionnelles en v1) pour
+
 - Modifier certaines informations du rendez-vous
 - Annuler et replanifier un rendez-vous
 
 L'API respecte le standard REST et utilise le protocole HTTP. Les messages échangés sont au format JSON.
-
 
 Une clé est nécessaire pour utiliser l'API. Cette clé doit être fournie par la société qui implémente l'API.
 
@@ -44,7 +44,6 @@ Les données sont soit :
 
 | Données                      | Créneaux hor. | Rendez-vous | Remarques                         |
 | :--------------------------- | :-----------: | :---------: | :-------------------------------- |
-| Processus                    |     \|––>     |    \|––>    | Champ libre                       |
 | Assureur                     |     \|––>     |    \|––>    | Identifiant de l'assureur         |
 | Contrat                      |               |    \|<––    | Nom du contrat                    |
 | N° contrat                   |               |    \|––>    | Réf. assureur du contrat          |
@@ -54,14 +53,14 @@ Les données sont soit :
 | Adresse du risque            |               |    \|<––    |                                   |
 | Type de sinistre             |     \|––>     |    \|––>    | _DDE, DE, CATNAT, VOL_            |
 | Type d'expertise             |     \|––>     |    \|––>    | VISIO, EAD, ESS, CONTRADICTOIRE   |
-| Date du sinistre             |     \|––>     |    \|––>    |                                   |
+| Date du sinistre             |               |    \|––>    |                                   |
 | Date de la déclaration       |               |    \|––>    |                                   |
 | Type d'habitation            |     \|––>     |    \|––>    |                                   |
-| Adresse de l'habitaion       |     \|––>     |    \|––>    |                                   |
-| Enjeu                        |     \|––>     |    \|––>    | Varie selon le type de sinistre   |
-| Enjeu DM                     |     \|––>     |    \|––>    |
-| Enjeu DI                     |     \|––>     |    \|––>    |                                   |
-| Lieu de RDV                  |     \|––>     |    \|––>    | Si **ESS**                        |
+| Adresse du risque            |               |    \|––>    |                                   |
+| Enjeu                        |     \|––>     |    \|––>    | TTC                               |
+| Enjeu DM                     |     \|––>     |    \|––>    | TTC                               |
+| Enjeu DI                     |     \|––>     |    \|––>    | TTC                               |
+| Lieu de RDV                  |     \|––>     |    \|––>    |                                   |
 | _Géocodage lieu RDV_         |     \|––>     |    \|––>    | V2                                |
 | Liste des dommages immo      |               |    \|<––    | Avec ou sans chiffrage ?          |
 | Liste des dommages mobiliers |               |    \|<––    | Avec ou sans chiffrage ?          |
@@ -71,9 +70,15 @@ Les données sont soit :
 | <hr>                         |     <hr>      |    <hr>     | <hr>                              |
 | USAGE FUTUR                  |               |             |                                   |
 | <hr>                         |     <hr>      |    <hr>     | <hr>                              |
+| Processus                    |     \|––>     |    \|––>    | Champ libre. A définir            |
+| <hr>                         |     <hr>      |    <hr>     | <hr>                              |
 | `ESS` : Lieu de RDV souhaité |     \|––>     |    \|––>    |                                   |
 | `EAD` : Données de connexion |               |    \|<––    |                                   |
 
-> **\|––>** Données transmises par claims IA 
+> **\|––>** Données transmises par claims IA
 >
 > **\|<––** Données récupérées par le partenaire
+
+## Montants HT / TTC
+
+- Enjeu en TTC. A valider avec le métier
