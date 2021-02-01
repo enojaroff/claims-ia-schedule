@@ -272,7 +272,9 @@ paths:
         - Appointment
       summary: CREER un rendez-vous
       description: |
-        Using this endpoint you can create a new appointment within the account. You will have to specify the service and the service provider you are creating the appointment for, along with all the other appointment attributes. This will initiate the scheduling process within Setster. 
+
+        > En réponse, ajouter des infos de connexion (Visio) : URL (directe ou pas ?), ...
+
 
         ### Documentation
 

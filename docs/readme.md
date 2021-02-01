@@ -50,6 +50,7 @@ Les données sont soit :
 | Ref Claims IA                |               |    \|––>    | Réf. interne de la déclaration    |
 | Ref Sinistre                 |               |    \|––>    | Réf. assureur du sinistre         |
 | Qualité de l'assuré          |               |    \|<––    | CPO, LOC, PNO, ...                |
+| Type assuré                  |     \|-->     |    \|-->    | Particulier, PRO                  |
 | Adresse du risque            |               |    \|<––    |                                   |
 | Type de sinistre             |     \|––>     |    \|––>    | _DDE, DE, CATNAT, VOL_            |
 | Type d'expertise             |     \|––>     |    \|––>    | VISIO, EAD, ESS, CONTRADICTOIRE   |
