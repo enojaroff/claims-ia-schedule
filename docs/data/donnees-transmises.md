@@ -40,33 +40,3 @@ Les données sont soit :
 | `ESS` : Lieu de RDV souhaité |     \|––>     |    \|––>    |                                   |
 | `EAD` : Données de connexion |               |    \|<––    |                                   |
 
-# Données transmises par les partenaires
-
-## Liste de créneaux
-
-CONTEXTE
-
-ESS
-
-```
-  --> Contact
-        email
-        téléphone
-  --> Adresse du bien               (pas forcément limité à ESS)
-
-  <-- Lieu de rendez-vous           (si différent du souhaité)
-  <-- Informations complémentaires  (à définir)
-```
-
-VISIO
-
-```
-  --> Contact
-        email
-        téléphone
-  --> Adresse du bien               (pas forcément limité à ESS)
-
-  <-- Informations complémentaires  (Procédure de connexion visio)
-```
-
-[Codes Sinapps utilisés](docs/sinapps/Type-de-risque.md)
