@@ -1,0 +1,7 @@
+title: Appointment
+type: object
+x-tags:
+  - Appointment
+properties:
+  id:
+    type: string

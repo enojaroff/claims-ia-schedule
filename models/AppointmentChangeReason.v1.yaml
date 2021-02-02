@@ -1,0 +1,13 @@
+title: AppointmentChangeReason
+type: string
+enum:
+  - ErreurDeSaisie
+  - ClientIndisponible
+  - ExpertIndisponible
+  - TiersIndisponible
+  - DossierIncomplet
+  - RendezVousNonUtile
+  - Autre
+description: Motif de changement de rendez-vous
+x-tags:
+  - Appointment
