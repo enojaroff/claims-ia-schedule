@@ -6,7 +6,7 @@ info:
     L'API RDV de Claims IA est utilisée dans la cadre du service de prise de rendez-vous de Claims IA.
     Cete API permet aux partenaires, après avoir fixé le rendez-vous, de récupérer les informations détaillées sur le sinistre et la déclaration de l'asuré.
 
-    L'API respecte le standard REST et utilise le protocole HTTP. Les messages échangés sont au format JSON.
+    L'API respecte le standard REST et s'appuie sur les méthodes du protocole HTTP. Les messages échangés sont au format JSON.
 
     Une clé est nécessaire pour utiliser l'API. Cette clé doit être fournie par la société qui implémente l'API.
   contact:
@@ -14,7 +14,9 @@ info:
     email: e.nojaroff@claims-ia.fr
 servers:
   - url: 'https://base_url/claims/api/v1'
-    description: Base URL
+    description: Sample URL
+  - url: 'https://api.claims-ia.fr/v1'
+    description: Test URL
 tags:
   - name: Account
     description: ''
@@ -86,7 +88,7 @@ components:
     header_token:
       type: apiKey
       in: header
-      name: header_token
+      name: ctoken
     http_basic:
       type: http
       scheme: basic
@@ -98,4 +100,4 @@ components:
   parameters: {}
   examples: {}
 security:
-  - http_basic: []
+  - header_token: []

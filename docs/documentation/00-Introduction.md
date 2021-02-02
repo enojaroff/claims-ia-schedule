@@ -20,7 +20,7 @@ La prise de rendez-vous s'effectue en 3 temps:
 -   **Etape 3** : Claims IA réserve un créneau, qui devient affecté au rendez-vous
     -   Le partenaire fournit en retour les informations sur le rendez-vous
 
-![Flux normal](../assets/images/flux2.png "Flux normal")
+![Flux normal](../../assets/images/flux2.png "Flux normal")
 
 **Etape 4** : En différé, le partenaire peut récupérer
 
