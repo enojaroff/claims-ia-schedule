@@ -450,7 +450,7 @@ components:
           type: string
           description: Convention applicable
     Timeslot:
-      title: Timeslot
+      title: Objet Timeslot
       type: object
       description: |-
         Le Timeslot est un créneau horaire retourné par le partenaire. Il est défini au minimum par 
@@ -945,6 +945,32 @@ components:
         - Explosion
         - DefautConception
         - AccueilAuDomicile
+    Appointment:
+      title: Objet Appointment
+      type: object
+      x-tags:
+        - Appointment
+      description: Rendez-vous
+      properties:
+        address:
+          $ref: ../../schemas/PostalAddress.v1.yaml
+        notes:
+          $ref: ../../schemas/NonEmptyString.v1.yaml
+        createdAt:
+          type: string
+          format: date-time
+        lastUpdated:
+          type: string
+          format: date-time
+        type:
+          $ref: ../../schemas/AppointmentType.v1.yaml
+        schedule:
+          $ref: ../../schemas/AppointmentSchedule.v1.yaml
+        customer:
+          $ref: ../../schemas/Customer.v1.yaml
+      required:
+        - type
+        - schedule
   responses: {}
   parameters: {}
   examples: {}
