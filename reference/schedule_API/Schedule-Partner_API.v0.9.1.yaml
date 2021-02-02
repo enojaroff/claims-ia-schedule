@@ -425,19 +425,6 @@ components:
       type: http
       scheme: bearer
   schemas:
-    Valuation:
-      title: Valuation
-      type: object
-      properties:
-        cost:
-          $ref: ../../models/Amount.v1.yaml
-        contentsCount:
-          type: integer
-        roomsCount:
-          type: integer
-      x-tags:
-        - Claim
-      description: Estimation
     Qualification:
       title: Qualification
       description: |-
@@ -546,26 +533,6 @@ components:
           description: Description
       required:
         - value
-    Risk:
-      title: Risk
-      type: object
-      description: Représentation du risque
-      properties:
-        type:
-          $ref: ../../models/RiskType.v1.yaml
-        relationship:
-          $ref: ../../models/RiskRelationship.v1.yaml
-        measures:
-          type: array
-          items:
-            $ref: '#/components/schemas/Measure'
-        address:
-          $ref: ../../models/PostalAddress.v1.yaml
-        description:
-          type: string
-      required:
-        - type
-        - address
     MissionRequest:
       title: AppointmentRequest
       type: object

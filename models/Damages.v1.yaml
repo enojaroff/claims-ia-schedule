@@ -7,8 +7,8 @@ properties:
   contentDamages:
     type: array
     items:
-      $ref: ./CIAC_ContentDamage.v1.yaml
+      $ref: ./ContentDamage.v1.yaml
   buildingDamages:
     type: array
     items:
-      $ref: ./CIAC_BuildingDamage.v1.yaml
+      $ref: ./BuildingDamage.v1.yaml

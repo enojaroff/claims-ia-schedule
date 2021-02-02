@@ -11,7 +11,7 @@ properties:
   guarantee:
     $ref: ./WarrantyType.v1.yaml
   customer:
-    $ref: '#/components/schemas/Customer'
+    $ref: './Customer.v1.yaml'
   sinister:
     $ref: ./Sinister.v1.yaml
   documents:
@@ -19,14 +19,14 @@ properties:
     items:
       $ref: ./Attachment.v1.yaml
   valuation:
-    $ref: '#/components/schemas/Valuation'
+    $ref: ./Valuation.v1.yaml
   contract:
-    $ref: '#/components/schemas/Contract'
+    $ref: ./Contract.v1.yaml
   reference:
     type: string
     description: Référence ClaimsIA de la déclaration
   risk:
-    $ref: '#/components/schemas/Risk'
+    $ref: ./Risk.v1.yaml
   company:
     $ref: ./Company.v1.yaml
 required:

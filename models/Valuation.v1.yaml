@@ -1,0 +1,12 @@
+title: Valuation
+type: object
+properties:
+  cost:
+    $ref: ./Amount.v1.yaml
+  contentsCount:
+    type: integer
+  roomsCount:
+    type: integer
+x-tags:
+  - Claim
+description: Estimation

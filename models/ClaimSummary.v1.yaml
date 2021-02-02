@@ -32,9 +32,9 @@ properties:
   location:
     $ref: ./PostalAddress.v1.yaml
   sinister:
-    $ref: '#/components/schemas/Sinister'
+    $ref: './Sinister.v1.yaml'
   valuation:
-    $ref: '#/components/schemas/Valuation'
+    $ref: './Valuation.v1.yaml'
 required:
   - date
   - guarantee

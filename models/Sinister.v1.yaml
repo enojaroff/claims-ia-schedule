@@ -6,18 +6,18 @@ x-tags:
 description: '**Sinistre**'
 properties:
   characteristics:
-    $ref: ./CIAC_SinisterCharacteristic.v1.yaml
+    $ref: ./SinisterCharacteristic.v1.yaml
   circonstancesDeclarees:
-    $ref: ./CIAC_NonEmptyString.v1.yaml
+    $ref: ./NonEmptyString.v1.yaml
   declaredDamages:
-    $ref: ./CIAC_Damages.v1.yaml
+    $ref: ./Damages.v1.yaml
   conservationMeasures:
     type: boolean
     description: Mesures conservatoires prises ?
   causeRemoval:
-    $ref: ./CIAC_CauseRemoval.v1.yaml
+    $ref: ./CauseRemoval.v1.yaml
   address:
-    $ref: ./CIAC_PostalAddress.v1.yaml
+    $ref: ./PostalAddress.v1.yaml
   time:
     type: string
     description: Heure du sinistre
@@ -26,7 +26,7 @@ properties:
     format: date
     description: Date du sinistre
   qualification:
-    $ref: ./CIAC_Qualification.v1.yaml
+    $ref: ./Qualification.v1.yaml
 required:
   - characteristics
   - address

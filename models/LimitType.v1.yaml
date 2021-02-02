@@ -6,9 +6,9 @@ x-tags:
   - Sinapps
 properties:
   type:
-    $ref: ./CIAC_LimitTypeValues.v1.yaml
+    $ref: ./LimitTypeValues.v1.yaml
   value:
-    $ref: ./CIAC_Amount.v1.yaml
+    $ref: ./Amount.v1.yaml
 required:
   - type
   - value

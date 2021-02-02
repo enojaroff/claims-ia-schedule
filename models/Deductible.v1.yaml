@@ -24,8 +24,8 @@ properties:
       - rate
   value:
     oneOf:
-      - $ref: ./CIAC_MonetaryValueType.v1.yaml
-      - $ref: ./CIAC_Rate.v1.yaml
+      - $ref: ./MonetaryValueType.v1.yaml
+      - $ref: ./Rate.v1.yaml
     description: Si la franchise est de type "fixed" alors le champ contient qu'une valeur monétaire; sinon c'est un pourcentage.
   min:
     type: number

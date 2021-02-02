@@ -1,0 +1,21 @@
+title: Risk
+type: object
+description: Représentation du risque
+x-tags:
+  - Claim
+properties:
+  type:
+    $ref: ./RiskType.v1.yaml
+  relationship:
+    $ref: ./RiskRelationship.v1.yaml
+  measures:
+    type: array
+    items:
+      $ref: ./Measure.v1.yaml
+  address:
+    $ref: ./PostalAddress.v1.yaml
+  description:
+    type: string
+required:
+  - type
+  - address
