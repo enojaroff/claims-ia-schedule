@@ -534,7 +534,7 @@ components:
       required:
         - value
     MissionRequest:
-      title: AppointmentRequest
+      title: Intervention
       type: object
       description: Demande d'intervention
       x-tags:
