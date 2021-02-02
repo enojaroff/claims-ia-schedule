@@ -110,7 +110,7 @@ paths:
   /availabilities:
     parameters: []
     get:
-      summary: ''
+      summary: LISTER les créneaux horaires disponibles
       operationId: get-availabilities
       responses:
         '200':
@@ -162,7 +162,7 @@ paths:
     get:
       tags:
         - Availability
-      summary: Get Availability Info
+      summary: LIRE les informations sur un créneau horaire
       description: |
         Récupère les informations sur un créneau horaire.
 
