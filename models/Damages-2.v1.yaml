@@ -1,0 +1,6 @@
+title: Damages
+x-tags:
+  - Claim
+anyOf:
+  - $ref: './BuildingDamage.v1.yaml'
+  - $ref: './ContentDamage.v1.yaml'

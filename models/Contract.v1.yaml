@@ -1,0 +1,13 @@
+title: Contract
+type: object
+properties:
+  company:
+    $ref: ./Company.v1.yaml
+  name:
+    type: string
+    description: Nom du contrat
+required:
+  - company
+  - name
+x-tags:
+  - Claim

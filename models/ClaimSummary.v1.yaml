@@ -1,0 +1,42 @@
+title: ClaimSummary
+type: object
+description: Déclaration de sinistre résumée.
+x-examples:
+  example-1:
+    claimDate: '2020-04-02'
+    guarantee: DegatDesEaux
+    company:
+      id: AVIVA
+      name: Aviva
+      acam: aviva
+    location:
+      country: FR
+      city: Paris
+      zipcode: '92200'
+      street1: '49, rue de Paris'
+    sinister:
+      code: DegatDesEaux
+      date: '2020-03-30'
+      type: DegatDesEaux
+x-tags:
+  - Claim
+properties:
+  date:
+    type: string
+    format: date
+    description: Date de déclaration
+  guarantee:
+    $ref: ./WarrantyType.v1.yaml
+  company:
+    $ref: ./Company.v1.yaml
+  location:
+    $ref: ./PostalAddress.v1.yaml
+  sinister:
+    $ref: '#/components/schemas/Sinister'
+  valuation:
+    $ref: '#/components/schemas/Valuation'
+required:
+  - date
+  - guarantee
+  - company
+  - location

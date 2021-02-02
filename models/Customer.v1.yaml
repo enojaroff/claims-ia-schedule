@@ -1,0 +1,13 @@
+title: Customer
+type: object
+x-tags:
+  - Claim
+properties:
+  firstName:
+    type: string
+  lastName:
+    type: string
+  gender:
+    type: string
+  coordinates:
+    $ref: ./Coordinates.v1.yaml

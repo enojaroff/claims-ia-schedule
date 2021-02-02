@@ -1,0 +1,22 @@
+title: Surface
+type: object
+description: |
+  Surface d'une pièce: mur, sol, plafond
+properties:
+  name:
+    type: string
+    description: Nom de la surface
+  size:
+    type: string
+    description: Superficie en m2
+  covering:
+    $ref: './SurfaceCovering.v1.yaml'
+  condition:
+    type: string
+    description: Etat général de la surface
+required:
+  - name
+  - size
+  - covering
+x-tags:
+  - Claim

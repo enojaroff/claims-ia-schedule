@@ -1,7 +1,35 @@
-title: CIAC_Claim
+title: Claim
 type: object
+description: Déclaration de sinistre
 x-tags:
-  - Common
+  - Claim
 properties:
-  id:
+  date:
     type: string
+    format: date
+    description: Date de déclaration
+  guarantee:
+    $ref: ./WarrantyType.v1.yaml
+  customer:
+    $ref: '#/components/schemas/Customer'
+  sinister:
+    $ref: ./Sinister.v1.yaml
+  documents:
+    type: array
+    items:
+      $ref: ./Attachment.v1.yaml
+  valuation:
+    $ref: '#/components/schemas/Valuation'
+  contract:
+    $ref: '#/components/schemas/Contract'
+  reference:
+    type: string
+    description: Référence ClaimsIA de la déclaration
+  risk:
+    $ref: '#/components/schemas/Risk'
+  company:
+    $ref: ./Company.v1.yaml
+required:
+  - date
+  - guarantee
+  - company

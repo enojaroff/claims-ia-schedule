@@ -1,7 +1,24 @@
 title: Appointment
 type: object
+properties:
+  address:
+    $ref: ./PostalAddress.v1.yaml
+  notes:
+    $ref: ./NonEmptyString.v1.yaml
+  createdAt:
+    type: string
+    format: date-time
+  lastUpdated:
+    type: string
+    format: date-time
+  type:
+    $ref: '#/components/schemas/AppointmentType'
+  schedule:
+    $ref: '#/components/schemas/AppointmentSchedule'
+  customer:
+    $ref: '#/components/schemas/Customer'
+required:
+  - type
+  - schedule
 x-tags:
   - Appointment
-properties:
-  id:
-    type: string

@@ -21,9 +21,9 @@ properties:
   fileName:
     type: string
   mimeType:
-    $ref: ./CIAC_MimeType.v1.yaml
+    $ref: ./MimeType.v1.yaml
   type:
-    $ref: ./CIAC_AttachmentType.v1.yaml
+    $ref: ./AttachmentType.v1.yaml
   href:
     type: string
 required:

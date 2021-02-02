@@ -1,0 +1,40 @@
+title: AppointmentSchedule
+type: object
+description: Horaire de rendez-vous
+x-examples:
+  Horaire fixe:
+    type: HoraireFixe
+    startTime: '2020-05-14T10:00:00Z'
+    endTime: '2020-05-14T11:30:00Z'
+    duration: 90
+  Plage horaire:
+    type: HorairePlage
+    startTime: '2020-05-14T09:00:00Z'
+    endTime: '2020-05-14T10:00:00Z'
+    duration: 60
+properties:
+  type:
+    type: string
+    enum:
+      - HoraireFixe
+      - HorairePlage
+    description: |-
+      Si "HoraireFixe", le rendez commence à "startTime" et fini à "endTime"
+
+      Si "HorairePlage", le rendez-vous de "duration" minutes aura lieu n'importe quand entre "startTime" et "endTime"
+  startTime:
+    type: string
+    format: date-time
+    example: '2020-05-14T09:00:00Z'
+  endTime:
+    type: string
+    format: date-time
+    example: '2020-05-14T09:00:00Z'
+  duration:
+    $ref: ./Duration.v1.yaml
+required:
+  - type
+  - startTime
+  - endTime
+x-tags:
+  - Appointment

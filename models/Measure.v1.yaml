@@ -1,0 +1,31 @@
+title: Measure
+type: object
+x-tags:
+  - Claim
+properties:
+  type:
+    type: string
+    enum:
+      - NombreDePieces
+      - Effectif
+      - Superficie
+      - SuperficieVeranda
+      - SuperficieExploitation
+      - SurfaceDesDependances
+      - SurfaceDesDependancesContigues
+      - SurfaceDesDependancesNonContigues
+      - Piscine
+      - Activite
+      - ChiffreAffaireAnnuel
+      - NombreJoursInhabitation
+      - NumeroEtage
+      - NombreDePiecesSuperieures30m2
+      - AgeDeLaConstruction
+      - NombreNiveaux
+      - NombreColocataires
+      - PiscineExterieureAvecDome
+  value:
+    type: number
+required:
+  - type
+  - value

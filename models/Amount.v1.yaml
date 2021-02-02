@@ -7,7 +7,7 @@ x-examples:
     currency: EUR
 properties:
   value:
-    $ref: ./CIAC_MonetaryValueType.v1.yaml
+    $ref: ./MonetaryValueType.v1.yaml
   currency:
     type: string
     default: EUR

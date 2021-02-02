@@ -1,10 +1,10 @@
 title: BuildingDamage
 type: object
 description: |
-  Description de **dommage immobilier** tel qu'utilisé en dégât des eaux
+  Description de dommage immobilier
 
   - Nom de la pièce
-  - Liste de surfaces
+  - Tableau de surfaces
 
   ### Surface
 
@@ -17,23 +17,23 @@ description: |
       - (1: Normal, 2: Standing, 3: Luxe)
     - niveau d'usure (1: neuf, 2: état d'usage, 3: ancien)
         
-x-tags:
-  - Common
 properties:
   name:
     type: string
     description: Nom de la pièce
-  size:
-    type: number
   surfaces:
     type: array
     minItems: 1
     items:
-      $ref: ../Claims_Appointment_API.v0.9.1.yaml#/components/schemas/Surface
+      $ref: '#/components/schemas/Surface'
   pictures:
     type: array
     items:
       $ref: ./Attachment.v1.yaml
+  size:
+    type: number
 required:
-  - surfaces
   - name
+  - surfaces
+x-tags:
+  - Claim

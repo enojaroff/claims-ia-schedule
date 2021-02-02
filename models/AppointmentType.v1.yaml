@@ -1,0 +1,12 @@
+title: AppointmentType
+type: string
+enum:
+  - Site
+  - Visio
+  - Telephonique
+description: |-
+  Type de rendez-vous
+
+  [Valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typedurendez-vous)
+x-tags:
+  - Appointment
