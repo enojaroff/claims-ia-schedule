@@ -1,5 +1,5 @@
 ---
-tags: [Sinapps, documentation]
+tags: [documentation]
 ---
 
 # Type de convention

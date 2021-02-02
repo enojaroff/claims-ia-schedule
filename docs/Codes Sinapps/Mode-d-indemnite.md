@@ -1,5 +1,5 @@
 ---
-tags: [Sinapps, documentation]
+tags: [documentation]
 ---
 
 # Mode d'indemnité

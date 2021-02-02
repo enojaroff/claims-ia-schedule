@@ -1,10 +1,8 @@
 ---
-tags: [Sinapps, documentation]
+tags: [documentation]
 ---
 
 # Nature des dommages
-
-
 
 | Code                         | Description                    |
 | ---------------------------- | ------------------------------ |
