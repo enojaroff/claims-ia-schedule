@@ -426,7 +426,7 @@ components:
       scheme: bearer
   schemas:
     Qualification:
-      title: Qualification
+      title: Objet Qualification
       description: |-
         La qualification regroupe des informations établies par Claims IA à l'issue de la déclaration de sinistre.
         Les données dépendent du type de sinistre, et sont optionnelles.
@@ -534,9 +534,12 @@ components:
       required:
         - value
     Intervention:
-      title: Intervention
+      title: Objet Intervention
       type: object
-      description: Demande d'intervention
+      description: |-
+        Caractéristiques de l'intervention souhaitée.
+        Cet objet est transmis au partenaire lors d'une demande de créneaux horaires.
+        Le but est de fournir au partenaire les informations nécessaires pour qu'il puisse identifier les ressoureces disponibles.
       x-tags:
         - Availability
       properties:
