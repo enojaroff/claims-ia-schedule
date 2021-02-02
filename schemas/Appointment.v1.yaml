@@ -12,13 +12,14 @@ properties:
     type: string
     format: date-time
   type:
-    $ref: './AppointmentType.v1.yaml'
+    $ref: ./AppointmentType.v1.yaml
   schedule:
-    $ref: './AppointmentSchedule.v1.yaml'
+    $ref: ./AppointmentSchedule.v1.yaml
   customer:
-    $ref: './Customer.v1.yaml'
+    $ref: ./Customer.v1.yaml
 required:
   - type
   - schedule
 x-tags:
   - Appointment
+description: Rendez-vous

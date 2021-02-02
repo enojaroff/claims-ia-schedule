@@ -4,7 +4,7 @@ tags: [documentation]
 
 # Flux
 
-La prise de rendez-vous s'effectue en 3 temps:
+La prise de rendez-vous s'effectue en 4 temps:
 
 - **Etape 1** : Claims IA fait de demande de créneaux disponibles pour le rendez-vous.
   - La demande est accompagnée d'informations sur la déclaration de sinistre

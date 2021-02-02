@@ -551,6 +551,8 @@ components:
         limit:
           type: integer
           maximum: 30
+      x-tags:
+        - Availability
     SinisterCharacteristics:
       title: SinisterCharacteristic
       type: object
