@@ -1,11 +1,8 @@
 ---
-tags: [documentation]
+tags: [Common]
 ---
 
 # Authentification
-
-
-<!-- theme: warning -->
 
 > ### WIP
 >
