@@ -110,7 +110,7 @@ paths:
   /availabilities:
     parameters: []
     get:
-      summary: LISTER les créneaux horaires disponibles
+      summary: RÉCUPÉRER les créneaux horaires disponibles
       operationId: get-availabilities
       responses:
         '200':
@@ -533,7 +533,7 @@ components:
           description: Description
       required:
         - value
-    MissionRequest:
+    Intervention:
       title: Intervention
       type: object
       description: Demande d'intervention
