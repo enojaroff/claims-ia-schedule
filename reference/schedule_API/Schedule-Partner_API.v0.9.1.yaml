@@ -537,11 +537,13 @@ components:
       title: AppointmentRequest
       type: object
       description: Demande d'intervention
+      x-tags:
+        - Availability
       properties:
         type:
           $ref: ../../models/MissionType.v1.yaml
         claim:
-          $ref: '#/components/schemas/ClaimSummary'
+          $ref: ../../schemas/ClaimSummary.v1.yaml
         dateFrom:
           type: string
           format: date
@@ -551,8 +553,6 @@ components:
         limit:
           type: integer
           maximum: 30
-      x-tags:
-        - Availability
     SinisterCharacteristics:
       title: SinisterCharacteristic
       type: object
