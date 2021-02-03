@@ -12,7 +12,7 @@ info:
     name: Edouard Nojaroff
     email: e.nojaroff@claims-ia.fr
 servers:
-  - url: 'https://base_url/claims/api/v1'
+  - url: 'https://partner_url/claims/api/v1'
     description: Base URL
 tags:
   - name: Account
@@ -32,81 +32,6 @@ tags:
   - name: Timeslot
     description: Créneau horaire
 paths:
-  /account/login:
-    post:
-      tags:
-        - Account
-      summary: Login
-      operationId: AccountLogin
-      description: |
-        Cette requête est utilisée dans le cas où l'accès est protégé par un jeton de session (API Key).
-
-        La première étape est l'authentification via un compte.
-        Les informations envoyées sont un nom de compte, un mot de passe du compte, et la clé de l'API.
-
-        La réponse contient un jeton de session (session_token) qui sera utilisé à chaque appel de l'API.
-        Pour des raisons de sécurité, le jeton de session doit expirer au bout de 24 heures; une nouvelle authentification est alors nécessaire.
-      parameters:
-        - in: query
-          name: username
-          description: Account owner email address
-          required: true
-          schema:
-            type: string
-            format: email
-        - in: query
-          name: password
-          description: Account owner password
-          schema:
-            type: string
-            format: password
-        - in: query
-          name: token
-          description: API key
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  responseStatus:
-                    type: string
-            application/xml:
-              schema:
-                type: object
-                properties:
-                  '':
-                    type: string
-        '401':
-          description: Compte inactif ou clé d'API incorrecte
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  statusCode:
-                    type: integer
-                    example: 3
-                  statusDescriptions:
-                    type: string
-                    example: Account is not active
-    parameters: []
-  /account/logout:
-    get:
-      tags:
-        - Account
-      summary: Logout
-      security: []
-      responses:
-        '200':
-          description: Logout successful
-      operationId: AccountLogout
-      description: Ferme la session courante et rend le jeton de session périmé.
   /availabilities:
     parameters: []
     get:
@@ -128,12 +53,13 @@ paths:
         '401':
           description: Unauthorized
       description: |
-        Récupère les créneaux horaires disponibles
-        ---
+        ## Récupère les créneaux horaires disponibles
+
 
         La requête contient les informations sur le type d'intervention
 
-        **Expert**:
+        ### Expert
+
         - Type d'expertise
         - Informations sur l'assurance et le contrat
         - Garantie en jeu
@@ -143,28 +69,29 @@ paths:
         - Des données d'analyse de ClaimsIA (tiers, recours,...)
         - La pesée de l'enjeu
 
-        **RENeur**:
+        ### RENeur
+
         - Type de mission (???)
         - Informations sur l'assurance
         - Garantie en jeu
         - Adresse
         - Qualification du sinistre
       security:
-        - pid: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MissionRequest'
+        - Partner ID: []
       tags:
         - Availability
+      parameters:
+        - $ref: '#/components/parameters/CompanyId'
+        - $ref: '#/components/parameters/InsuredNature'
+        - $ref: '#/components/parameters/WarrantyType'
+        - $ref: '#/components/parameters/MissionType'
   '/availabilities/{id}':
     get:
       tags:
         - Availability
       summary: LIRE les informations sur un créneau horaire
       description: |
-        Récupère les informations sur un créneau horaire.
+        ## Récupère les informations sur un créneau horaire.
 
         > N.B. Normalement, cette requête n'est pas nécessaire, dans la mesure où l'information a déjà été transmise dans la liste des créneaux disponibles lors d'un **GET /availabilities**.
       security:
@@ -193,7 +120,7 @@ paths:
     get:
       tags:
         - Appointment
-      summary: LISTER les rendez-vous
+      summary: RÉCUPÉRER les rendez-vous
       description: |
         Récupère une liste de rendez-vous fixés.
 
@@ -265,8 +192,7 @@ paths:
         '401':
           description: Unauthorized
       operationId: get-appointments-list
-      security:
-        - pid: []
+      security: []
     post:
       tags:
         - Appointment
@@ -290,7 +216,7 @@ paths:
                 timeslot:
                   $ref: '#/components/schemas/Timeslot'
                 claim:
-                  $ref: '#/components/schemas/Claim'
+                  $ref: ../../schemas/Claim.v1.yaml
               required:
                 - timeslot
           application/x-www-form-urlencoded:
@@ -411,19 +337,40 @@ paths:
       operationId: AppointmentReschedule
       security: []
       description: Lecture de l'horaire d'un rendez-vous
+  /intervention:
+    post:
+      summary: ENVOYER une demande d'intervention
+      operationId: post-intervention
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Timeslot'
+      description: |
+        Cette requête permet d'envoyer une demande d'intervention, et en retour de **recevoir une liste de créneaux horaires**.
+      tags:
+        - Availability
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Intervention'
+      security:
+        - '0123456789': []
 components:
   securitySchemes:
-    pid:
-      type: apiKey
-      in: header
-      name: pid
     '0123456789':
       type: http
       scheme: basic
       description: ''
-    http_bearer:
-      type: http
-      scheme: bearer
+    Partner ID:
+      name: pid
+      type: apiKey
+      in: header
   schemas:
     Qualification:
       title: Objet Qualification
@@ -459,6 +406,8 @@ components:
         - une heure de fin
 
         Une adresse peut être renseignée si elle est différente de l'adresse fournie dans la demande.
+      x-tags:
+        - Availability
       properties:
         id:
           type: string
@@ -466,13 +415,11 @@ components:
           type: string
           format: date
         schedule:
-          $ref: '#/components/schemas/AppointmentSchedule'
+          $ref: ../../schemas/AppointmentSchedule.v1.yaml
       required:
         - id
         - date
         - schedule
-      x-tags:
-        - Availability
     Sinister:
       title: Sinister
       type: object
@@ -488,9 +435,9 @@ components:
         qualification:
           $ref: '#/components/schemas/Qualification'
         damages:
-          $ref: '#/components/schemas/Damages'
+          $ref: ../../schemas/Damages.v1.yaml
         address:
-          $ref: ../../models/PostalAddress.v1.yaml
+          $ref: ../../schemas/PostalAddress.v1.yaml
       required:
         - date
         - characteristics
@@ -544,7 +491,7 @@ components:
         - Availability
       properties:
         type:
-          $ref: ../../models/MissionType.v1.yaml
+          $ref: ../../schemas/MissionType.v1.yaml
         claim:
           $ref: ../../schemas/ClaimSummary.v1.yaml
         dateFrom:
@@ -972,7 +919,126 @@ components:
         - type
         - schedule
   responses: {}
-  parameters: {}
+  parameters:
+    InsuredNature:
+      name: insuredNature
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - Locataire
+          - LocataireMeuble
+          - LocataireEnVide
+          - LocataireNonOccupant
+          - Colocataire
+          - CoproprietaireOccupant
+          - CoproprietaireBailleur
+          - CoproprietaireNonOccupant
+          - CoproprietaireNonOccupantMeuble
+          - ProprietaireOccupant
+          - ProprietaireBailleur
+          - ProprietaireIndivisaire
+          - ProprietaireNonOccupant
+          - ProprietaireNonOccupantMeuble
+          - Usufruit
+          - Inconnu
+          - NuProprietaire
+          - SansObjet
+          - Autre
+          - Debirentier
+          - Credirentier
+          - SyndicDeCopropriete
+          - LocataireOccupantTotal
+          - LocataireAttributaireTotal
+          - Proprietaire
+          - MandataireOuGerant
+          - Coproprietaire
+      description: Relation de l'assuré au risque
+    CompanyId:
+      name: companyId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Identifiant de la société d'assurance
+    WarrantyType:
+      name: warrantyType
+      in: query
+      required: true
+      schema:
+        type: string
+        enum:
+          - Arbres
+          - ArbresPot
+          - Attentat
+          - Autre
+          - BienEnValeurDeclaree
+          - BiensDeLoisirs
+          - BiensMultimedias
+          - BiensProfessionnelsEnTousLieux
+          - BiensScolaires
+          - Bijoux
+          - BrisDeGlace
+          - BrisDeGlaceMobilier
+          - Canalisation
+          - CanalisationsExterieures
+          - CatastropheNaturelle
+          - ChocVtm
+          - DegatsDesEaux
+          - Divers
+          - DiversImmobilier
+          - DommageOuvrage
+          - DommagesAuxBiens
+          - DommagesElectriques
+          - DommagesMenagers
+          - Effondrement
+          - EquipementDeLoisir
+          - EvenementNaturel
+          - Explosion
+          - FoudreSansIncendie
+          - Fumee
+          - Gel
+          - HorsGaranties
+          - Incendie
+          - IncidentsDomestiques
+          - InstallationExterieure
+          - Jardin
+          - LocationEnMeuble
+          - Malfacon
+          - NouvelleTechnologie
+          - ObjetPrecieux
+          - PanneElectromenager
+          - Perte
+          - PerteCongelateur
+          - PerteDeLiquide
+          - PerteEauInterieur
+          - Piscine
+          - RisquesAnnexes
+          - TogOuTng
+          - TousRisques
+          - ValeurANeuf
+          - Vandalisme
+          - Vol
+          - VolCave
+          - VolLieuPublic
+      description: Type de garantie
+    MissionType:
+      name: MissionType
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - RenDirecte
+          - RenSuiteExpertise
+          - RechercheDeFuite
+          - Reparation
+          - ExpertiseCovea
+          - RenMobiliereDirecte
+          - RenMobiliereSuiteExpertise
+          - Expertise
+      description: Type de mission
   examples: {}
 security:
   - http_basic: []

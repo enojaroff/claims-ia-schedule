@@ -1,6 +1,6 @@
-title: Justificative
+title: Justificatif
 type: object
-description: '**Document justificatif**'
+description: Document justificatif
 properties:
   type:
     type: string
