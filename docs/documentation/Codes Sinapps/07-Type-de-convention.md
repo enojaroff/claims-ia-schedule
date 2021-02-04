@@ -1,5 +1,5 @@
 ---
-tags: [documentation]
+tags: [documentation, Sinapps]
 ---
 
 # Type de convention

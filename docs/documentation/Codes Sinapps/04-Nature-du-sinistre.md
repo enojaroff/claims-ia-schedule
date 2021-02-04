@@ -2,8 +2,11 @@
 tags: [Sinapps, documentation]
 ---
 
-
 # Nature du sinistre
+
+La nature d'un sinistre est représentée par un trio de valeurs **NATURE / CAUSE / DETAIL**
+
+Selon les cas, les champs Cause ou Détail peuvent être vides.
 
 <!--
 type: tab
@@ -14,13 +17,13 @@ title: BDG
 
 | **Nature**      | Cause           | Détail |
 | --------------- | --------------- | ------ |
-| **BrisDeGlace** | ——              | ——     |
-| **BrisDeGlace** | **Autre**       | ——     |
-| BrisDeGlace     | Accidentel      | ——     |
-| BrisDeGlace     | ViceEtMalfacon  | ——     |
-| BrisDeGlace     | Vandalisme      | ——     |
-| BrisDeGlace     | ForceDeLaNature | ——     |
-| BrisDeGlace     | CauseInconnue   | ——     |
+| **BrisDeGlace** | ---             | ---    |
+| **BrisDeGlace** | **Autre**       | ---    |
+| BrisDeGlace     | Accidentel      | ---    |
+| BrisDeGlace     | ViceEtMalfacon  | ---    |
+| BrisDeGlace     | Vandalisme      | ---    |
+| BrisDeGlace     | ForceDeLaNature | ---    |
+| BrisDeGlace     | CauseInconnue   | ---    |
 
 <!--
 type: tab
@@ -31,11 +34,11 @@ title: BDM
 
 | Nature        | Cause             | Détail |
 | ------------- | ----------------- | ------ |
-| BrisDeMachine | Divers            | ——     |
-| BrisDeMachine | DommageElectrique | ——     |
-| BrisDeMachine | Chute             | ——     |
-| BrisDeMachine | Interne           | ——     |
-| BrisDeMachine | Externe           | ——     |
+| BrisDeMachine | Divers            | ---    |
+| BrisDeMachine | DommageElectrique | ---    |
+| BrisDeMachine | Chute             | ---    |
+| BrisDeMachine | Interne           | ---    |
+| BrisDeMachine | Externe           | ---    |
 
 <!--
 type: tab
@@ -46,31 +49,31 @@ title: CATNAT
 
 | Nature                   | Cause                        | Détail                        |
 | ------------------------ | ---------------------------- | ----------------------------- |
-| **CatastropheNaturelle** | ——                           | ——                            |
-| CatastropheNaturelle     | Autre                        | ——                            |
-| CatastropheNaturelle     | Avalanche                    | ——                            |
-| CatastropheNaturelle     | ChocMecaniqueDesVagues       | ——                            |
-| CatastropheNaturelle     | Cyclone                      | ——                            |
-| CatastropheNaturelle     | EffondrementDeTerrain        | ——                            |
-| CatastropheNaturelle     | EruptionVolcanique           | ——                            |
-| CatastropheNaturelle     | ForceDeLaNature              | ——                            |
-| CatastropheNaturelle     | Foudre                       | ——                            |
-| CatastropheNaturelle     | GlissementMouvementDeTerrain | ——                            |
+| **CatastropheNaturelle** | ---                          | ---                           |
+| CatastropheNaturelle     | Autre                        | ---                           |
+| CatastropheNaturelle     | Avalanche                    | ---                           |
+| CatastropheNaturelle     | ChocMecaniqueDesVagues       | ---                           |
+| CatastropheNaturelle     | Cyclone                      | ---                           |
+| CatastropheNaturelle     | EffondrementDeTerrain        | ---                           |
+| CatastropheNaturelle     | EruptionVolcanique           | ---                           |
+| CatastropheNaturelle     | ForceDeLaNature              | ---                           |
+| CatastropheNaturelle     | Foudre                       | ---                           |
+| CatastropheNaturelle     | GlissementMouvementDeTerrain | ---                           |
 | <hr>                     | <hr>                         | <hr>                          |
 | **CatastropheNaturelle** | **Inondation**               | **DebordementCoursDEau**      |
 | **CatastropheNaturelle** | **Inondation**               | **CouleeDeBoue**              |
 | **CatastropheNaturelle** | **Inondation**               | **RemonteeDeNappePhreatique** |
 | **CatastropheNaturelle** | **Inondation**               | **EauxRuisselement**          |
 | <hr>                     | <hr>                         | <hr>                          |
-| CatastropheNaturelle     | RazDeMaree                   | ——                            |
-| **CatastropheNaturelle** | **Secheresse**               | ——                            |
-| CatastropheNaturelle     | Seisme                       | ——                            |
+| CatastropheNaturelle     | RazDeMaree                   | ---                           |
+| **CatastropheNaturelle** | **Secheresse**               | ---                           |
+| CatastropheNaturelle     | Seisme                       | ---                           |
 | <hr>                     | <hr>                         | <hr>                          |
-| EvtNaturel               | Inondation                   | ——                            |
+| EvtNaturel               | Inondation                   | ---                           |
 | <hr>                     | <hr>                         | <hr>                          |
-| TempeteNeigeGrele        | Autre                        | ——                            |
-| **TempeteNeigeGrele**    | **Grele**                    | ——                            |
-| **TempeteNeigeGrele**    | **PoidsDeLaNeigeGlace**      | ——                            |
+| TempeteNeigeGrele        | Autre                        | ---                           |
+| **TempeteNeigeGrele**    | **Grele**                    | ---                           |
+| **TempeteNeigeGrele**    | **PoidsDeLaNeigeGlace**      | ---                           |
 | **TempeteNeigeGrele**    | **TempeteOuragan**           | **ActionDirecteDuVent**       |
 
 <!--
@@ -82,8 +85,8 @@ title: CATTEC
 
 | Nature                   | Cause             | Détail |
 | ------------------------ | ----------------- | ------ |
-| CatastropheTechnologique | IncendieExplosion | ——     |
-| CatastropheTechnologique | ——                | ——     |
+| CatastropheTechnologique | IncendieExplosion | ---    |
+| CatastropheTechnologique | ---               | ---    |
 
 <!--
 type: tab
@@ -94,13 +97,13 @@ title: CVT
 
 | Nature   | Cause                        | Détail |
 | -------- | ---------------------------- | ------ |
-| Choc     | Animal                       | ——     |
-| Choc     | Autre                        | ——     |
-| Choc     | ChuteDarbre                  | ——     |
-| Choc     | ChuteDeConstruction          | ——     |
-| Choc     | ObjetVolantAeronef           | ——     |
-| Choc     | VehiculeAutre                | ——     |
-| **Choc** | **VehiculeTerrestreAMoteur** | ——     |
+| Choc     | Animal                       | ---    |
+| Choc     | Autre                        | ---    |
+| Choc     | ChuteDarbre                  | ---    |
+| Choc     | ChuteDeConstruction          | ---    |
+| Choc     | ObjetVolantAeronef           | ---    |
+| Choc     | VehiculeAutre                | ---    |
+| **Choc** | **VehiculeTerrestreAMoteur** | ---    |
 
 <!--
 type: tab
@@ -111,8 +114,8 @@ title: DEFREC
 
 | Nature         | Cause             | Détail |
 | -------------- | ----------------- | ------ |
-| DefenseRecours | Defense           | ——     |
-| DefenseRecours | RecoursNonSubroge | ——     |
+| DefenseRecours | Defense           | ---    |
+| DefenseRecours | RecoursNonSubroge | ---    |
 
 <!--
 type: tab
@@ -123,14 +126,14 @@ title: DDE
 
 | Nature            | Cause                   | Détail                                      |
 | ----------------- | ----------------------- | ------------------------------------------- |
-| **DegatsDesEaux** | ——                      | ——                                          |
-| DegatsDesEaux     | AutresLiquides          | ——                                          |
+| **DegatsDesEaux** | ---                     | ---                                         |
+| DegatsDesEaux     | AutresLiquides          | ---                                         |
 | DegatsDesEaux     | Condensation            | DefautDUsage                                |
 | DegatsDesEaux     | Condensation            | PanneVmc                                    |
 | DegatsDesEaux     | Condensation            | ViceConstruction                            |
-| DegatsDesEaux     | EffetDuGel              | ——                                          |
-| DegatsDesEaux     | EnCours                 | ——                                          |
-| DegatsDesEaux     | FaitIntentionnel        | ——                                          |
+| DegatsDesEaux     | EffetDuGel              | ---                                         |
+| DegatsDesEaux     | EnCours                 | ---                                         |
+| DegatsDesEaux     | FaitIntentionnel        | ---                                         |
 |                   |                         |                                             |
 | **DegatsDesEaux** | **FuiteRupture**        | **AppareilAEffetDEauEtAccessoires**         |
 | **DegatsDesEaux** | **FuiteRupture**        | **AppareilDeProductionDEauChaudeSanitaire** |
@@ -157,7 +160,7 @@ title: DDE
 | DegatsDesEaux     | Gel                     | CanalisationPriveeNonAccessible             |
 | DegatsDesEaux     | Gel                     | CheneauxGouttieres                          |
 |                   |                         |                                             |
-| DegatsDesEaux     | Indeterminee            | ——                                          |
+| DegatsDesEaux     | Indeterminee            | ---                                         |
 |                   |                         |                                             |
 | **DegatsDesEaux** | **Infiltration**        | **CarrelageFaience**                        |
 | DegatsDesEaux     | Infiltration            | **ConduiteDeChemineeVentialtion**           |
@@ -175,9 +178,9 @@ title: DDE
 | DegatsDesEaux     | Inondation              | RemonteeDeNappePhreatique                   |
 | DegatsDesEaux     | Inondation              | RuissellementEauHorsReaseau                 |
 |                   |                         |                                             |
-| DegatsDesEaux     | InterventionHumaine     | ——                                          |
-| DegatsDesEaux     | PluieOuNeige            | ——                                          |
-| DegatsDesEaux     | PorositeCapillarite     | ——                                          |
+| DegatsDesEaux     | InterventionHumaine     | ---                                         |
+| DegatsDesEaux     | PluieOuNeige            | ---                                         |
+| DegatsDesEaux     | PorositeCapillarite     | ---                                         |
 |                   |                         |                                             |
 | DegatsDesEaux     | RefoulementEngorgement  | **CanalisationCollective**                  |
 | DegatsDesEaux     | RefoulementEngorgement  | **CanalisationPrivative**                   |
@@ -196,29 +199,29 @@ title: DIV
 
 | Nature | Cause                            | Détail |
 | ------ | -------------------------------- | ------ |
-| Divers | ActionDeChasse                   | ——     |
-| Divers | Attentat                         | ——     |
-| Divers | Autre                            | ——     |
-| Divers | BrisDeteriorationPanne           | ——     |
-| Divers | CanalisationsExterieures         | ——     |
-| Divers | DeteriorationImmeubleParVehicule | ——     |
-| Divers | Emeute                           | ——     |
-| Divers | EvenementImmobilier              | ——     |
-| Divers | ExtraScolaire                    | ——     |
-| Divers | FaitIntentionnel                 | ——     |
-| Divers | Fonctionnement                   | ——     |
-| Divers | HorsActionDeChasse               | ——     |
-| Divers | Mrh                              | ——     |
-| Divers | OrigineCriminelle                | ——     |
-| Divers | PanneElectromenager              | ——     |
-| Divers | Perte                            | ——     |
-| Divers | PerteEauInterieure               | ——     |
-| Divers | Pollution                        | ——     |
-| Divers | PollutionGraduelle               | ——     |
-| Divers | Pro                              | ——     |
-| Divers | Scolaire                         | ——     |
-| Divers | Vandalisme                       | ——     |
-| Divers | ViceOuMalfacon                   | ——     |
+| Divers | ActionDeChasse                   | ---    |
+| Divers | Attentat                         | ---    |
+| Divers | Autre                            | ---    |
+| Divers | BrisDeteriorationPanne           | ---    |
+| Divers | CanalisationsExterieures         | ---    |
+| Divers | DeteriorationImmeubleParVehicule | ---    |
+| Divers | Emeute                           | ---    |
+| Divers | EvenementImmobilier              | ---    |
+| Divers | ExtraScolaire                    | ---    |
+| Divers | FaitIntentionnel                 | ---    |
+| Divers | Fonctionnement                   | ---    |
+| Divers | HorsActionDeChasse               | ---    |
+| Divers | Mrh                              | ---    |
+| Divers | OrigineCriminelle                | ---    |
+| Divers | PanneElectromenager              | ---    |
+| Divers | Perte                            | ---    |
+| Divers | PerteEauInterieure               | ---    |
+| Divers | Pollution                        | ---    |
+| Divers | PollutionGraduelle               | ---    |
+| Divers | Pro                              | ---    |
+| Divers | Scolaire                         | ---    |
+| Divers | Vandalisme                       | ---    |
+| Divers | ViceOuMalfacon                   | ---    |
 
 <!--
 type: tab
@@ -229,14 +232,14 @@ title: DMMT
 
 | Nature | Cause                                        | Détail |
 | ------ | -------------------------------------------- | ------ |
-| DMMT   | Accident                                     | ——     |
-| DMMT   | Agression                                    | ——     |
-| DMMT   | Divers                                       | ——     |
-| DMMT   | Incendie                                     | ——     |
-| DMMT   | TerrorismeAttentat                           | ——     |
-| DMMT   | VandalismeEmeuteMouvementPopulaireTerrorisme | ——     |
-| DMMT   | VolDeMarchandises                            | ——     |
-| DMMT   | VolDuVehicule                                | ——     |
+| DMMT   | Accident                                     | ---    |
+| DMMT   | Agression                                    | ---    |
+| DMMT   | Divers                                       | ---    |
+| DMMT   | Incendie                                     | ---    |
+| DMMT   | TerrorismeAttentat                           | ---    |
+| DMMT   | VandalismeEmeuteMouvementPopulaireTerrorisme | ---    |
+| DMMT   | VolDeMarchandises                            | ---    |
+| DMMT   | VolDuVehicule                                | ---    |
 
 <!--
 type: tab
@@ -247,9 +250,9 @@ title: BIENS
 
 | Nature           | Cause                                        | Détail |
 | ---------------- | -------------------------------------------- | ------ |
-| DommagesAuxBiens | AppareilMedical                              | ——     |
-| DommagesAuxBiens | InstrumentsDeMusique                         | ——     |
-| DommagesAuxBiens | PerteContenuCongelateurCellulesRefrigerantes | ——     |
+| DommagesAuxBiens | AppareilMedical                              | ---    |
+| DommagesAuxBiens | InstrumentsDeMusique                         | ---    |
+| DommagesAuxBiens | PerteContenuCongelateurCellulesRefrigerantes | ---    |
 
 <!--
 type: tab
@@ -260,35 +263,35 @@ title: DE
 
 | Nature                  | Cause                              | Détail |
 | ----------------------- | ---------------------------------- | ------ |
-| **DommagesElectriques** | ——                                 | ——     |
-| DommagesElectriques     | Autre                              | ——     |
-| DommagesElectriques     | ExplosionImplosion                 | ——     |
-| DommagesElectriques     | FaitIntentionnel                   | ——     |
-| **DommagesElectriques** | **FoudreElectriciteAtmospherique** | ——     |
-| **DommagesElectriques** | **IncidentSurtensionSurLeReseau**  | ——     |
-| **DommagesElectriques** | **Surtension**                     | ——     |
-| DommagesElectriques     | ViceOuMalfacon                     | ——     |
+| **DommagesElectriques** | ---                                | ---    |
+| DommagesElectriques     | Autre                              | ---    |
+| DommagesElectriques     | ExplosionImplosion                 | ---    |
+| DommagesElectriques     | FaitIntentionnel                   | ---    |
+| **DommagesElectriques** | **FoudreElectriciteAtmospherique** | ---    |
+| **DommagesElectriques** | **IncidentSurtensionSurLeReseau**  | ---    |
+| **DommagesElectriques** | **Surtension**                     | ---    |
+| DommagesElectriques     | ViceOuMalfacon                     | ---    |
 
 <!--
 type: tab
-title: Explosion
+title: EXPL
 -->
 
 ## Explosion
 
 | Nature    | Cause                                        | Détail    |
 | --------- | -------------------------------------------- | --------- |
-| Explosion | ——                                           | ——        |
-| Explosion | ActeCriminel                                 | ——        |
-| Explosion | AppareilAutre                                | ——        |
-| Explosion | AppareilChauffage                            | ——        |
-| Explosion | AppareilElectromenager                       | ——        |
-| Explosion | Autre                                        | ——        |
-| Explosion | FoyerOuvertFerme                             | ——        |
-| Explosion | Indeterminee                                 | ——        |
-| Explosion | InstallationElectrique                       | ——        |
+| Explosion | ---                                          | ---       |
+| Explosion | ActeCriminel                                 | ---       |
+| Explosion | AppareilAutre                                | ---       |
+| Explosion | AppareilChauffage                            | ---       |
+| Explosion | AppareilElectromenager                       | ---       |
+| Explosion | Autre                                        | ---       |
+| Explosion | FoyerOuvertFerme                             | ---       |
+| Explosion | Indeterminee                                 | ---       |
+| Explosion | InstallationElectrique                       | ---       |
 | Explosion | InstallationGaz                              | Privative |
-| Explosion | VandalismeEmeuteMouvementPopulaireTerrorisme | ——        |
+| Explosion | VandalismeEmeuteMouvementPopulaireTerrorisme | ---       |
 
 <!--
 type: tab
@@ -299,9 +302,9 @@ title: INC
 
 | Nature       | Cause                                        | Détail                                     |
 | ------------ | -------------------------------------------- | ------------------------------------------ |
-| **Incendie** | ——                                           | ——                                         |
-| Incendie     | Indeterminee                                 | ——                                         |
-| Incendie     | FaitAccidentelDunTiers                       | ——                                         |
+| **Incendie** | ---                                          | ---                                        |
+| Incendie     | Indeterminee                                 | ---                                        |
+| Incendie     | FaitAccidentelDunTiers                       | ---                                        |
 | Incendie     | AppareilChauffage                            | FoyerFerme                                 |
 | Incendie     | ExplosionImplosion                           | InstallationGaz                            |
 | Incendie     | Foudre                                       | ActionDeLElectriciteAtmospherique          |
@@ -309,19 +312,19 @@ title: INC
 | Incendie     | Electrique                                   | CanalisationElectriqueBatiment             |
 | Incendie     | AppareilChauffage                            | FoyerOuvert                                |
 | Incendie     | AppareilChauffage                            | Autre                                      |
-| Incendie     | AccessoireDomestique                         | ——                                         |
+| Incendie     | AccessoireDomestique                         | ---                                        |
 | Incendie     | Electrique                                   | AppareilElectromenagerInstallationAmovible |
-| Incendie     | Criminel                                     | ——                                         |
-| Incendie     | FeuDeForetEcobuage                           | ——                                         |
+| Incendie     | Criminel                                     | ---                                        |
+| Incendie     | FeuDeForetEcobuage                           | ---                                        |
 | Incendie     | AccidentDeMenage                             | Cuisine                                    |
-| Incendie     | ForceDeLaNature                              | ——                                         |
+| Incendie     | ForceDeLaNature                              | ---                                        |
 | Incendie     | AccidentDeMenage                             | Autre                                      |
 | Incendie     | Foudre                                       | ChuteDirecte                               |
-| Incendie     | VandalismeEmeuteMouvementPopulaireTerrorisme | ——                                         |
+| Incendie     | VandalismeEmeuteMouvementPopulaireTerrorisme | ---                                        |
 | Incendie     | ExplosionImplosion                           | Appareil                                   |
 | Incendie     | Vehicule                                     | AerienChuteDObjetDeLEspace                 |
-| Incendie     | FumeeSansIncendie                            | ——                                         |
-| Incendie     | Autre                                        | ——                                         |
+| Incendie     | FumeeSansIncendie                            | ---                                        |
+| Incendie     | Autre                                        | ---                                        |
 | Incendie     | FuiteRupture                                 | CanalisationAlimentationPriveeAccessible   |
 
 <!--
@@ -345,18 +348,18 @@ title: VOL
 | Vol    | AvecEffraction                               | VolEtVandalisme        |
 | Vol    | AvecEffraction                               | AvecVol                |
 |        |                                              |                        |
-| Vol    | ALExterieur                                  | ——                     |
-| Vol    | Indeterminee                                 | ——                     |
-| Vol    | DeCles                                       | ——                     |
-| Vol    | Alarrache                                    | ——                     |
-| Vol    | VandalismeSurSerrure                         | ——                     |
-| Vol    | VandalismeEmeuteMouvementPopulaireTerrorisme | ——                     |
-| Vol    | Vandalisme                                   | ——                     |
-| Vol    | Autre                                        | ——                     |
+| Vol    | ALExterieur                                  | ---                    |
+| Vol    | Indeterminee                                 | ---                    |
+| Vol    | DeCles                                       | ---                    |
+| Vol    | Alarrache                                    | ---                    |
+| Vol    | VandalismeSurSerrure                         | ---                    |
+| Vol    | VandalismeEmeuteMouvementPopulaireTerrorisme | ---                    |
+| Vol    | Vandalisme                                   | ---                    |
+| Vol    | Autre                                        | ---                    |
 
 | Nature             | Cause  | Détail |
 | ------------------ | ------ | ------ |
-| FoudreSansIncendie | Divers | ——     |
+| FoudreSansIncendie | Divers | ---    |
 
 <!--
 type: tab
@@ -367,6 +370,6 @@ title: Autres
 
 | **Nature**         | Cause | Détail |
 | ------------------ | ----- | ------ |
-| **AutresDommages** | ——    | ——     |
+| **AutresDommages** | ---   | ---    |
 
 <!-- type: tab-end -->
