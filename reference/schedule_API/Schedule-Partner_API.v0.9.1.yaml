@@ -34,6 +34,7 @@ tags:
   - name: Timeslot
     description: Créneau horaire
   - name: Disponibilités
+  - name: Rendez-vous
 paths:
   /availabilities:
     parameters: []
@@ -121,7 +122,7 @@ paths:
   /appointments:
     get:
       tags:
-        - Appointment
+        - Rendez-vous
       summary: RÉCUPÉRER les rendez-vous
       description: |
         Récupère une liste de rendez-vous fixés.
@@ -247,8 +248,6 @@ paths:
     parameters: []
   '/appointments/{id}':
     get:
-      tags:
-        - Appointment
       summary: LIRE les détails d'un rendez-vous
       security: []
       responses:
@@ -267,6 +266,8 @@ paths:
                           $ref: '#/components/schemas/Appointment'
       operationId: AppointmentGetInfo
       description: LIRE les détails d'un rendez-vous
+      tags:
+        - Rendez-vous
     put:
       tags:
         - Appointment
@@ -329,8 +330,6 @@ paths:
         required: true
     get:
       summary: REPLANIFIER un rendez-vous
-      tags:
-        - Appointment
       responses:
         '200':
           description: OK
@@ -339,6 +338,8 @@ paths:
       operationId: AppointmentReschedule
       security: []
       description: Lecture de l'horaire d'un rendez-vous
+      tags:
+        - Rendez-vous
   /intervention:
     post:
       summary: ENVOYER une demande d'intervention
@@ -535,8 +536,6 @@ components:
         Selon les sinistres, le détail de la cause peut ne pas être renseigné. Les valeurs de ces trois informations suivent la codification **Sinapps**.
 
         [Liste des valeurs possibles](docs/sinapps/Nature-du-sinistre.md)
-      x-tags:
-        - Sinapps
       properties:
         nature:
           $ref: '#/components/schemas/SinisterNature'
@@ -546,6 +545,8 @@ components:
           $ref: '#/components/schemas/SinisterCauseDetail'
       required:
         - nature
+      x-tags:
+        - Rendez-vous
     SinisterNature:
       title: SinisterNature
       type: string
@@ -917,8 +918,6 @@ components:
     Appointment:
       title: Objet Appointment
       type: object
-      x-tags:
-        - Appointment
       description: Rendez-vous
       properties:
         address:
@@ -940,6 +939,8 @@ components:
       required:
         - type
         - schedule
+      x-tags:
+        - Rendez-vous
   responses: {}
   parameters:
     InsuredNature:
