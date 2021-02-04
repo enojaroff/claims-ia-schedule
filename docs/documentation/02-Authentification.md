@@ -12,7 +12,7 @@ L'API Schedule de Claims IA utilise des clés API pour authentifier les demandes
 
 En mode test, les clés secrètes ont le préfixe `test_`.
 
-### Basic Auth
+## Basic Auth
 
 L'authentification auprès de l'API est effectuée via **HTTP Basic Auth**. La clé API est passée comme valeur du nom d'utilisateur d'authentification. Pas besoin de fournir de mot de passe.
 
