@@ -21,8 +21,6 @@ servers:
 tags:
   - name: Account
     description: ''
-  - name: Appointment
-    description: Gestion des rendez-vous.
   - name: Client
     description: ''
   - name: Custom Field
@@ -197,8 +195,6 @@ paths:
       operationId: get-appointments-list
       security: []
     post:
-      tags:
-        - Appointment
       summary: CREER un rendez-vous
       description: |
         > En réponse, ajouter des infos de connexion (Visio) : URL (directe ou pas ?), ...
@@ -245,6 +241,8 @@ paths:
         '404':
           description: Not Found
       operationId: AppointmentCreate
+      tags:
+        - Rendez-vous
     parameters: []
   '/appointments/{id}':
     get:
@@ -269,8 +267,6 @@ paths:
       tags:
         - Rendez-vous
     put:
-      tags:
-        - Appointment
       summary: MODIFIER un rendez-vous
       description: Using this endpoint you can modify the attributes for an appointment
       security: []
@@ -301,9 +297,9 @@ paths:
                       data:
                         $ref: '#/components/schemas/Appointment'
       operationId: AppointmentModify
-    delete:
       tags:
-        - Appointment
+        - Rendez-vous
+    delete:
       summary: ANNULER un rendez-vous
       description: Using this endpoint you can delete an appointment within the account.
       security: []
@@ -315,6 +311,8 @@ paths:
               schema:
                 allOf: []
       operationId: AppointmentDelete
+      tags:
+        - Rendez-vous
     parameters:
       - schema:
           type: string
