@@ -23,8 +23,6 @@ tags:
     description: ''
   - name: Appointment
     description: Gestion des rendez-vous.
-  - name: Availability
-    description: Recherche de créneaux horaires disponibles
   - name: Client
     description: ''
   - name: Custom Field
@@ -84,7 +82,6 @@ paths:
       security:
         - Partner ID: []
       tags:
-        - Availability
         - Disponibilités
       parameters:
         - $ref: '#/components/parameters/CompanyId'
@@ -94,7 +91,6 @@ paths:
   '/availabilities/{id}':
     get:
       tags:
-        - Availability
         - Disponibilités
       summary: LIRE les informations sur un créneau horaire
       description: |
@@ -384,7 +380,6 @@ paths:
         - Adresse du risque
         - Liste des DI
       tags:
-        - Availability
         - Disponibilités
       requestBody:
         content:
@@ -434,7 +429,6 @@ components:
 
         Une adresse peut être renseignée si elle est différente de l'adresse fournie dans la demande.
       x-tags:
-        - Availability
         - Disponibilités
       properties:
         id:
@@ -516,7 +510,6 @@ components:
         Cet objet est transmis au partenaire lors d'une demande de créneaux horaires.
         Le but est de fournir au partenaire les informations nécessaires pour qu'il puisse identifier les ressoureces disponibles.
       x-tags:
-        - Availability
         - Disponibilités
       properties:
         type:
