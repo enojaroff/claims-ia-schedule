@@ -2,7 +2,7 @@
 tags: [documentation, Sinapps]
 ---
 
-# Codes
+# Codes Sinapps
 
 Pour codifier les informations, l'API s'apuie quand c'est approprié sur les codes définis dans l'API REST de **Sinapps**.
 
