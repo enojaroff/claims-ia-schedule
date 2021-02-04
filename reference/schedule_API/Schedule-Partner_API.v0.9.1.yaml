@@ -3,11 +3,15 @@ info:
   version: 0.9.1
   title: API Partenaire
   description: |
-    L'API partenaire décrit les méthodes qui devront être implémentées par le partenaire (Expert ou REN) dans le cadre du module de prise de rendez-vous.
+    L'API partenaire décrit les méthodes qui devront être implémentées par le partenaire (Expert ou REN) dans le cadre du service de prise de rendez-vous.
 
     Le service RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, l'API partenaire doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.
 
-    Le service RDv de Claims IA est décrit plus en détails dans la documentation.
+    Le service RDv de Claims IA est décrit plus dans le [chapitre **Flux**](../../docs/documentation/01-Flux.md) de la documentation.
+
+    L'API du partenaire a 2 objectifs:
+    - Fournir une liste de créneaux horaires libres
+    - Permettre de fixer un rendez-vous
   contact:
     name: Edouard Nojaroff
     email: e.nojaroff@claims-ia.fr
@@ -94,8 +98,7 @@ paths:
         ## Récupère les informations sur un créneau horaire.
 
         > N.B. Normalement, cette requête n'est pas nécessaire, dans la mesure où l'information a déjà été transmise dans la liste des créneaux disponibles lors d'un **GET /availabilities**.
-      security:
-        - '0123456789': []
+      security: []
       parameters: []
       responses:
         '200':
@@ -350,8 +353,34 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Timeslot'
-      description: |
-        Cette requête permet d'envoyer une demande d'intervention, et en retour de **recevoir une liste de créneaux horaires**.
+      description: |+
+        Cette requête permet de récupérer la liste des créneaux horaires disponibles.
+
+        Pour cela, une demande d'intervention est émise, accompagnée d'informations sur la déclaration de sinistre.
+
+        La nature des informations varie selon que la demande s'adresse à un Expert ou un Artisan.
+
+        ### Expert
+
+        - Identifiant de l'assureur
+        - Type assuré
+        - Type de sinistre
+        - Type d'expertise
+        - Type d'habitation
+        - Enjeu total
+        - Enjeu DM
+        - Enjeu DI
+        - Lieu de RDV
+
+
+        ### RENeur
+
+        - Identifiant de l'assureur
+        - Type de mission
+        - Garantie en jeu
+        - Adresse du risque
+        - Liste des DI
+
       tags:
         - Availability
       requestBody:
@@ -359,14 +388,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Intervention'
-      security:
-        - '0123456789': []
+      security: []
 components:
   securitySchemes:
-    '0123456789':
-      type: http
-      scheme: basic
-      description: ''
     Partner ID:
       name: pid
       type: apiKey
@@ -1041,4 +1065,4 @@ components:
       description: Type de mission
   examples: {}
 security:
-  - http_basic: []
+  - Partner ID: []
