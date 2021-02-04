@@ -35,6 +35,7 @@ tags:
     description: ''
   - name: Timeslot
     description: Créneau horaire
+  - name: Disponibilités
 paths:
   /availabilities:
     parameters: []
@@ -84,6 +85,7 @@ paths:
         - Partner ID: []
       tags:
         - Availability
+        - Disponibilités
       parameters:
         - $ref: '#/components/parameters/CompanyId'
         - $ref: '#/components/parameters/InsuredNature'
@@ -93,6 +95,7 @@ paths:
     get:
       tags:
         - Availability
+        - Disponibilités
       summary: LIRE les informations sur un créneau horaire
       description: |
         ## Récupère les informations sur un créneau horaire.
@@ -353,7 +356,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Timeslot'
-      description: |+
+      description: |
         Cette requête permet de récupérer la liste des créneaux horaires disponibles.
 
         Pour cela, une demande d'intervention est émise, accompagnée d'informations sur la déclaration de sinistre.
@@ -380,9 +383,9 @@ paths:
         - Garantie en jeu
         - Adresse du risque
         - Liste des DI
-
       tags:
         - Availability
+        - Disponibilités
       requestBody:
         content:
           application/json:
@@ -432,6 +435,7 @@ components:
         Une adresse peut être renseignée si elle est différente de l'adresse fournie dans la demande.
       x-tags:
         - Availability
+        - Disponibilités
       properties:
         id:
           type: string
@@ -513,6 +517,7 @@ components:
         Le but est de fournir au partenaire les informations nécessaires pour qu'il puisse identifier les ressoureces disponibles.
       x-tags:
         - Availability
+        - Disponibilités
       properties:
         type:
           $ref: ../../schemas/MissionType.v1.yaml
