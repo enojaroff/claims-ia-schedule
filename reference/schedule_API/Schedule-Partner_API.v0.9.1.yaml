@@ -340,7 +340,7 @@ paths:
         - Rendez-vous
   /intervention:
     post:
-      summary: ENVOYER une demande d'intervention
+      summary: DEMANDER une intervention
       operationId: post-intervention
       responses:
         '200':
@@ -502,7 +502,7 @@ components:
       required:
         - value
     Intervention:
-      title: Objet Intervention
+      title: Objet ServiceRequest
       type: object
       description: |-
         Caractéristiques de l'intervention souhaitée.
