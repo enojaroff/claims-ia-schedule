@@ -17,6 +17,8 @@ La prise de rendez-vous s'effectue en 4 temps:
   - les documents fournis par l'assuré
 
 
+![Flux normal](../../assets/images/test.svg "Flux normal")
+
 ![Flux normal](../../assets/images/flux2.png "Flux normal")
 
 L'API intègre également d'autres méthodes (optionnelles en v1) pour
