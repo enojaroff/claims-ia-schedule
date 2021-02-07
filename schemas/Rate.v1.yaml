@@ -3,3 +3,6 @@ title: Rate
 description: Taux (pourcentage)
 format: float
 example: 75.25
+minimum: 0
+x-tags:
+  - Common

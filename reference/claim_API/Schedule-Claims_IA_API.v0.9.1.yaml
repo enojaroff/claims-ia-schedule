@@ -35,16 +35,9 @@ tags:
   - name: Timeslot
     description: Créneau horaire
 paths:
-  '/claims/{cid}':
+  '/claims/{claimId}':
     parameters:
-      - schema:
-          type: string
-          example: cd83ea81-5ca1-4a1b-a155-2e4d99f04a6a
-          format: uuid
-        name: cid
-        in: path
-        required: true
-        description: Identifiant de la déclaration
+      - $ref: '#/components/parameters/claimId'
     get:
       summary: LIRE les données d'une déclaration
       tags: []
@@ -54,35 +47,33 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../../models/Claim.v1.yaml
+                $ref: '#/components/schemas/Claim'
       operationId: get-claim
-      description: km
+      description: Déclaration
       parameters: []
+      security:
+        - header_token: []
   '/claims/{claimId}/files/{fileId}':
     parameters:
-      - schema:
-          type: string
-        name: claimId
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: fileId
-        in: path
-        required: true
+      - $ref: '#/components/parameters/claimId'
+      - $ref: '#/components/parameters/fileId'
     get:
-      summary: LIRE un fichier
+      summary: RÉCUPÉRER un fichier
       tags: []
       responses:
         '200':
           description: OK
           content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
             application/octet-stream:
               schema:
                 type: object
                 properties: {}
       operationId: get-claim-file
-      description: Récupère un fichier de la déclaration
+      description: 'Récupère un fichier '
 components:
   securitySchemes:
     header_token:
@@ -97,7 +88,61 @@ components:
       type: http
       scheme: bearer
   responses: {}
-  parameters: {}
+  parameters:
+    claimId:
+      name: claimId
+      in: path
+      schema:
+        type: string
+        format: uuid
+        example: 123e4567-e89b-12d3-a456-426614174000
+      required: true
+      description: Identifiant interne d'une déclaration
+    fileId:
+      name: fileId
+      in: path
+      schema:
+        type: string
+      style: matrix
+      description: Référence du fichier
+      required: true
   examples: {}
+  schemas:
+    Claim:
+      title: Claim
+      type: object
+      description: Déclaration de sinistre
+      x-tags:
+        - Claim
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date de déclaration
+        company:
+          $ref: ../../schemas/Company.v1.yaml
+        contract:
+          $ref: ../../schemas/Contract.v1.yaml
+        guarantee:
+          $ref: ../../schemas/WarrantyType.v1.yaml
+        customer:
+          $ref: ../../schemas/Customer.v1.yaml
+        sinister:
+          $ref: ../../schemas/Sinister.v1.yaml
+        documents:
+          type: array
+          items:
+            $ref: ../../schemas/Attachment.v1.yaml
+        valuation:
+          $ref: ../../schemas/Valuation.v1.yaml
+        reference:
+          type: string
+          description: Référence ClaimsIA de la déclaration
+        risk:
+          $ref: ../../schemas/Risk.v1.yaml
+      required:
+        - date
+        - company
+        - guarantee
 security:
   - header_token: []

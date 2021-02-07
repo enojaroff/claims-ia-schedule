@@ -1,0 +1,5 @@
+type: string
+title: UUID
+format: uuid
+x-tags:
+  - Common
