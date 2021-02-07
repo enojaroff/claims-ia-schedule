@@ -35,22 +35,22 @@ title: Demande de créneaux - Expert
 
 ## Etape 1 : Demande de créneaux horaires
 
-Les envoyées par Claims IA doivent être suffisantes pour que le partenaire Expert puisse déterminer quels crénaux sont libres en fonction de ses ressources (experts).   
+Les envoyées par Claims IA doivent être suffisantes pour que le partenaire Expert puisse déterminer quels crénaux sont libres en fonction de ses ressources (experts).
 
-| Données                      |  Remarques                         |
-| :--------------------------- |  :-------------------------------- |
-| Assureur                     |  Identifiant de l'assureur         |
-| Type assuré                  |  Particulier, PRO                  |
-| Type de sinistre             |  _DDE, DE, CATNAT, VOL_            |
-| Type d'expertise             |  VISIO, EAD, ESS, CONTRADICTOIRE   |
-| Type d'habitation            |                                    |
-| Enjeu                        |  TTC                               |
-| Enjeu DM                     |  TTC                               |
-| Enjeu DI                     |  TTC                               |
-| Lieu de RDV                  |                                    |
-| _Géocodage lieu RDV_         |  V2                                |
-| <hr>                         |  <hr>                              |
-| Processus                    |  Champ libre. A définir            |
+| Données              | Remarques                       |
+| :------------------- | :------------------------------ |
+| Assureur             | Identifiant de l'assureur       |
+| Type assuré          | Particulier, PRO                |
+| Type de sinistre     | _DDE, DE, CATNAT, VOL_          |
+| Type d'expertise     | VISIO, EAD, ESS, CONTRADICTOIRE |
+| Type d'habitation    |                                 |
+| Enjeu                | TTC                             |
+| Enjeu DM             | TTC                             |
+| Enjeu DI             | TTC                             |
+| Lieu de RDV          |                                 |
+| _Géocodage lieu RDV_ | V2                              |
+| <hr>                 | <hr>                            |
+| Processus            | Champ libre. A définir          |
 
 <!--
 type: tab
@@ -59,15 +59,13 @@ title: Demande de créneaux - REN
 
 ## Etape 1 : Demande de créneaux horaires
 
-Les envoyées par Claims IA doivent être suffisantes pour que le partenaire Artisan puisse déterminer quels crénaux sont libres.   
-
+Les envoyées par Claims IA doivent être suffisantes pour que le partenaire Artisan puisse déterminer quels crénaux sont libres.
 
 <!-- theme: warning -->
 
 > ### A compléter
 >
 > Définir la liste des données à transmettre
-
 
 <!--
 type: tab
@@ -76,21 +74,27 @@ title: Récupération du dossier
 
 ## Etape 4 : Récupération du dossier par le partenaire
 
-
 | Données                      | Remarques                         |
 | :--------------------------- | :-------------------------------- |
+| **Assurance**                |                                   |
 | Assureur                     | Identifiant de l'assureur         |
+| **Contrat**                  |                                   |
 | Contrat                      | Nom du contrat                    |
 | N° contrat                   | Réf. assureur du contrat          |
-| Ref Claims IA                | Réf. interne de la déclaration    |
+| Ref Sinistre                 | Réf. assureur du sinistre         |
+| **Assuré**                   |                                   |
 | Ref Sinistre                 | Réf. assureur du sinistre         |
 | Qualité de l'assuré          | CPO, LOC, PNO, ...                |
 | Type assuré                  | Particulier, PRO                  |
+| <hr>                         | <hr>                              |
+| **Déclaration**              |                                   |
+| <hr>                         | <hr>                              |
+| Ref Claims IA                | Réf. interne de la déclaration    |
+| Date de la déclaration       |                                   |
 | Adresse du risque            |                                   |
 | Type de sinistre             | _DDE, DE, CATNAT, VOL_            |
 | Type d'expertise             | VISIO, EAD, ESS, CONTRADICTOIRE   |
 | Date du sinistre             |                                   |
-| Date de la déclaration       |                                   |
 | Type d'habitation            |                                   |
 | Adresse du risque            |                                   |
 | Enjeu                        | TTC                               |
@@ -109,4 +113,3 @@ title: Récupération du dossier
 | `EAD` : Données de connexion |                                   |
 
 <!-- type: tab-end -->
-
