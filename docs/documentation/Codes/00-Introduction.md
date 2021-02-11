@@ -4,20 +4,23 @@ tags: [documentation, Sinapps]
 
 # Sommaire
 
+Les données qui ont des valeurs définies sont codifiées, les rendant ainsi facilement exploitables.
 
-Pour codifier les informations, l'API s'apuie quand c'est approprié sur les codes définis dans l'API REST de **Sinapps**.
+Elles sont généralement représentées sous la forme d'un couple Code + Description.
+- Le **code** est un champ obligatoire, et est constitué d'une chaine de caractères. C'est ce code qui doit être utilisé.
+- La **description** est une chaine de caractères optionnelle. Elle est présente principalement à des fins de lisibilité. Son contenu est susceptible de varier. ** Il ne faut donc pas se baser dessus dans les traitements informatiques**.
 
-Les valeurs sont définies dans les schémas de l'API.
+Quand les codes sont utilisés, leurs valeurs sont énumérées dans les schémas de l'API.
 
-Pour informations, voici quelques tables de codes Sinapps : 
+Pour informations, voici quelques tables de codes : 
 
--   [Type de garantie](01-Type-de-garantie.md)
--   [Type de risque](02-Type-de-risque.md) 
--   [Rapport de l'assuré au risque](03-Qualite-de-l-assure.md)
--   [Link Text](https://link_url)
--   [Link Text](https://link_url) 
--   [Link Text](https://link_url) 
--   [Link Text](https://link_url) 
--   [Link Text](https://link_url) 
+1. [Type de garantie](01-Type-de-garantie.md)
+1. [Type de risque (bien)](02-Type-de-risque.md) 
+1. [Relation au risque de l'assuré](03-Relation-au-risque.md)
+1. [Nature du sinistre](04-Nature-du-sinistre.md)
+1. Dommages
+   1.   [Nature des dommages](05-Nature-des-dommages.md) 
+   1.   [Type de dommages](05-Nature-des-dommages.md) 
+1. [Convention](07-Type-de-convention.md) 
+1.   [Mode indemnitaire](08-Mode-indemnitaire.md) 
 
-[gjhgjhg](../Codes_Sinapps/Type-de-risque.md)
