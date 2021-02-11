@@ -20,7 +20,7 @@ Pour informations, voici quelques tables de codes :
 1. [Nature du sinistre](04-Nature-du-sinistre.md)
 1. Dommages
    1.   [Nature des dommages](05-Nature-des-dommages.md) 
-   1.   [Type de dommages](05-Nature-des-dommages.md) 
+   1.   [Types de dommages](06-Detail-nature-dommages.md) 
 1. [Convention](07-Type-de-convention.md) 
 1.   [Mode indemnitaire](08-Mode-indemnitaire.md) 
 

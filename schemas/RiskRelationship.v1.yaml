@@ -1,31 +1,37 @@
-type: string
+type:
+  - string
+  - object
 title: RiskRelationship
-enum:
-  - Locataire
-  - LocataireMeuble
-  - LocataireEnVide
-  - LocataireNonOccupant
-  - Colocataire
-  - CoproprietaireOccupant
-  - CoproprietaireBailleur
-  - CoproprietaireNonOccupant
-  - CoproprietaireNonOccupantMeuble
-  - ProprietaireOccupant
-  - ProprietaireBailleur
-  - ProprietaireIndivisaire
-  - ProprietaireNonOccupant
-  - ProprietaireNonOccupantMeuble
-  - Usufruit
-  - Inconnu
-  - NuProprietaire
-  - SansObjet
-  - Autre
-  - Debirentier
-  - Credirentier
-  - SyndicDeCopropriete
-  - LocataireOccupantTotal
-  - LocataireAttributaireTotal
-  - Proprietaire
-  - MandataireOuGerant
-  - Coproprietaire
 description: Relation au risque
+properties:
+  name:
+    type: string
+    description: Code
+    enum:
+      - Proprietaire
+      - ProprietaireOccupant
+      - ProprietaireNonOccupant
+      - Coproprietaire
+      - CoproprietaireOccupant
+      - CoproprietaireNonOccupant
+      - Locataire
+      - Inconnu
+      - Autre
+    example: ProprietaireOccupant
+  label:
+    type: string
+    description: |
+      Description
+    enum:
+      - Propriétaire
+      - Propriétaire occupant
+      - Propriétaire non occupant
+      - Copropriétaire
+      - Copropriétaire occupant
+      - Copropriétaire non occupant
+      - Locataire
+      - Inconnu
+      - Autre
+    example: Propriétaire occupant
+required:
+  - name
