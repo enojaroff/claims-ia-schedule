@@ -23,4 +23,5 @@ Pour informations, voici quelques tables de codes :
    1.   [Types de dommages](06-Detail-nature-dommages.md) 
 1. [Convention](07-Type-de-convention.md) 
 1.   [Mode indemnitaire](08-Mode-indemnitaire.md) 
+1. [Acceptation de la proposition par l'assuré](09-Acception-proposition.md)
 

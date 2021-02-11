@@ -9,9 +9,6 @@ x-examples:
     countryCode: FR
     country: France
 description: Adresse postale d'un lieu.
-x-tags:
-  - ClaimsIA
-  - Common
 properties:
   street1:
     type: string
@@ -50,3 +47,5 @@ required:
   - street1
   - zipCode
   - city
+x-tags:
+  - Common

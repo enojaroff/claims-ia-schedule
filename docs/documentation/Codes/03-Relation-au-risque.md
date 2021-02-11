@@ -10,7 +10,6 @@ Claims IA ne gère qu'une partie des valeurs possibles. Les autres valeurs sont 
 
 ## Codes utilisés
 
-
 | Code                          | Description                 |                                           |
 | ----------------------------- | --------------------------- | ----------------------------------------- |
 | **Proprietaire**              | Propriétaire                | _Habitation individuelle_                 |

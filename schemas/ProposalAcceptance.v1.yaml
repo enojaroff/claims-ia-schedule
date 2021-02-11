@@ -1,0 +1,31 @@
+title: Acceptation de la proposition indemnitaire
+type: object
+properties:
+  name:
+    type: string
+    enum:
+      - AcceptationIndemnite
+      - Refus
+      - AcceptationDommages
+      - AcceptationDommagesAvecReserves
+      - AcceptationIndemniteAvecReserves
+      - AttentePositionClient
+      - SansObjet
+    description: |
+      Code
+  label:
+    type: string
+    enum:
+      - Acceptation de l'indemnité
+      - Refus
+      - Acceptation des dommages
+      - Acceptation des dommages avec réserves
+      - Acceptation de l'indemnité avec réserves
+      - En attente position client
+      - Sans objet
+    description: |
+      Description
+required:
+  - name
+x-tags:
+  - Claim
