@@ -7,11 +7,11 @@ info:
 
     Le service RDV de Claims IA permet la prise de rendez-vous d'expertise ou d'intervention d'artisan depuis l'application Claims MRH. A ce titre, l'API partenaire doit être implémentée par les sociétés qui souhaitent fournir ce service de prise de rendez-vous.
 
-    Le service RDv de Claims IA est décrit plus dans le [chapitre **Flux**](../../docs/documentation/01-Flux.md) de la documentation.
+    Le service RDV de Claims IA est décrit plus dans le [chapitre **Flux**](../../docs/documentation/01-Flux.md) de la documentation.
 
-    L'API du partenaire a 2 objectifs:
+    L'API du partenaire a 2 fonctions principales:
     - Fournir une liste de créneaux horaires libres
-    - Permettre de fixer un rendez-vous
+    - Enregistrer un rendez-vous
   contact:
     name: Edouard Nojaroff
     email: e.nojaroff@claims-ia.fr
