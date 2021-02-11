@@ -1,5 +1,5 @@
 ---
-tags: [documentation, Sinapps]
+tags: [documentation]
 ---
 
 # Type de risque
@@ -15,7 +15,7 @@ Désigne le bien assuré.
 | <hr>                   | <hr>                                     | <hr>               |
 | **Chambre**            | **CHAMBRE (BONNE, ETUDIANT, HOTE.....)** |                    |
 
-## _Autres_
+## Autres valeurs (_non utilisées pour le moment_)
 
 | Code                       | Description                  |   |
 | -------------------------- | ---------------------------- | - |
@@ -30,3 +30,24 @@ Désigne le bien assuré.
 | _HabitationEnConstruction_ | _HABITATION EN CONSTRUCTION_ |   |
 | _TerrainNonBati_           | _TERRAIN NON BATI_           |   |
 | AutreRisque                | AUTRE RISQUE                 |   |
+
+| Code                     | Description                          |
+| ------------------------ | ------------------------------------ |
+| MaisonParticuliere       | MAISON PARTICULIERE                  |
+| ResidenceMobile          | RESIDENCE MOBILE                     |
+| Immeuble                 | IMMEUBLE                             |
+| Appartement              | APPARTEMENT                          |
+| ResidenceDeRetraite      | RESIDENCE DE RETRAITE                |
+| Bungalow                 | BUNGALOW                             |
+| Chambre                  | CHAMBRE (BONNE, ETUDIANT, HOTE.....) |
+| Appartement              | APPARTEMENT                          |
+| Appartement              | APPARTEMENT                          |
+| LogementJeune            | LOGEMENT JEUNE                       |
+| ConstructionLegere       | CONSTRUCTION LEGERE                  |
+| BatimentNonHabitable     | BATIMENT NON HABITABLE               |
+| MaisonParticuliere       | MAISON PARTICULIERE                  |
+| CaveRemise               | CAVE / REMISE                        |
+| HabitationEnConstruction | HABITATION EN CONSTRUCTION           |
+| TerrainNonBati           | TERRAIN NON BATI                     |
+| AutreRisque              | AUTRE RISQUE                         |
+| AutreRisque              | AUTRE RISQUE                         |

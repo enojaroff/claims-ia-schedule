@@ -1,5 +1,5 @@
 ---
-tags: [documentation, Sinapps]
+tags: [documentation]
 ---
 
 # Relation au risque

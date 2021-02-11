@@ -34,7 +34,7 @@ title: A-C
 |     | **CatastropheNaturelle**     | CATASTROPHE NATURELLE                               |
 |     | **ChocVtm**                  | CHOC VTM (choc de véhicule terrestre)               |
 
-## _Autres_
+## Autres valeurs (_non utilisées pour le moment_)
 
 |     | Code                           | Description                        |
 | --- | ------------------------------ | ---------------------------------- |

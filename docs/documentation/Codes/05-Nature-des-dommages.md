@@ -1,5 +1,5 @@
 ---
-tags: [documentation, Sinapps]
+tags: [documentation]
 ---
 
 # Nature des dommages
@@ -19,7 +19,7 @@ tags: [documentation, Sinapps]
 | **BiensMobiliersPersonnels** | BIENS MOBILIERS PERSONNELS |
 | **AutresPrejudices**         | AUTRES PREJUDICES          |
 
-## Autres
+## Autres valeurs (_non utilisées pour le moment_)
 
 | Code                  | Description             |
 | --------------------- | ----------------------- |

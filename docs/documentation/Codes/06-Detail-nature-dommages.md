@@ -1,5 +1,5 @@
 ---
-tags: [Sinapps, documentation]
+tags: [documentation]
 ---
 
 # Détail de la nature des dommages
@@ -13,11 +13,18 @@ title: Immobilier
 
 | Code                               | Libellé                               |
 | ---------------------------------- | ------------------------------------- |
-| Terrassement                       | Terrassement                          |
-| Assainissement                     | Assainissement                        |
 | **Maconnerie**                     | **Maconnerie**                        |
 | **PlatreriePlaco**                 | **Platerie / Placo**                  |
 | **CarrelageEtRevetementCeramique** | **Carrelage et revêtement céramique** |
+| **Parquets**                       | **Parquets**                          |
+| **Electricite**                    | **Electricité**                       |
+
+## Autres valeurs (_non utilisées pour le moment_)
+
+| Code                               | Libellé                               |
+| ---------------------------------- | ------------------------------------- |
+| Terrassement                       | Terrassement                          |
+| Assainissement                     | Assainissement                        |
 | CharpenteEtOssatureBois            | Charpente et ossature bois            |
 | CharpenteMetallique                | Charpente metallique                  |
 | MenuiserieExterieureEtFermetures   | Menuiserie exterieure et fermetures   |
@@ -28,9 +35,7 @@ title: Immobilier
 | Plomberie                          | Plomberie                             |
 | VentilationConditionnementAir      | Ventilation / Conditionnement d'air   |
 | Vitrerie                           | Vitrerie                              |
-| **Parquets**                       | **Parquets**                          |
 | Fumisterie                         | Fumisterie                            |
-| **Electricite**                    | **Electricité**                       |
 | Ascenseur                          | Ascenseur                             |
 | Echaffaudage                       | Échafaudage                           |
 | Isolation                          | Isolation                             |

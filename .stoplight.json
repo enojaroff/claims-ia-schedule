@@ -1,5 +1,5 @@
 {
-  "exclude": [],
+  "exclude": ["ZZZreference/Sinapps"],
   "formats": {
     "openapi": {
       "rootDir": "reference",

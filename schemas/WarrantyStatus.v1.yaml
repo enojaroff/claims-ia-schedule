@@ -1,0 +1,22 @@
+title: WarrantyStatus
+type: object
+x-tags:
+  - Claim
+description: Définit si la garantie est acquise ou non
+properties:
+  name:
+    type: string
+    enum:
+      - SansReserve
+      - AvecReserve
+      - GarantieNonAcquise
+    description: Code
+  label:
+    type: string
+    enum:
+      - Sans réserve
+      - Avec réserve
+      - Garantie non acquise
+    description: Description
+required:
+  - name

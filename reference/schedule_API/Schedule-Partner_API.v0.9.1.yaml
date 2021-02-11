@@ -162,7 +162,7 @@ paths:
                 timeslot:
                   $ref: '#/components/schemas/Timeslot'
                 claim:
-                  $ref: ./schemas/Claim.v1.yaml
+                  $ref: '#/components/schemas/ClaimSummary'
               required:
                 - timeslot
           application/x-www-form-urlencoded:
@@ -172,21 +172,30 @@ paths:
                 data:
                   $ref: '#/components/schemas/Appointment'
       responses:
-        '200':
-          description: The appointment has been created
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/ResponseStatus'
-        '403':
-          description: The appointment can not be created
+        '201':
+          description: '**Created** Le rendez-vous a été créé.'
+        '400':
+          description: |-
+            **Bad Request**
+
+            Les données transmises sont incomplètes ou mal formées; la demande ne peut être prise en compte.
+          headers: {}
+        '404':
+          description: 'Not found. Création impossible, créneau horaire non trouvé'
+        '409':
+          description: Conflict. Créneau horaire déjà réservé.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseStatus'
-        '404':
-          description: Not Found
+        '416':
+          description: Requested Range Not Satisfiable
+        '417':
+          description: Expectation Failed
+        '500':
+          description: Internal Server Error
+        '503':
+          description: Service Unavailable
       operationId: AppointmentCreate
       tags:
         - Rendez-vous
@@ -331,7 +340,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Service'
+              $ref: '#/components/schemas/ServiceRequest'
       security: []
 components:
   securitySchemes:
@@ -415,22 +424,22 @@ components:
       description: |
         ResponseStatus donne une information sur la réponse. Il contient un code numérique et une description.
 
-        Statut de l'opération.
+        > N.B. A priori inutile si on utilise correctement les status HTTP
 
-        | Decription             | Value |
-        | ---------------------- | ----: |
-        | OK                     |    0  |
-        | INVALID_PARAMETERS     |    1  |
-        | INVALID_CREDENTIALS    |    2  |
-        | ACCOUNT_NOT_ACTIVE     |    3  |
-        | INTERNAL_ERROR         |    4  |
-        | ERROR_SAVING_ENTITY    |    5  |
-        | ERROR_DELETING         |    6  |
-        | NOT_FOUND              |    7  |
-        | NOT_ALLOWED            |    8  |
-        | SLOT_NOT_AVAILABLE     |    9  |
-        | SLOT_OCCUPIED          |   10  |
-        | ACCOUNTS_LIMIT_REACHED |   11  |
+        | Code  | Description              |
+        | ----: | :----------------------- |
+        |    0  | OK                       |
+        |    1  | INVALID\_PARAMETERS      |
+        |    2  | INVALID\_CREDENTIALS     |
+        |    3  | ACCOUNT\_NOT\_ACTIVE     |
+        |    4  | INTERNAL\_ERROR          |
+        |    5  | ERROR\_SAVING\_ENTITY    |
+        |    6  | ERROR\_DELETING          |
+        |    7  | NOT\_FOUND               |
+        |    8  | NOT\_ALLOWED             |
+        |    9  | SLOT\_NOT\_AVAILABLE     |
+        |   10  | SLOT\_OCCUPIED           |
+        |   11  | ACCOUNTS\_LIMIT\_REACHED |
       x-examples:
         example:
           value: 0
@@ -448,8 +457,8 @@ components:
           description: Description
       required:
         - value
-    Service:
-      title: Service
+    ServiceRequest:
+      title: ServiceRequest
       type: object
       description: |-
         Caractéristiques de l'intervention souhaitée.
@@ -461,16 +470,20 @@ components:
         type:
           $ref: '#/components/schemas/ServiceType'
         claim:
-          $ref: ../../schemas/ClaimSummary.v1.yaml
+          $ref: '#/components/schemas/ClaimSummary'
         dateFrom:
           type: string
           format: date
+          description: Début de l'intervalle
         dateTo:
           type: string
           format: date
+          description: Fin de l'intervalle
         limit:
           type: integer
           maximum: 30
+      required:
+        - dateFrom
     SinisterCharacteristics:
       title: SinisterCharacteristic
       type: object
@@ -915,9 +928,46 @@ components:
     ClaimSummary:
       title: ClaimSummary
       type: object
+      description: Déclaration de sinistre résumée.
+      x-examples:
+        example-1:
+          claimDate: '2020-04-02'
+          guarantee: DegatDesEaux
+          company:
+            id: AVIVA
+            name: Aviva
+            acam: aviva
+          location:
+            country: FR
+            city: Paris
+            zipcode: '92200'
+            street1: '49, rue de Paris'
+          sinister:
+            code: DegatDesEaux
+            date: '2020-03-30'
+            type: DegatDesEaux
+      x-tags:
+        - Claim
       properties:
-        id:
+        date:
           type: string
+          format: date
+          description: Date de déclaration
+        guarantee:
+          $ref: ../../schemas/WarrantyType.v1.yaml
+        company:
+          $ref: ../../schemas/Company.v1.yaml
+        location:
+          $ref: ../../schemas/PostalAddress.v1.yaml
+        sinister:
+          $ref: '#/components/schemas/Sinister'
+        valuation:
+          $ref: ../../schemas/Valuation.v1.yaml
+      required:
+        - date
+        - guarantee
+        - company
+        - location
   responses: {}
   parameters:
     InsuredNature:
