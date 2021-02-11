@@ -22,4 +22,4 @@ required:
   - schedule
 x-tags:
   - Appointment
-description: Rendez-vous
+description: OBSOLETE - Rendez-vous

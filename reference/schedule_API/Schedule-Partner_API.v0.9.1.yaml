@@ -34,59 +34,6 @@ tags:
   - name: Disponibilités
   - name: Rendez-vous
 paths:
-  /availabilities:
-    parameters: []
-    get:
-      summary: RÉCUPÉRER les créneaux horaires disponibles
-      operationId: get-availabilities
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                minItems: 10
-                maxItems: 30
-                items:
-                  $ref: '#/components/schemas/Timeslot'
-        '204':
-          description: No Content
-        '401':
-          description: Unauthorized
-      description: |
-        ## Récupère les créneaux horaires disponibles
-
-
-        La requête contient les informations sur le type d'intervention
-
-        ### Expert
-
-        - Type d'expertise
-        - Informations sur l'assurance et le contrat
-        - Garantie en jeu
-        - Adresse
-        - Qualification du sinistre, selon la codification Sinapps (origine, cause, détail)
-
-        - Des données d'analyse de ClaimsIA (tiers, recours,...)
-        - La pesée de l'enjeu
-
-        ### RENeur
-
-        - Type de mission (???)
-        - Informations sur l'assurance
-        - Garantie en jeu
-        - Adresse
-        - Qualification du sinistre
-      security:
-        - Partner ID: []
-      tags:
-        - Disponibilités
-      parameters:
-        - $ref: '#/components/parameters/CompanyId'
-        - $ref: '#/components/parameters/InsuredNature'
-        - $ref: '#/components/parameters/WarrantyType'
-        - $ref: '#/components/parameters/MissionType'
   '/availabilities/{id}':
     get:
       tags:
@@ -215,7 +162,7 @@ paths:
                 timeslot:
                   $ref: '#/components/schemas/Timeslot'
                 claim:
-                  $ref: ../../schemas/Claim.v1.yaml
+                  $ref: ./schemas/Claim.v1.yaml
               required:
                 - timeslot
           application/x-www-form-urlencoded:
@@ -384,7 +331,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Intervention'
+              $ref: '#/components/schemas/Service'
       security: []
 components:
   securitySchemes:
@@ -501,8 +448,8 @@ components:
           description: Description
       required:
         - value
-    Intervention:
-      title: Objet ServiceRequest
+    Service:
+      title: Service
       type: object
       description: |-
         Caractéristiques de l'intervention souhaitée.
@@ -512,7 +459,7 @@ components:
         - Disponibilités
       properties:
         type:
-          $ref: ../../schemas/MissionType.v1.yaml
+          $ref: '#/components/schemas/ServiceType'
         claim:
           $ref: ../../schemas/ClaimSummary.v1.yaml
         dateFrom:
@@ -939,6 +886,38 @@ components:
         - schedule
       x-tags:
         - Rendez-vous
+    ServiceType:
+      type: object
+      description: |-
+        L'expert doit saisir une des prestations proposées dans la liste :
+        [Voir les valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typedeprestation)
+
+        Type de prestation demandée.
+      properties:
+        name:
+          type: string
+          enum:
+            - EAD
+            - ESS
+            - VISIO
+            - CONTRADICTOIRE
+            - REN
+          description: Code de la prestation
+        label:
+          type: string
+          enum:
+            - Expertise à distance
+            - Expertise sur site
+            - Visio-expertise
+            - Expertise contradictoire
+            - REN
+      title: ServiceType
+    ClaimSummary:
+      title: ClaimSummary
+      type: object
+      properties:
+        id:
+          type: string
   responses: {}
   parameters:
     InsuredNature:

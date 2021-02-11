@@ -76,37 +76,46 @@ title: Récupération du dossier
 
 | Données                      | Remarques                         |
 | :--------------------------- | :-------------------------------- |
+| <hr>                         | <hr>                              |
+| **DONNÉES COMPAGNIE**        |                                   |
+| <hr>                         | <hr>                              |
 | **Assurance**                |                                   |
 | Assureur                     | Identifiant de l'assureur         |
 | **Contrat**                  |                                   |
 | Contrat                      | Nom du contrat                    |
 | N° contrat                   | Réf. assureur du contrat          |
 | Ref Sinistre                 | Réf. assureur du sinistre         |
+| **Risque**                   |                                   |
+| Type d'habitation            |                                   |
+| Adresse du risque            |                                   |
 | **Assuré**                   |                                   |
 | Ref Sinistre                 | Réf. assureur du sinistre         |
+| Identité de l'assuré         | Différent du contact RDV          |
 | Qualité de l'assuré          | CPO, LOC, PNO, ...                |
 | Type assuré                  | Particulier, PRO                  |
 | <hr>                         | <hr>                              |
-| **Déclaration**              |                                   |
+| **DÉCLARATION**              |                                   |
 | <hr>                         | <hr>                              |
 | Ref Claims IA                | Réf. interne de la déclaration    |
 | Date de la déclaration       |                                   |
-| Adresse du risque            |                                   |
+| Date du sinistre             |                                   |
 | Type de sinistre             | _DDE, DE, CATNAT, VOL_            |
 | Type d'expertise             | VISIO, EAD, ESS, CONTRADICTOIRE   |
-| Date du sinistre             |                                   |
-| Type d'habitation            |                                   |
-| Adresse du risque            |                                   |
+| <hr>                         | <hr>                              |
+| **DOMMAGES**                 |                                   |
+| <hr>                         | <hr>                              |
 | Enjeu                        | TTC                               |
 | Enjeu DM                     | TTC                               |
 | Enjeu DI                     | TTC                               |
-| Lieu de RDV                  |                                   |
-| _Géocodage lieu RDV_         | V2                                |
 | Liste des dommages immo      | Avec ou sans chiffrage ?          |
 | Liste des dommages mobiliers | Avec ou sans chiffrage ?          |
 | Pièces-jointes               | URL des documents                 |
-| Identité de l'assuré         | Différent du contact RDV          |
 | Identité du contact RDV      | Si la personne n'est pas l'assuré |
+| <hr>                         | <hr>                              |
+| **RENDEZ-VOUS**              |                                   |
+| <hr>                         | <hr>                              |
+| Lieu de RDV                  |                                   |
+| _Géocodage lieu RDV_         | V2                                |
 | <hr>                         | <hr>                              |
 | Processus                    | Champ libre. A définir            |
 | <hr>                         | <hr>                              |

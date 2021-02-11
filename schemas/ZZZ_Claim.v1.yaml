@@ -11,7 +11,7 @@ properties:
   guarantee:
     $ref: ./WarrantyType.v1.yaml
   customer:
-    $ref: './Customer.v1.yaml'
+    $ref: ./Customer.v1.yaml
   sinister:
     $ref: ./Sinister.v1.yaml
   documents:
