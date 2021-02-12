@@ -1,0 +1,9 @@
+title: Position GPS
+type: object
+properties:
+  id:
+    type: string
+description: |-
+  Coordonnées GPS, latitude et longitude.
+  Les coordonnées respectent le système géodésique **WGS 84**, utilisé dans les systèmes GPS (et accessoirementdans GoogleMaps.   
+  Latitude et longitude sont données en valeurs décimales de degrés
