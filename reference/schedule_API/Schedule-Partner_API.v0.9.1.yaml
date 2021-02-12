@@ -482,8 +482,10 @@ components:
         limit:
           type: integer
           maximum: 30
-        address:
-          $ref: ../../schemas/PostalAddress.v1.yaml
+        appointmentLocation:
+          $ref: '#/components/schemas/Place'
+        riskType:
+          $ref: ../../schemas/RiskType.v1.yaml
       required:
         - dateFrom
     SinisterCharacteristics:
@@ -974,11 +976,15 @@ components:
       title: Emplacement
       type: object
       description: 'Lieu, emplacement'
+      x-tags:
+        - Appointment
       properties:
         address:
           $ref: ../../schemas/PostalAddress.v1.yaml
-      x-tags:
-        - Appointment
+        position:
+          $ref: ../../schemas/GpsPosition.v1.yaml
+      required:
+        - address
   responses: {}
   parameters:
     InsuredNature:

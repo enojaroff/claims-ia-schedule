@@ -1,9 +1,19 @@
 title: Position GPS
 type: object
-properties:
-  id:
-    type: string
 description: |-
   Coordonnées GPS, latitude et longitude.
-  Les coordonnées respectent le système géodésique **WGS 84**, utilisé dans les systèmes GPS (et accessoirementdans GoogleMaps.   
-  Latitude et longitude sont données en valeurs décimales de degrés
+
+  Les coordonnées respectent le système géodésique **WGS 84**, utilisé dans les systèmes GPS (et accessoirementdans Google Maps).   
+
+  Latitude et longitude sont données en degrés décimaux, avec 7 décimales
+
+  Par exemple les coordonnées de la Tour Eiffel sont:
+  - latitude : 48.857323
+  - longitude : 2.2942472
+properties:
+  lat:
+    type: number
+  long:
+    type: number
+x-tags:
+  - Common

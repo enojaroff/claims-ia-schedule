@@ -1,7 +1,7 @@
 type:
   - string
   - object
-title: RiskRelationship
+title: Objet Relation au risque
 description: Relation au risque
 properties:
   name:
@@ -35,3 +35,5 @@ properties:
     example: Propriétaire occupant
 required:
   - name
+x-tags:
+  - Claim
