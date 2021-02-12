@@ -491,15 +491,10 @@ components:
       x-tags:
         - Rendez-vous
     SinisterNature:
-      title: SinisterNature
+      title: Nature du sinistre
       type: string
-      x-tags:
-        - Sinapps
       description: |
-        **Nature du sinistre**, codification SinApps.
-
-        Liste des valeurs possibles: 
-        [Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)
+        Liste des valeurs possibles [Documentation Claims IA](../../docs/documentation/Codes/04-Nature-du-sinistre.md)
       enum:
         - AutresDommages
         - Assistance
@@ -521,6 +516,8 @@ components:
         - RisqueInformatique
         - TempeteNeigeGrele
         - Vol
+      x-tags:
+        - Claim
     SinisterCause:
       type: string
       title: Objet Cause du sinistre
