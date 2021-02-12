@@ -1,6 +1,14 @@
 title: AppointmentSchedule
 type: object
-description: Horaire de rendez-vous
+description: |-
+  Horaire de rendez-vous
+
+  2 types de créneaux
+  - Fixe : heure de début et fin fixées
+  - Glissant : TBD
+
+  La durée est tout le temps fixée.
+  L'heure de début put glisser dans l'inrtevalle spécifié (type = horairePlage)
 x-examples:
   Horaire fixe:
     type: HoraireFixe

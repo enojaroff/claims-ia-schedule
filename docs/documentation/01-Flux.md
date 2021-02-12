@@ -52,6 +52,13 @@ Les envoyées par Claims IA doivent être suffisantes pour que le partenaire Exp
 | <hr>                 | <hr>                            |
 | Processus            | Champ libre. A définir          |
 
+- Référence sinistre (assureur) + Assureur
+- ID session
+- Prévoir blacklist des gestionnaires en V2
+
+
+> Timeout session de 300s
+
 <!--
 type: tab
 title: Demande de créneaux - REN
