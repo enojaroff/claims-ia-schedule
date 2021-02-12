@@ -5,3 +5,5 @@ enum:
   - EAD
   - VISIO
   - ESS
+x-tags:
+  - Common

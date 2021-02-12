@@ -1,0 +1,5 @@
+title: Place
+type: object
+properties:
+  id:
+    type: string

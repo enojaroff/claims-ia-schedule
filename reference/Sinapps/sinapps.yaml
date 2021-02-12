@@ -2382,10 +2382,10 @@ paths:
         | RG_CHIFFRAGE_EXP_0026 | La position de l'indemnité doit être Acceptation de l'indemnité, Refus ou En attente position client |
         | RG_CHIFFRAGE_EXP_0027 | Le commentaire est obligatoire si la position de l'indemnité est En attente position client |
         # Evènements
-        IndemniteAccepteeParAssure (Si position : Indemnité acceptée)
-        IndemniteRefuseeParAssure (Si position : Refus)
-        IndemniteQuestion (Si question)
-        MessageInformationAjoute   (Non exposé)
+        - IndemniteAccepteeParAssure (Si position : Indemnité acceptée)
+        - IndemniteRefuseeParAssure (Si position : Refus)
+        - IndemniteQuestion (Si question)
+        - MessageInformationAjoute   (Non exposé)
       operationId: repondrePositionIndemnite
       consumes: []
       parameters:
@@ -3371,6 +3371,7 @@ definitions:
       links:
         $ref: '#/definitions/LinksDifficulte'
     example: |2-
+
               {
                   "href": "/core/api/covea-expert/difficulte/5b1a7ebe2700003e04a7f7a6",
                   "properties": {
@@ -7679,6 +7680,7 @@ definitions:
       montantEvaluation:
         $ref: '#/definitions/Montant'
     example: |2-
+
        {
          "montantEvaluation": 50
        }
@@ -12339,7 +12341,6 @@ definitions:
       |-|AutresPrejudices|PerteDExploitation|
       |-|AutresPrejudices|MensualitePretImmobilier|
       |-|AutresPrejudices|InterruptionDeProductionElectrique|
-
 
 
 
