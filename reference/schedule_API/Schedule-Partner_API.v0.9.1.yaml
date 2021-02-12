@@ -355,11 +355,10 @@ components:
           type: string
           description: Convention applicable
     Timeslot:
-      title: Objet Timeslot
+      title: Objet Créneau horaire
       type: object
       description: |-
-        Le Timeslot est un créneau horaire retourné par le partenaire. Il est défini au minimum par 
-
+        Le créneau horaire est retourné par le partenaire. Il est défini au minimum par 
         - une heure de début
         - une heure de fin
 
@@ -491,7 +490,7 @@ components:
       x-tags:
         - Rendez-vous
     SinisterNature:
-      title: Nature du sinistre
+      title: Objet Nature du sinistre
       type: string
       description: |
         Liste des valeurs possibles [Documentation Claims IA](../../docs/documentation/Codes/04-Nature-du-sinistre.md)
