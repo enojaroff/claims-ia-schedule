@@ -10,4 +10,4 @@ properties:
   gender:
     type: string
   coordinates:
-    $ref: ./Coordinates.v1.yaml
+    $ref: ./Commun/Coordinates.v1.yaml
