@@ -1,6 +1,6 @@
-title: Risk
+title: Risque
 type: object
-description: Représentation du risque
+description: Description du bien (le risque) couvert par la garantie
 x-tags:
   - Claim
 properties:

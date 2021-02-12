@@ -1,9 +1,8 @@
-title: Sinister
+title: Sinistre
 type: object
 x-tags:
-  - Common
-  - ClaimsIA
-description: '**Sinistre**'
+  - Claim
+description: ''
 properties:
   characteristics:
     $ref: ./SinisterCharacteristic.v1.yaml

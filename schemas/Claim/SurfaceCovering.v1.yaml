@@ -1,9 +1,9 @@
-title: Covering
+title: Revêtement d'une paroi
 type: object
 description: |-
   Revêtement d'une surface.
 
-  Le type de revêtement correspond globalement aux corps d'état. On s'appuie sur la codification Sinapps pour les valeurs (_cf. fichier [Detail-nature-dommage](docs/sinapps/Detail-nature-dommages.md)_)
+  Le type de revêtement correspond globalement aux corps d'état. On s'appuie sur la codification Sinapps pour les valeurs (_cf. fichier [Detail-nature-dommage](../../docs/documentation/Codes/06-Detail-nature-dommages.md)_)
 properties:
   name:
     type: string

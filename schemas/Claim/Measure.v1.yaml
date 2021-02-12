@@ -1,4 +1,4 @@
-title: Measure
+title: Mesure
 type: object
 x-tags:
   - Claim
@@ -29,3 +29,4 @@ properties:
 required:
   - type
   - value
+description: 'Objet générique qui permet de dimensionner une données utilisée dans un dossier de sinistre : nombre de pièces, étage, superficie, ...'

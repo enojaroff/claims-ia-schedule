@@ -1,6 +1,6 @@
 type: object
-title: Objet Relation au risque
-description: Relation au risque
+title: Relation au risque
+description: ''
 x-tags:
   - Claim
 properties:

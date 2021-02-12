@@ -1,5 +1,12 @@
-title: Place
+title: Emplacement
 type: object
+description: 'Lieu, emplacement'
+x-tags:
+  - Common
 properties:
-  id:
-    type: string
+  address:
+    $ref: ./PostalAddress.v1.yaml
+  position:
+    $ref: ./GpsPosition.v1.yaml
+required:
+  - address

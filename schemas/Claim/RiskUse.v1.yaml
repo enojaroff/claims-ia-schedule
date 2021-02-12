@@ -1,6 +1,7 @@
 type: string
-title: RiskUse
-description: '**Usage du risque** par l''assuré (qualité de l''assuré)'
+title: Usage du risque
+description: |
+  Usage fait par l'assuré du bien sinistré.
 enum:
   - ResidencePrincipale
   - ResidenceSecondaire
@@ -19,3 +20,5 @@ enum:
   - HabitationEnRenovation
   - DonneeEnLocationSaisonniere
   - DonneeEnLocationALAnnee
+x-tags:
+  - Claim

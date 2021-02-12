@@ -1,12 +1,11 @@
 type: string
-title: RecourseType
+title: Type de recours
 enum:
   - Recours
   - AbandonDeRecours
   - ActionEnRemboursement
   - ActionEnContribution
   - ActionEnRecuperation
-description: Type de recours
+description: ''
 x-tags:
-  - Common
-  - Sinapps
+  - Claim

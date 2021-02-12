@@ -1,12 +1,7 @@
 type: string
-title: Sinister's Nature
-x-tags:
-  - Common
-  - Sinapps
+title: Nature du sinistre
 description: |
-  **Nature du sinistre**, codification Sinapps.
-
-  [Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)
+  [Documentation Claims IA](../../docs/documentation/Codes/04-Nature-du-sinistre.md)
 enum:
   - AutresDommages
   - Assistance
@@ -28,3 +23,5 @@ enum:
   - RisqueInformatique
   - TempeteNeigeGrele
   - Vol
+x-tags:
+  - Claim

@@ -1,5 +1,5 @@
 type: number
-title: Rate
+title: Taux
 description: Taux (pourcentage)
 format: float
 example: 75.25

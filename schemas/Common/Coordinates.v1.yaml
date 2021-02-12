@@ -1,6 +1,6 @@
-title: Coordinates
+title: Coordonnées
 type: object
-description: "Coordonnées d'un individu"
+description: Coordonnées d'un individu
 properties:
   personalPhone:
     type: string
@@ -15,5 +15,4 @@ properties:
     type: string
     maxLength: 50
 x-tags:
-  - ClaimsIA
   - Common

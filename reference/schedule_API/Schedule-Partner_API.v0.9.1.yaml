@@ -74,11 +74,6 @@ paths:
 
         > Pas nécessaire en V1
       parameters:
-        - name: id
-          in: query
-          description: The appointment id
-          schema:
-            type: integer
         - name: zip
           in: query
           schema:
@@ -255,20 +250,6 @@ paths:
       operationId: AppointmentModify
       tags:
         - Rendez-vous
-    delete:
-      summary: ANNULER un rendez-vous
-      description: Using this endpoint you can delete an appointment within the account.
-      security: []
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                allOf: []
-      operationId: AppointmentDelete
-      tags:
-        - Rendez-vous
     parameters:
       - schema:
           type: string
@@ -398,7 +379,7 @@ components:
         - date
         - schedule
     Sinister:
-      title: Sinister
+      title: Objet Sinistre
       type: object
       x-tags:
         - Claim
@@ -445,7 +426,7 @@ components:
           value: 0
           statusCode: 0
           statusDescription: Cool Baby!
-      title: Response Status
+      title: Objet Response Status
       properties:
         value:
           type: integer
@@ -458,7 +439,7 @@ components:
       required:
         - value
     ServiceRequest:
-      title: ServiceRequest
+      title: Objet Demande d'intervention
       type: object
       description: |-
         Caractéristiques de l'intervention souhaitée.
@@ -483,13 +464,13 @@ components:
           type: integer
           maximum: 30
         appointmentLocation:
-          $ref: '#/components/schemas/Place'
+          $ref: ../../schemas/Common/Place.v1.yaml
         riskType:
           $ref: ../../schemas/RiskType.v1.yaml
       required:
         - dateFrom
     SinisterCharacteristics:
-      title: SinisterCharacteristic
+      title: Objet Caractéristiques du sinistre
       type: object
       description: |
         Caractéristiques du sinistre.
@@ -497,7 +478,7 @@ components:
 
         Selon les sinistres, le détail de la cause peut ne pas être renseigné. Les valeurs de ces trois informations suivent la codification **Sinapps**.
 
-        [Liste des valeurs possibles](docs/sinapps/Nature-du-sinistre.md)
+        [Liste des valeurs possibles](../../docs/documentation/Codes/04-Nature-du-sinistre.md)
       properties:
         nature:
           $ref: '#/components/schemas/SinisterNature'
@@ -542,7 +523,7 @@ components:
         - Vol
     SinisterCause:
       type: string
-      title: SinisterCause
+      title: Objet Cause du sinistre
       description: |
         **Cause du sinistre**, codification Sinapps.
 
@@ -708,18 +689,14 @@ components:
         - Mobilier
         - DommageDeMouille
       x-tags:
-        - Sinapps
+        - Claim
     SinisterCauseDetail:
-      title: SinisterCauseDetail
+      title: Objet Détail de la cause du sinistre
       type: string
-      x-tags:
-        - Sinapps
-      description: |-
+      description: |
         Détail sur la cause du sinistre, selon la codification Sinapps.
 
-        Liste des valeurs possibles:
-        - [Documentation Claims IA](docs/sinapps/Nature-du-sinistre.md)
-        - [Documentation Sinapps](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Caract%C3%A9ristiqueSinistre)
+        Liste des valeurs possibles: [Documentation Claims IA](../../docs/documentation/Codes/04-Nature-du-sinistre.md)
       enum:
         - Abattoirs
         - AccidentDeSki
@@ -877,15 +854,19 @@ components:
         - Explosion
         - DefautConception
         - AccueilAuDomicile
+      x-tags:
+        - Rendez-vous
     Appointment:
-      title: Objet Appointment
+      title: Objet Rendez-vous
       type: object
       description: Rendez-vous
+      x-tags:
+        - Rendez-vous
       properties:
         address:
-          $ref: ../../schemas/PostalAddress.v1.yaml
+          $ref: ../../schemas/Common/PostalAddress.v1.yaml
         notes:
-          $ref: ../../schemas/NonEmptyString.v1.yaml
+          $ref: ../../schemas/Common/NonEmptyString.v1.yaml
         createdAt:
           type: string
           format: date-time
@@ -893,16 +874,14 @@ components:
           type: string
           format: date-time
         type:
-          $ref: ../../schemas/AppointmentType.v1.yaml
+          $ref: ../../schemas/Appointment/AppointmentType.v1.yaml
         schedule:
-          $ref: ../../schemas/AppointmentSchedule.v1.yaml
+          $ref: ../../schemas/Appointment/AppointmentSchedule.v1.yaml
         customer:
-          $ref: ../../schemas/Customer.v1.yaml
+          $ref: ../../schemas/Claim/Customer.v1.yaml
       required:
         - type
         - schedule
-      x-tags:
-        - Rendez-vous
     ServiceType:
       type: object
       description: |-
@@ -928,9 +907,11 @@ components:
             - Visio-expertise
             - Expertise contradictoire
             - REN
-      title: ServiceType
+      title: Objet Type de prestation
+      x-tags:
+        - Disponibilités
     ClaimSummary:
-      title: ClaimSummary
+      title: Objet Données de déclaration
       type: object
       description: Déclaration de sinistre résumée.
       x-examples:
@@ -972,19 +953,6 @@ components:
         - guarantee
         - company
         - location
-    Place:
-      title: Emplacement
-      type: object
-      description: 'Lieu, emplacement'
-      x-tags:
-        - Appointment
-      properties:
-        address:
-          $ref: ../../schemas/PostalAddress.v1.yaml
-        position:
-          $ref: ../../schemas/GpsPosition.v1.yaml
-      required:
-        - address
   responses: {}
   parameters:
     InsuredNature:

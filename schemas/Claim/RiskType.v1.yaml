@@ -1,5 +1,5 @@
 type: object
-title: Objet Type de risque
+title: Type de risque
 enum:
   - Appartement
   - MaisonParticuliere
@@ -7,7 +7,7 @@ enum:
 description: |
   Type de d'habitation (_cf. [documentation](../docs/documentation/Codes/02-Type-de-risque.md) pour la liste complète des valeurs possibles_)
 x-tags:
-  - Common
+  - Claim
 properties:
   name:
     type: string

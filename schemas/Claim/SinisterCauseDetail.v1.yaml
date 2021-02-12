@@ -1,14 +1,9 @@
 type: string
-title: SinisterCauseDetail
-x-tags:
-  - Common
-  - Sinapps
-description: |-
-  **Détail sur la cause du sinistre**, selon la codification Sinapps.
+title: Détail de la cause du sinistre
+description: |
+  Troisième champ du trio nature-cause-détail qui définit un sinistre.
 
-  Liste des valeurs possibles:
-  - [Documentation Claims IA](../docs/sinapps/Nature-du-sinistre.md)
-  - [Documentation Sinapps](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Caract%C3%A9ristiqueSinistre)
+  Liste des valeurs possibles : [Documentation Claims IA](../../docs/documentation/Codes/04-Nature-du-sinistre.md)
 enum:
   - Abattoirs
   - AccidentDeSki
@@ -166,3 +161,5 @@ enum:
   - Explosion
   - DefautConception
   - AccueilAuDomicile
+x-tags:
+  - Claim

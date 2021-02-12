@@ -3,9 +3,6 @@ description: |-
   Somme retenue du montant des dommages
   - Si de type "fixed", seul value est défini. 
   - Si "proportional", value est un pourcentage. min et max sont des valeurs optionnelles de montants plancher et plafond.
-x-tags:
-  - Common
-  - Sinapps
 x-examples:
   Montant fixe:
     type: fixed
@@ -36,3 +33,5 @@ properties:
 required:
   - type
   - value
+x-tags:
+  - Claim

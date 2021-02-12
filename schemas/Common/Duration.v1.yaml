@@ -1,6 +1,8 @@
 type: integer
-title: Duration
+title: Durée
 description: |
   Durée en minutes
 example: 90
 minimum: 0
+x-tags:
+  - Common

@@ -1,5 +1,5 @@
 type: string
-title: LimitTypeValues
+title: Type de plafond d'indemnisation
 enum:
   - PlafondImmobilier
   - PlafondMobilier
@@ -31,7 +31,6 @@ enum:
   - FraisRéparationAppareilEffetDEauConduiteGel
   - BiensEntreposesImmeubleConstruction
   - PlafondMobilierDependanceAutreAdresse
+description: ''
 x-tags:
-  - Common
-  - Sinapps
-description: '**Type de plafond d''indemnisation**'
+  - Claim

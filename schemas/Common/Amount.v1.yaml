@@ -1,18 +1,24 @@
-title: Amount
+title: Montant
 type: object
 description: Représente une valeur monétaire
 x-examples:
   example:
     value: -12345
     currency: EUR
+x-tags:
+  - Common
 properties:
   value:
-    $ref: ./MonetaryValueType.v1.yaml
+    type: number
+    format: float
+    example: 123.45
   currency:
     type: string
     default: EUR
+    pattern: '[A-Z]{3}'
+    example: EUR
+    minLength: 3
+    maxLength: 3
     description: Code de la devise au format ISO 4217
 required:
   - value
-x-tags:
-  - Common

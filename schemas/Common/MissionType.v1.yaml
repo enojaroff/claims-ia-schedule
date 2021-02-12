@@ -1,6 +1,6 @@
 type: string
-title: MissionType
-description: Type de prestation
+title: Type de mission
+description: ''
 enum:
   - RenDirecte
   - RenSuiteExpertise
@@ -12,4 +12,3 @@ enum:
   - Expertise
 x-tags:
   - Common
-  - Sinapps

@@ -1,14 +1,13 @@
-title: LimitType
+title: Plafond d'indemnisation
 type: object
-description: Plafond d'indemnisation
-x-tags:
-  - Common
-  - Sinapps
+description: ''
 properties:
   type:
     $ref: ./LimitTypeValues.v1.yaml
   value:
-    $ref: ./Amount.v1.yaml
+    $ref: ../Common/Amount.v1.yaml
 required:
   - type
   - value
+x-tags:
+  - Claim

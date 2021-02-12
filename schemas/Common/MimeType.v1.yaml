@@ -32,5 +32,4 @@ enum:
   - video/x-msvideo
   - video/web
 x-tags:
-  - ClaimsIA
   - Common

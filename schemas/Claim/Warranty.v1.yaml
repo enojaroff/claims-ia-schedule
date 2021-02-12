@@ -1,8 +1,5 @@
-title: Warranty
+title: Garantie
 type: object
-x-tags:
-  - Common
-  - Sinapps
 description: Description de la garantie
 properties:
   franchise:
@@ -10,7 +7,7 @@ properties:
   plafonds:
     type: array
     items:
-      $ref: './LimitType.v1.yaml'
+      $ref: ./LimitType.v1.yaml
   additionalWarranty:
     $ref: ./AdditionalWarrantyType.v1.yaml
   type:
@@ -18,3 +15,5 @@ properties:
 required:
   - plafonds
   - type
+x-tags:
+  - Claim

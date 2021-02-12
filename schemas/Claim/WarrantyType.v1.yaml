@@ -1,6 +1,6 @@
-type: string
-title: Warranty Type
-description: '**Type de garantie**. Les valeurs possibles sont tirées de **Sinapps**.'
+type: object
+title: Type de garantie
+description: 'Documentation sur la [liste des valeurs](../../docs/documentation/Codes/01-Type-de-garantie.md)'
 enum:
   - Arbres
   - ArbresPot
@@ -57,5 +57,231 @@ enum:
   - VolLieuPublic
 example: DegatsDesEaux
 x-tags:
-  - ClaimsIA
-  - Common
+  - Claim
+properties:
+  name:
+    type: string
+    enum:
+      - Arbres
+      - ArbresPot
+      - Autre
+      - Assistance
+      - Attentat
+      - BiensDeLoisirs
+      - BienEnValeurDeclaree
+      - BiensHandicapes
+      - BiensMultimedias
+      - BiensProfessionnelsEnTousLieux
+      - BiensScolaires
+      - Bijoux
+      - BrisDeGlace
+      - BrisDeGlaceMobilier
+      - BrisDeVerre
+      - BrisMachine
+      - Canalisation
+      - CanalisationsExterieures
+      - CatastropheNaturelle
+      - CatastropheTechnologique
+      - ChocVtm
+      - DegatsDesEaux
+      - DefenseRecours
+      - Demenagement
+      - DeteriorationEnSalleDAttente
+      - DeteriorationImmobiliereLocative
+      - Divers
+      - DiversImmobilier
+      - DommagesAuxBiens
+      - DommagesElectriques
+      - DommageOuvrage
+      - DommagesMenagers
+      - Effondrement
+      - EnergieNouvelle
+      - EquipementDeLoisir
+      - EvenementNaturel
+      - Explosion
+      - FoudreSansIncendie
+      - FraisSupplementaireExploitation
+      - Fumee
+      - Gel
+      - HorsGaranties
+      - ImaProtect
+      - Incendie
+      - IncidentsDomestiques
+      - InstallationExterieure
+      - InterventionDesSecours
+      - Jardin
+      - Laboratoire
+      - Licenciement
+      - LocationEnMeuble
+      - Malfacon
+      - Marchandises
+      - MarchandiseSousTemperatureRegulee
+      - MaterielTransporteTousLieux
+      - MortaliteBetail
+      - NavigationDePlaisance
+      - NavigationLegere
+      - NouvelleTechnologie
+      - ObjetConfie
+      - ObjetPrecieux
+      - Officine
+      - PanneElectromenager
+      - Perte
+      - PerteCongelateur
+      - PerteDeLiquide
+      - PerteDuMaterielTransporte
+      - PerteEauInterieur
+      - PerteExploitation
+      - PerteValeur
+      - Piscine
+      - Pollution
+      - RcAccueillantFamilial
+      - RcAssistanteMaternelle
+      - RcChambresDHoteEtudiant
+      - RcChasse
+      - RcChefDeFamille
+      - RcDecennale
+      - RcDiverse
+      - RcFeteFamiliale
+      - RcImmobilier
+      - RcNonOccupant
+      - RcOccupant
+      - RcProfessionnelle
+      - RcProprietaire
+      - RcViePrivee
+      - ReconstitutionDesMedias
+      - RemplacementDePersonnel
+      - ResponsabiliteCivileGenerale
+      - RisqueInformatique
+      - RisqueLocatif
+      - RisquesAnnexes
+      - RisquesSpeciaux
+      - TogOuTng
+      - TousRisques
+      - ValeurANeuf
+      - ValeurFondExploitation
+      - Vandalisme
+      - VehiculeDeRemplacement
+      - Vol
+      - VolArrache
+      - VolBateau
+      - VolCave
+      - VolLieuPublic
+      - VolLocalUtilitaireDistinct
+      - VolResidence
+      - VolVehicule
+      - Voyages
+      - Voyages
+  label:
+    type: string
+    enum:
+      - AMENAGEMENTS IMMOBILIERS EXTERIEURS/ARBRE
+      - AMENAGEMENTS IMMOBILIERS EXTERIEURS / ARBRES EN POT
+      - AUTRE
+      - ASSISTANCE
+      - ATTENTAT
+      - BIENS DE LOISIRS
+      - BIEN EN VALEUR DECLAREE
+      - BIENS HANDICAPES
+      - BIENS MULTIMEDIAS
+      - BIENS PROFESSIONNELS EN TOUS LIEUX
+      - BIENS SCOLAIRES
+      - BIJOUX
+      - BRIS DE GLACE
+      - BRIS DE GLACE MOBILIER
+      - BRIS DE VERRE
+      - BRIS DE MACHINE
+      - CANALISATION
+      - CANALISATIONS EXTERIEURES
+      - CATASTROPHE NATURELLE
+      - CATASTROPHE TECHNOLOGIQUE
+      - CHOC VTM (choc de véhicule terrestre)
+      - DEGATS DES EAUX
+      - DEFENSE RECOURS
+      - DEMENAGEMENT
+      - DETERIORATION EN SALLE D'ATTENTE
+      - DETERIORATION IMMOBILIERE LOCATIVE
+      - DIVERS
+      - DIVERS IMMOBILIER
+      - DOMMAGES AUX BIENS
+      - DOMMAGES ELECTRIQUES
+      - DOMMAGE OUVRAGE
+      - DOMMAGES MENAGERS
+      - EFFONDREMENT
+      - ENERGIE NOUVELLE
+      - EQUIPEMENT DE LOISIR
+      - EVT NATUREL
+      - EXPLOSION
+      - FOUDRE SANS INCENDIE
+      - FRAIS SUPPLEMENTAIRES D'EXPLOITATION
+      - FUMEE
+      - GEL
+      - HORS GARANTIES
+      - IMA PROTECT
+      - INCENDIE
+      - INCIDENTS DOMESTIQUES
+      - INSTALLATION EXTERIEURE
+      - INTERVENTION SECOURS
+      - JARDIN
+      - LABORATOIRE
+      - LICENCIEMENT
+      - LOCATION EN MEUBLE
+      - MALFACON
+      - MARCHANDISES
+      - MARCHANDISE SOUS TEMPERATURE REGULEE
+      - MATERIEL TRANSPORTE TOUS LIEUX
+      - MORTALITE DU BETAIL
+      - NAVIGATION DE PLAISANCE
+      - NAVIGATION LEGERE
+      - NOUVELLE TECHNOLOGIE
+      - OBJET CONFIE
+      - OBJET PRECIEUX
+      - OFFICINEOFFICINE
+      - PANNE ELECTROMENAGER
+      - PERTE
+      - PERTE EN CONGELATEUR (CONTENU)
+      - PERTE DE LIQUIDE
+      - PERTE DU MATERIEL TRANSPORTE
+      - PERTE EAU INTERIEUR
+      - PERTE D'EXPLOITATION
+      - PERTE DE VALEUR
+      - PISCINE
+      - POLLUTION
+      - RC ACCUEILLANT FAMILIAL
+      - RC ASSISTANTE MATERNELLE
+      - RC CHAMBRES D'HOTES / ETUDIANTS
+      - RC CHASSE
+      - RC CHEF DE FAMILLE
+      - RC DECENNALE
+      - RC DIVERSE
+      - RC FETE FAMILIALE
+      - RC IMMOBILIER
+      - RC NON OCCUPANT
+      - RC OCCUPANT
+      - RC PROFESSIONNELLE
+      - RC PROPRIETAIRE
+      - RC VIE PRIVEE
+      - RECONSTITUTION DES MEDIAS
+      - REMPLACEMENT DE PERSONNEL
+      - RESPONSABILITE CIVILE GENERALE
+      - RISQUE INFORMATIQUE
+      - RISQUE LOCATIF
+      - RISQUES ANNEXES
+      - RISQUES SPECIAUX
+      - 'TOG OU TNG _(**T**empête, **N**eige, **G**rêle)_'
+      - TOUS RISQUES
+      - VALEUR A NEUF
+      - VALEUR FOND D'EXPLOITATION
+      - VANDALISME
+      - VEHICULE DE REMPLACEMENT
+      - VOL
+      - VOL A L ARRACHE
+      - VOL / DANS OU SUR UN BATEAU
+      - VOL / CAVE OU DEPENDANCES ISOLEES
+      - VOL / LIEU PUBLIC - TRANSPORT EN COMMUN
+      - VOL / DANS UN LOCAL UTILITAIRE DISTINCT
+      - VOL / AUTRE RESIDENCE
+      - VOL / DANS OU SUR UN VEHICULE
+      - VOYAGES / VACANCES
+      - VOYAGES / VACANCES
+required:
+  - name

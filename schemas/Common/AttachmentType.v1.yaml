@@ -1,4 +1,4 @@
-title: AttachmentType
+title: Type de pièce-jointe
 type: string
 enum:
   - document
