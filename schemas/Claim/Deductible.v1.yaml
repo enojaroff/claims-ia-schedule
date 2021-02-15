@@ -13,6 +13,8 @@ x-examples:
     min: 0
     max: 65.5
 type: object
+x-tags:
+  - Claim
 properties:
   type:
     type: string
@@ -21,8 +23,8 @@ properties:
       - rate
   value:
     oneOf:
-      - $ref: ./MonetaryValueType.v1.yaml
-      - $ref: ./Rate.v1.yaml
+      - $ref: ../Common/Amount.v1.yaml
+      - $ref: ../Common/Rate.v1.yaml
     description: Si la franchise est de type "fixed" alors le champ contient qu'une valeur monétaire; sinon c'est un pourcentage.
   min:
     type: number
@@ -33,5 +35,3 @@ properties:
 required:
   - type
   - value
-x-tags:
-  - Claim

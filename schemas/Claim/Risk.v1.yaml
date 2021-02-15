@@ -13,7 +13,7 @@ properties:
     items:
       $ref: ./Measure.v1.yaml
   address:
-    $ref: ./PostalAddress.v1.yaml
+    $ref: ../Common/PostalAddress.v1.yaml
   description:
     type: string
 required:

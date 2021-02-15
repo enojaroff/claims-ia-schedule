@@ -7,7 +7,7 @@ properties:
   characteristics:
     $ref: ./SinisterCharacteristic.v1.yaml
   circonstancesDeclarees:
-    $ref: ./NonEmptyString.v1.yaml
+    $ref: ../Common/NonEmptyString.v1.yaml
   declaredDamages:
     $ref: ./Damages.v1.yaml
   conservationMeasures:
@@ -16,7 +16,7 @@ properties:
   causeRemoval:
     $ref: ./CauseRemoval.v1.yaml
   address:
-    $ref: ./PostalAddress.v1.yaml
+    $ref: ../Common/PostalAddress.v1.yaml
   time:
     type: string
     description: Heure du sinistre

@@ -1,12 +1,12 @@
 title: Estimation
 type: object
+x-tags:
+  - Claim
+description: Estimation
 properties:
   cost:
-    $ref: ./Amount.v1.yaml
+    $ref: ../Common/Amount.v1.yaml
   contentsCount:
     type: integer
   roomsCount:
     type: integer
-x-tags:
-  - Claim
-description: Estimation

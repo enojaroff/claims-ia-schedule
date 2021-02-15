@@ -372,7 +372,7 @@ components:
           type: string
           format: date
         schedule:
-          $ref: ../../schemas/AppointmentSchedule.v1.yaml
+          $ref: ../../schemas/Appointment/AppointmentSchedule.v1.yaml
       required:
         - id
         - date
@@ -392,9 +392,9 @@ components:
         qualification:
           $ref: '#/components/schemas/Qualification'
         damages:
-          $ref: ../../schemas/Damages.v1.yaml
+          $ref: ../../schemas/Claim/Damages.v1.yaml
         address:
-          $ref: ../../schemas/PostalAddress.v1.yaml
+          $ref: ../../schemas/Common/PostalAddress.v1.yaml
       required:
         - date
         - characteristics
@@ -465,7 +465,7 @@ components:
         appointmentLocation:
           $ref: ../../schemas/Common/Place.v1.yaml
         riskType:
-          $ref: ../../schemas/RiskType.v1.yaml
+          $ref: ../../schemas/Claim/RiskType.v1.yaml
       required:
         - dateFrom
     SinisterCharacteristics:
@@ -910,40 +910,24 @@ components:
       title: Objet Données de déclaration
       type: object
       description: Déclaration de sinistre résumée.
-      x-examples:
-        example-1:
-          claimDate: '2020-04-02'
-          guarantee: DegatDesEaux
-          company:
-            id: AVIVA
-            name: Aviva
-            acam: aviva
-          location:
-            country: FR
-            city: Paris
-            zipcode: '92200'
-            street1: '49, rue de Paris'
-          sinister:
-            code: DegatDesEaux
-            date: '2020-03-30'
-            type: DegatDesEaux
+      x-examples: {}
       x-tags:
         - Claim
       properties:
         date:
           type: string
-          format: date
           description: Date de déclaration
+          format: date-time
         guarantee:
-          $ref: ../../schemas/WarrantyType.v1.yaml
+          $ref: ../../schemas/Claim/WarrantyType.v1.yaml
         company:
-          $ref: ../../schemas/Company.v1.yaml
+          $ref: ../../schemas/Claim/Company.v1.yaml
         location:
-          $ref: ../../schemas/PostalAddress.v1.yaml
+          $ref: ../../schemas/Common/PostalAddress.v1.yaml
         sinister:
           $ref: '#/components/schemas/Sinister'
         valuation:
-          $ref: ../../schemas/Valuation.v1.yaml
+          $ref: ../../schemas/Claim/Valuation.v1.yaml
       required:
         - date
         - guarantee

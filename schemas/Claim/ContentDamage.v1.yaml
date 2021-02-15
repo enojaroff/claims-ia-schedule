@@ -2,6 +2,7 @@ title: ContentDamage
 type: object
 x-tags:
   - Claim
+description: Dommage mobilier
 properties:
   name:
     type: string
@@ -12,17 +13,16 @@ properties:
   category:
     type: string
   age:
-    $ref: ./Age.v1.yaml
+    $ref: ../Common/Age.v1.yaml
   buyingPrice:
-    $ref: ./Amount.v1.yaml
+    $ref: ../Common/Amount.v1.yaml
   marketPrice:
-    $ref: ./Amount.v1.yaml
+    $ref: ../Common/Amount.v1.yaml
   invoice:
-    $ref: ./Attachment.v1.yaml
+    $ref: ../Common/Attachment.v1.yaml
   pictures:
     type: array
     items:
-      $ref: ./Attachment.v1.yaml
+      $ref: ../Common/Attachment.v1.yaml
 required:
   - name
-description: Dommage mobilier

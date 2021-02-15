@@ -16,6 +16,8 @@ description: |
     - Qualité du revêtement (1: Normal, 2: Standing, 3: Luxe)
     - Niveau d'usure (1: neuf, 2: état d'usage, 3: ancien)
         
+x-tags:
+  - Claim
 properties:
   name:
     type: string
@@ -30,9 +32,7 @@ properties:
   pictures:
     type: array
     items:
-      $ref: ./Attachment.v1.yaml
+      $ref: ../Common/Attachment.v1.yaml
 required:
-  - surfaces
   - name
-x-tags:
-  - Claim
+  - surfaces
