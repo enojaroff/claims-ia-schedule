@@ -17,13 +17,8 @@ properties:
     $ref: ./CauseRemoval.v1.yaml
   address:
     $ref: ../Common/PostalAddress.v1.yaml
-  time:
-    type: string
-    description: Heure du sinistre
   date:
-    type: string
-    format: date
-    description: Date du sinistre
+    $ref: ../Common/DateTime.v1.yaml
   qualification:
     $ref: ./Qualification.v1.yaml
 required:

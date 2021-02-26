@@ -369,8 +369,7 @@ components:
         id:
           type: string
         date:
-          type: string
-          format: date
+          $ref: ../../schemas/Common/DateTime.v1.yaml
         schedule:
           $ref: ../../schemas/Appointment/AppointmentSchedule.v1.yaml
       required:
@@ -452,13 +451,9 @@ components:
         claim:
           $ref: '#/components/schemas/ClaimSummary'
         dateFrom:
-          type: string
-          format: date
-          description: Début de l'intervalle
+          $ref: ../../schemas/Common/DateTime.v1.yaml
         dateTo:
-          type: string
-          format: date
-          description: Fin de l'intervalle
+          $ref: ../../schemas/Common/DateTime.v1.yaml
         limit:
           type: integer
           maximum: 30
@@ -864,11 +859,9 @@ components:
         notes:
           $ref: ../../schemas/Common/NonEmptyString.v1.yaml
         createdAt:
-          type: string
-          format: date-time
+          $ref: ../../schemas/Common/DateTime.v1.yaml
         lastUpdated:
-          type: string
-          format: date-time
+          $ref: ../../schemas/Common/DateTime.v1.yaml
         type:
           $ref: ../../schemas/Appointment/AppointmentType.v1.yaml
         schedule:

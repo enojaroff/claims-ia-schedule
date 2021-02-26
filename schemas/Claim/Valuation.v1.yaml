@@ -6,7 +6,7 @@ description: Estimation
 properties:
   totalCost:
     $ref: ../Common/Amount.v1.yaml
-  personnalPropertyDamagesCost:
+  contentDamagesCost:
     $ref: ../Common/Amount.v1.yaml
   buildingDamagesCost:
     $ref: ../Common/Amount.v1.yaml

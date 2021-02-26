@@ -33,13 +33,9 @@ properties:
 
       Si "HorairePlage", le rendez-vous de "duration" minutes aura lieu n'importe quand entre "startTime" et "endTime"
   startTime:
-    type: string
-    format: date-time
-    example: '2020-05-14T09:00:00Z'
+    $ref: ../Common/DateTime.v1.yaml
   endTime:
-    type: string
-    format: date-time
-    example: '2020-05-14T09:00:00Z'
+    $ref: ../Common/DateTime.v1.yaml
   duration:
     $ref: ../Common/Duration.v1.yaml
 required:
