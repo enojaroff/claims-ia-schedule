@@ -924,8 +924,6 @@ components:
           $ref: ../../schemas/Claim/WarrantyType.v1.yaml
         company:
           $ref: ../../schemas/Claim/Company.v1.yaml
-        location:
-          $ref: ../../schemas/Common/PostalAddress.v1.yaml
         sinister:
           $ref: '#/components/schemas/Sinister'
         valuation:
@@ -934,7 +932,6 @@ components:
         - date
         - guarantee
         - company
-        - location
   responses: {}
   parameters:
     InsuredNature:
