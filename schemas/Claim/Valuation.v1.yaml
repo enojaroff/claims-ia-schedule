@@ -4,9 +4,9 @@ x-tags:
   - Claim
 description: Estimation
 properties:
-  cost:
+  totalCost:
     $ref: ../Common/Amount.v1.yaml
-  contentsCount:
-    type: integer
-  roomsCount:
-    type: integer
+  personnalPropertyDamagesCost:
+    $ref: ../Common/Amount.v1.yaml
+  buildingDamagesCost:
+    $ref: ../Common/Amount.v1.yaml

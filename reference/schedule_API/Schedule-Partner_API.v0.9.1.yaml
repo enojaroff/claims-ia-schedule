@@ -917,9 +917,7 @@ components:
         - Claim
       properties:
         date:
-          type: string
-          description: Date de déclaration
-          format: date-time
+          $ref: ../../schemas/Common/DateTime.v1.yaml
         guarantee:
           $ref: ../../schemas/Claim/WarrantyType.v1.yaml
         company:
