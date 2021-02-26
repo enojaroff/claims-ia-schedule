@@ -9,88 +9,6 @@ Il existe plusieurs codifications.
 
 <!--
 type: tab
-title: Code Claims
--->
-
-## Codes Claims
-
-Dans Claims IA, les sociétés d'assurances sont identifiées par un code alphanumérique. C'est une chaîne de caractères qui peut avoir une des vlaeurs suivantes :
-
-| Code          | Assurance                                                                                        |
-| ------------- | ------------------------------------------------------------------------------------------------ |
-| **ACM**       | ASSURANCES DU CREDIT MUTUEL IARD SA                                                              |
-| **ACTE**      | ACTE IARD                                                                                        |
-| **AFIESCA**   | AFI.ESCA IARD                                                                                    |
-| **AGPMA**     | ASSOCIATION GENERALE DE PREVOYANCE MILITAIRE ASSURANCES                                          |
-| **ALLIANZ**   | ALLIANZ IARD                                                                                     |
-| **ALTIMA**    | ALTIMA ASSURANCE                                                                                 |
-| **AMALINE**   | AMALINE ASSURANCES                                                                               |
-| **AMF**       | ASSURANCES MUTUELLES DE France                                                                   |
-| **AMP**       | ASSURANCES MUTUELLES DE PICARDIE                                                                 |
-| **AREAS**     | AREAS DOMMAGES                                                                                   |
-| **ARIAL**     | ARIAL CNP ASSURANCES                                                                             |
-| **ASSUR**     | ASSURIMA                                                                                         |
-| **AVIVA**     | AVIVA ASSURANCES                                                                                 |
-| **AXA**       | AXA FRANCE IARD                                                                                  |
-| **AXERIA**    | AXERIA IARD                                                                                      |
-| **BPCE**      | BPCE IARD                                                                                        |
-| **CALYPSO**   | CALYPSO                                                                                          |
-| **CAPMA**     | CAPMA – CAPMI                                                                                    |
-| **CARDIF**    | CARDIF IARD                                                                                      |
-| **CARMA**     | CARMA                                                                                            |
-| **CHUBB**     | CHUBB EUROPEAN GROUP SE                                                                          |
-| **CMAM**      | CAISSE MEUSIENNE D'ASSURANCES MUTUELLES                                                          |
-| **CMMA**      | CAISSE MUTUELLE MARNAISE D'ASSURANCE                                                             |
-| **FILIA**     | FILIA MAIF                                                                                       |
-| **GAN**       | GAN ASSURANCES                                                                                   |
-| **GANOM**     | GAN OUTRE-MER                                                                                    |
-| **GENERALI**  | GENERALI IARD                                                                                    |
-| **GMF**       | GARANTIE MUTUELLE DES FONCTIONNAIRES - ASSURANCES - G.M.F. ASSURANCES                            |
-| **GOTHAER**   | GOTHAER                                                                                          |
-| **GROUPAMA**  | GROUPAMA ASSURANCES MUTUELLES                                                                    |
-| **LBP**       | LA BANQUE POSTALE ASSURANCES IARD                                                                |
-| **LFA**       | LE FINISTERE ASSURANCE                                                                           |
-| **LIBEA**     | LIBEA                                                                                            |
-| **LIBERTY**   | LIBERTY MUTUAL INSURANCE EUROPE LIMITED                                                          |
-| **LMF**       | LA MEDICALE DE France                                                                            |
-| **LPA**       | LA PARISIENNE ASSURANCES                                                                         |
-| **MAAF**      | MAAF ASSURANCES                                                                                  |
-| **MACIF**     | MUTUELLE ASSURANCE DES COMMERCANTS ET INDUSTRIELS DE France                                      |
-| **MACIFILIA** | MACIFILIA                                                                                        |
-| **MACSF**     | MUTUELLE D'ASSURANCES DU CORPS DE SANTE FRANÇAIS - ASSURANCES                                    |
-| **MAE**       | MUTUELLE ASSURANCE DE L'EDUCATION                                                                |
-| **MAIF**      | MUTUELLE ASSURANCE DES INSTITUTEURS DE France                                                    |
-| **MAPA**      | MAPA MUTUELLE D'ASSURANCE                                                                        |
-| **MATM**      | MUTUELLE ASSURANCE DES TRAVAILLEURS MUTUALISTES                                                  |
-| **MATMUT**    | MATMUT & CO                                                                                      |
-| **MCR**       | MUTUELLE CENTRALE DE REASSURANCE - M.C.R.                                                        |
-| **MFA**       | MUTUELLE FRATERNELLE D'ASSURANCES                                                                |
-| **MMA**       | MMA IARD ASSURANCES MUTUELLES                                                                    |
-| **MONCEAU**   | MONCEAU GENERALE ASSURANCES S.A.                                                                 |
-| **MONDIALE**  | LA MONDIALE                                                                                      |
-| **MPA**       | LA MUTUELLE PHOCEENNE ASSURANCES                                                                 |
-| **POITIER**   | MUTUELLE DE POITIERS ASSURANCES                                                                  |
-| **MSC**       | MUTUELLE SAINT-CHRISTOPHE ASSURANCES                                                             |
-| **NAGICO**    | NAGICO INSURANCE COMPANY LIMITED                                                                 |
-| **OPTEVEN**   | OPTEVEN ASSURANCES                                                                               |
-| **PACIFICA**  | PACIFICA                                                                                         |
-| **PANACEA**   | PANACEA ASSURANCES                                                                               |
-| **PREPAR**    | PREPAR IARD                                                                                      |
-| **PROTEC**    | PROTEC BTP                                                                                       |
-| **PRUDENCE**  | PRUDENCE CREOLE                                                                                  |
-| **REMA**      | REUNION DES MUTUELLES D'ASSURANCES REGIONALES - REMA                                             |
-| **SADA**      | SOCIETE ANONYME DE DEFENSE ET D'ASSURANCES - S.A.D.A.                                            |
-| **SAFSABBTP** | SOCIETE D'ASSURANCES FAMILIALES DES SALARIES ET ARTISANS DU BAT. ET DES T.P. IARD - SAF-BTP-IARD |
-| **SERENIS**   | SERENIS ASSURANCES                                                                               |
-| **SMA**       | SMA SA                                                                                           |
-| **SMACL**     | SOCIETE MUTUELLE D'ASSURANCE DES COLLECTIVITES LOCALES                                           |
-| **SURAVENIR** | SURAVENIR ASSURANCES                                                                             |
-| **SWISSLIFE** | SWISS LIFE ASSURANCES DE BIENS                                                                   |
-| **THELEM**    | THELEM ASSURANCES                                                                                |
-| **UMAM**      | UNION DES MUTUELLES D'ASSURANCES MONCEAU - U.M.A.M.                                              |
-
-<!--
-type: tab
 title: Code ACAM
 -->
 
@@ -247,5 +165,88 @@ Le code ACAM permet d'identifier de façon unique les sociétés d'assurances. I
 | 13100402 | MATMUT RISQUES ENTREPRISE                                                  |
 | 00000001 | Non Assurance                                                              |
 | 00000002 | Autre                                                                      |
+
+<!--
+type: tab
+title: Code Claims
+-->
+
+## Codes Claims
+
+Dans Claims IA, les sociétés d'assurances sont identifiées par un code alphanumérique. C'est une chaîne de caractères qui peut avoir une des vlaeurs suivantes :
+
+| Code          | Assurance                                                                                        |
+| ------------- | ------------------------------------------------------------------------------------------------ |
+| **ACM**       | ASSURANCES DU CREDIT MUTUEL IARD SA                                                              |
+| **ACTE**      | ACTE IARD                                                                                        |
+| **AFIESCA**   | AFI.ESCA IARD                                                                                    |
+| **AGPMA**     | ASSOCIATION GENERALE DE PREVOYANCE MILITAIRE ASSURANCES                                          |
+| **ALLIANZ**   | ALLIANZ IARD                                                                                     |
+| **ALTIMA**    | ALTIMA ASSURANCE                                                                                 |
+| **AMALINE**   | AMALINE ASSURANCES                                                                               |
+| **AMF**       | ASSURANCES MUTUELLES DE France                                                                   |
+| **AMP**       | ASSURANCES MUTUELLES DE PICARDIE                                                                 |
+| **AREAS**     | AREAS DOMMAGES                                                                                   |
+| **ARIAL**     | ARIAL CNP ASSURANCES                                                                             |
+| **ASSUR**     | ASSURIMA                                                                                         |
+| **AVIVA**     | AVIVA ASSURANCES                                                                                 |
+| **AXA**       | AXA FRANCE IARD                                                                                  |
+| **AXERIA**    | AXERIA IARD                                                                                      |
+| **BPCE**      | BPCE IARD                                                                                        |
+| **CALYPSO**   | CALYPSO                                                                                          |
+| **CAPMA**     | CAPMA – CAPMI                                                                                    |
+| **CARDIF**    | CARDIF IARD                                                                                      |
+| **CARMA**     | CARMA                                                                                            |
+| **CHUBB**     | CHUBB EUROPEAN GROUP SE                                                                          |
+| **CMAM**      | CAISSE MEUSIENNE D'ASSURANCES MUTUELLES                                                          |
+| **CMMA**      | CAISSE MUTUELLE MARNAISE D'ASSURANCE                                                             |
+| **FILIA**     | FILIA MAIF                                                                                       |
+| **GAN**       | GAN ASSURANCES                                                                                   |
+| **GANOM**     | GAN OUTRE-MER                                                                                    |
+| **GENERALI**  | GENERALI IARD                                                                                    |
+| **GMF**       | GARANTIE MUTUELLE DES FONCTIONNAIRES - ASSURANCES - G.M.F. ASSURANCES                            |
+| **GOTHAER**   | GOTHAER                                                                                          |
+| **GROUPAMA**  | GROUPAMA ASSURANCES MUTUELLES                                                                    |
+| **LBP**       | LA BANQUE POSTALE ASSURANCES IARD                                                                |
+| **LFA**       | LE FINISTERE ASSURANCE                                                                           |
+| **LIBEA**     | LIBEA                                                                                            |
+| **LIBERTY**   | LIBERTY MUTUAL INSURANCE EUROPE LIMITED                                                          |
+| **LMF**       | LA MEDICALE DE France                                                                            |
+| **LPA**       | LA PARISIENNE ASSURANCES                                                                         |
+| **MAAF**      | MAAF ASSURANCES                                                                                  |
+| **MACIF**     | MUTUELLE ASSURANCE DES COMMERCANTS ET INDUSTRIELS DE France                                      |
+| **MACIFILIA** | MACIFILIA                                                                                        |
+| **MACSF**     | MUTUELLE D'ASSURANCES DU CORPS DE SANTE FRANÇAIS - ASSURANCES                                    |
+| **MAE**       | MUTUELLE ASSURANCE DE L'EDUCATION                                                                |
+| **MAIF**      | MUTUELLE ASSURANCE DES INSTITUTEURS DE France                                                    |
+| **MAPA**      | MAPA MUTUELLE D'ASSURANCE                                                                        |
+| **MATM**      | MUTUELLE ASSURANCE DES TRAVAILLEURS MUTUALISTES                                                  |
+| **MATMUT**    | MATMUT & CO                                                                                      |
+| **MCR**       | MUTUELLE CENTRALE DE REASSURANCE - M.C.R.                                                        |
+| **MFA**       | MUTUELLE FRATERNELLE D'ASSURANCES                                                                |
+| **MMA**       | MMA IARD ASSURANCES MUTUELLES                                                                    |
+| **MONCEAU**   | MONCEAU GENERALE ASSURANCES S.A.                                                                 |
+| **MONDIALE**  | LA MONDIALE                                                                                      |
+| **MPA**       | LA MUTUELLE PHOCEENNE ASSURANCES                                                                 |
+| **POITIER**   | MUTUELLE DE POITIERS ASSURANCES                                                                  |
+| **MSC**       | MUTUELLE SAINT-CHRISTOPHE ASSURANCES                                                             |
+| **NAGICO**    | NAGICO INSURANCE COMPANY LIMITED                                                                 |
+| **OPTEVEN**   | OPTEVEN ASSURANCES                                                                               |
+| **PACIFICA**  | PACIFICA                                                                                         |
+| **PANACEA**   | PANACEA ASSURANCES                                                                               |
+| **PREPAR**    | PREPAR IARD                                                                                      |
+| **PROTEC**    | PROTEC BTP                                                                                       |
+| **PRUDENCE**  | PRUDENCE CREOLE                                                                                  |
+| **REMA**      | REUNION DES MUTUELLES D'ASSURANCES REGIONALES - REMA                                             |
+| **SADA**      | SOCIETE ANONYME DE DEFENSE ET D'ASSURANCES - S.A.D.A.                                            |
+| **SAFSABBTP** | SOCIETE D'ASSURANCES FAMILIALES DES SALARIES ET ARTISANS DU BAT. ET DES T.P. IARD - SAF-BTP-IARD |
+| **SERENIS**   | SERENIS ASSURANCES                                                                               |
+| **SMA**       | SMA SA                                                                                           |
+| **SMACL**     | SOCIETE MUTUELLE D'ASSURANCE DES COLLECTIVITES LOCALES                                           |
+| **SURAVENIR** | SURAVENIR ASSURANCES                                                                             |
+| **SWISSLIFE** | SWISS LIFE ASSURANCES DE BIENS                                                                   |
+| **THELEM**    | THELEM ASSURANCES                                                                                |
+| **UMAM**      | UNION DES MUTUELLES D'ASSURANCES MONCEAU - U.M.A.M.                                              |
+
 
 <!-- type: tab-end -->

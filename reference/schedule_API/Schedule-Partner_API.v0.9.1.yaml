@@ -885,6 +885,9 @@ components:
         [Voir les valeurs possibles](https://wiki.apps.darva.com/display/REFDOC/Valeurs+de+codes#Valeursdecodes-Typedeprestation)
 
         Type de prestation demandée.
+      title: Objet Type de prestation
+      x-tags:
+        - Disponibilités
       properties:
         name:
           type: string
@@ -894,6 +897,7 @@ components:
             - VISIO
             - CONTRADICTOIRE
             - REN
+            - TELE
           description: Code de la prestation
         label:
           type: string
@@ -903,9 +907,7 @@ components:
             - Visio-expertise
             - Expertise contradictoire
             - REN
-      title: Objet Type de prestation
-      x-tags:
-        - Disponibilités
+            - Télé-expertise
     ClaimSummary:
       title: Objet Données de déclaration
       type: object
