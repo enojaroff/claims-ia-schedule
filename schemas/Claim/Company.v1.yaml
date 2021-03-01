@@ -1,10 +1,10 @@
 title: Company
 type: object
-description: "Société d'assurance"
+description: Société d'assurance
 properties:
   id:
     type: string
-    description: Identifiant unique de la compagnie
+    description: Identifiant unique de la compagnie - Code ACAM
   name:
     type: string
 required:

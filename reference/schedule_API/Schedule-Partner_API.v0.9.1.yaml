@@ -322,6 +322,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ServiceRequest'
+            examples:
+              example-1: {}
+        description: ''
       security: []
 components:
   securitySchemes:
@@ -376,22 +379,16 @@ components:
         - id
         - date
         - schedule
-    Sinister:
+    Accident:
       title: Objet Sinistre
       type: object
       x-tags:
         - Claim
       properties:
         date:
-          type: string
-          format: date
-          description: Date du sinistre
+          $ref: ../../schemas/Common/DateTime.v1.yaml
         characteristics:
           $ref: '#/components/schemas/SinisterCharacteristics'
-        qualification:
-          $ref: '#/components/schemas/Qualification'
-        damages:
-          $ref: ../../schemas/Claim/Damages.v1.yaml
         address:
           $ref: ../../schemas/Common/PostalAddress.v1.yaml
       required:
@@ -461,9 +458,21 @@ components:
           $ref: ../../schemas/Common/Place.v1.yaml
         riskType:
           $ref: ../../schemas/Claim/RiskType.v1.yaml
+        customerType:
+          type: string
+          enum:
+            - professional
+            - individual
+          description: |
+            Client pro ou particulier
+        idClaimsIA:
+          type: string
       required:
+        - type
         - dateFrom
-    SinisterCharacteristics:
+        - customerType
+        - idClaimsIA
+    AccidentCharacteristics:
       title: Objet Caractéristiques du sinistre
       type: object
       description: |
@@ -484,7 +493,7 @@ components:
         - nature
       x-tags:
         - Rendez-vous
-    SinisterNature:
+    AccidentNature:
       title: Objet Nature du sinistre
       type: string
       description: |
@@ -512,7 +521,7 @@ components:
         - Vol
       x-tags:
         - Claim
-    SinisterCause:
+    AccidentCause:
       type: string
       title: Objet Cause du sinistre
       description: |
@@ -681,7 +690,7 @@ components:
         - DommageDeMouille
       x-tags:
         - Claim
-    SinisterCauseDetail:
+    AccidentCauseDetail:
       title: Objet Détail de la cause du sinistre
       type: string
       description: |
@@ -885,7 +894,6 @@ components:
         name:
           type: string
           enum:
-            - EAD
             - ESS
             - VISIO
             - CONTRADICTOIRE
@@ -895,7 +903,6 @@ components:
         label:
           type: string
           enum:
-            - Expertise à distance
             - Expertise sur site
             - Visio-expertise
             - Expertise contradictoire
@@ -915,14 +922,17 @@ components:
           $ref: ../../schemas/Claim/WarrantyType.v1.yaml
         company:
           $ref: ../../schemas/Claim/Company.v1.yaml
-        sinister:
+        accident:
           $ref: '#/components/schemas/Sinister'
         valuation:
           $ref: ../../schemas/Claim/Valuation.v1.yaml
+        id:
+          type: string
       required:
         - date
         - guarantee
         - company
+        - id
   responses: {}
   parameters:
     InsuredNature:
