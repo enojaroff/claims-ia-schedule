@@ -388,7 +388,7 @@ components:
         date:
           $ref: ../../schemas/Common/DateTime.v1.yaml
         characteristics:
-          $ref: '#/components/schemas/SinisterCharacteristics'
+          $ref: '#/components/schemas/AccidentCharacteristics'
         address:
           $ref: ../../schemas/Common/PostalAddress.v1.yaml
       required:
@@ -482,17 +482,17 @@ components:
         Selon les sinistres, le détail de la cause peut ne pas être renseigné. Les valeurs de ces trois informations suivent la codification **Sinapps**.
 
         [Liste des valeurs possibles](../../docs/documentation/Codes/04-Nature-du-sinistre.md)
-      properties:
-        nature:
-          $ref: '#/components/schemas/SinisterNature'
-        cause:
-          $ref: '#/components/schemas/SinisterCause'
-        detail:
-          $ref: '#/components/schemas/SinisterCauseDetail'
-      required:
-        - nature
       x-tags:
         - Rendez-vous
+      properties:
+        nature:
+          $ref: '#/components/schemas/AccidentNature'
+        cause:
+          $ref: '#/components/schemas/AccidentCause'
+        detail:
+          $ref: '#/components/schemas/AccidentCauseDetail'
+      required:
+        - nature
     AccidentNature:
       title: Objet Nature du sinistre
       type: string
@@ -923,7 +923,7 @@ components:
         company:
           $ref: ../../schemas/Claim/Company.v1.yaml
         accident:
-          $ref: '#/components/schemas/Sinister'
+          $ref: '#/components/schemas/Accident'
         valuation:
           $ref: ../../schemas/Claim/Valuation.v1.yaml
         id:
