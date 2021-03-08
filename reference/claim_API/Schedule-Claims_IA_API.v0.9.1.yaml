@@ -48,6 +48,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Claim'
+            text/plain:
+              schema:
+                type: object
+                properties: {}
+            application/xml:
+              schema:
+                type: object
+                properties: {}
       operationId: get-claim
       description: Déclaration
       parameters: []
@@ -127,8 +135,8 @@ components:
           $ref: ../../schemas/Claim/AdditionalWarrantyType.v1.yaml
         customer:
           $ref: ../../schemas/Claim/Customer.v1.yaml
-        sinister:
-          $ref: ../../schemas/Claim/Sinister.v1.yaml
+        accident:
+          $ref: ../../schemas/Claim/Accident.v1.yaml
         documents:
           type: array
           items:

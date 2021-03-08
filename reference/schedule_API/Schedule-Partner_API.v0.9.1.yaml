@@ -330,9 +330,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Timeslot'
+                $ref: '#/components/schemas/Timeslot'
       description: |
         Cette requête permet de récupérer la liste des créneaux horaires disponibles.
 
