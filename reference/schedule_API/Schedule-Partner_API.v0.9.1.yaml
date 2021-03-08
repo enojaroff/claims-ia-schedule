@@ -330,7 +330,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Timeslot'
+                type: object
+                properties:
+                  sessionID:
+                    type: string
+                  timeslots:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Timeslot'
       description: |
         Cette requête permet de récupérer la liste des créneaux horaires disponibles.
 
@@ -401,23 +408,7 @@ components:
           type: string
           description: Convention applicable
     Timeslot:
-      title: Objet Créneau horaire
-      description: |-
-        Le créneau horaire est retourné par le partenaire. Il est défini au minimum par 
-        - une heure de début
-        - une heure de fin
-
-        Une adresse peut être renseignée si elle est différente de l'adresse fournie dans la demande.
-      x-tags:
-        - Disponibilités
-      type: object
-      properties:
-        sessionID:
-          type: string
-        appointmentSchedules:
-          type: array
-          items:
-            $ref: ../../schemas/Appointment/AppointmentSchedule.v1.yaml
+      $ref: ../../schemas/Appointment/AppointmentSchedule.v1.yaml
     Accident:
       title: Objet Sinistre
       type: object
