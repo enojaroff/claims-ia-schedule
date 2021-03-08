@@ -9,5 +9,18 @@ properties:
     type: string
   gender:
     type: string
-  coordinates:
-    $ref: ../Common/Coordinates.v1.yaml
+  userInfo:
+    $ref: ../Common/ContactInfo.v1.yaml
+  userType:
+    type: string
+    enum:
+      - individual
+      - professional
+  adress:
+    $ref: ../Common/PostalAddress.v1.yaml
+required:
+  - firstName
+  - lastName
+  - userInfo
+  - userType
+  - adress
