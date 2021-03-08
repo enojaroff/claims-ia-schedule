@@ -402,7 +402,6 @@ components:
           description: Convention applicable
     Timeslot:
       title: Objet Créneau horaire
-      type: object
       description: |-
         Le créneau horaire est retourné par le partenaire. Il est défini au minimum par 
         - une heure de début
@@ -411,16 +410,14 @@ components:
         Une adresse peut être renseignée si elle est différente de l'adresse fournie dans la demande.
       x-tags:
         - Disponibilités
+      type: object
       properties:
-        sessionId:
+        sessionID:
           type: string
-        schedules:
+        appointmentSchedules:
           type: array
           items:
             $ref: ../../schemas/Appointment/AppointmentSchedule.v1.yaml
-      required:
-        - sessionId
-        - schedules
     Accident:
       title: Objet Sinistre
       type: object
