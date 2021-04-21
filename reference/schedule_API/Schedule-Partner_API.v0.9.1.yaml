@@ -495,13 +495,13 @@ components:
             - individual
           description: |
             Client pro ou particulier
-        idClaimsIA:
+        insurerClaimId:
           type: string
       required:
         - type
         - dateFrom
         - customerType
-        - idClaimsIA
+        - insurerClaimId
     AccidentCharacteristics:
       title: Objet Caractéristiques du sinistre
       type: object
@@ -956,13 +956,13 @@ components:
           $ref: '#/components/schemas/Accident'
         valuation:
           $ref: ../../schemas/Claim/Valuation.v1.yaml
-        id:
+        claimId:
           type: string
       required:
         - date
         - guarantee
         - company
-        - id
+        - claimId
   responses: {}
   parameters:
     InsuredNature:
