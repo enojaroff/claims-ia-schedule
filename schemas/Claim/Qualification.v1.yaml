@@ -7,8 +7,7 @@ x-tags:
   - Claim
 properties:
   thirdParty:
-    type: boolean
-    description: Tiers en cause?
+    $ref: ./Customer.v1.yaml
   insuredResponsible:
     type: boolean
     description: Est-ce que l'assuré est responsable?
