@@ -383,17 +383,17 @@ paths:
                     timeslots:
                       - type: HorairePlage
                         startTime: '2020-05-18T09:00:00Z'
-                        endTime: '2020-05-18T10:00:00Z'
-                        id: deserunt consectetur ipsum aute enim
-                        duration: 60
-                      - type: HorairePlage
-                        startTime: '2020-05-18T10:00:00Z'
-                        endTime: '2020-05-18T11:00:00Z'
+                        endTime: '2020-05-18T12:00:00Z'
                         id: deserunt consectetur ipsum aute enim
                         duration: 60
                       - type: HorairePlage
                         startTime: '2020-05-18T11:00:00Z'
-                        endTime: '2020-05-18T12:00:00Z'
+                        endTime: '2020-05-18T15:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-18T11:00:00Z'
+                        endTime: '2020-05-18T17:00:00Z'
                         id: deserunt consectetur ipsum aute enim
                         duration: 60
                       - type: HorairePlage
