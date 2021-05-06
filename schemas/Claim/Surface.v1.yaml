@@ -1,7 +1,7 @@
-title: Paroi
+title: Surface
 type: object
 description: |
-  Surface d'une pièce: mur, sol, plafond
+  Paroi d'une pièce: mur, sol, plafond
 properties:
   name:
     type: string

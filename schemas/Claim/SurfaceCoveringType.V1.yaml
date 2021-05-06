@@ -1,0 +1,11 @@
+title: SurfaceCoveringType
+type: object
+description: |
+  Type de revêtement (_cf. [documentation](../docs/documentation/Codes/10-Revetements.md)_
+properties:
+  name:
+    type: string
+  label:
+    type: string
+required:
+  - name

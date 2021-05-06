@@ -4,15 +4,11 @@ description: |-
   Revêtement d'une surface.
 
   Le type de revêtement correspond globalement aux corps d'état. On s'appuie sur la codification Sinapps pour les valeurs (_cf. fichier [Detail-nature-dommage](../../docs/documentation/Codes/06-Detail-nature-dommages.md)_)
+x-tags:
+  - Claim
 properties:
-  name:
-    type: string
   type:
-    type: string
-    description: |-
-      Nature du revêtement. 
-      Liste des valeurs: cf.Sinapps - detailNatureDommages 
-      (anciennement DARVA 9711.01.01)
+    $ref: ./SurfaceCoveringType.V1.yaml
   state:
     type: integer
     description: 'Niveau d''usure. 1:neuf, 2:état d''usage, 3:ancien'
@@ -28,8 +24,5 @@ properties:
       - 2
       - 3
 required:
-  - name
   - type
   - state
-x-tags:
-  - Claim
