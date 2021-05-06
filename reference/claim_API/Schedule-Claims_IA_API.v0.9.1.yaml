@@ -48,6 +48,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Claim'
+            text/plain:
+              schema:
+                type: object
+                properties: {}
+            application/xml:
+              schema:
+                type: object
+                properties: {}
       operationId: get-claim
       description: Déclaration
       parameters: []
@@ -117,18 +125,18 @@ components:
       properties:
         date:
           type: string
-          format: date
+          format: date-time
           description: Date de déclaration
         company:
           $ref: ../../schemas/Claim/Company.v1.yaml
         contract:
           $ref: ../../schemas/Claim/Contract.v1.yaml
         guarantee:
-          $ref: ../../schemas/Claim/AdditionalWarrantyType.v1.yaml
+          $ref: ../../schemas/Claim/WarrantyType.v1.yaml
         customer:
           $ref: ../../schemas/Claim/Customer.v1.yaml
-        sinister:
-          $ref: ../../schemas/Claim/Sinister.v1.yaml
+        accident:
+          $ref: ../../schemas/Claim/Accident.v1.yaml
         documents:
           type: array
           items:
@@ -140,6 +148,9 @@ components:
           description: Référence ClaimsIA de la déclaration
         risk:
           $ref: ../../schemas/Claim/Risk.v1.yaml
+        missionID:
+          type: string
+          description: ID coté client
       required:
         - date
         - company

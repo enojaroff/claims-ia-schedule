@@ -5,7 +5,7 @@ x-tags:
 description: ''
 properties:
   characteristics:
-    $ref: ./SinisterCharacteristic.v1.yaml
+    $ref: ./AccidentCharacteristic.v1.yaml
   circonstancesDeclarees:
     $ref: ../Common/NonEmptyString.v1.yaml
   declaredDamages:

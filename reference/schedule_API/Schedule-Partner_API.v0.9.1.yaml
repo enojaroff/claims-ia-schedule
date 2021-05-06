@@ -152,14 +152,19 @@ paths:
             schema:
               type: object
               properties:
-                data:
-                  $ref: '#/components/schemas/Appointment'
                 timeslot:
                   $ref: '#/components/schemas/Timeslot'
-                claim:
-                  $ref: '#/components/schemas/ClaimSummary'
+                sessionID:
+                  type: string
+                location:
+                  $ref: ../../schemas/Common/Place.v1.yaml
+                idClaimsIA:
+                  type: string
               required:
                 - timeslot
+                - sessionID
+                - location
+                - idClaimsIA
           application/x-www-form-urlencoded:
             schema:
               type: object
@@ -169,6 +174,46 @@ paths:
       responses:
         '201':
           description: '**Created** Le rendez-vous a été créé.'
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                example-1:
+                  value: string
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  appointmentID:
+                    type: string
+                required:
+                  - appointmentID
+            multipart/form-data:
+              schema:
+                type: object
+                properties: {}
+            text/html:
+              schema:
+                type: string
+            text/plain:
+              schema:
+                type: object
+                properties:
+                  '':
+                    type: string
+            application/EDI-X12:
+              schema:
+                type: object
+                properties: {}
+            application/EDIFACT:
+              schema:
+                type: object
+                properties: {}
+            application/atom+xml:
+              schema:
+                type: object
+                properties: {}
         '400':
           description: |-
             **Bad Request**
@@ -285,9 +330,128 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Timeslot'
+                type: object
+                properties:
+                  sessionID:
+                    type: string
+                  timeslots:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Timeslot'
+              examples:
+                example-1-horaireFixe:
+                  value:
+                    timeslots:
+                      - type: HoraireFixe
+                        startTime: '2020-05-18T09:00:00Z'
+                        endTime: '2020-05-18T10:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HoraireFixe
+                        startTime: '2020-05-18T10:00:00Z'
+                        endTime: '2020-05-18T11:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HoraireFixe
+                        startTime: '2020-05-18T11:00:00Z'
+                        endTime: '2020-05-18T12:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HoraireFixe
+                        startTime: '2020-05-18T14:00:00Z'
+                        endTime: '2020-05-18T15:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HoraireFixe
+                        startTime: '2020-05-18T17:00:00Z'
+                        endTime: '2020-05-18T18:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HoraireFixe
+                        startTime: '2020-07-18T11:00:00Z'
+                        endTime: '2020-07-18T12:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HoraireFixe
+                        startTime: '2020-05-20T08:00:00Z'
+                        endTime: '2020-05-20T09:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-18T09:00:00Z'
+                        endTime: '2020-05-18T12:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-18T11:00:00Z'
+                        endTime: '2020-05-18T15:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-18T11:00:00Z'
+                        endTime: '2020-05-18T17:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-18T14:00:00Z'
+                        endTime: '2020-05-18T15:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-18T17:00:00Z'
+                        endTime: '2020-05-18T18:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-07-18T11:00:00Z'
+                        endTime: '2020-07-18T12:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-20T08:00:00Z'
+                        endTime: '2020-05-20T09:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                    sessionID: qui sed labore nulla
+                example-2-horairePlage:
+                  value:
+                    timeslots:
+                      - type: HorairePlage
+                        startTime: '2020-05-18T09:00:00Z'
+                        endTime: '2020-05-18T12:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-18T11:00:00Z'
+                        endTime: '2020-05-18T15:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-18T11:00:00Z'
+                        endTime: '2020-05-18T17:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-18T14:00:00Z'
+                        endTime: '2020-05-18T15:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-18T17:00:00Z'
+                        endTime: '2020-05-18T18:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-07-18T11:00:00Z'
+                        endTime: '2020-07-18T12:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                      - type: HorairePlage
+                        startTime: '2020-05-20T08:00:00Z'
+                        endTime: '2020-05-20T09:00:00Z'
+                        id: deserunt consectetur ipsum aute enim
+                        duration: 60
+                    sessionID: qui sed labore nulla
       description: |
         Cette requête permet de récupérer la liste des créneaux horaires disponibles.
 
@@ -322,6 +486,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ServiceRequest'
+            examples:
+              example-1: {}
+        description: ''
       security: []
 components:
   securitySchemes:
@@ -355,43 +522,17 @@ components:
           type: string
           description: Convention applicable
     Timeslot:
-      title: Objet Créneau horaire
-      type: object
-      description: |-
-        Le créneau horaire est retourné par le partenaire. Il est défini au minimum par 
-        - une heure de début
-        - une heure de fin
-
-        Une adresse peut être renseignée si elle est différente de l'adresse fournie dans la demande.
-      x-tags:
-        - Disponibilités
-      properties:
-        id:
-          type: string
-        date:
-          $ref: ../../schemas/Common/DateTime.v1.yaml
-        schedule:
-          $ref: ../../schemas/Appointment/AppointmentSchedule.v1.yaml
-      required:
-        - id
-        - date
-        - schedule
-    Sinister:
+      $ref: ../../schemas/Appointment/AppointmentSchedule.v1.yaml
+    Accident:
       title: Objet Sinistre
       type: object
       x-tags:
         - Claim
       properties:
         date:
-          type: string
-          format: date
-          description: Date du sinistre
+          $ref: ../../schemas/Common/DateTime.v1.yaml
         characteristics:
-          $ref: '#/components/schemas/SinisterCharacteristics'
-        qualification:
-          $ref: '#/components/schemas/Qualification'
-        damages:
-          $ref: ../../schemas/Claim/Damages.v1.yaml
+          $ref: '#/components/schemas/AccidentCharacteristics'
         address:
           $ref: ../../schemas/Common/PostalAddress.v1.yaml
       required:
@@ -461,9 +602,21 @@ components:
           $ref: ../../schemas/Common/Place.v1.yaml
         riskType:
           $ref: ../../schemas/Claim/RiskType.v1.yaml
+        customerType:
+          type: string
+          enum:
+            - professional
+            - individual
+          description: |
+            Client pro ou particulier
+        insurerClaimId:
+          type: string
       required:
+        - type
         - dateFrom
-    SinisterCharacteristics:
+        - customerType
+        - insurerClaimId
+    AccidentCharacteristics:
       title: Objet Caractéristiques du sinistre
       type: object
       description: |
@@ -473,18 +626,18 @@ components:
         Selon les sinistres, le détail de la cause peut ne pas être renseigné. Les valeurs de ces trois informations suivent la codification **Sinapps**.
 
         [Liste des valeurs possibles](../../docs/documentation/Codes/04-Nature-du-sinistre.md)
-      properties:
-        nature:
-          $ref: '#/components/schemas/SinisterNature'
-        cause:
-          $ref: '#/components/schemas/SinisterCause'
-        detail:
-          $ref: '#/components/schemas/SinisterCauseDetail'
-      required:
-        - nature
       x-tags:
         - Rendez-vous
-    SinisterNature:
+      properties:
+        nature:
+          $ref: '#/components/schemas/AccidentNature'
+        cause:
+          $ref: '#/components/schemas/AccidentCause'
+        detail:
+          $ref: '#/components/schemas/AccidentCauseDetail'
+      required:
+        - nature
+    AccidentNature:
       title: Objet Nature du sinistre
       type: string
       description: |
@@ -512,7 +665,7 @@ components:
         - Vol
       x-tags:
         - Claim
-    SinisterCause:
+    AccidentCause:
       type: string
       title: Objet Cause du sinistre
       description: |
@@ -681,7 +834,7 @@ components:
         - DommageDeMouille
       x-tags:
         - Claim
-    SinisterCauseDetail:
+    AccidentCauseDetail:
       title: Objet Détail de la cause du sinistre
       type: string
       description: |
@@ -885,7 +1038,6 @@ components:
         name:
           type: string
           enum:
-            - EAD
             - ESS
             - VISIO
             - CONTRADICTOIRE
@@ -895,7 +1047,6 @@ components:
         label:
           type: string
           enum:
-            - Expertise à distance
             - Expertise sur site
             - Visio-expertise
             - Expertise contradictoire
@@ -915,14 +1066,17 @@ components:
           $ref: ../../schemas/Claim/WarrantyType.v1.yaml
         company:
           $ref: ../../schemas/Claim/Company.v1.yaml
-        sinister:
-          $ref: '#/components/schemas/Sinister'
+        accident:
+          $ref: '#/components/schemas/Accident'
         valuation:
           $ref: ../../schemas/Claim/Valuation.v1.yaml
+        claimId:
+          type: string
       required:
         - date
         - guarantee
         - company
+        - claimId
   responses: {}
   parameters:
     InsuredNature:

@@ -38,6 +38,8 @@ properties:
     $ref: ../Common/DateTime.v1.yaml
   duration:
     $ref: ../Common/Duration.v1.yaml
+  id:
+    type: string
 required:
   - type
   - startTime
