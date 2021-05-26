@@ -6,14 +6,14 @@ description: |
   Selon les sinistres, le détail de la cause peut ne pas être renseigné. Les valeurs de ces trois informations suivent la codification **Sinapps**.
 
   [Liste des valeurs possibles](../../docs/documentation/Codes/04-Nature-du-sinistre.md)
-properties:
-  nature:
-    $ref: ./SinisterNature.v1.yaml
-  cause:
-    $ref: ./SinisterCause.v1.yaml
-  detail:
-    $ref: ./SinisterCauseDetail.v1.yaml
-required:
-  - nature
 x-tags:
   - Claim
+properties:
+  nature:
+    $ref: ./AccidentNature.v1.yaml
+  cause:
+    $ref: ./AccidentCause.v1.yaml
+  detail:
+    $ref: ./AccidentCauseDetail.v1.yaml
+required:
+  - nature
