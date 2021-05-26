@@ -158,13 +158,13 @@ paths:
                   type: string
                 location:
                   $ref: ../../schemas/Common/Place.v1.yaml
-                idClaimsIA:
+                caseNumber:
                   type: string
               required:
                 - timeslot
                 - sessionID
                 - location
-                - idClaimsIA
+                - caseNumber
           application/x-www-form-urlencoded:
             schema:
               type: object
