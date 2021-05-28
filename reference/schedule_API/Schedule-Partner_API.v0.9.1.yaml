@@ -407,11 +407,6 @@ paths:
                         endTime: '2020-07-18T12:00:00Z'
                         id: '13'
                         duration: 60
-                      - type: HorairePlage
-                        startTime: '2020-06-20T08:00:00Z'
-                        endTime: '2020-06-20T09:00:00Z'
-                        id: '14'
-                        duration: 60
                     sessionID: qui sed labore nulla
                 example-2-horairePlage:
                   value:
