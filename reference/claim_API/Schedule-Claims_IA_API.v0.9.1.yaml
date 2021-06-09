@@ -61,6 +61,19 @@ paths:
       parameters: []
       security:
         - header_token: []
+    delete:
+      summary: ''
+      operationId: delete-claims-claimId
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      description: Suppression d'une déclaration
   '/claims/{claimId}/files/{fileId}':
     parameters:
       - $ref: '#/components/parameters/claimId'
