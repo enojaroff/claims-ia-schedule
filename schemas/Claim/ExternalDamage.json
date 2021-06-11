@@ -1,0 +1,38 @@
+{
+  "description": "",
+  "type": "object",
+  "x-examples": {
+    "example-1": {
+      "slug": "trou-toiture",
+      "insuranceSlug": "trou-toiture",
+      "localizationSlug": "toit",
+      "pictures": []
+    }
+  },
+  "properties": {
+    "slug": {
+      "type": "string",
+      "minLength": 1
+    },
+    "insuranceSlug": {
+      "type": "string",
+      "minLength": 1
+    },
+    "localizationSlug": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pictures": {
+      "type": "array",
+      "items": {
+        "$ref": "./File.json"
+      }
+    }
+  },
+  "required": [
+    "slug",
+    "insuranceSlug",
+    "localizationSlug",
+    "pictures"
+  ]
+}

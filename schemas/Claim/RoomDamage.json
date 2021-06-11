@@ -1,0 +1,9 @@
+{
+  "title": "RoomDamage",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    }
+  }
+}

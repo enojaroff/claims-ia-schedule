@@ -1,0 +1,101 @@
+{
+  "description": "",
+  "type": "object",
+  "x-examples": {
+    "example-1": {
+      "compensationMode": "definitive",
+      "type": "porte-garage",
+      "reparationType": "definitive",
+      "isRepaired": true,
+      "ignorePendingRepairFile": null,
+      "ignoreRepairFile": null,
+      "mustBeReplaced": null,
+      "waitingForReceipt": false,
+      "needsRepair": false,
+      "quoteAmount": 400,
+      "quoteCompanyName": "repa",
+      "quoteCompanyPhone": null,
+      "pendingRepairFiles": [],
+      "repairFiles": [
+        {
+          "id": "44d3d794-c2e9-11eb-b6d7-0242ac1c0013",
+          "description": "1000_F_372449721_m7NISE1xo8ZkwITm0gb6o4ozsW7viD8K.jpeg",
+          "fileName": "jeviba0b2iS9RLRkUXo6AYA_1000_F_372449721_m7NISE1xo8ZkwITm0gb6o4ozsW7viD8K.jpeg.jpg",
+          "mimeType": "image/jpeg",
+          "type": "document",
+          "href": "https://api.staging.generali.claims-ia.com/v1/file/44d3d794-c2e9-11eb-b6d7-0242ac1c0013"
+        }
+      ],
+      "pictures": []
+    }
+  },
+  "properties": {
+    "compensationMode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reparationType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "isRepaired": {
+      "type": "boolean"
+    },
+    "ignorePendingRepairFile": {},
+    "ignoreRepairFile": {},
+    "mustBeReplaced": {},
+    "waitingForReceipt": {
+      "type": "boolean"
+    },
+    "needsRepair": {
+      "type": "boolean"
+    },
+    "quoteAmount": {
+      "type": "number"
+    },
+    "quoteCompanyName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "quoteCompanyPhone": {
+      "type": "string"
+    },
+    "pendingRepairFiles": {
+      "type": "array",
+      "items": {
+        "$ref": "./File.json"
+      }
+    },
+    "repairFiles": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": {
+        "$ref": "./File.json"
+      }
+    },
+    "pictures": {
+      "type": "array",
+      "items": {
+        "$ref": "./File.json"
+      }
+    }
+  },
+  "required": [
+    "compensationMode",
+    "type",
+    "reparationType",
+    "isRepaired",
+    "waitingForReceipt",
+    "needsRepair",
+    "quoteAmount",
+    "quoteCompanyName",
+    "pendingRepairFiles",
+    "repairFiles",
+    "pictures"
+  ]
+}

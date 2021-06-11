@@ -1,0 +1,48 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fileName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mimeType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "href": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "description",
+    "fileName",
+    "mimeType",
+    "type",
+    "href"
+  ],
+  "x-examples": {
+    "example-1": {
+      "id": "44d3d794-c2e9-11eb-b6d7-0242ac1c0013",
+      "description": "1000_F_372449721_m7NISE1xo8ZkwITm0gb6o4ozsW7viD8K.jpeg",
+      "fileName": "jeviba0b2iS9RLRkUXo6AYA_1000_F_372449721_m7NISE1xo8ZkwITm0gb6o4ozsW7viD8K.jpeg.jpg",
+      "mimeType": "image/jpeg",
+      "type": "document",
+      "href": "https://api.staging.generali.claims-ia.com/v1/file/44d3d794-c2e9-11eb-b6d7-0242ac1c0013"
+    }
+  }
+}

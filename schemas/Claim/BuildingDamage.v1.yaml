@@ -1,38 +1,98 @@
-title: BuildingDamage
+description: ''
 type: object
-description: |
-  Description de **dommage immobilier** tel qu'utilisé en dégât des eaux
-
-  - Nom de la pièce
-  - Liste de surfaces
-
-  ### Surface
-
-  * Nom
-  * Superficie
-  * Revêtement
-    - Nom
-    - Nature
-    - Qualité du revêtement (1: Normal, 2: Standing, 3: Luxe)
-    - Niveau d'usure (1: neuf, 2: état d'usage, 3: ancien)
-        
-x-tags:
-  - Claim
+x-examples:
+  example-1:
+    roomDamages: []
+    externalDamages: []
+    breakInDamages:
+      - compensationMode: definitive
+        type: porte-fenetre
+        reparationType: definitive
+        isRepaired: true
+        ignorePendingRepairFile: null
+        ignoreRepairFile: null
+        mustBeReplaced: null
+        waitingForReceipt: true
+        needsRepair: false
+        quoteAmount: 0
+        quoteCompanyName: null
+        quoteCompanyPhone: null
+        pendingRepairFiles: []
+        repairFiles: []
+        pictures: []
+      - compensationMode: fixed
+        type: volet
+        reparationType: null
+        isRepaired: null
+        ignorePendingRepairFile: null
+        ignoreRepairFile: null
+        mustBeReplaced: null
+        waitingForReceipt: false
+        needsRepair: false
+        quoteAmount: 0
+        quoteCompanyName: null
+        quoteCompanyPhone: null
+        pendingRepairFiles: []
+        repairFiles: []
+        pictures: []
+      - compensationMode: definitive
+        type: porte-garage
+        reparationType: definitive
+        isRepaired: true
+        ignorePendingRepairFile: null
+        ignoreRepairFile: null
+        mustBeReplaced: null
+        waitingForReceipt: false
+        needsRepair: false
+        quoteAmount: 400
+        quoteCompanyName: repa
+        quoteCompanyPhone: null
+        pendingRepairFiles: []
+        repairFiles:
+          - id: 44d3d794-c2e9-11eb-b6d7-0242ac1c0013
+            description: 1000_F_372449721_m7NISE1xo8ZkwITm0gb6o4ozsW7viD8K.jpeg
+            fileName: jeviba0b2iS9RLRkUXo6AYA_1000_F_372449721_m7NISE1xo8ZkwITm0gb6o4ozsW7viD8K.jpeg.jpg
+            mimeType: image/jpeg
+            type: document
+            href: 'https://api.staging.generali.claims-ia.com/v1/file/44d3d794-c2e9-11eb-b6d7-0242ac1c0013'
+        pictures: []
+      - compensationMode: fixed
+        type: porte-garage
+        reparationType: null
+        isRepaired: null
+        ignorePendingRepairFile: null
+        ignoreRepairFile: null
+        mustBeReplaced: null
+        waitingForReceipt: false
+        needsRepair: false
+        quoteAmount: 0
+        quoteCompanyName: null
+        quoteCompanyPhone: null
+        pendingRepairFiles: []
+        repairFiles: []
+        pictures:
+          - id: 3448c68a-c1e2-11eb-a195-0242ac1c0008
+            description: download (1).jpeg
+            fileName: jxlUocvq83kYY2erg_Zeu9N_download (1).jpeg.jpg
+            mimeType: image/jpeg
+            type: image
+            href: 'https://api.staging.generali.claims-ia.com/v1/file/3448c68a-c1e2-11eb-a195-0242ac1c0008'
 properties:
-  name:
-    type: string
-    description: Nom de la pièce
-  size:
-    type: number
-  surfaces:
+  roomDamages:
     type: array
+    items:
+      $ref: ''
+  externalDamages:
+    type: array
+    items:
+      $ref: ./ExternalDamage.json
+  breakInDamages:
+    type: array
+    uniqueItems: true
     minItems: 1
     items:
-      $ref: ./Surface.v1.yaml
-  pictures:
-    type: array
-    items:
-      $ref: ../Common/Attachment.v1.yaml
+      $ref: ./BreakInDamage.json
 required:
-  - name
-  - surfaces
+  - roomDamages
+  - externalDamages
+  - breakInDamages
