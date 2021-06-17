@@ -92,6 +92,12 @@ properties:
     minItems: 1
     items:
       $ref: ./BreakInDamage.json
+  equipments:
+    type:
+      - string
+      - array
+    items:
+      $ref: ./Equipment.json
 required:
   - roomDamages
   - externalDamages
