@@ -344,32 +344,32 @@ paths:
                     timeslots:
                       - type: HoraireFixe
                         startTime: '2021-06-24T09:00:00Z'
-                        endTime: '2021-06-18T10:00:00Z'
+                        endTime: '2021-06-24T10:00:00Z'
                         id: '01'
                         duration: 60
                       - type: HoraireFixe
                         startTime: '2021-06-24T10:00:00Z'
-                        endTime: '2021-06-18T11:00:00Z'
+                        endTime: '2021-06-24T11:00:00Z'
                         id: '02'
                         duration: 60
                       - type: HoraireFixe
                         startTime: '2021-06-25T11:00:00Z'
-                        endTime: '2021-06-18T12:00:00Z'
+                        endTime: '2021-06-25T12:00:00Z'
                         id: '03'
                         duration: 60
                       - type: HoraireFixe
                         startTime: '2021-06-25T14:00:00Z'
-                        endTime: '2021-06-18T15:00:00Z'
+                        endTime: '2021-06-25T15:00:00Z'
                         id: '04'
                         duration: 60
                       - type: HoraireFixe
-                        startTime: '2021-06-26T17:00:00Z'
-                        endTime: '2021-06-18T18:00:00Z'
+                        startTime: '2021-06-25T17:00:00Z'
+                        endTime: '2021-06-25T18:00:00Z'
                         id: '05'
                         duration: 60
                       - type: HoraireFixe
-                        startTime: '2021-07-18T11:00:00Z'
-                        endTime: '2021-07-18T12:00:00Z'
+                        startTime: '2021-07-16T11:00:00Z'
+                        endTime: '2021-07-16T12:00:00Z'
                         id: '06'
                         duration: 60
                       - type: HoraireFixe
