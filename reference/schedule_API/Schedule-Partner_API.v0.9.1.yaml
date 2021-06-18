@@ -383,8 +383,8 @@ paths:
                         id: '08'
                         duration: 60
                       - type: HorairePlage
-                        startTime: '2021-07-18T11:00:00Z'
-                        endTime: '2020-01-18T15:00:00Z'
+                        startTime: '2021-07-20T11:00:00Z'
+                        endTime: '2020-01-20T15:00:00Z'
                         id: '09'
                         duration: 60
                       - type: HorairePlage
