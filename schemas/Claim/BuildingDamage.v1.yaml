@@ -81,7 +81,7 @@ properties:
   roomDamages:
     type: array
     items:
-      $ref: ''
+      $ref: ./RoomDamage.json
   externalDamages:
     type: array
     items:
