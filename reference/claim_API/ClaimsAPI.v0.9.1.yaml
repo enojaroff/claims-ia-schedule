@@ -1,0 +1,500 @@
+openapi: 3.0.0
+info:
+  version: 0.9.1
+  title: API Claims IA
+  description: |
+    L'API Claims IA permet aux partenaires de : 
+
+    - Créer une déclaration chez Claims et générer un magic link de connexion sans mot de passe 
+    - Récupérer les informations détaillées sur le sinistre et la déclaration de l'assuré.
+
+    L'API respecte le standard REST et s'appuie sur les méthodes du protocole HTTP. Les messages échangés sont au format JSON.
+
+    Une clé est nécessaire pour utiliser l'API. Cette clé doit être fournie par la société qui implémente l'API.
+  contact:
+    name: Edouard Nojaroff
+    email: e.nojaroff@claims-ia.fr
+servers:
+  - url: 'https://api.staging.claims-ia.tech/v1'
+    description: Test URL
+tags:
+  - name: Account
+    description: ''
+  - name: Appointment
+    description: Gestion des rendez-vous.
+  - name: Availability
+    description: Recherche de créneaux horaires disponibles
+  - name: Client
+    description: ''
+  - name: Custom Field
+    description: ''
+  - name: Location
+    description: Emplacement/adresse d'un site
+  - name: Time Zone
+    description: ''
+  - name: Timeslot
+    description: Créneau horaire
+paths:
+  '/claims/{claimId}':
+    parameters:
+      - $ref: '#/components/parameters/claimId'
+    get:
+      summary: LIRE les données d'une déclaration
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Claim'
+            text/plain:
+              schema:
+                type: object
+                properties: {}
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+      operationId: get-claim
+      description: Déclaration
+      parameters: []
+      security:
+        - header_token: []
+    delete:
+      summary: ''
+      operationId: delete-claims-claimId
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      description: Suppression d'une déclaration
+  '/claims/{claimId}/files/{fileId}':
+    parameters:
+      - $ref: '#/components/parameters/claimId'
+      - $ref: '#/components/parameters/fileId'
+    get:
+      summary: RÉCUPÉRER un fichier dans une déclaration
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+            application/octet-stream:
+              schema:
+                type: object
+                properties: {}
+      operationId: get-claim-file
+      description: Récupère un fichier ajouté par l'assuré dans une déclaration
+  /claims/prime:
+    post:
+      summary: Création d'une déclaraion
+      operationId: post-claims-prime
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  type:
+                    type: string
+                    minLength: 1
+                  result:
+                    type: object
+                    properties:
+                      previously_existing:
+                        type: object
+                        properties:
+                          claim:
+                            type: boolean
+                          user:
+                            type: boolean
+                          contract:
+                            type: boolean
+                        required:
+                          - claim
+                          - user
+                          - contract
+                      user:
+                        type: object
+                        properties:
+                          email:
+                            type: string
+                            minLength: 1
+                        required:
+                          - email
+                      contract:
+                        type: object
+                        properties:
+                          number:
+                            type: string
+                            minLength: 1
+                        required:
+                          - number
+                      claim:
+                        type: object
+                        properties:
+                          caseNumber:
+                            type: string
+                            minLength: 1
+                          id:
+                            type: string
+                            minLength: 1
+                        required:
+                          - caseNumber
+                          - id
+                      declaration:
+                        type: object
+                        properties:
+                          url:
+                            type: string
+                            minLength: 1
+                        required:
+                          - url
+                    required:
+                      - previously_existing
+                      - user
+                      - contract
+                      - claim
+                      - declaration
+                required:
+                  - type
+                  - result
+                x-examples:
+                  example-1:
+                    type: success
+                    result:
+                      previously_existing:
+                        claim: true
+                        user: true
+                        contract: true
+                      user:
+                        email: domi.farrug@claims.test
+                      contract:
+                        number: '05463690'
+                      claim:
+                        caseNumber: testValidationAdènes
+                        id: faaec700-d8d7-11eb-a74f-0242ac1c0012
+                      declaration:
+                        url: 'https://app.staging.generali.claims-ia.com/ml?m=29035410-c8fa-11eb-8c7f-0242ac1c0013&c=faaec700-d8d7-11eb-a74f-0242ac1c0012'
+      security:
+        - header_token: []
+      parameters:
+        - schema:
+            type: string
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              x-examples:
+                example-1:
+                  insured:
+                    title: '1'
+                    name: Farruggia
+                    firstName: Domi
+                    email: domi.farrug@claims.test
+                    mobile: '0610101010'
+                    status: '14'
+                  contract:
+                    number: '05463690'
+                    deductableAmount: 310
+                    generalTermsAndConditions: Generali
+                    anteriority: 'false'
+                    isRecentSubscription: 'false'
+                  claim:
+                    number: testValidationAdènes
+                    date: '2021-06-06'
+                    address:
+                      line1: 48 boulevard des Batignolles
+                      line2: Batiment B
+                      line3: ''
+                      line4: ''
+                      city: Paris
+                      postCode: '75017'
+                      country: France
+                      otherDetails: Digicode 1234
+                  intermediary:
+                    name: Claims
+                    phone: '01000000'
+                  product: 259D
+                  type: DDE
+              properties:
+                insured:
+                  type: object
+                  description: Informations de l'assuré
+                  required:
+                    - title
+                    - name
+                    - firstName
+                    - email
+                    - mobile
+                    - status
+                  properties:
+                    title:
+                      type: string
+                      minLength: 1
+                      enum:
+                        - '1'
+                        - '2'
+                    name:
+                      type: string
+                      minLength: 1
+                    firstName:
+                      type: string
+                      minLength: 1
+                    email:
+                      type: string
+                      minLength: 1
+                    mobile:
+                      type: string
+                      minLength: 1
+                    status:
+                      type: string
+                      minLength: 1
+                      enum:
+                        - '1'
+                        - '2'
+                        - '3'
+                        - '4'
+                        - '5'
+                        - '7'
+                        - '10'
+                        - '14'
+                        - '15'
+                      description: |2-
+
+
+
+
+                         '1' => HousingCapacity::HOUSING_CAPACITY_CODE_OWNER_OCCUPIER,
+                                '2' => HousingCapacity::HOUSING_CAPACITY_CODE_OWNER_NON_OCCUPIER,
+                                '3' => HousingCapacity::HOUSING_CAPACITY_CODE_CO_OWNER_OCCUPIER,
+                                '4' => HousingCapacity::HOUSING_CAPACITY_CODE_CO_OWNER_NON_OCCUPIER,
+                                '5' => HousingCapacity::HOUSING_CAPACITY_CODE_TENANT,
+                                '7' => HousingCapacity::HOUSING_CAPACITY_CODE_TENANT,
+                                '10' => HousingCapacity::HOUSING_CAPACITY_CODE_FREE_OF_CHARGE_OCCUPIER,
+                                '14' => HousingCapacity::HOUSING_CAPACITY_CODE_USUFRUCT,
+                                '15' => HousingCapacity::HOUSING_CAPACITY_CODE_BARE_OWNERSHIP,
+                contract:
+                  type: object
+                  required:
+                    - number
+                    - deductableAmount
+                    - generalTermsAndConditions
+                    - anteriority
+                    - isRecentSubscription
+                  properties:
+                    number:
+                      type: string
+                      minLength: 1
+                    deductableAmount:
+                      type: number
+                    generalTermsAndConditions:
+                      type: string
+                      minLength: 1
+                    anteriority:
+                      type: string
+                      minLength: 1
+                    isRecentSubscription:
+                      type: string
+                      minLength: 1
+                claim:
+                  type: object
+                  required:
+                    - number
+                    - date
+                    - address
+                  properties:
+                    number:
+                      type: string
+                      minLength: 1
+                    date:
+                      type: string
+                      minLength: 1
+                    address:
+                      type: object
+                      required:
+                        - line1
+                        - line2
+                        - line3
+                        - line4
+                        - city
+                        - postCode
+                        - country
+                        - otherDetails
+                      properties:
+                        line1:
+                          type: string
+                          minLength: 1
+                        line2:
+                          type: string
+                          minLength: 1
+                        line3:
+                          type: string
+                        line4:
+                          type: string
+                        city:
+                          type: string
+                          minLength: 1
+                        postCode:
+                          type: string
+                          minLength: 1
+                        country:
+                          type: string
+                          minLength: 1
+                        otherDetails:
+                          type: string
+                          minLength: 1
+                intermediary:
+                  type: object
+                  required:
+                    - name
+                    - phone
+                  properties:
+                    name:
+                      type: string
+                      minLength: 1
+                    phone:
+                      type: string
+                      minLength: 1
+                product:
+                  type: string
+                  minLength: 1
+                  description: Type de produit propres aux CG
+                type:
+                  type: string
+                  minLength: 1
+                  description: Type de déclaration
+                  enum:
+                    - VOL
+              required:
+                - insured
+                - contract
+                - claim
+                - intermediary
+                - product
+                - type
+            examples:
+              example-1:
+                value:
+                  insured:
+                    title: '1'
+                    name: Farruggia
+                    firstName: Domi
+                    email: domi.farrug@claims.test
+                    mobile: '0610101010'
+                    status: '14'
+                  contract:
+                    number: '05463690'
+                    deductableAmount: 310
+                    generalTermsAndConditions: Generali
+                    anteriority: 'false'
+                    isRecentSubscription: 'false'
+                  claim:
+                    number: testValidationAdènes
+                    date: '2021-06-06'
+                    address:
+                      line1: 48 boulevard des Batignolles
+                      line2: Batiment B
+                      line3: ''
+                      line4: ''
+                      city: Paris
+                      postCode: '75017'
+                      country: France
+                      otherDetails: Digicode 1234
+                  intermediary:
+                    name: Claims
+                    phone: '01000000'
+                  product: 259D
+                  type: DDE
+      description: Retourne une URL de connexion par Magic link
+components:
+  securitySchemes:
+    header_token:
+      type: apiKey
+      in: header
+      name: ctoken
+    http_basic:
+      type: http
+      scheme: basic
+      description: ''
+    http_bearer:
+      type: http
+      scheme: bearer
+  responses: {}
+  parameters:
+    claimId:
+      name: claimId
+      in: path
+      schema:
+        type: string
+        format: uuid
+        example: 123e4567-e89b-12d3-a456-426614174000
+      required: true
+      description: Identifiant interne d'une déclaration
+    fileId:
+      name: fileId
+      in: path
+      schema:
+        type: string
+      style: matrix
+      description: Référence du fichier
+      required: true
+  examples: {}
+  schemas:
+    Claim:
+      title: Claim
+      type: object
+      description: Déclaration de sinistre
+      x-tags:
+        - Claim
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: Date de déclaration
+        company:
+          $ref: ../../schemas/Claim/Company.v1.yaml
+        contract:
+          $ref: ../../schemas/Claim/Contract.v1.yaml
+        guarantee:
+          $ref: ../../schemas/Claim/WarrantyType.v1.yaml
+        customer:
+          $ref: ../../schemas/Claim/Customer.v1.yaml
+        accident:
+          $ref: ../../schemas/Claim/Accident.v1.yaml
+        documents:
+          type: array
+          items:
+            $ref: ../../schemas/Common/Attachment.v1.yaml
+        valuation:
+          $ref: ../../schemas/Claim/Valuation.v1.yaml
+        reference:
+          type: string
+          description: Référence ClaimsIA de la déclaration
+        risk:
+          $ref: ../../schemas/Claim/Risk.v1.yaml
+        missionID:
+          type: string
+          description: ID coté client
+      required:
+        - date
+        - company
+        - guarantee
+security:
+  - header_token: []
