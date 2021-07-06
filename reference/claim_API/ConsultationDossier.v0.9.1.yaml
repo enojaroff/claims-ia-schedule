@@ -3,8 +3,7 @@ info:
   version: 0.9.1
   title: API Claims IA
   description: |
-    L'API RDV de Claims IA est utilisée dans la cadre du service de prise de rendez-vous de Claims IA.
-    Cete API permet aux partenaires, après avoir fixé le rendez-vous, de récupérer les informations détaillées sur le sinistre et la déclaration de l'asuré.
+    L'API Consultation de Dossier de Claims IA permet aux partenaires de récupérer les informations détaillées sur le sinistre et la déclaration de l'assuré.
 
     L'API respecte le standard REST et s'appuie sur les méthodes du protocole HTTP. Les messages échangés sont au format JSON.
 
@@ -13,9 +12,7 @@ info:
     name: Edouard Nojaroff
     email: e.nojaroff@claims-ia.fr
 servers:
-  - url: 'https://base_url/claims/api/v1'
-    description: Sample URL
-  - url: 'https://api.claims-ia.fr/v1'
+  - url: 'https://api.staging.claims-ia.tech/v1'
     description: Test URL
 tags:
   - name: Account
