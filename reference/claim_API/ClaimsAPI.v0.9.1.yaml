@@ -97,7 +97,7 @@ paths:
       description: Récupère un fichier ajouté par l'assuré dans une déclaration
   /claims/prime:
     post:
-      summary: Création d'une déclaraion
+      summary: Création d'une déclaration
       operationId: post-claims-prime
       responses:
         '200':
@@ -281,6 +281,8 @@ paths:
 
 
 
+
+
                          '1' => HousingCapacity::HOUSING_CAPACITY_CODE_OWNER_OCCUPIER,
                                 '2' => HousingCapacity::HOUSING_CAPACITY_CODE_OWNER_NON_OCCUPIER,
                                 '3' => HousingCapacity::HOUSING_CAPACITY_CODE_CO_OWNER_OCCUPIER,
@@ -386,7 +388,6 @@ paths:
                 - insured
                 - contract
                 - claim
-                - intermediary
                 - product
                 - type
             examples:
