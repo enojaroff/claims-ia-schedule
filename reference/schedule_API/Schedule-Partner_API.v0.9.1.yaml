@@ -344,7 +344,7 @@ paths:
                     timeslots:
                       - type: HoraireFixe
                         startTime: '2021-08-02T09:00:00Z'
-                        endTime: '2021-08-0221T10:00:00Z'
+                        endTime: '2021-08-02T10:00:00Z'
                         id: '01'
                         duration: 60
                       - type: HoraireFixe
@@ -402,8 +402,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ServiceRequest'
-            examples:
-              example-1: {}
         description: ''
       security: []
 components:
@@ -439,14 +437,6 @@ components:
           description: Convention applicable
     Timeslot:
       $ref: ../../schemas/Appointment/AppointmentSchedule.v1.yaml
-      x-examples:
-        example-1:
-          value:
-            type: HoraireFixe
-            startTime: '2019-08-24T14:15:22Z'
-            endTime: '2019-08-24T14:15:22Z'
-            duration: 90
-            id: string
     Accident:
       title: Objet Sinistre
       type: object
