@@ -44,3 +44,9 @@ required:
   - type
   - startTime
   - endTime
+examples:
+  - type: HoraireFixe
+    startTime: '2019-08-24T14:15:22Z'
+    endTime: '2019-08-24T14:15:22Z'
+    duration: 90
+    id: string

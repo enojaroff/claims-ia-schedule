@@ -343,30 +343,30 @@ paths:
                   value:
                     timeslots:
                       - type: HoraireFixe
-                        dateDebut: '2021-06-24T09:00:00Z'
-                        dateFin: '2021-06-24T10:00:00Z'
+                        startTime: '2021-08-02T09:00:00Z'
+                        endTime: '2021-08-0221T10:00:00Z'
                         id: '01'
-                        duree: 60
+                        duration: 60
                       - type: HoraireFixe
-                        dateDebut: '2021-06-24T10:00:00Z'
-                        dateFin: '2021-06-24T11:00:00Z'
+                        startTime: '2021-08-02T10:00:00Z'
+                        endTime: '2021-08-02T11:00:00Z'
                         id: '02'
-                        duree: 60
+                        duration: 60
                       - type: HoraireFixe
-                        dateDebut: '2021-06-25T11:00:00Z'
-                        dateFin: '2021-06-25T12:00:00Z'
+                        startTime: '2021-08-03T11:00:00Z'
+                        endTime: '2021-08-03T12:00:00Z'
                         id: '03'
-                        duree: 60
+                        duration: 60
                       - type: HoraireFixe
-                        dateDebut: '2021-06-25T14:00:00Z'
-                        dateFin: '2021-06-25T15:00:00Z'
+                        startTime: '2021-08-03T14:00:00Z'
+                        endTime: '2021-08-03T15:00:00Z'
                         id: '04'
-                        duree: 60
+                        duration: 60
                       - type: HoraireFixe
-                        dateDebut: '2021-06-25T17:00:00Z'
-                        dateFin: '2021-06-25T18:00:00Z'
+                        startTime: '2021-08-04T17:00:00Z'
+                        endTime: '2021-08-04T18:00:00Z'
                         id: '05'
-                        duree: 60
+                        duration: 60
                     sessionID: qui sed labore nulla
       description: |
         Cette requête permet de récupérer la liste des créneaux horaires disponibles.
@@ -439,6 +439,14 @@ components:
           description: Convention applicable
     Timeslot:
       $ref: ../../schemas/Appointment/AppointmentSchedule.v1.yaml
+      x-examples:
+        example-1:
+          value:
+            type: HoraireFixe
+            startTime: '2019-08-24T14:15:22Z'
+            endTime: '2019-08-24T14:15:22Z'
+            duration: 90
+            id: string
     Accident:
       title: Objet Sinistre
       type: object
