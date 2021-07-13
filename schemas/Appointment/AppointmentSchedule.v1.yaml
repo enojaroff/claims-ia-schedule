@@ -32,15 +32,15 @@ properties:
       Si "HoraireFixe", le rendez commence à "startTime" et fini à "endTime"
 
       Si "HorairePlage", le rendez-vous de "duration" minutes aura lieu n'importe quand entre "startTime" et "endTime"
-  dateDebut:
+  startTime:
     $ref: ../Common/DateTime.v1.yaml
-  dateFin:
+  endTime:
     $ref: ../Common/DateTime.v1.yaml
-  duree:
+  duration:
     $ref: ../Common/Duration.v1.yaml
   id:
     type: string
 required:
   - type
-  - dateDebut
-  - dateFin
+  - startTime
+  - endTime
